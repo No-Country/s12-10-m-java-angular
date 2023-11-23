@@ -4,22 +4,28 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { LoginFormComponent } from './login-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LoginService } from 'app/data/services/login/login.service';
 
 describe('LoginFormComponent', () => {
   let component: LoginFormComponent;
-  let fixture: ComponentFixture<LoginFormComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ LoginFormComponent ]
-    })
-    .compileComponents();
-  }));
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [LoginFormComponent],
+      providers: [LoginService]
+    }).compileComponents();
+  });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(LoginFormComponent);
-    component = fixture.componentInstance;
+  it('should create the LoginFormComponent', () => {
+    const fixture = TestBed.createComponent(LoginFormComponent);
     fixture.detectChanges();
+  });
+
+  it('should create the LoginFormComponent', () => {
+    const fixture = TestBed.createComponent(LoginFormComponent);
+    component= fixture.componentInstance;
+    expect(fixture).toBeTruthy();
   });
 
   it('should create', () => {

@@ -1,14 +1,21 @@
-import { Injectable } from '@angular/core';
-import { UserState } from '../../models/userLoginState';
-import { SignalsSimpleStoreService } from '../StoreService.service';
+import { Injectable, inject } from '@angular/core';
+import { UserLoginState } from '../../models/userLoginState';
+import { ApiService } from '../api.service';
+import {  firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService extends SignalsSimpleStoreService<UserState> {
+export class LoginService  {
 
+  private api: ApiService = inject(ApiService);
   constructor() { 
-    super();
+
+  }
+
+  public async login(loginSubmitted: UserLoginState) {
+    let response = await firstValueFrom(this.api.httpPost('login', loginSubmitted, false));
+
   }
 
 }

@@ -7,19 +7,23 @@ import { LoginComponent } from './login.component';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       declarations: [ LoginComponent ]
-    })
-    .compileComponents();
-  }));
+    }).compileComponents();
+  });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(LoginComponent);
-    component = fixture.componentInstance;
+
+  it('should create the LoginComponent 1', () => {
+    const fixture = TestBed.createComponent(LoginComponent);
     fixture.detectChanges();
+  });
+
+  it('should create the LoginComponent 2', () => {
+    const fixture = TestBed.createComponent(LoginComponent);
+    component= fixture.componentInstance;
+    expect(fixture).toBeTruthy();
   });
 
   it('should create', () => {
