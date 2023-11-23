@@ -1,3 +1,70 @@
-<p>
-  register works!
-</p>
+
+  <!-- Container -->
+  <div class="flex flex-col h-screen bg-[#F5F5F5]">
+    <!-- Auth Card Container -->
+    <div class="grid place-items-center mx-2 my-20 sm:my-auto">
+    
+    
+        <!-- Auth Card -->
+        <div class="w-10/12 p-12 sm:w-7/12 md:w-5/12 lg:w-4/12 2xl:w-3/12 
+            px-6 py-10 sm:px-9 sm:py-6 
+            bg-[#FFFBFE]"
+            id="register-card">
+
+            <!-- Card Title -->
+            <h2 class="text-center font-semibold text-3xl lg:text-4xl text-[#585858]">
+                Register
+            </h2>
+
+            <form class="px-8 pt-6 pb-8 mb-4 bg-[#FFFBFE] rounded">
+                <div class="mb-4 md:flex md:justify-between">
+                  <div class="mb-4  md:mb-0">
+                    <div class="inputGroup">
+                      <input autocomplete="off" required="" type="text"
+                      id="firstName">
+                      <label for="name" class="truncate ...">First Name</label>
+                  </div>
+                  </div>
+                  <div class="md:ml-2">
+                    <div class="inputGroup">
+                      <input autocomplete="off" required="" type="text"
+                      id="lastName">
+                      <label for="name" class="truncate ...">Last Name</label>
+                  </div>
+                  </div>
+                </div>
+                <div class="mb-4">
+                  <div class="inputGroup">
+                    <input autocomplete="off" required="" type="text"
+                    id="email">
+                    <label for="name">Email</label>
+                </div>
+                </div>
+                <div class="mb-4">
+                    <div class="inputGroup">
+                      <input autocomplete="off" required="" type="text"
+                      id="password">
+                      <label for="name">Paaword</label>
+                  </div>
+                </div>
+                <div class="mb-6 text-center">
+                  <button
+                    class="w-full px-4 py-2 font-bold text-white bg-[#069150] rounded-full hover:bg-[#15AD67] truncate ..."
+                    type="button"
+                  >
+                    Register Account
+                  </button>
+                </div>
+                <hr class="mb-6 border-t" />
+                <div class="text-center">
+                  <a
+                    class="inline-block text-sm text-green-700 align-baseline hover:text-[#15AD67]"
+                    href="#"
+                  >
+                  <b>Already have an account? Login!</b>
+                  </a>
+                </div>
+              </form>
+        </div>
+    </div>
+</div>
