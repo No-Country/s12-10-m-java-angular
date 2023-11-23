@@ -14,10 +14,11 @@ import java.util.UUID;
 @AllArgsConstructor
 @MappedSuperclass
 public abstract class PersistenceObject {
-        @Id
-        @GeneratedValue(strategy = GenerationType.UUID)
-        private UUID id;
-        private Boolean status = true;
-        private LocalDate creationDate;
-        private LocalDate modificationDate;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.UUID)
+	private UUID id;
+	private Boolean status = Boolean.TRUE;
+	private LocalDate creationDate;
+	private LocalDate modificationDate;
 }
