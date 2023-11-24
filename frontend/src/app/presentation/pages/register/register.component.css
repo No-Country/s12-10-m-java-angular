@@ -1,0 +1,6 @@
+#register-card{
+    border-radius: 30px;
+    -webkit-box-shadow: 1px 1px 7px 0px rgba(88,88,88,1);
+    -moz-box-shadow: 1px 1px 7px 0px rgba(88,88,88,1);
+    box-shadow: 1px 1px 7px 0px rgba(88,88,88,1);
+}

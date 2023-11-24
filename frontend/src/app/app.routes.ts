@@ -10,7 +10,7 @@ export const routes: Routes = [
     {
         path: 'register',
         title: 'Register',
-        loadComponent: () => import('./presentation/pages/register/register.component').then(c => c.RegisterComponent)
+        loadComponent: () => import('@presentation/pages/register/register.component').then(c => c.RegisterComponent)
     },
     { 
         path: '**', 
