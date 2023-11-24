@@ -1,14 +1,25 @@
-import { Injectable } from '@angular/core';
-import { UserState } from '../../models/userLoginState';
-import { SignalsSimpleStoreService } from '../StoreService.service';
+import { DestroyRef, Injectable, Injector, inject } from '@angular/core';
+import { UserLoginState } from '../../models/userLoginState';
+import { ApiService } from '../api.service';
+import {  Observable, Observer, Subject, firstValueFrom, takeUntil } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService extends SignalsSimpleStoreService<UserState> {
+export class LoginService  {
+  private api: ApiService = this.injector.get(ApiService);
 
-  constructor() { 
-    super();
+  constructor(private injector: Injector) { 
+  }
+
+  public login(loginSubmitted: UserLoginState): Observable<any>  {
+    return this.api.httpPost('login', loginSubmitted, false);
+  }
+
+  public setInStorage(values: UserLoginState){
+    Object.entries(values).forEach(([key, value]) => {
+      localStorage.setItem(key, value);
+    });
   }
 
 }
