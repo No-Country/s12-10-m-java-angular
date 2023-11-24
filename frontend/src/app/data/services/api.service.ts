@@ -1,15 +1,15 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { Injectable, Injector, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'any'
 })
 export class ApiService {
   private devUrl: string = 'http://localhost:8080/api/v1'; 
-  private http: HttpClient = inject(HttpClient);
+  private http: HttpClient = this.injector.get(HttpClient);
 
-  constructor() { }
+  constructor(private injector: Injector) { }
 
   private createHeaders(isNedAuth: boolean) {
     let httpOptions = {};

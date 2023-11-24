@@ -1,21 +1,25 @@
-import { Injectable, inject } from '@angular/core';
+import { DestroyRef, Injectable, Injector, inject } from '@angular/core';
 import { UserLoginState } from '../../models/userLoginState';
 import { ApiService } from '../api.service';
-import {  firstValueFrom } from 'rxjs';
+import {  Observable, Observer, Subject, firstValueFrom, takeUntil } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService  {
+  private api: ApiService = this.injector.get(ApiService);
 
-  private api: ApiService = inject(ApiService);
-  constructor() { 
-
+  constructor(private injector: Injector) { 
   }
 
-  public async login(loginSubmitted: UserLoginState) {
-    let response = await firstValueFrom(this.api.httpPost('login', loginSubmitted, false));
+  public login(loginSubmitted: UserLoginState): Observable<any>  {
+    return this.api.httpPost('login', loginSubmitted, false);
+  }
 
+  public setInStorage(values: UserLoginState){
+    Object.entries(values).forEach(([key, value]) => {
+      localStorage.setItem(key, value);
+    });
   }
 
 }

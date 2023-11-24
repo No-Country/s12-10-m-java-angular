@@ -12,7 +12,6 @@ import { UserLoginState } from 'app/data/models/userLoginState';
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [LoginService],
 })
 export class LoginFormComponent implements OnInit {
   @Output() loginFormSubmitted: EventEmitter<UserLoginState>;
@@ -40,7 +39,7 @@ export class LoginFormComponent implements OnInit {
 
   protected onSubmit(){
     if(this.loginForm.valid)
-      this.loginFormSubmitted.emit({email: this.loginForm.value.email, password: this.loginForm.value.password} as UserLoginState);
+      this.loginFormSubmitted.emit({ID: crypto.randomUUID(), email: this.loginForm.value.email, password: this.loginForm.value.password} as UserLoginState);
   }
 
 }
