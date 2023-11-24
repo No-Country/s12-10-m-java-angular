@@ -3,7 +3,8 @@ import { ChangeDetectionStrategy, Component, Injector, OnDestroy, OnInit, inject
 import { LoginFormComponent } from '../../components/login-form/login-form.component';
 import { UserLoginState } from 'app/data/models/userLoginState';
 import { LoginService } from 'app/data/services/login/login.service';
-import { Subject, Subscription, first, takeUntil } from 'rxjs';
+import { Subject, Subscription, catchError, first, takeUntil } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   standalone: true,
@@ -16,7 +17,8 @@ import { Subject, Subscription, first, takeUntil } from 'rxjs';
 })
 export class LoginComponent implements OnInit, OnDestroy  {
   private service: LoginService = this.injector.get(LoginService);
-
+  private router: Router = inject(Router);
+  
   private destroy$: Subject<void>;
 
   constructor(private injector: Injector) { 
@@ -33,24 +35,30 @@ export class LoginComponent implements OnInit, OnDestroy  {
   }
 
   protected loginHandler(loginSubmitted: UserLoginState): void{
-    const self = this;
+    const service = this.service;
+    const router = this.router;
+
     const loginObserver = {
       login: loginSubmitted,
       next(loginResponse: any): void{
+        console.log("Entra al next ?"); 
         this.login = loginResponse;
-        self.service.setInStorage(this.login);
-      },
-      error(err: any): void{
-        console.log(err);
+        service.setInStorage(this.login);
       },
       complete(): void{
-        if(this.login.ID !== loginSubmitted.ID) localStorage.setItem("ID", this.login.ID);
+        setTimeout(()=>router.navigate(["/register"]), 700);
       }
     };
 
-    this.service.login(loginSubmitted)
+    service.login(loginSubmitted)
     .pipe(takeUntil(this.destroy$))
     .pipe(first())
+    .pipe(
+      catchError((error: any) => {
+        console.log(error);
+        throw error; // Reenviar el error
+      })
+    )
     .subscribe(loginObserver);
   }
   
