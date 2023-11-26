@@ -31,7 +31,7 @@
     </div>
     <div class="h-[74px] mb-4 md:mb-2">
         <div class="input-group" [ngClass]="{'form-error': registerForm.get('password')?.touched && (registerForm.get('password')?.hasError('required') || registerForm.get('password')?.hasError('pattern'))}">
-          <input autocomplete="off" required="" type="text" id="password" class="form-input"
+          <input autocomplete="off" required="" type="password" id="password" class="form-input"
           formControlName="password" autocomplete="password" name="password" aria-disabled="false" aria-label="Password" tabindex="3" autocapitalize="none" dir="ltr" required>
           <label for="password" class="form-label ellipsis ...">Password</label>
       </div>
@@ -48,13 +48,7 @@
       </button>
     </div>
     <hr class="mb-6 border-t" />
-    <div class="text-center">
-      <a
-        class="inline-block text-sm text-green-700 align-baseline hover:text-[#15AD67]"
-        href="#" tabindex="5"
-      >
-      <b>Already have an account ? Login!</b>
-      </a>
-    </div>
+    <app-link textLink="Already have an account ? Login!" path="/login" className="text-center text-[#069150] hover:text-[#15AD67]">
+    </app-link>
   </form>
 

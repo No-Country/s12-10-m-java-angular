@@ -9,8 +9,7 @@
     height: 100dvh;
 
     font-family: Roboto, arial, sans-serif;
-    color: #585858;
-    
+    color: #585858;  
 }
 
 .login-container {
@@ -19,20 +18,21 @@
     width: 100%;
     height: 100%;
     box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.30), 0px 4px 8px 3px rgba(0, 0, 0, 0.15);
-    border-radius: 1rem;
     margin-block: auto;
-    padding-block: 2.5rem;
+    padding-block-start: 2.5rem;
     padding-inline: 1rem; 
 }
   
 .login-container h2.title{
     font-size: 2rem;
     line-height: 2rem; 
+    color: #585858;
+    font-weight: bold;
 }
 
 
 /* SMALL */
-@media only screen and (min-width: 905px)  {
+@media only screen and (min-width: 705px)  {
     .login-container {
         padding: 2.5rem;   
     }
@@ -43,6 +43,7 @@
     .login-container {
         width: 480px;
         height: 500px;
+        border-radius: 1.875rem;
         box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.30), 0px 4px 8px 3px rgba(0, 0, 0, 0.15);
     }
     .login-container h2.title{

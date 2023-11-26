@@ -33,12 +33,13 @@ export class RegisterComponent implements OnInit, OnDestroy  {
   }
 
   protected registerHandler(registerSubmitted: NewUserState): void{
-    const self = this;
+    const service = this.service;
+
     const registerObserver = {
       register: registerSubmitted,
       next(registerResponse: any): void{
         this.register = registerResponse;
-        self.service.setInStorage(this.register);
+        service.setInStorage(this.register);
       },
       error(err: any): void{
         console.log(err);

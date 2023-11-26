@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ErrorMessageComponent } from '../error-message/error-message.component';
 import { NewUserState } from 'app/data/models/userRegisterState';
+import { LinkComponent } from '../link/link.component';
 
 @Component({
   selector: 'app-register-form',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule, ErrorMessageComponent],
+  imports: [CommonModule,ReactiveFormsModule, ErrorMessageComponent, LinkComponent],
   templateUrl: './register-form.component.html',
   styleUrl: './register-form.component.css'
 })

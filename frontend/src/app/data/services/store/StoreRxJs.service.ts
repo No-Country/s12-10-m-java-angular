@@ -3,8 +3,6 @@ import { AbstractStoreService } from "./AbstractStore.service";
 
 
 export class RxjsStoreService<T> extends AbstractStoreService< T, Observable<T[any]> > {
-
-
     private subject: BehaviorSubject<T>;
     public state$: Observable<T>;
     

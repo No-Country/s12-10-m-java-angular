@@ -1,10 +1,9 @@
-import { Injectable, Signal, WritableSignal, computed, signal } from "@angular/core";
+import { Signal, WritableSignal, computed, signal } from "@angular/core";
 import { AbstractStoreService } from "./AbstractStore.service";
 
 
 export class SignalsStoreService<T> extends AbstractStoreService< T, Signal<T[any]> >{
 
-    //
     public state: WritableSignal<T>;
     
     constructor(initialValue: T) {

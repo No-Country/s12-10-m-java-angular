@@ -1,22 +1,20 @@
 <!-- Container -->
-  <div class="flex flex-col h-screen bg-[#F5F5F5]">
+<div class="flex flex-col h-screen bg-[#F5F5F5]">
+  <!-- Auth Card Container -->
+  <div class="place-items-center mx-2 my-20 sm:my-auto">
     <!-- Auth Card Container -->
-    <div class="place-items-center mx-2 my-20 sm:my-auto">
-      <!-- Auth Card Container -->
-<div class="grid place-items-center mx-2 my-20 sm:my-auto" 
->
-<!-- Auth Card -->
-<div class="w-10/12 p-12 sm:w-7/12 md:w-5/12 lg:w-4/12 2xl:w-3/12 
+    <div class="grid place-items-center mx-2 my-20 sm:my-auto">
+      <!-- Auth Card (Cambie: md:w-[50%] lg:w-[35%])-->
+      <div class="w-10/12 p-12 sm:w-7/12 md:w-[50%] lg:w-[35%] 2xl:w-3/12 
 px-6 py-10 sm:px-9 sm:py-6 
-bg-[#FFFBFE]"
-id="register-card">
+bg-[#FFFBFE]" id="register-card">
 
-<!-- Card Title -->
-<h2 class="text-center font-semibold text-3xl lg:text-4xl text-[#585858]">
-    Register
-</h2>
-    <app-register-form (registerFormSubmitted)="registerHandler($event)"></app-register-form>
-  </div>
-</div>
+        <!-- Card Title -->
+        <h2 class="text-center font-semibold text-3xl lg:text-4xl text-[#585858]">
+          Register
+        </h2>
+        <app-register-form (registerFormSubmitted)="registerHandler($event)"></app-register-form>
+      </div>
     </div>
+  </div>
 </div>

@@ -18,14 +18,14 @@ export class ToastService extends SignalsStoreService<ToastProps>{
     });
   }
 
-  public removeFirst(): void{
+  private removeFirst(): void{
     this.state.update((currentValue)=> {
       currentValue.toasts.shift();
       return currentValue;
     });
   }
 
-  public show(title: string, message: string, seconds: number, type: ToastType, position: ToastPosition): void{
+  private show(title: string, message: string, seconds: number, type: ToastType, position: ToastPosition): void{
     if(!seconds || seconds <= 0) seconds = 5;
 
     const toastModel: ToastModel ={
@@ -63,7 +63,6 @@ export class ToastService extends SignalsStoreService<ToastProps>{
   public waring(title: string, message: string, seconds: number = 100, position: ToastPosition = ToastPosition.TOP_RIGHT): void{
 
     this.show(title, message, seconds, ToastType.WARNING, position);
-
   }
 
   public error(title: string, message: string, seconds: number = 100, position: ToastPosition = ToastPosition.TOP_RIGHT): void{
