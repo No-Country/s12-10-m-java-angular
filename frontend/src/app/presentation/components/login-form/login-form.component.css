@@ -6,12 +6,10 @@
     justify-content: center;
     flex-direction: column;
     height: auto;
-    margin-inline: 1.5rem;
     padding-block-start: 1.5rem;
 }
 
 .input-group {
-    display: -webkit-flex;
     display: flex;
     flex-grow: 1;
     flex-shrink: 1;
@@ -60,7 +58,11 @@
     border: 2px solid rgb(200, 200, 200);
     border-radius: 1.25rem; 
     background: #FFFBFE;
-    width: 100%;
+    flex-grow: 1;
+    flex-shrink: 1;
+    height: 51px;
+
+    caret-color: #C88D65;
   }
 
   .move-label{
@@ -81,7 +83,7 @@
     border: 2px #C88D65 solid; 
   }
 
-  .default-button{
+.default-button{
     border-radius: 6.25rem;
     padding-inline: 0.25rem;
     padding-block: 0.6rem;
@@ -96,12 +98,40 @@
 
 .form-error input.form-input, .form-error input.form-input:focus  {
     border: 2px solid #D93025;
+    caret-color: #D93025;
 }
 .form-error label.form-label, .form-error :is(input:focus, input:valid)~label {
   color: #ca3126;
 }
 
+.icon{
+  position: absolute;
+  width: 25px;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-45%);
+  opacity: .4;
+  cursor: pointer;
+  aspect-ratio: 1/1;
+}
 
+.icon:hover{
+  opacity: .6;
+}
+.icon.active{
+  opacity: 1;
+}
+
+/* SMALL */
+@media only screen and (min-width: 905px)  {
+  .login-form {
+    margin-inline: 1.5rem;
+    padding-block-start: 1.5rem;
+}
+  .input-group input.form-input {
+    height: auto;
+  }
+}
 /* LARGE */
 @media only screen and (min-width: 1440px) {
   .form-label{

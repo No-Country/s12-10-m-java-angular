@@ -3,29 +3,32 @@ import { ChangeDetectionStrategy, Component, Injector, OnDestroy, OnInit, inject
 import { LoginFormComponent } from '../../components/login-form/login-form.component';
 import { UserLoginState } from 'app/data/models/userLoginState';
 import { LoginService } from 'app/data/services/login/login.service';
-import { Subject, Subscription, first, takeUntil } from 'rxjs';
+import { Observable, Subject, Subscription, catchError, first, takeUntil } from 'rxjs';
+import { Router } from '@angular/router';
+import { ToastComponent } from '@presentation/components/toast/toast.component';
+import { ToastService } from 'app/data/services/toast/Toast.service';
+import { ToastModel, ToastPosition, ToastType } from 'app/data/models/toast.model';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, LoginFormComponent],
+  imports: [CommonModule, LoginFormComponent, ToastComponent],
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [LoginService],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent implements OnInit, OnDestroy  {
-  private service: LoginService = this.injector.get(LoginService);
+  private readonly toast = inject(ToastService);
+  private readonly service: LoginService = inject(LoginService);
+  private readonly router: Router = inject(Router);
 
   private destroy$: Subject<void>;
 
-  constructor(private injector: Injector) { 
+  constructor(private readonly injector: Injector) { 
     this.destroy$ = new Subject<void>();
   }
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void { }
 
   ngOnDestroy(): void {
     this.destroy$.next();
@@ -33,22 +36,27 @@ export class LoginComponent implements OnInit, OnDestroy  {
   }
 
   protected loginHandler(loginSubmitted: UserLoginState): void{
-    const self = this;
+    const service = this.service;
+    const router = this.router;
+    const toast = this.toast;
+    toast.info("Sending", "Waiting answer.", 5);
+
     const loginObserver = {
       login: loginSubmitted,
       next(loginResponse: any): void{
         this.login = loginResponse;
-        self.service.setInStorage(this.login);
+        service.setInStorage(this.login);
+        toast.error("Success", "Logging in.", 5);
       },
       error(err: any): void{
-        console.log(err);
+        toast.error("Error", err.message, 5);
       },
       complete(): void{
-        if(this.login.ID !== loginSubmitted.ID) localStorage.setItem("ID", this.login.ID);
+        setTimeout(()=>router.navigate(["/register"]), 700);
       }
     };
 
-    this.service.login(loginSubmitted)
+    service.login(loginSubmitted)
     .pipe(takeUntil(this.destroy$))
     .pipe(first())
     .subscribe(loginObserver);

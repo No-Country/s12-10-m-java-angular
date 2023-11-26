@@ -1,38 +1,35 @@
 <form class="login-form gap-y-6" [formGroup]="loginForm" (submit)="onSubmit()">
 
-  <div class="w-[366px] h-[74px]">
+  <div class="w-full max-w-[366px] h-[74px]">
 
     <div class="input-group w-full" [ngClass]="{'form-error': loginForm.get('email')?.touched && (loginForm.get('email')?.hasError('required') || loginForm.get('email')?.hasError('pattern'))}">   
-      <input type="email" formControlName="email" autocomplete="email" name="Email" class="form-input" aria-disabled="false" aria-label="Email" tabindex="0" autocapitalize="none" dir="ltr" required>
-      <label for="email" class="form-label">Email</label>
+      <input type="text" id="email-login" formControlName="email" autocomplete="email" name="email-login" class="form-input" aria-disabled="false" aria-label="Email" tabindex="0" autocapitalize="none" dir="ltr" required>
+      <label for="email-login" class="form-label">Email</label>
     </div>
 
     <error-message [showError]="loginForm.get('email')?.touched && (loginForm.get('email')?.hasError('pattern') || loginForm.get('email')?.hasError('required'))"
     errorMessage="Write a valid email address" errorClass="text-red-500" />
   </div>
 
-  <div class="w-[366px] h-[97px]">
+  <div class="w-full max-w-[366px] h-[97px]">
 
     <div class="input-group w-full" [ngClass]="{'form-error': loginForm.get('password')?.touched && (loginForm.get('password')?.hasError('required') || loginForm.get('password')?.hasError('pattern'))}">
-      <input type="password" formControlName="password" autocomplete="off" name="password" class="form-input" aria-disabled="false" aria-label="Password" tabindex="1" autocapitalize="none" dir="ltr" required>
-      <label for="password" class="form-label">Password</label>
+      <input [type]="viewPassword ? 'text' : 'password'" id="password-login" formControlName="password" autocomplete="off" name="password-login" class="form-input" aria-disabled="false" aria-label="Password" tabindex="1" autocapitalize="none" dir="ltr" required>
+      <img src="../../../../assets/icons/show.webp" alt="Show password" class="icon" loading="lazy" (click)="toogleViewPassword($event)">
+      <label for="password-login" class="form-label">Password</label>
     </div>
 
     <error-message [showError]="loginForm.get('password')?.touched && (loginForm.get('password')?.hasError('pattern') || loginForm.get('password')?.hasError('required'))"
     errorMessage="Write a valid password" errorClass="text-red-500" />
     
-    <a class="outline-none mt-1 inline-block text-left text-[.8rem] cursor-pointer text-[#069150] font-bold hover:text-[#15AD67]" tabindex="2">
-      ¿Forgot your password?
-    </a>
+    <app-link path="/login" textLink="¿Forgot your password?" className="mt-4 text-left text-[#069150] hover:text-[#15AD67]"></app-link>
   </div>
   
   <div class="w-full">
-    <div class="flex w-full mb-6">
-      <button type="submit" class="default-button w-full text-[#FFFFFC] bg-[#069150] hover:bg-[#15AD67]" [disabled]="loginForm.invalid" tabindex="3"  role="button" [disabled]="this.loginForm.invalid" [attr.aria-disabled]="this.loginForm.invalid">Log in</button>
+    <div class="flex w-full mb-6 justify-center">
+      <button type="submit" class="default-button w-full min-w-[100px]  max-w-[300px] min-[905px]:max-w-full text-[#FFFFFC] bg-[#069150] hover:bg-[#15AD67]" [disabled]="loginForm.invalid" tabindex="3"  role="button" [disabled]="this.loginForm.invalid" [attr.aria-disabled]="this.loginForm.invalid">Log in</button>
     </div>
     <hr class="mb-6 border-t">
-    <a class="w-full mt-4 inline-block text-center text-[.8rem] cursor-pointer text-[#069150] font-bold hover:text-[#15AD67]" routerLink="/register" tabindex="4">
-      You still do not have an account?
-    </a>
+    <app-link path="/register" textLink="You still do not have an account?" className="mt-4 text-center text-[#069150] hover:text-[#15AD67]"></app-link>
   </div>
 </form>
