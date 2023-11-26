@@ -39,17 +39,17 @@ export class LoginComponent implements OnInit, OnDestroy  {
     const service = this.service;
     const router = this.router;
     const toast = this.toast;
-    toast.info("Sending", "Waiting answer", 100000);
+    toast.info("Sending", "Waiting answer.", 5);
 
     const loginObserver = {
       login: loginSubmitted,
       next(loginResponse: any): void{
-        console.log("Entra al next ?"); 
         this.login = loginResponse;
         service.setInStorage(this.login);
+        toast.error("Success", "Logging in.", 5);
       },
       error(err: any): void{
-        toast.error("Error", err.message, 100000);
+        toast.error("Error", err.message, 5);
       },
       complete(): void{
         setTimeout(()=>router.navigate(["/register"]), 700);

@@ -4,12 +4,12 @@ import { AbstractStoreService } from "./AbstractStore.service";
 
 export class SignalsStoreService<T> extends AbstractStoreService< T, Signal<T[any]> >{
 
-    // Se iniicia un signal, con un objeto "T" vacio
+    //
     public state: WritableSignal<T>;
     
-    constructor(value: T) {
+    constructor(initialValue: T) {
       super();
-      this.state = signal(value);
+      this.state = signal(initialValue);
     }
     
     /**

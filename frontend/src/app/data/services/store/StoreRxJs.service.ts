@@ -8,9 +8,9 @@ export class RxjsStoreService<T> extends AbstractStoreService< T, Observable<T[a
     private subject: BehaviorSubject<T>;
     public state$: Observable<T>;
     
-    constructor() {
+    constructor(initialValue: T) {
         super();
-        this.subject = new BehaviorSubject<T>({} as T);
+        this.subject = new BehaviorSubject<T>(initialValue);
         this.state$ = this.subject.asObservable();
     }
 
