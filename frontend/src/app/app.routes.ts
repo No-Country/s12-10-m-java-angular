@@ -12,7 +12,8 @@ export const routes: Routes = [
     },
     {
         path: 'register',
-        component: RegisterComponent
+        title: 'Register',
+        loadComponent: () => import('@presentation/pages/register/register.component').then(c => c.RegisterComponent)
     },
     { 
         path: '**', 

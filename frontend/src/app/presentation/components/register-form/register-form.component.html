@@ -1,0 +1,60 @@
+<form class="px-8 pt-6 pb-8 mb-4 bg-[#FFFBFE] rounded" 
+[formGroup]="registerForm" (submit)="onSubmit()">
+    <div class="mb-4 md:flex ">
+      <div class="h-[74px] mb-4 md:mb-0">
+        <div class="input-group" [ngClass]="{'form-error': registerForm.get('name')?.touched && (registerForm.get('name')?.hasError('required') || registerForm.get('name')?.hasError('pattern'))}">
+          <input autocomplete="off" required="" type="text" id="firstName" class="form-input"
+          formControlName="name" autocomplete="given-name" name="name" aria-disabled="false" aria-label="Name" tabindex="0" autocapitalize="none" dir="ltr" required>
+          <label for="name" class="form-label ellipsis ...">First Name</label>
+      </div>
+      <error-message [showError]="registerForm.get('name')?.touched && (registerForm.get('name')?.hasError('pattern') || registerForm.get('name')?.hasError('required'))"
+    errorMessage="Write a valid name" errorClass="text-red-500" />
+      </div>
+      <div class="h-[74px] md:ml-3">
+        <div class="input-group" [ngClass]="{'form-error': registerForm.get('lastName')?.touched && (registerForm.get('lastName')?.hasError('required') || registerForm.get('lastName')?.hasError('pattern'))}">
+          <input autocomplete="off" required="" type="text" id="lastName" class="form-input"
+          formControlName="lastName" autocomplete="family-name" name="lastName" aria-disabled="false" aria-label="LastName" tabindex="1" autocapitalize="none" dir="ltr" required>
+          <label for="lastName" class="form-label ellipsis ...">Last Name</label>
+      </div>
+      <error-message [showError]="registerForm.get('lastName')?.touched && (registerForm.get('lastName')?.hasError('pattern') || registerForm.get('lastName')?.hasError('required'))"
+    errorMessage="Write a valid last name" errorClass="text-red-500" />
+      </div>
+    </div>
+    <div class="h-[74px] mb-4 md:mb-2">
+      <div class="input-group" [ngClass]="{'form-error': registerForm.get('email')?.touched && (registerForm.get('email')?.hasError('required') || registerForm.get('email')?.hasError('pattern'))}">
+        <input autocomplete="off" required="" type="text" id="email" class="form-input"
+        formControlName="email" autocomplete="email" name="email" aria-disabled="false" aria-label="Email" tabindex="2" autocapitalize="none" dir="ltr" required>
+        <label for="email" class="form-label ellipsis ...">Email</label>
+    </div>
+    <error-message [showError]="registerForm.get('email')?.touched && (registerForm.get('email')?.hasError('pattern') || registerForm.get('email')?.hasError('required'))"
+    errorMessage="Write a valid email address" errorClass="text-red-500" />
+    </div>
+    <div class="h-[74px] mb-4 md:mb-2">
+        <div class="input-group" [ngClass]="{'form-error': registerForm.get('password')?.touched && (registerForm.get('password')?.hasError('required') || registerForm.get('password')?.hasError('pattern'))}">
+          <input autocomplete="off" required="" type="text" id="password" class="form-input"
+          formControlName="password" autocomplete="password" name="password" aria-disabled="false" aria-label="Password" tabindex="3" autocapitalize="none" dir="ltr" required>
+          <label for="password" class="form-label ellipsis ...">Password</label>
+      </div>
+      <error-message [showError]="registerForm.get('password')?.touched && (registerForm.get('password')?.hasError('pattern') || registerForm.get('password')?.hasError('required'))"
+    errorMessage="Write a valid password" errorClass="text-red-500" />
+    </div>
+    <div class="mb-6 text-center">
+      <button
+        class="default-button w-full px-4 py-2 font-bold text-white bg-[#069150] rounded-full hover:bg-[#15AD67]
+        ellipsis ..." tabindex="4" type="submit" role="button"
+         [disabled]="registerForm.invalid" [disabled]="this.registerForm.invalid" [attr.aria-disabled]="this.registerForm.invalid"
+      >
+        Register Account
+      </button>
+    </div>
+    <hr class="mb-6 border-t" />
+    <div class="text-center">
+      <a
+        class="inline-block text-sm text-green-700 align-baseline hover:text-[#15AD67]"
+        href="#" tabindex="5"
+      >
+      <b>Already have an account ? Login!</b>
+      </a>
+    </div>
+  </form>
+
