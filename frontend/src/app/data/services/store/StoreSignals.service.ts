@@ -1,9 +1,16 @@
-import { Signal, WritableSignal, computed, signal } from "@angular/core";
+import { Injectable, Signal, WritableSignal, computed, signal } from "@angular/core";
+import { AbstractStoreService } from "./AbstractStore.service";
 
-export class SignalsSimpleStoreService<T> {
-    public readonly state: WritableSignal<T> = signal({} as T);
+
+export class SignalsStoreService<T> extends AbstractStoreService< T, Signal<T[any]> >{
+
+    // Se iniicia un signal, con un objeto "T" vacio
+    public state: WritableSignal<T>;
     
-    constructor() {}
+    constructor(value: T) {
+      super();
+      this.state = signal(value);
+    }
     
     /**
      * Devuelve un valor reactivo para una propiedad en el estado.
@@ -23,9 +30,12 @@ export class SignalsSimpleStoreService<T> {
      * @param key  - la clave de la propiedad que se va a establecer
      * @param data - los nuevos datos a guardar
      */
-    public set<K extends keyof T>(key: K, data: T[K]) {
+    public set<K extends keyof T>(key: K, data: T[K]): void {
       this.state.update((currentValue) => ({ ...currentValue, [key]: data }));
     }
+    //
+ 
+ 
     
     /**
      * Establece valores para múltiples propiedades en la tienda.

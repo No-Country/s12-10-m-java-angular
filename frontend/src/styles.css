@@ -18,4 +18,5 @@ body{
     outline: none;
     overscroll-behavior-x: none;
     touch-action: manipulation;
+    direction: ltr;
 }

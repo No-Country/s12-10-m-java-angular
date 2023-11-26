@@ -61,6 +61,8 @@
     flex-grow: 1;
     flex-shrink: 1;
     height: 51px;
+
+    caret-color: #C88D65;
   }
 
   .move-label{
@@ -96,6 +98,7 @@
 
 .form-error input.form-input, .form-error input.form-input:focus  {
     border: 2px solid #D93025;
+    caret-color: #D93025;
 }
 .form-error label.form-label, .form-error :is(input:focus, input:valid)~label {
   color: #ca3126;

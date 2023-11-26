@@ -1,24 +1,23 @@
-export class ToastModel{
-    public visible: boolean;
+export interface ToastProps{
+    toasts: ToastModel[],
+    position: ToastPosition;
+}
 
-    public type: ToastType;
-    public message: string;
-    public title: string;
-    public position: ToastPosition;
 
-    constructor(visible: boolean){
-        this.visible = visible;
-
-        this.type = ToastType.INFO;
-        this.position = ToastPosition.TOP_RIGHT;
-        this.message = "";
-        this.title = ""; 
-    }
+export interface ToastModel{
+    ID: string,
+    visible: boolean;
+    message: string;
+    title: string;
+    seconds: number;
+    type: ToastType;
 }
 
 export enum ToastPosition{
     TOP_RIGHT = 'top-right',
     TOP_LEFT = 'top-left',
+    BOTTOM_RIGHT = 'bottom-right',
+    BOTTOM_LEFT = 'bottom-left',
     CENTER = 'center',
 }
 export enum ToastType {
