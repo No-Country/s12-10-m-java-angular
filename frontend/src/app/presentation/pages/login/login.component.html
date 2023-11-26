@@ -1,9 +1,11 @@
 
-  <div class="flex justify-center items-center w-full h-full">
+  <div class="flex justify-center items-center w-full h-full relative">
     <section class="login-container ">
       <h2 class="title  text-center">Login</h2>
       <login-form (loginFormSubmitted)="loginHandler($event)"></login-form>
     </section>
+    
+    <app-toast></app-toast>
   </div>
 
 
