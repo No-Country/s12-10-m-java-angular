@@ -45,6 +45,13 @@
 	box-sizing: border-box;
 	position: fixed;
 	z-index: 20;
+
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    flex-shrink: 1;
+    row-gap: 0.5em;
+    padding-inline-start: 1rem;
 }
 
 .toast-list .toast {
@@ -54,34 +61,38 @@
 .toast{
     background-color: #FFFFFC;
     position: relative;
-    pointer-events: auto;
     overflow: hidden;
+    box-sizing: border-box;
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 1;
     max-height: 80px;
-    width: 350px;
+    min-height: 80px;
+    max-width: 350px;
     aspect-ratio: 5/1;
     border-radius: 0.625rem;
     box-shadow: hsl(25 10% 10% / 10%) 0px 1px 3px 0px,
                 hsl(25 10% 10% / 5%) 0px 1px 2px 0px;
 
     opacity: .99;
-    transition: opacity .3s ease;
-}
-
-.toast + .toast {
-    margin-top: .5em;
+    border: 1px solid #e7e7e7;
+    transition-duration: 250ms;
+    transition-timing-function: ease;
+    transition-property: opacity, border-color;
 }
 
 .toast:hover {
     opacity: 1;
-    box-shadow: hsl(25 10% 10% / 30%) 0px 1px 3px 0px,
-      hsl(25 10% 10% / 15%) 0px 1px 2px 0px;
+    border-color: #dbdada;
 }
 
 .toast .toast-wrapper {
     display: grid;
     grid-template-columns: .2fr .3fr 3fr .5fr;
     grid-template-rows: .6fr 1fr;
-    height: 100%;
+    flex-grow: 1;
+    flex-shrink: 1;
+    overflow: hidden;
 }
 
 .toast div.bar {
@@ -147,6 +158,7 @@
     color: #1E1E1E;
     white-space: pre-wrap;
     word-break: break-all;
+    overflow: hidden;
     text-overflow: ellipsis;
     font-size: .85rem;
     max-height: 47px;
@@ -174,6 +186,12 @@
 
 .toast .toast-wrapper .btn-close:hover {
     opacity: 1;
+}
+
+@media screen and (max-width: 350px){
+    .toast .toast-wrapper .message{
+        white-space: nowrap;
+    }
 }
 
 @keyframes toast-in-right {
