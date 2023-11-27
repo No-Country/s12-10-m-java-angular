@@ -2,9 +2,11 @@ package com.noCountry.library.dto.User;
 
 import com.noCountry.library.entities.User;
 import org.springframework.cglib.core.Local;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
+@Component
 public class MappingUserDto {
 
 
