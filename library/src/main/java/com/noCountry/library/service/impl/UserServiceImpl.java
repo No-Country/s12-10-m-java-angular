@@ -1,7 +1,9 @@
 package com.noCountry.library.service.impl;
 
-<<<<<<< HEAD
 import com.noCountry.library.dto.RegisterRequest;
+import com.noCountry.library.dto.User.MappingUserDto;
+import com.noCountry.library.dto.User.ResponseUserDto;
+import com.noCountry.library.dto.User.UpdatePasswordDto;
 import com.noCountry.library.entities.User;
 import com.noCountry.library.entities.enums.Role;
 import com.noCountry.library.exception.InvalidPasswordException;
@@ -11,17 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import com.noCountry.library.dto.Register;
 import com.noCountry.library.dto.User.UserDto;
 import com.noCountry.library.service.EmailService;
 import jakarta.transaction.Transactional;
-
 
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -30,16 +29,18 @@ public class UserServiceImpl implements UserService {
 
     private final EmailService emailService;
 
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
+    private final MappingUserDto mapperUser;
 
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository, EmailService emailService,
-                           PasswordEncoder passwordEncoder) {
+                           PasswordEncoder passwordEncoder, MappingUserDto mapperUser) {
         this.userRepository = userRepository;
         this.emailService = emailService;
         this.passwordEncoder = passwordEncoder;
+        this.mapperUser = mapperUser;
     }
 
     @Override
@@ -66,36 +67,44 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(email);
     }
 
-
-    private void sendEmailWelcome(String name, String email) {
-
-        Map<String, Object> templateModel = new HashMap<>();
-
-        templateModel.put("userName", name);
-        templateModel.put("libraryName", "Libreria YEY!");
-
-        emailService.sendWelcomeEmail(email,
-                "Bienvenido a la librería YEY!",
-                "welcome.html", templateModel);
+    @Override
+    public User getUserById(String id) {
+        return userRepository.findById(id).get();
     }
-
 
     @Transactional
     @Override
-    public void updateUser(UserDto userDTO) {
+    public ResponseUserDto updateUser(UserDto userDTO) {
 
+        User updateUser = mapperUser.userDtoToUser(userDTO);
 
-        emailService.sendSimpleEmail(userDTO.email, "Actualización de informacion",
+        if (userDTO.getName() != null) {
+            updateUser.setName(userDTO.getName());
+        }
+
+        if (userDTO.getLastName() != null) {
+            updateUser.setName(userDTO.getLastName());
+        }
+
+        if (userDTO.getEmail() != null) {
+            updateUser.setName(userDTO.getEmail());
+        }
+
+        userRepository.save(updateUser);
+
+        emailService.sendSimpleEmail(userDTO.getEmail(), "Actualización de informacion",
                 "Su informacion ha sido actualizada exitosamente.");
 
+        return mapperUser.userToUserDto(updateUser);
     }
 
     @Transactional
     @Override
-    public void updatePasswordUser(UserDto userDTO) {
+    public void updatePasswordUser(UpdatePasswordDto userDTO) {
 
+        // Ver verificaciones de seguridad?
 
-        emailService.sendSimpleEmail(userDTO.email, "Actualización de contraseña",
+        emailService.sendSimpleEmail(userDTO.getEmail(), "Actualización de contraseña",
                 "Su contraseña ha sido actualizada exitosamente.");
 
     }
@@ -103,31 +112,17 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public User getUserById(String id) {
-
-
-        return userRepository.findById(id).get();
-    }
-
-    @Transactional
-    @Override
     public void deleteUser(String id) {
-
         User user = userRepository.findById(id).get();
         user.setModificationDate(LocalDate.now());
         user.setStatus(false);
 
-        // al tener el atributo status, solo lo actualizo a false, y no toco la bd?
-        // o sino hago el delete en la bd?
-        // averiguar en q casos se realiza el borrado logico y en cuales no
-        userRepository.deleteById(id);
-
+        userRepository.save(user);
     }
 
     @Transactional
     @Override
     public void unsubscribeEmailUser(String id) {
-
         User user = userRepository.findById(id).get();
 
         if (user.getIsSubscribed()) {
@@ -147,6 +142,17 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    private void sendEmailWelcome(String name, String email) {
+
+        Map<String, Object> templateModel = new HashMap<>();
+
+        templateModel.put("userName", name);
+        templateModel.put("libraryName", "Libreria YEY!");
+
+        emailService.sendWelcomeEmail(email,
+                "Bienvenido a la librería YEY!",
+                "welcome.html", templateModel);
+    }
 
 
 }

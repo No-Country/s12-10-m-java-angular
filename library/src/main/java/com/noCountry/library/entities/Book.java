@@ -15,16 +15,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Book extends PersistenceObject {
 
-	protected Long ISBN;
-	protected String title;
-	protected Double price;
+	private Long ISBN;
+	private String title;
+	private Double price;
 	@Enumerated(EnumType.STRING)
-	protected Genre genre;
-	protected Autor autor;
-	protected Editorial editorial;
-	protected Integer pages;
-	protected Integer quantity;
-	protected String description;
+	private Genre genre;
+	private Autor autor;
+	private Editorial editorial;
+	private Integer pages;
+	private Integer quantity;
+	private String description;
+
+	private ArrayList<String> urlImages;
 
 }
 */
