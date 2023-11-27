@@ -9,4 +9,6 @@ public class ApiErrorDto implements Serializable {
     private String backendMessage;
     private String message;
     private LocalDateTime times;
+    private String url;
+    private String method;
 }
