@@ -4,6 +4,7 @@ import com.noCountry.library.dto.LoginRequest;
 import com.noCountry.library.dto.LoginResponse;
 import com.noCountry.library.dto.RegisterRequest;
 import com.noCountry.library.dto.RegisterResponse;
+import com.noCountry.library.entities.User;
 import com.noCountry.library.service.auth.AuthenticationService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,13 @@ public class AuthenticateController {
 
         LoginResponse loginResponse = authenticationService.login(login);
 
-        return null;
+        return ResponseEntity.status(HttpStatus.OK).body(loginResponse);
+    }
+
+    @GetMapping("/profile")
+    public ResponseEntity<User> findMyProfile(){
+        User user = authenticationService.findLoggedInUser();
+        return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 
 }

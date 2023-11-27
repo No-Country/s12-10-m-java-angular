@@ -5,11 +5,13 @@ import com.noCountry.library.dto.LoginResponse;
 import com.noCountry.library.dto.RegisterRequest;
 import com.noCountry.library.dto.RegisterResponse;
 import com.noCountry.library.entities.User;
+import com.noCountry.library.exception.NotFoundException;
 import com.noCountry.library.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -63,6 +65,14 @@ public class AuthenticationService {
         LoginResponse loginResponse = new LoginResponse();
         loginResponse.setJwt(jwt);
         return loginResponse;
+
+    }
+
+    public User findLoggedInUser() {
+
+        Authentication auth = (UsernamePasswordAuthenticationToken)SecurityContextHolder.getContext().getAuthentication();
+            String username = (String)auth.getPrincipal();
+            return userService.findByEmail(username).orElseThrow(()-> new NotFoundException("User not found"));
 
     }
 }
