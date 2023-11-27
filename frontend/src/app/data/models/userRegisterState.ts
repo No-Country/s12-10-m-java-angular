@@ -4,4 +4,5 @@ export interface NewUserState {
     lastName:string;
     email: string;
     password: string;
+    repeatPassword:string;
 }

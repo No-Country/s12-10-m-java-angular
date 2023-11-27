@@ -94,3 +94,38 @@ min-height: 51px;
 .form-error label.form-label, .form-error :is(input:focus, input:valid)~label {
   color: #ca3126;
 }
+
+.form-error [formControlName="repeatPassword"] {
+  border: 2px solid #D93025;
+  caret-color: #D93025;
+}
+
+.form-error [formControlName="repeatPassword"] + label.form-label {
+  color: #ca3126;
+}
+
+.icon{
+  position: absolute;
+  width: 25px;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-45%);
+  opacity: .4;
+  cursor: pointer;
+  aspect-ratio: 1/1;
+}
+
+.icon:hover{
+  opacity: .6;
+}
+.icon.active{
+  opacity: 1;
+}
+
+@media only screen and (max-width: 705px)  {
+ form{
+  padding-left: 0.2rem;
+  padding-right: 0.2rem;
+ }
+   
+}
