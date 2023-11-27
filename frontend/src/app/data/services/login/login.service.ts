@@ -2,6 +2,7 @@ import { DestroyRef, Injectable, Injector, inject } from '@angular/core';
 import { UserLoginState } from '../../models/userLoginState';
 import { ApiService } from '../api.service';
 import {  Observable, Observer, Subject, firstValueFrom, takeUntil } from 'rxjs';
+import { AuthResponse } from 'app/data/models/AuthResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +17,13 @@ export class LoginService  {
     return this.api.httpPost('login', loginSubmitted, false);
   }
 
-  public setInStorage(values: UserLoginState){
+  public setInStorage(values: AuthResponse){
     Object.entries(values).forEach(([key, value]) => {
       localStorage.setItem(key, value);
     });
   }
 
+  public forgotPassword(email: string){
+    return this.api.httpPost('forgot-password', email, false);
+  }
 }

@@ -8,12 +8,18 @@ export const routes: Routes = [
         path: 'login',
         title: 'Login',
         loadComponent: () => import('@presentation/pages/login/login.component').then(c => c.LoginComponent),
-        providers: [ ToastService, LoginService ]
+        providers: [ ToastService, LoginService ],
     },
     {
         path: 'register',
         title: 'Register',
         loadComponent: () => import('@presentation/pages/register/register.component').then(c => c.RegisterComponent)
+    },
+    {
+        path: 'forgot-password',
+        title: 'Forgot Password',
+        loadComponent: () => import('@presentation/pages/forgot-password/forgot-password.component').then(c => c.ForgotPasswordComponent),
+        providers: [ ToastService, LoginService ],
     },
     { 
         path: '**', 

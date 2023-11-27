@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { ToastComponent } from '@presentation/components/toast/toast.component';
 import { ToastService } from 'app/data/services/toast/Toast.service';
 import { ToastModel, ToastPosition, ToastType } from 'app/data/models/toast.model';
+import { AuthResponse } from 'app/data/models/AuthResponse';
 
 @Component({
   standalone: true,
@@ -42,23 +43,28 @@ export class LoginComponent implements OnInit, OnDestroy  {
     toast.info("Sending", "Waiting answer.", 5);
 
     const loginObserver = {
-      login: loginSubmitted,
-      next(loginResponse: any): void{
-        this.login = loginResponse;
+      login: {} as AuthResponse,
+      next(loginResponse: AuthResponse): void {
+        this.login.id =   loginResponse.id;
+        this.login.name = loginResponse.name;
+        this.login.lastName = loginResponse.lastName;
+        this.login.email = loginResponse.email;
+        this.login.jwt = loginResponse.jwt;
+
         service.setInStorage(this.login);
         toast.error("Success", "Logging in.", 5);
       },
       error(err: any): void{
-        toast.error("Error", err.message, 5);
+        toast.error("Error", "An unexpected error has occurred with the server", 5);
       },
-      complete(): void{
-        setTimeout(()=>router.navigate(["/register"]), 700);
+      complete(): void {
+        setTimeout(()=>router.navigate(["/"]), 700);
       }
     };
 
     service.login(loginSubmitted)
-    .pipe(takeUntil(this.destroy$))
     .pipe(first())
+    .pipe(takeUntil(this.destroy$))
     .subscribe(loginObserver);
   }
   
