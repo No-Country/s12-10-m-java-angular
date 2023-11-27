@@ -1,5 +1,5 @@
 package com.noCountry.library.entities;
-
+/*
 import com.noCountry.library.entities.enums.Genre;
 
 import jakarta.persistence.Entity;
@@ -15,15 +15,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Book extends PersistenceObject {
 
-	private Long ISBN;
-	private String title;
-	private Double price;
+	protected Long ISBN;
+	protected String title;
+	protected Double price;
 	@Enumerated(EnumType.STRING)
-	private Genre genre;
-	private Autor autor;
-	private Editorial editorial;
-	private Integer pages;
-	private Integer quantity;
-	private String description;
+	protected Genre genre;
+	protected Autor autor;
+	protected Editorial editorial;
+	protected Integer pages;
+	protected Integer quantity;
+	protected String description;
 
 }
+*/

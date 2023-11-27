@@ -2,10 +2,10 @@ package com.noCountry.library.dto;
 
 public class Register {
 
-    private String name;
-    private String lastName;
-    private String email;
-    private String password;
-    private String passwordRepeat;
+    public String name;
+    public String lastName;
+    public String email;
+    public String password;
+    public String passwordRepeat;
 
 }

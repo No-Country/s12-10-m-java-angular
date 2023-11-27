@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -14,11 +15,16 @@ import java.util.UUID;
 @NoArgsConstructor
 public class User extends PersistenceObject {
 
-    private String name;
-    private String lastName;
-    private String email;
-    private String password;
+    protected String name;
+    protected String lastName;
+    protected String email;
+    protected String password;
     @Enumerated(EnumType.STRING)
-    private Role role;
+    protected Role role;
+
+    protected Boolean isSubscribed;
+
+
+
 
 }
