@@ -1,19 +1,21 @@
 package com.noCountry.library.service.auth;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.security.Key;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
+
 
 @Service
 public class JwtService {
@@ -45,4 +47,33 @@ public class JwtService {
 
         return Keys.hmacShaKeyFor(passwordDecoded);
     }
+
+    public String extractUsername(String jwt) {
+        return extractAllClaims(jwt).getSubject();
+    }
+
+    private Claims extractAllClaims(String jwt) {
+
+        return Jwts.parserBuilder().setSigningKey(generateKey()).build() //
+                .parseClaimsJws(jwt).getBody();
+    }
+
+    public String extractJwtFromRequest(HttpServletRequest request) {
+        //1-Obntener encabezado http llamado Authorization
+
+        String authorizationHeader = request.getHeader("Authorization");
+        if (!StringUtils.hasText(authorizationHeader) || !authorizationHeader.startsWith("Bearer ")){
+            return null;
+        }
+
+        //2- Obtener token JWT desde el encabezado
+
+        String jwt = authorizationHeader.split(" ")[1];
+        return jwt;
+    }
+
+    public Date extractExpiration(String jwt) {
+        return extractAllClaims(jwt).getExpiration();
+    }
+
 }
