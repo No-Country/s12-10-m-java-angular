@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -23,13 +24,14 @@ import java.util.List;
 @Table(name = "tbl_user")
 public class User extends PersistenceObject implements UserDetails {
 
-	private String name;
-	private String lastName;
-	@Column(unique = true)
-	private String email;
-	private String password;
-	@Enumerated(EnumType.STRING)
-	private Role role;
+    private String name;
+    private String lastName;
+    @Column(unique = true)
+    private String email;
+    private String password;
+    @Enumerated(EnumType.STRING)
+    protected Role role;
+    protected Boolean isSubscribed;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

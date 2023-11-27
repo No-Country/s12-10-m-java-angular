@@ -8,15 +8,14 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
-@NoArgsConstructor
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 @MappedSuperclass
 public abstract class PersistenceObject {
-	@Id
-	private String id;
-	private Boolean status = Boolean.TRUE;
-	private LocalDate creationDate;
-	private LocalDate modificationDate;
-
+        @Id
+        private String id;
+        private Boolean status = true;
+        private LocalDate creationDate;
+        private LocalDate modificationDate;
 }

@@ -1,5 +1,5 @@
 package com.noCountry.library.entities;
-
+/*
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -24,3 +24,4 @@ public class Autor extends PersistenceObject {
 	private String biography;
 
 }
+*/

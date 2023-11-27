@@ -1,0 +1,19 @@
+
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Çœ“µşÿÿÿÿ
+d	java:S116"ORename this field "ISBN" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÜË¤Å
+>
+java:S1068"(Remove this unused "ISBN" private field.(ÜË¤Å
+D
+java:S1068")Remove this unused "title" private field.(åõò¹ıÿÿÿÿ
+?
+java:S1068")Remove this unused "price" private field.(ÿí
+>
+java:S1068")Remove this unused "autor" private field.(ÃöšW
+C
+java:S1068"-Remove this unused "editorial" private field.(İƒ¢
+D
+java:S1068")Remove this unused "pages" private field.(ëûî÷üÿÿÿÿ
+G
+java:S1068",Remove this unused "quantity" private field.(÷ç¥‚ùÿÿÿÿ
+J
+java:S1068"/Remove this unused "description" private field.(ÇÓæâıÿÿÿÿ
