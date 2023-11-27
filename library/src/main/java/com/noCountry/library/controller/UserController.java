@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api")
@@ -22,27 +21,22 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping(path = "/user")
-    public ResponseEntity<?> saveUser(@RequestBody Register user) {
-        User users = userService.createUser(user);
-        return ResponseEntity.ok(users);
-    }
 
     @GetMapping(path = "/user/{id}")
-    public ResponseEntity<?> getUserById(@PathVariable UUID id) {
+    public ResponseEntity<?> getUserById(@PathVariable String id) {
         User user = userService.getUserById(id);
         return ResponseEntity.ok(user);
     }
 
 
     @DeleteMapping(path = "/user/{id}")
-    public ResponseEntity<?> deleteUserById(@PathVariable UUID id) {
+    public ResponseEntity<?> deleteUserById(@PathVariable String id) {
         userService.deleteUser(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/user/unsubscribe/{id}")
-    public ResponseEntity<?> unsubscribeEmailUser(@PathVariable UUID id) throws Exception {
+    public ResponseEntity<?> unsubscribeEmailUser(@PathVariable String id) throws Exception {
         try {
             userService.unsubscribeEmailUser(id);
             return new ResponseEntity<>(HttpStatus.OK);
