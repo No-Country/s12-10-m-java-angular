@@ -7,13 +7,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
-@NoArgsConstructor
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 @MappedSuperclass
 public abstract class PersistenceObject {
+
         @Id
         private String id;
         private Boolean status = true;

@@ -1,5 +1,5 @@
 package com.noCountry.library.entities;
-
+/*
 import java.util.ArrayList;
 
 import jakarta.persistence.Column;
@@ -20,3 +20,4 @@ public class Editorial extends PersistenceObject {
 	private String email;
 
 }
+*/

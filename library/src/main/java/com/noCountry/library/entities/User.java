@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -23,13 +24,17 @@ import java.util.List;
 @Table(name = "tbl_user")
 public class User extends PersistenceObject implements UserDetails {
 
+
     private String name;
     private String lastName;
     @Column(unique = true)
     private String email;
     private String password;
     @Enumerated(EnumType.STRING)
-    private Role role;
+    protected Role role;
+
+    protected Boolean isSubscribed;
+
 
     public User(String id, Boolean status, LocalDate creationDate, LocalDate modificationDate, String name, String lastName, String email, String password, Role role) {
         super(id, status, creationDate, modificationDate);

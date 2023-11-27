@@ -1,5 +1,5 @@
 package com.noCountry.library.entities;
-
+/*
 import com.noCountry.library.entities.enums.Genre;
 
 import jakarta.persistence.Entity;
@@ -26,4 +26,7 @@ public class Book extends PersistenceObject {
 	private Integer quantity;
 	private String description;
 
+	private ArrayList<String> urlImages;
+
 }
+*/
