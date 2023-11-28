@@ -1,10 +1,14 @@
 import { Routes } from '@angular/router';
-import { RegisterComponent } from '@presentation/pages/register/register.component';
 import { ToastService } from './data/services/toast/Toast.service';
 import { LoginService } from './data/services/login/login.service';
 import { RegisterService } from './data/services/register/register.service';
 
 export const routes: Routes = [
+    {
+        path: '',
+        title: 'Home',
+        loadComponent: ()=> import('@presentation/pages/home/home.component').then(c => c.HomeComponent),
+    },
     {
         path: 'login',
         title: 'Login',
