@@ -38,7 +38,7 @@ export class ToastService extends SignalsStoreService<ToastProps>{
     if(!seconds || seconds <= 0) seconds = 5;
 
     const toastModel: ToastModel ={
-      ID: crypto.randomUUID(),
+      ID: 'a'+crypto.randomUUID(),
       title: title,
       message: message, 
       visible: true, 
@@ -55,7 +55,9 @@ export class ToastService extends SignalsStoreService<ToastProps>{
 
     const autoClose = seconds * 1000;
     setTimeout(() => {
-      this.remove(toastModel.ID);
+      const index = toasts.findIndex((val: any) => val.ID === toastModel.ID);
+      if(index !== -1) toasts.splice(index, 1);
+      this.set("toasts", toasts);
     }, autoClose);
   }
 
