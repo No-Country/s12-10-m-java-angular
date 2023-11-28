@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { ToastService } from './data/services/toast/Toast.service';
 import { LoginService } from './data/services/login/login.service';
 import { RegisterService } from './data/services/register/register.service';
+import { CatalogComponent } from './presentation/pages/catalog/catalog.component';
 
 export const routes: Routes = [
     {
@@ -28,8 +29,7 @@ export const routes: Routes = [
         providers: [ ToastService, LoginService ],
     },
     { 
-        path: '**', 
-        pathMatch: 'full',
-        redirectTo: ''
-    }
+        path: 'catalog', 
+        component: CatalogComponent,
+    },
 ];
