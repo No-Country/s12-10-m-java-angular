@@ -33,7 +33,6 @@ public class SecurityConfig {
                    authRequestConfig.requestMatchers(HttpMethod.POST,"/authenticate/register").permitAll();
                    authRequestConfig.requestMatchers(HttpMethod.POST,"/authenticate/**").permitAll();
                    authRequestConfig.requestMatchers(HttpMethod.GET,"/authenticate/hello").permitAll();
-
                    authRequestConfig.anyRequest().authenticated();
                })
                .build();
