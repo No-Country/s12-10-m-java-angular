@@ -6,12 +6,13 @@ import { RegisterComponent } from './presentation/pages/register/register.compon
 import { HttpClientModule } from '@angular/common/http';
 import { ToastComponent } from '@presentation/components/toast/toast.component';
 import { ToastService } from './data/services/toast/Toast.service';
+import { CatalogComponent } from "./presentation/pages/catalog/catalog.component";
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RegisterComponent, LoginComponent],
+  imports: [CommonModule, RouterOutlet, RegisterComponent, LoginComponent, CatalogComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   providers: [ToastService]
