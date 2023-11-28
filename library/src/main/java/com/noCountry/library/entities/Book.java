@@ -1,32 +1,39 @@
 package com.noCountry.library.entities;
-/*
+
 import com.noCountry.library.entities.enums.Genre;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "tbl_book")
 public class Book extends PersistenceObject {
 
 	private Long ISBN;
 	private String title;
 	private Double price;
+    private Integer pages;
+    private Integer quantity;
+    private String description;
+
 	@Enumerated(EnumType.STRING)
 	private Genre genre;
+
+    @ManyToOne
+    @JoinColumn(name = "autor_id", referencedColumnName = "id")
 	private Autor autor;
+
+    @ManyToOne
+    @JoinColumn(name = "editorial_id", referencedColumnName = "id")
 	private Editorial editorial;
-	private Integer pages;
-	private Integer quantity;
-	private String description;
 
 	private ArrayList<String> urlImages;
 
 }
-*/
