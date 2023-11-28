@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Book } from '../../../data/models/book';
+import { Book, BookDetail } from '../../../data/models/book';
 import { CardBookComponent } from '../../components/card-book/card-book.component';
-import { booksArray } from '../../../data/mocks/booksArray';
+import { BOOK_DETAIL_MOOK, booksArray } from '../../../data/mocks/booksArray';
 
 @Component({
   selector: 'app-catalog',
@@ -13,7 +13,11 @@ import { booksArray } from '../../../data/mocks/booksArray';
 })
 export class CatalogComponent {
 
-  booksArray: Book[]=booksArray
+  protected booksArray: BookDetail[];
+
+  constructor(){
+    this.booksArray = BOOK_DETAIL_MOOK;
+  }
 
 }
 

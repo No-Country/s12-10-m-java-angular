@@ -1,4 +1,4 @@
-import { Book } from '../models/book';
+import { Book, BookDetail } from '../models/book';
 
 export const booksArray: Book[]=[
     { 
@@ -78,5 +78,51 @@ export const booksArray: Book[]=[
       editorial: "editorial 5",
       price: 50,
       quantity: 100,
+    },
+  ];
+
+
+  export const BOOK_DETAIL_MOOK: BookDetail[]=[
+    { 
+      ID: 1,
+      img: "../../assets/booksImages/1.jpg",
+      name: "Memoir of Vincent Van gogh",
+      author: "genre 6",
+      price: 500
+    },
+    { 
+      ID: 2,
+      img: "../../assets/booksImages/2.jpg",
+      name: "Helvetica",
+      author: "genre 6",
+      price: 500
+    },
+    { 
+      ID: 3,
+      img: "../../assets/booksImages/3.jpg",
+      name: "Scheveningnen",
+      author: "genre 6",
+      price: 1000
+    },
+    { 
+      ID: 4,
+      img: "../../assets/booksImages/4.jpg",
+      name: "The graphic design",
+      author: "genre 6",
+      price: 7000
+    },
+    { 
+      ID: 5,
+      img: "../../assets/booksImages/5.jpg",
+      name: "The graphic design",
+      author: "genre 6",
+      price: 7000
+    },
+    { 
+      ID: 6,
+      img: "../../assets/booksImages/6.jpg",
+      name: "The graphic design",
+      author: "genre 6",
+      price: 7000
     },
   ];

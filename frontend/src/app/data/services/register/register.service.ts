@@ -13,7 +13,7 @@ export class RegisterService {
 
   
   public register(newUser: NewUserState): Observable<any>{
-    return this.api.httpPost('register', newUser, false);
+    return this.api.httpPost('authenticate/register', newUser, false);
   }
 
   public setInStorage(values: NewUserState){

@@ -1,0 +1,78 @@
+.card-book {
+    width: 250px;
+    aspect-ratio: 2/1;
+    position: relative;
+    z-index: 20;
+}
+
+.card-book .img-wrapper:hover .img-container {
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+.card-book .img-wrapper{
+    border-radius: 0.9375rem 0.9375rem 0rem 0rem;
+    background: linear-gradient(229deg, #EEE 0%, #C8C8C8 49.34%, #E3E3E3 98.68%);
+    width: 100%;
+    aspect-ratio: 2/2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+}
+
+.card-book .img-wrapper .img-container {
+    overflow: hidden;
+    position: relative;
+    width: 155px;
+    aspect-ratio: 6/7;
+    opacity: .9;
+    transition-duration: 250ms;
+    transition-timing-function: ease-out;
+    transition-property: opacity, transform;
+
+}
+
+
+.card-book .content-info{
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-height: 51px;
+    border-radius: 0rem 0rem 0.9375rem 0.9375rem;
+    background: linear-gradient(135deg, #E0E0E0 0%, #EBEBE9 100%);
+    flex-direction: column;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.card-book .content-info h2 {
+    font-weight: 500;
+    color: #242221;
+
+    line-height: normal;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1.25rem;
+    cursor: pointer;
+}
+
+.card-book .content-info h2:hover {
+    color: #069150;
+}
+
+.default-button{
+    text-overflow: ellipsis;
+      border-radius: 3.125rem;
+      padding-inline: 0.25rem;
+      padding-block: 0.6rem;
+      font-size: .875rem;
+      font-weight: 500;
+      transition: background .19s linear, box-shadow .17s cubic-bezier(0.65, 0.05, 0.36, 1);
+  }
+  
+  .default-button:hover{
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.30);
+  }
