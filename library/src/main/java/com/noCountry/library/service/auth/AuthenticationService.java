@@ -1,9 +1,8 @@
 package com.noCountry.library.service.auth;
 
 import com.noCountry.library.dto.LoginRequest;
-import com.noCountry.library.dto.LoginResponse;
 import com.noCountry.library.dto.RegisterRequest;
-import com.noCountry.library.dto.RegisterResponse;
+import com.noCountry.library.dto.UserDetailsResponse;
 import com.noCountry.library.entities.User;
 import com.noCountry.library.exception.NotFoundException;
 import com.noCountry.library.service.UserService;
@@ -12,7 +11,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -29,12 +27,12 @@ public class AuthenticationService {
 
     @Autowired
     private AuthenticationManager authenticationManager;
-    public RegisterResponse registerUser(RegisterRequest newUser) {
+    public UserDetailsResponse registerUser(RegisterRequest newUser) {
 
         User user = userService.registeUser(newUser);
         String jwt = jwtService.generateToken(user,generateExtraClaims(user));
 
-        RegisterResponse registerResponse = RegisterResponse.builder()
+        UserDetailsResponse userDetailsResponse = UserDetailsResponse.builder()
                 .name(user.getName())
                 .lastName(user.getLastName())
                 .email(user.getEmail())
@@ -43,7 +41,7 @@ public class AuthenticationService {
                 .list(user.getAuthorities().stream().toList())
                 .build();
 
-        return registerResponse;
+        return userDetailsResponse;
     }
 
     private Map<String, Object> generateExtraClaims(User user) {
@@ -55,16 +53,24 @@ public class AuthenticationService {
         return extraClaims;
     }
 
-    public LoginResponse login(LoginRequest login) {
+    public UserDetailsResponse login(LoginRequest login) {
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(login.getEmail(),login.getPassword());
         authenticationManager.authenticate(authentication);
 
-        UserDetails userDetails = userService.findByEmail(login.getEmail()).get();
-        String jwt = jwtService.generateToken(userDetails,generateExtraClaims((User) userDetails));
-        LoginResponse loginResponse = new LoginResponse();
-        loginResponse.setJwt(jwt);
-        return loginResponse;
+        User userDetails = userService.findByEmail(login.getEmail()).get();
+        String jwt = jwtService.generateToken(userDetails,generateExtraClaims(userDetails));
+
+        UserDetailsResponse userDetailsResponse = UserDetailsResponse.builder()
+                .name(userDetails.getName())
+                .lastName(userDetails.getLastName())
+                .email(userDetails.getEmail())
+                .jwt(jwt)
+                .role(userDetails.getRole().name())
+                .list(userDetails.getAuthorities().stream().toList())
+                .build();
+
+        return userDetailsResponse;
 
     }
 

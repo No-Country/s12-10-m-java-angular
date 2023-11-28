@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @Builder
-public class RegisterResponse implements Serializable{
+public class UserDetailsResponse implements Serializable{
 
         private String name;
         private String lastName;
