@@ -1,0 +1,53 @@
+.title {
+    padding-top: 5vh;
+    padding-left: 5vw;
+    font-family: Inter;
+    font-size: 60px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  .title .color{
+    color: #33B672;
+  }
+  .products-container {
+    width: 100%;
+    height: auto;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 2fr));
+    gap: 120px;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 90vw;
+    padding-top: 5vh;
+  }
+  
+  @media (max-width: 468px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+      padding: 0;
+      gap: 20px;
+    }
+  }
+  .card {
+    background-color: #E4E4E4;
+    border-radius: 50px;
+    border: 1px solid #CCC;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    height: 215px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .card img {
+    display: block;
+    width: 149px;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+  }

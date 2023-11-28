@@ -8,13 +8,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastComponent } from '@presentation/components/toast/toast.component';
 import { ToastService } from './data/services/toast/Toast.service';
 import { CatalogComponent } from "./presentation/pages/catalog/catalog.component";
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RegisterComponent, LoginComponent, CatalogComponent, NavbarComponent],
+  imports: [CommonModule, RouterOutlet, RegisterComponent, LoginComponent, CatalogComponent, NavbarComponent,NgxPaginationModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   providers: [ToastService]

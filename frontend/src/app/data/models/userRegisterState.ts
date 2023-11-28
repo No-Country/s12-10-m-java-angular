@@ -1,5 +1,5 @@
 export interface NewUserState {
-    ID: string;
+    id: string;
     name: string;
     lastName:string;
     email: string;

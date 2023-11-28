@@ -1,3 +1,12 @@
-<p>
-  bowser-categories works!
-</p>
+<div class="products-container">
+  <div class="title">
+    <h1>Browser by <b class="color">Categories</b></h1>
+    <pagination-controls previousLabel="Previous" nextLabel="Next"></pagination-controls>
+  </div>
+  <div class="grid" >
+    <div class="card" *ngFor="let log of categories  | paginate: {itemsPerPage: 5, currentPage: page }">
+      <img src={{log.image}} alt={{log.name}}>
+    </div>
+  </div>
+</div>
+

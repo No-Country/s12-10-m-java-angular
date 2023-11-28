@@ -53,7 +53,7 @@ export class RegisterComponent implements OnInit, OnDestroy  {
         toast.error("Error", err.message, 5);
       },
       complete(): void{
-        if(this.register.ID !== registerSubmitted.ID) localStorage.setItem("ID", this.register.ID);
+        if(this.register.id !== registerSubmitted.id) localStorage.setItem("id", this.register.id);
       }
     };
 

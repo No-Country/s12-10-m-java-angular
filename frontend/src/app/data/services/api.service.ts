@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'any'
 })
 export class ApiService {
-  private devUrl: string = 'http://localhost:8080/api/v1'; 
+  private devUrl: string = 'https://librarync1.fly.dev/api'; 
   private http: HttpClient = this.injector.get(HttpClient);
 
   constructor(private injector: Injector) { }

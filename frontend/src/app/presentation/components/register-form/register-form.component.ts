@@ -49,7 +49,7 @@ export class RegisterFormComponent implements OnInit {
   protected onSubmit() {
     if (this.registerForm.valid) {
       this.registerFormSubmitted.emit({
-        ID: crypto.randomUUID(),
+        id: crypto.randomUUID(),
         name: this.registerForm.value.name,
         lastName: this.registerForm.value.lastName,
         email: this.registerForm.value.email,
