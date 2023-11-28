@@ -90,6 +90,7 @@ public class UserServiceImpl implements UserService {
             updateUser.setName(userDTO.getEmail());
         }
 
+        updateUser.setModificationDate(LocalDate.now());
         userRepository.save(updateUser);
 
         emailService.sendSimpleEmail(userDTO.getEmail(), "Actualización de informacion",
@@ -127,6 +128,7 @@ public class UserServiceImpl implements UserService {
 
         if (user.getIsSubscribed()) {
             user.setIsSubscribed(false);
+            user.setModificationDate(LocalDate.now());
         }
 
         userRepository.save(user);
