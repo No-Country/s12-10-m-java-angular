@@ -240,9 +240,6 @@
     }
   }
   
-  .fade-out {
-    animation: fade-out 0.35s ease-in-out;
-  }
 
   @keyframes fade-in {
     from {
@@ -253,6 +250,13 @@
     }
   }
   
-  .fade-in {
-    animation: fade-in 0.35s ease-in;
+
+  .animate-enter{
+    -webkit-animation: fade-in 3s ease-in-out;
+    animation: fade-in 3s ease-in-out;
+  }
+
+  .animate-out{
+    -webkit-animation: fade-out 3s ease-in-out;
+    animation: fade-out 3s ease-in-out;
   }
