@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "tbl_autor")
-public class Autor extends PersistenceObject {
+@Table(name = "tbl_author")
+public class Author extends PersistenceObject {
 
 	private String name;
 	private String lastName;
@@ -23,7 +23,7 @@ public class Autor extends PersistenceObject {
 	private String nationality;
     private String biography;
 
-    @OneToMany(mappedBy = "autor")
+    @OneToMany(mappedBy = "author")
 	private ArrayList<Book> books = new ArrayList<>();
 
 

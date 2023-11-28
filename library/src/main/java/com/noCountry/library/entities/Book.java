@@ -27,8 +27,8 @@ public class Book extends PersistenceObject {
 	private Genre genre;
 
     @ManyToOne
-    @JoinColumn(name = "autor_id", referencedColumnName = "id")
-	private Autor autor;
+    @JoinColumn(name = "author_id", referencedColumnName = "id")
+	private Author author;
 
     @ManyToOne
     @JoinColumn(name = "editorial_id", referencedColumnName = "id")
