@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -45,6 +46,11 @@ public class BookServiceImpl implements BookService {
         Genre genre = searchGenre(bookRequest.getGenre());
 
         Book book = mapperBooks.bookRequestToBook(bookRequest);
+
+        book.setStatus(true);
+        book.setCreationDate(LocalDate.now());
+        book.setModificationDate(LocalDate.now());
+
         book.setAuthor(author);
         book.setEditorial(editorial);
         book.setGenre(genre);
@@ -68,6 +74,9 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookResponse updateBook(BookRequest book) {
+
+
+
         return null;
     }
 
@@ -77,6 +86,13 @@ public class BookServiceImpl implements BookService {
         Book book = bookRepository.findById(id).get();
 
         return mapperBooks.bookToBookResponse(book);
+    }
+
+    @Override
+    public List<BookResponse> getAllBooks() {
+        List<Book> books = bookRepository.findAll();
+
+        return mapperBooks.listBooksToListResponseBooks(books);
     }
 
     @Override
@@ -92,22 +108,32 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void addImagesBook(String id, String img) {
+    public List<BookCardResponse> getAllBooksForCard() {
+        List<Book> books = bookRepository.findAll();
 
-
-
-
-
+        return mapperBooks.listBooksToListCardBooks(books);
     }
 
-    public Genre searchGenre(String genre) {
+    @Override
+    public void addImagesBook(String id, String img) {
+
+        Book book = bookRepository.findById(id).get();
+
+        if (img != null) {
+            book.getUrlImages().add(img);
+            book.setModificationDate(LocalDate.now());
+        }
+
+        bookRepository.save(book);
+    }
+
+    private Genre searchGenre(String genre) {
 
         for (Genre element: Genre.values()) {
             if (element.name().equals(genre)) {
                 return element;
             }
         }
-
         return null;
     }
 
