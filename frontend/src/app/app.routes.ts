@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { RegisterComponent } from '@presentation/pages/register/register.component';
 import { ToastService } from './data/services/toast/Toast.service';
 import { LoginService } from './data/services/login/login.service';
+import { RegisterService } from './data/services/register/register.service';
 
 export const routes: Routes = [
     {
@@ -13,7 +14,8 @@ export const routes: Routes = [
     {
         path: 'register',
         title: 'Register',
-        loadComponent: () => import('@presentation/pages/register/register.component').then(c => c.RegisterComponent)
+        loadComponent: () => import('@presentation/pages/register/register.component').then(c => c.RegisterComponent),
+        providers: [ ToastService, RegisterService ]
     },
     {
         path: 'forgot-password',

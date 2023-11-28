@@ -2,7 +2,7 @@
 
 @for (toast of toasts().toasts; track toast.ID) {
   @if (toast.visible) {
-    <section class="toast" role="alert" [id]="toast.ID" aria-label="Process notification of any application">
+    <section class="toast fade-in" role="alert" [id]="toast.ID" aria-label="Process notification of any application">
         <div class="toast-wrapper">
           @switch (toast.type) {
             @case ('info')    { <div class="bar info-bar" aria-disabled="true" role="complementary"></div>}
