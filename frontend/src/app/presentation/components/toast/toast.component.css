@@ -66,7 +66,6 @@
     display: flex;
     flex-grow: 1;
     flex-shrink: 1;
-    max-height: 80px;
     min-height: 80px;
     max-width: 350px;
     aspect-ratio: 5/1;
@@ -221,4 +220,41 @@
     to {
       transform: translateX(100%);
     }
+  }
+
+  .animate-in-right {
+    animation: toast-in-right .7s;
+  }
+  
+  .animate-in-left {
+    animation: toast-in-left .7s;
+  }
+
+  @keyframes fade-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+  
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+
+  .animate-enter{
+    animation: fade-in 0.35s ease-in;
+  }
+
+  .animate-out{
+    animation: fade-out 0.35s ease-in-out;
+    animation-delay: 3s;
   }

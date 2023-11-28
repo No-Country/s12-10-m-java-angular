@@ -78,12 +78,12 @@
     color: #BA703C;
   }
 
-
   .input-group input.form-input:focus {
     border: 2px #C88D65 solid; 
   }
 
 .default-button{
+  text-overflow: ellipsis;
     border-radius: 6.25rem;
     padding-inline: 0.25rem;
     padding-block: 0.6rem;

@@ -20,3 +20,35 @@ body {
     touch-action: manipulation;
     direction: ltr;
 }
+
+h2.title{
+    font-size: 2rem;
+    line-height: 2rem; 
+    color: #585858;
+    font-weight: bold;
+}
+
+/* SMALL */
+@media only screen and (min-width: 705px)  {
+    h2.title{
+        font-size: 2.25rem;
+        line-height: 2.75rem;
+    }
+}
+
+/* MEDIUM */
+@media only screen and (min-width: 1240px) {
+    h2.title{
+        font-size: 2.8125rem;
+        line-height: 3.25rem;
+    }
+}
+
+/* LARGE */
+@media only screen and (min-width: 1440px) {
+    h2.title{
+        font-size: 3.5625rem;
+        line-height: 4rem; 
+        letter-spacing: -0.01563rem;
+    }
+}

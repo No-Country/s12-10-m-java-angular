@@ -79,12 +79,16 @@ min-height: 51px;
 }
 
 .default-button{
+  text-overflow: ellipsis;
   border-radius: 6.25rem;
   padding-inline: 0.25rem;
   padding-block: 0.6rem;
   font-size: .875rem;
   font-weight: 500;
   transition: background .19s linear, box-shadow .17s cubic-bezier(0.65, 0.05, 0.36, 1);
+}
+.default-button:hover{
+  box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.30);
 }
 
 .form-error input.form-input, .form-error input.form-input:focus  {
@@ -93,4 +97,39 @@ min-height: 51px;
 }
 .form-error label.form-label, .form-error :is(input:focus, input:valid)~label {
   color: #ca3126;
+}
+
+.form-error [formControlName="repeatPassword"] {
+  border: 2px solid #D93025;
+  caret-color: #D93025;
+}
+
+.form-error [formControlName="repeatPassword"] + label.form-label {
+  color: #ca3126;
+}
+
+.icon{
+  position: absolute;
+  width: 25px;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-45%);
+  opacity: .4;
+  cursor: pointer;
+  aspect-ratio: 1/1;
+}
+
+.icon:hover{
+  opacity: .6;
+}
+.icon.active{
+  opacity: 1;
+}
+
+@media only screen and (max-width: 705px)  {
+ form{
+  padding-left: 0.2rem;
+  padding-right: 0.2rem;
+ }
+   
 }
