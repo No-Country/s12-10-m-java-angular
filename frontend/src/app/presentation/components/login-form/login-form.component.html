@@ -22,7 +22,7 @@
     <error-message [showError]="loginForm.get('password')?.touched && (loginForm.get('password')?.hasError('pattern') || loginForm.get('password')?.hasError('required'))"
     errorMessage="Write a valid password" errorClass="text-red-500" />
     
-    <app-link path="/login" textLink="¿Forgot your password?" className="mt-4 text-left text-[#069150] hover:text-[#15AD67]"></app-link>
+    <app-link class="w-full flex justify-start" path="/forgot-password" textLink="¿Forgot your password?" className="mt-4 mr-auto justify-start text-left text-[#069150] hover:text-[#15AD67]"></app-link>
   </div>
   
   <div class="w-full">

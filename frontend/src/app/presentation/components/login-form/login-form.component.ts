@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output, Renderer2, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, OnDestroy, OnInit, Output, Renderer2, inject } from '@angular/core';
 import { LoginService } from '../../../data/services/login/login.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ErrorMessageComponent } from '../error-message/error-message.component';
@@ -15,7 +15,7 @@ import { LinkComponent } from '../link/link.component';
   styleUrls: ['./login-form.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginFormComponent implements OnInit {
+export class LoginFormComponent implements OnInit, OnDestroy {
   @Output() loginFormSubmitted: EventEmitter<UserLoginState>;
   protected loginForm!: FormGroup;
   protected viewPassword = false;
@@ -27,6 +27,9 @@ export class LoginFormComponent implements OnInit {
   constructor() { 
     this.loginFormSubmitted = new EventEmitter()
     this.loginForm = this.createLoginForm();
+  }
+  ngOnDestroy(): void {
+    this.loginForm.reset();
   }
 
   ngOnInit(): void {

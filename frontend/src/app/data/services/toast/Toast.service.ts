@@ -10,6 +10,11 @@ export class ToastService extends SignalsStoreService<ToastProps>{
     super({} as ToastProps);
   }
 
+  /**
+   * Remueve un toast de la lista de toasts
+   * 
+   * @param ID - ID del toast
+   */
   public remove(ID: string | number): void{
     this.state.update((currentValue)=> {
       const index = currentValue.toasts.findIndex((val: any) => val.ID === ID);
@@ -18,6 +23,10 @@ export class ToastService extends SignalsStoreService<ToastProps>{
     });
   }
 
+  /**
+   * Remueve el primer Toast en cola en la cola de toast
+   * 
+   */
   private removeFirst(): void{
     this.state.update((currentValue)=> {
       currentValue.toasts.shift();
