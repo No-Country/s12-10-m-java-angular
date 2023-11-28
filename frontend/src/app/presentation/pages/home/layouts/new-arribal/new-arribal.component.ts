@@ -1,19 +1,27 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { CardBookComponent } from '@presentation/components/card-book/card-book.component';
+import { BOOK_DETAIL_MOOK } from 'app/data/mocks/booksArray';
+import { BookDetail } from 'app/data/models/book';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
-  selector: 'app-new-arribal',
+  imports: [CommonModule, CardBookComponent],
+  selector: 'new-arribal-layout',
   templateUrl: './new-arribal.component.html',
   styleUrls: ['./new-arribal.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NewArribalComponent implements OnInit {
+  protected books: BookDetail[];
 
-  constructor() { }
+  constructor() {
+    this.books = BOOK_DETAIL_MOOK;
+   }
 
   ngOnInit(): void {
   }
+
+  
 
 }
