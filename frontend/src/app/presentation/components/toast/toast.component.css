@@ -252,11 +252,10 @@
   
 
   .animate-enter{
-    -webkit-animation: fade-in 3s ease-in-out;
-    animation: fade-in 3s ease-in-out;
+    animation: fade-in 0.35s ease-in;
   }
 
   .animate-out{
-    -webkit-animation: fade-out 3s ease-in-out;
-    animation: fade-out 3s ease-in-out;
+    animation: fade-out 0.35s ease-in-out;
+    animation-delay: 3s;
   }

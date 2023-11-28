@@ -2,8 +2,9 @@
 
 @for (toast of toasts().toasts; track toast.ID) {
   @if (toast.visible) {
-    <section class="toast animate-enter" role="alert" [id]="toast.ID" aria-label="Process notification of any application">
-        <div class="toast-wrapper animate-out">
+    <div class="animate-enter">
+      <section class="toast animate-out"  role="alert" [id]="toast.ID" aria-label="Process notification of any application">
+        <div class="toast-wrapper ">
           @switch (toast.type) {
             @case ('info')    { <div class="bar info-bar" aria-disabled="true" role="complementary"></div>}
             @case ('success') { <div class="bar success-bar" aria-disabled="true" role="complementary"></div>}
@@ -12,7 +13,7 @@
             @default { <div class="bar default-bar" aria-disabled="true" role="complementary"></div> }
           }
   
-          <div class="icon-wrpapper animate-out">
+          <div class="icon-wrpapper">
             @switch (toast.type) {
               @case ('info')    { 
                 <svg width="20" height="20" fill="none"><circle cx="10" cy="10" r="10" fill="#3C58BA"/><path fill-rule="evenodd" clip-rule="evenodd" d="M9.993 3.333A6.663 6.663 0 0 0 3.333 10c0 3.68 2.98 6.667 6.66 6.667A6.67 6.67 0 0 0 16.667 10a6.67 6.67 0 0 0-6.674-6.667zm.007 12A5.332 5.332 0 0 1 4.667 10 5.332 5.332 0 0 1 10 4.667 5.332 5.332 0 0 1 15.333 10 5.332 5.332 0 0 1 10 15.333zm-.667-4.62 3.66 2.194.68-1.147-3.006-1.807V6.28H9.333v4.433z" fill="#FFFFFC"/>
@@ -41,6 +42,8 @@
         </div>
     
     </section>
+    </div>
+    
   }
 }
 
