@@ -13,7 +13,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @MappedSuperclass
 public abstract class PersistenceObject {
-
         @Id
         private String id;
         private Boolean status = true;
