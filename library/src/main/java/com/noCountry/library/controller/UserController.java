@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "${ALLOWED_ORIGINS}")
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/user")
 public class UserController {
 
 
@@ -25,7 +25,7 @@ public class UserController {
     }
 
 
-    @GetMapping(path = "/user/{id}")
+    @GetMapping(path = "/{id}")
     public ResponseEntity<?> getUserById(@PathVariable String id) throws Exception {
         try {
             User user = userService.getUserById(id);
@@ -36,7 +36,7 @@ public class UserController {
     }
 
 
-    @DeleteMapping(path = "/user/{id}")
+    @DeleteMapping(path = "/{id}")
     public ResponseEntity<?> deleteUserById(@PathVariable String id) throws Exception {
         try {
             userService.deleteUser(id);
@@ -46,7 +46,7 @@ public class UserController {
         }
     }
 
-    @DeleteMapping(path = "/user/unsubscribe/{id}")
+    @DeleteMapping(path = "/unsubscribe/{id}")
     public ResponseEntity<?> unsubscribeEmailUser(@PathVariable String id) throws Exception {
         try {
             userService.unsubscribeEmailUser(id);
@@ -56,7 +56,7 @@ public class UserController {
         }
     }
 
-    @PatchMapping(path = "/user/update")
+    @PatchMapping(path = "/update")
     public ResponseEntity<?> updateUser(@RequestBody @Valid UserDto userDto) throws Exception {
         try {
             ResponseUserDto userUpdated = userService.updateUser(userDto);
@@ -66,7 +66,7 @@ public class UserController {
         }
     }
 
-    @PutMapping(path = "/user/updatePassword")
+    @PutMapping(path = "/updatePassword")
     public ResponseEntity<?> updatePassword(@RequestBody @Valid UpdatePasswordDto userDto) throws Exception {
         try {
             userService.updatePasswordUser(userDto);
