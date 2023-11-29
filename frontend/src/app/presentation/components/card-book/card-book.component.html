@@ -1,30 +1,30 @@
-<article class="card-book" [id]="book.ID">
+<article #cardBook class="card-book" [id]="book.ID" >
 
-    <section class="img-wrapper" routerLink="">
-        <a class="img-container">
+    <section class="img-wrapper" routerLink="" >
+        <a class="img-container" [ngClass]="{'blur-md': isNumberId(book.ID) }">
             <img [ngSrc]="book.img" fill alt="Front of men&#039;s Basic Tee in black.">
         </a>
     </section>
+ 
 
     <section class="content-info">
-        <h2>
+        <h2 [title]="book.name">
             <a class="w-full" routerLink="">
                 {{ book.name }}
             </a>
         </h2>
 
-        <p class="mt-1 text-sm text-gray-500">{{ book.author }}</p>
+        <p class="mt-1 text-sm text-[#242221] h-[40px] max-h-[40px] ">{{ book.author }}</p>
 
         <div class="w-full flex justify-between items-center">
             <p class="mt-2 text-2xl font-medium text-[#242221] cursor-pointer">$
-                <a class="w-full" routerLink="/login">
+                <a class="w-full" routerLink="/login" >
                     {{ book.price }}
                 </a>
             </p>
 
-            <button>
-                <a class=" default-button min-w-[75px] !z-50 flex justify-center items-center bg-[#33B672] hover:bg-[#15AD67] text-[#fff]"
-                    routerLink="">
+            <app-button className="min-w-[75px] !py-2" title="Add to cart">
+                <a routerLink="">
                     <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" width="25px" fill="#ffffff"
                         viewBox="0 0 512 512">
                         <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -32,8 +32,7 @@
                             d="M80 176a16 16 0 00-16 16v216c0 30.24 25.76 56 56 56h272c30.24 0 56-24.51 56-54.75V192a16 16 0 00-16-16zM160 176v-32a96 96 0 0196-96h0a96 96 0 0196 96v32" />
                     </svg>
                 </a>
-            </button>
-
+            </app-button>
         </div>
 
     </section>

@@ -49,14 +49,12 @@
   errorMessage="Write a valid password, passwords do not match" errorClass="text-red-500" />
   </div>
     <div class="mb-6 text-center">
-      <button
-        class="default-button w-full px-4 py-2 font-bold text-[#FFFFFC] bg-[#069150] rounded-full hover:bg-[#15AD67]" tabindex="5" type="submit" role="button"
-         [disabled]="registerForm.invalid" [disabled]="this.registerForm.invalid" [attr.aria-disabled]="this.registerForm.invalid">
+      <app-button class="mb-6 w-full flex justify-center items-center" className="w-full min-w-[100px]  max-w-[300px] min-[905px]:max-w-full" [isDisable]="registerForm.invalid">
         Register Account
-      </button>
+      </app-button>
     </div>
     <hr class="mb-6 border-t" />
     <app-link textLink="Already have an account ? Login!" path="/login" className="text-center text-[#069150] hover:text-[#15AD67]">
     </app-link>
-  </form>
+</form>
 

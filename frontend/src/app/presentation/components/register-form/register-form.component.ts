@@ -1,14 +1,15 @@
 import { Component, EventEmitter, OnInit, Output, Renderer2, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ErrorMessageComponent } from '../error-message/error-message.component';
 import { NewUserState } from 'app/data/models/userRegisterState';
 import { LinkComponent } from '../link/link.component';
+import { DefaultButtonComponent } from '../default-button/default-button.component';
 
 @Component({
   selector: 'app-register-form',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule, ErrorMessageComponent, LinkComponent],
+  imports: [CommonModule,ReactiveFormsModule, ErrorMessageComponent, LinkComponent, DefaultButtonComponent],
   templateUrl: './register-form.component.html',
   styleUrl: './register-form.component.css'
 })

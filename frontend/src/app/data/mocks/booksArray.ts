@@ -85,44 +85,58 @@ export const booksArray: Book[]=[
   export const BOOK_DETAIL_MOOK: BookDetail[]=[
     { 
       ID: 1,
-      img: "../../assets/booksImages/1.jpg",
-      name: "Memoir of Vincent Van gogh",
-      author: "genre 6",
+      img: "../../assets/booksImages/book_1.png",
+      name: "The prince",
+      author: "Nicolas Maquiavelo",
       price: 500
     },
     { 
       ID: 2,
-      img: "../../assets/booksImages/2.jpg",
-      name: "Helvetica",
-      author: "genre 6",
+      img: "../../assets/booksImages/book_2.png",
+      name: "The greatest cover-up in history",
+      author: "Howerd Dilan",
       price: 500
     },
     { 
       ID: 3,
-      img: "../../assets/booksImages/3.jpg",
-      name: "Scheveningnen",
-      author: "genre 6",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ6EO4caRrtQkHq2YBXezwxuOiYNP4rD1evg&usqp=CAU",
+      name: "Hide and seek",
+      author: "Olivia Wilson",
       price: 1000
     },
     { 
       ID: 4,
-      img: "../../assets/booksImages/4.jpg",
-      name: "The graphic design",
-      author: "genre 6",
+      img: "https://images2.penguinrandomhouse.com/cover/9780525559238",
+      name: "Rules for visiting",
+      author: "Jesica Francis Kane",
       price: 7000
     },
     { 
       ID: 5,
-      img: "../../assets/booksImages/5.jpg",
-      name: "The graphic design",
-      author: "genre 6",
-      price: 7000
+      img: "https://www.barnesandnoble.com/blog/wp-content/uploads/2013/11/night_circus.jpg",
+      name: "Night Circus",
+      author: "Erin Morgenstern",
+      price: 500
     },
     { 
       ID: 6,
-      img: "../../assets/booksImages/6.jpg",
-      name: "The graphic design",
-      author: "genre 6",
+      img: "https://www.adazing.com/wp-content/uploads/2020/06/hp-2.jpg",
+      name: "The beast in cave",
+      author: "H.P. Lovecraft",
+      price: 7000
+    },
+    { 
+      ID: 7,
+      img: "https://upload.wikimedia.org/wikipedia/en/1/10/The_grand_design_book_cover.jpg",
+      name: "The grand design",
+      author: "Stephen hawking and Leonard Mlodinow",
+      price: 7000
+    },
+    { 
+      ID: 8,
+      img: "https://m.media-amazon.com/images/I/71WL+-1uQaL._AC_UF1000,1000_QL80_.jpg",
+      name: "Opticks",
+      author: "Issac Newton",
       price: 7000
     },
   ];

@@ -26,11 +26,16 @@
     overflow: hidden;
     position: relative;
     width: 155px;
-    aspect-ratio: 6/7;
+    aspect-ratio: 1/1;
     opacity: .9;
     transition-duration: 250ms;
     transition-timing-function: ease-out;
     transition-property: opacity, transform;
+    border-radius: .6rem;
+}
+
+.card-book .img-wrapper .img-container img{
+    object-fit: scale-down;
 
 }
 
@@ -57,6 +62,9 @@
     text-overflow: ellipsis;
     font-size: 1.25rem;
     cursor: pointer;
+    transition-duration: 100ms;
+    transition-timing-function: ease;
+    transition-property: color;
 }
 
 .card-book .content-info h2:hover {
