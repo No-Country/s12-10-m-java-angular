@@ -17,6 +17,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -36,7 +37,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
        return http
-               .cors(withDefaults())
+               .cors(config->config.configurationSource(corsConfigurationSource()))
                .csrf( csrfConfig-> csrfConfig.disable())
                .sessionManagement( sessConfig -> sessConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                .authenticationProvider(daoAuthProvider)
@@ -54,9 +55,10 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedOrigin(allowedOrigin); //Configuracion de los origenes de la peticion
+        configuration.addAllowedOrigin("*"); //Configuracion de los origenes de la peticion
         configuration.setAllowedMethods(Arrays.asList("*")); //Configuracion de los metodos que van a estar permitidos (GET,POST,etc)
-        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
+        configuration.setMaxAge(3600l);
         configuration.setAllowCredentials(true); //Si acepta cookies como session id en caso de usar sesiones o el bearer token
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

@@ -1,9 +1,8 @@
 package com.noCountry.library.controller;
 
 import com.noCountry.library.dto.LoginRequest;
-import com.noCountry.library.dto.LoginResponse;
 import com.noCountry.library.dto.RegisterRequest;
-import com.noCountry.library.dto.RegisterResponse;
+import com.noCountry.library.dto.UserDetailsDTO;
 import com.noCountry.library.entities.User;
 import com.noCountry.library.service.auth.AuthenticationService;
 import jakarta.validation.Valid;
@@ -30,17 +29,17 @@ public class AuthenticateController {
 
     @PostMapping
     @RequestMapping("/register")
-    public ResponseEntity<RegisterResponse> registerUser (@RequestBody @Valid RegisterRequest newUser){
-        RegisterResponse registerResponse = authenticationService.registerUser(newUser);
-        return ResponseEntity.status(HttpStatus.CREATED).body(registerResponse);
+    public ResponseEntity<UserDetailsDTO> registerUser (@RequestBody @Valid RegisterRequest newUser){
+        UserDetailsDTO userDetailsDTO = authenticationService.registerUser(newUser);
+        return ResponseEntity.status(HttpStatus.CREATED).body(userDetailsDTO);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login (@RequestBody @Valid LoginRequest login){
+    public ResponseEntity<UserDetailsDTO> login (@RequestBody @Valid LoginRequest login){
 
-        LoginResponse loginResponse = authenticationService.login(login);
+        UserDetailsDTO userDetailsDTO = authenticationService.login(login);
 
-        return ResponseEntity.status(HttpStatus.OK).body(loginResponse);
+        return ResponseEntity.status(HttpStatus.OK).body(userDetailsDTO);
     }
 
     @GetMapping("/profile")
