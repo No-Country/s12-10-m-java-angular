@@ -8,8 +8,6 @@ import { ToastService } from './data/services/toast/Toast.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 
-
-
 @Component({
   selector: 'app-root',
   standalone: true,

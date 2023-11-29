@@ -27,4 +27,10 @@ export const routes: Routes = [
         loadComponent: () => import('@presentation/pages/forgot-password/forgot-password.component').then(c => c.ForgotPasswordComponent),
         providers: [ ToastService, LoginService ],
     },
+    {
+        path: '404',
+        title: 'Page Not Found',
+        loadComponent: () => import('@presentation/pages/not-found/not-found.component').then(c => c.NotFoundComponent),
+    },
+    { path: '**', redirectTo: '/404' }
 ];

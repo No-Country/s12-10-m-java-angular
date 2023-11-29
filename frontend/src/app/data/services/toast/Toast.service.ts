@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { ToastModel, ToastPosition, ToastProps, ToastType } from 'app/data/models/toast.model';
-import { RxjsStoreService } from '../store/StoreRxJs.service';
 import { SignalsStoreService } from '../store/StoreSignals.service';
 
 @Injectable()

@@ -50,6 +50,7 @@ export class RegisterComponent implements OnInit, OnDestroy  {
         toast.error("Success", "Register in.", 5);
       },
       error(err: any): void{
+        console.log(err);
         toast.error("Error", err.message, 5);
       },
       complete(): void{
