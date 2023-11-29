@@ -38,7 +38,7 @@ export class RegisterFormComponent implements OnInit {
           /^\s*(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\s*$/,
         ), Validators.required]],
       password: ['', [Validators.required, Validators.pattern("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,32}$")]],
-      repeatPassword: ['', [Validators.required, this.passwordMatchValidator.bind(this)]]
+      passwordRepeat: ['', [Validators.required, this.passwordMatchValidator.bind(this)]]
     });
   }
   
@@ -50,12 +50,12 @@ export class RegisterFormComponent implements OnInit {
   protected onSubmit() {
     if (this.registerForm.valid) {
       this.registerFormSubmitted.emit({
-        ID: crypto.randomUUID(),
+        id: crypto.randomUUID(),
         name: this.registerForm.value.name,
         lastName: this.registerForm.value.lastName,
         email: this.registerForm.value.email,
         password: this.registerForm.value.password,
-        repeatPassword: this.registerForm.value.repeatPassword
+        passwordRepeat: this.registerForm.value.passwordRepeat
       } as NewUserState);
     }
   }
