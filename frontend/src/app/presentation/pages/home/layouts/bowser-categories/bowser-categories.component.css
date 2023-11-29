@@ -1,15 +1,33 @@
 .title {
     padding-top: 5vh;
     padding-left: 5vw;
-    font-family: Inter;
-    font-size: 60px;
+    font-size: 5vh;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    display: inline-flex;
+    align-items: center; 
+    justify-content:space-between;
+    width: 100vw;
   }
   .title .color{
     color: #33B672;
   }
+
+  pagination-template {
+    display: flex;
+    justify-content:flex-end;
+    align-items: center; 
+    padding-right: 5vw;
+  }
+  
+  .pagination-previous,
+  .pagination-next {
+    margin: 0;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
   .products-container {
     width: 100%;
     height: auto;
@@ -23,14 +41,8 @@
     max-width: 90vw;
     padding-top: 5vh;
   }
-  
-  @media (max-width: 468px) {
-    .grid {
-      grid-template-columns: repeat(2, 1fr);
-      padding: 0;
-      gap: 20px;
-    }
-  }
+ 
+
   .card {
     background-color: #E4E4E4;
     border-radius: 50px;

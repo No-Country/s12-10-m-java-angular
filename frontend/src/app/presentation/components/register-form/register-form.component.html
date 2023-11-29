@@ -40,12 +40,12 @@
     errorMessage="Write a valid password" errorClass="text-red-500" />
     </div>
     <div class="h-[74px] mb-4 md:mb-2">
-      <div class="input-group" [ngClass]="{'form-error': registerForm.get('repeatPassword')?.touched && (registerForm.get('repeatPassword')?.hasError('required') || registerForm.get('repeatPassword')?.hasError('passwordMismatch'))}">
-        <input  autocomplete="off" required="" type="password" id="repeatPassword" class="form-input"
-        formControlName="repeatPassword" autocomplete="password" name="repeatPassword" aria-disabled="false" aria-label="repeatPassword" tabindex="4" autocapitalize="none" dir="ltr" required>
+      <div class="input-group" [ngClass]="{'form-error': registerForm.get('passwordRepeat')?.touched && (registerForm.get('passwordRepeat')?.hasError('required') || registerForm.get('passwordRepeat')?.hasError('passwordMismatch'))}">
+        <input  autocomplete="off" required="" type="password" id="passwordRepeat" class="form-input"
+        formControlName="passwordRepeat" autocomplete="password" name="passwordRepeat" aria-disabled="false" aria-label="passwordRepeat" tabindex="4" autocapitalize="none" dir="ltr" required>
         <label for="password" class="form-label ellipsis ...">Repeat Password</label>
     </div>
-    <error-message [showError]="registerForm.get('repeatPassword')?.touched && (registerForm.get('repeatPassword')?.hasError('passwordMismatch') || registerForm.get('repeatPassword')?.hasError('required'))"
+    <error-message [showError]="registerForm.get('passwordRepeat')?.touched && (registerForm.get('passwordRepeat')?.hasError('passwordMismatch') || registerForm.get('passwordRepeat')?.hasError('required'))"
   errorMessage="Write a valid password, passwords do not match" errorClass="text-red-500" />
   </div>
     <div class="mb-6 text-center">
