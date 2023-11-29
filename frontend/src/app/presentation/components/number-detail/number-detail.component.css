@@ -1,0 +1,11 @@
+.number-detail strong {
+    font-size: 3rem;
+    color: #1E1E1E;
+    font-weight: 500;
+}
+
+.number-detail figcaption{
+    white-space: pre-line;
+    word-break: keep-all;
+    color: #858585;
+}
