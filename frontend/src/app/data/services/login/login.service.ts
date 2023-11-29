@@ -14,7 +14,7 @@ export class LoginService  {
   }
 
   public login(loginSubmitted: UserLoginState): Observable<any>  {
-    return this.api.httpPost('login', loginSubmitted, false);
+    return this.api.httpPost('authenticate/login', loginSubmitted, false);
   }
 
   public setInStorage(values: AuthResponse){

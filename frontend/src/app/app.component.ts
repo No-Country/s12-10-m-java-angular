@@ -6,8 +6,6 @@ import { LoginComponent } from './presentation/pages/login/login.component';
 import { RegisterComponent } from './presentation/pages/register/register.component';
 import { ToastService } from './data/services/toast/Toast.service';
 
-
-
 @Component({
   selector: 'app-root',
   standalone: true,
