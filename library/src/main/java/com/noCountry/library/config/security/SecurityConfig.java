@@ -2,6 +2,7 @@ package com.noCountry.library.config.security;
 
 import com.noCountry.library.config.security.filter.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -11,6 +12,13 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
+
+import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
@@ -20,11 +28,15 @@ public class SecurityConfig {
     private AuthenticationProvider daoAuthProvider;
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
+    @Value("${ALLOWED_ORIGINS}")
+    String allowedOrigin;
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
        return http
+               .cors(withDefaults())
                .csrf( csrfConfig-> csrfConfig.disable())
                .sessionManagement( sessConfig -> sessConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                .authenticationProvider(daoAuthProvider)
@@ -37,6 +49,19 @@ public class SecurityConfig {
                })
                .build();
 
+    }
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.addAllowedOrigin(allowedOrigin); //Configuracion de los origenes de la peticion
+        configuration.setAllowedMethods(Arrays.asList("*")); //Configuracion de los metodos que van a estar permitidos (GET,POST,etc)
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowCredentials(true); //Si acepta cookies como session id en caso de usar sesiones o el bearer token
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
 }

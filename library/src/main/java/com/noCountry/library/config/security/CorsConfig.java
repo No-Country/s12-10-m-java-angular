@@ -1,3 +1,4 @@
+/*
 package com.noCountry.library.config.security;
 
 import jakarta.annotation.Priority;
@@ -32,3 +33,4 @@ public class CorsConfig {
 		return new CorsFilter(source);
 	}
 }
+*/
