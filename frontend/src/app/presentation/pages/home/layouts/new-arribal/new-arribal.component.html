@@ -1,6 +1,6 @@
 <section #arribal class="arribal-container">
 
-  <h2 class="title"><span class="text-[#33B672]">New</span> arribal</h2>
+  <h2 class="title"><strong class="text-[#33B672] font-medium">New</strong> arribal</h2>
 
  
     <div class="book-list">
@@ -8,7 +8,7 @@
           <card-book [book]="book"></card-book>
       } @empty {
         @for(book of ["1","2","3","4","5","6","7","8"]; track book){
-          <card-book [book]="{ID: book, name:'Loading...', author: 'loading...', price: 0, img: '../../../../assets/imgs/book--placeholder.webp'}"></card-book>
+          <card-book [book]="{ID: book, name:'Loading...', author: 'loading...', price: 0, img: '../../../../assets/imgs/book-placeholder.webp'}"></card-book>
         }
       }
 

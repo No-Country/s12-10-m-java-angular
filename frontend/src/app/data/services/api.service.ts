@@ -1,12 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable, Injector, inject } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'any'
 })
 export class ApiService {
-  private devUrl: string = 'https://librarync1.fly.dev/api/v1/'; 
+  private devUrl: string = 'https://librarync1.fly.dev/api/v1'; 
   private http: HttpClient = this.injector.get(HttpClient);
 
   constructor(private injector: Injector) { }
@@ -28,7 +28,6 @@ export class ApiService {
 
       httpOptions = {
         headers: new HttpHeaders({
-          'Content-Type': 'application/json',
         }),
       };
 

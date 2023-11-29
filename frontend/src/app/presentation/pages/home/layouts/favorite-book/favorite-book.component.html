@@ -1,3 +1,32 @@
-<p>
-  favorite-book works!
-</p>
+<section class="favorite-container mx-[10dvw]">
+
+    <div class="flex justify-between">
+
+        <div class="left-content">
+            <picture class="w-[40dvw] relative">
+                <img ngSrc="../../../../../../assets/imgs/learn-book-svg.webp" fill alt="Learn book img" aria-disabled="true">
+            </picture>
+        </div>
+
+        <div class="right-content">
+            <h2 class="title">
+                Find yout <strong class="text-[#33B672] font-medium">favorite</strong> books here
+            </h2>
+
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad animi dolorem optio vitae neque eius quibusdam maxime nesciunt aliquid. Veritatis, porro? Ducimus.
+            </p>
+
+            <div class="number-detail-list">
+                <number-detail number="50" [detail]="'Books \nBest Seller'"></number-detail>
+                <number-detail number="60" [detail]="'Books \nfor comming'"></number-detail>
+                <number-detail number="150" [detail]="'Books \ntotally products'"></number-detail>
+            </div>
+
+            <app-button class="w-full flex mt-4" className="w-full max-w-[200px] mt-4 text-[1.7dvw]">
+                Explore
+            </app-button>
+        </div>
+
+    </div>
+</section>

@@ -1,0 +1,65 @@
+.title {
+    padding-top: 5vh;
+    padding-left: 5vw;
+    font-size: 5vh;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    display: inline-flex;
+    align-items: center; 
+    justify-content:space-between;
+    width: 100vw;
+  }
+  .title .color{
+    color: #33B672;
+  }
+
+  pagination-template {
+    display: flex;
+    justify-content:flex-end;
+    align-items: center; 
+    padding-right: 5vw;
+  }
+  
+  .pagination-previous,
+  .pagination-next {
+    margin: 0;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  .products-container {
+    width: 100%;
+    height: auto;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 2fr));
+    gap: 120px;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 90vw;
+    padding-top: 5vh;
+  }
+ 
+
+  .card {
+    background-color: #E4E4E4;
+    border-radius: 50px;
+    border: 1px solid #CCC;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    height: 215px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .card img {
+    display: block;
+    width: 149px;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+  }
