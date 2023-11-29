@@ -5,11 +5,12 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ErrorMessageComponent } from '../error-message/error-message.component';
 import { UserLoginState } from 'app/data/models/userLoginState';
 import { LinkComponent } from '../link/link.component';
+import { DefaultButtonComponent } from '../default-button/default-button.component';
 
 
 @Component({
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ErrorMessageComponent, LinkComponent],
+  imports: [CommonModule, ReactiveFormsModule, ErrorMessageComponent, LinkComponent, DefaultButtonComponent],
   selector: 'login-form',
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.css'],
