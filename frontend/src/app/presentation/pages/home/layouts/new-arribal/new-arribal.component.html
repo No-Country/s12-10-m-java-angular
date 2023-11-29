@@ -2,15 +2,17 @@
 
   <h2 class="title"><span class="text-[#33B672]">New</span> arribal</h2>
 
-  @defer(on viewport(arribal)){
-    <div class="w-full flex flex-wrap gap-x-8 gap-y-10 mt-10">
-      @for(book of books; track book.ID){
-        <card-book [book]="book"></card-book>
+ 
+    <div class="book-list">
+     @for(book of books | async; track book.ID){
+          <card-book [book]="book"></card-book>
+      } @empty {
+        @for(book of ["1","2","3","4","5","6","7","8"]; track book){
+          <card-book [book]="{ID: book, name:'Loading...', author: 'loading...', price: 0, img: '../../../../assets/imgs/book--placeholder.webp'}"></card-book>
+        }
       }
+
     </div>
-  } 
-  @loading {
-    <span>Load..</span>
-  }
+
 
 </section>

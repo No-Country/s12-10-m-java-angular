@@ -19,4 +19,8 @@ export class CardBookComponent {
   constructor(){
     this.book = {} as BookDetail;
   }
+
+  isNumberId(ID: string | number) {
+    return typeof ID === 'string'; 
+  }
 }
