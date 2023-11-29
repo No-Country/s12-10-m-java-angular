@@ -21,7 +21,8 @@
 
 .favorite-container h2{
 
-    max-width: 40dvw;
+    max-width: 45dvw;
+    width: 100%;
     font-size: 3.5dvw;
     line-height: 4.5dvw;
 }
@@ -30,7 +31,8 @@
     text-overflow: ellipsis;
     text-wrap: pretty;
     overflow: hidden;
-    max-width: 40dvw;
+    max-width: 45dvw;
+    width: 100%;
     margin-block-start: 1rem;
     color: #858585;
     font-size: 1.15dvw;

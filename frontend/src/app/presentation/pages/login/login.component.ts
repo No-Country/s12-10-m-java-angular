@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit, OnDestroy  {
         this.login.jwt = loginResponse.jwt;
 
         service.setInStorage(this.login);
-        toast.error("Success", "Logging in.", 5);
+        toast.success("Success", "Logging in.", 5);
       },
       error(err: any): void{
         toast.error("Error", "An unexpected error has occurred with the server", 5);
