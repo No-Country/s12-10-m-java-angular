@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { ToastService } from './data/services/toast/Toast.service';
 import { LoginService } from './data/services/login/login.service';
 import { RegisterService } from './data/services/register/register.service';
-import { CatalogComponent } from './presentation/pages/catalog/catalog.component';
 
 export const routes: Routes = [
     {
@@ -28,8 +27,10 @@ export const routes: Routes = [
         loadComponent: () => import('@presentation/pages/forgot-password/forgot-password.component').then(c => c.ForgotPasswordComponent),
         providers: [ ToastService, LoginService ],
     },
-    { 
-        path: 'catalog', 
-        component: CatalogComponent,
+    {
+        path: '404',
+        title: 'Page Not Found',
+        loadComponent: () => import('@presentation/pages/not-found/not-found.component').then(c => c.NotFoundComponent),
     },
+    { path: '**', redirectTo: '/404' }
 ];

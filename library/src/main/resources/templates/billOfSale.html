@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Bienvenido a la librería</title>
+</head>
+
+<body>
+
+<h1>Librería <span th:text="${libraryName}"></span> </h1>
+<br>
+
+<p> Factura N° <span th:text="${idBill}"></span> </p>
+<p> Fecha <span th:text="${dateBill}"></span> </p>
+
+<br>
+<p>Gracias <span th:text="${userName}"></span> por su compra. Esperamos que disfrutes tu nueva adquisición.</p>
+
+<p>Los detalles de tu compra son: </p>
+<br>
+<p>Has adquirido <span th:text="${bookName}"></span></p>
+<p>A un precio de $ <span th:text="${price}"></span></p>
+<p>Otro detalle.... <span th:text="${other}"></span></p>
+
+
+<p>Total a pagar <span th:text="${totalPrice}"></span></p>
+</body>
+
+</html>

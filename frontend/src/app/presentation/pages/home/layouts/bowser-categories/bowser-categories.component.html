@@ -1,3 +1,27 @@
-<p>
-  bowser-categories works!
-</p>
+<div class="products-container">
+  <div class="title">
+    <h1>Browser by <b class="color">Categories</b></h1>
+   <!-- <pagination-controls (pageChange)="page = $event" previousLabel="" nextLabel="" [autoHide]="true" [responsive]="true"
+    ></pagination-controls>-->
+    <pagination-template #p="paginationApi" (pageChange)="page = $event">
+
+        <div class="pagination-previous">
+            <a  (click)="p.previous()"> <svg xmlns="http://www.w3.org/2000/svg" width="80" height="96" viewBox="0 0 80 96" fill="none">
+              <path d="M52.3504 29.64L47.6504 24L27.6504 48L47.6504 72L52.3504 66.36L37.0837 48L52.3504 29.64Z" fill="#3B3A3A"/>
+              </svg> </a>
+        </div>
+        <div class="pagination-next">
+            <a  (click)="p.next()"> <svg xmlns="http://www.w3.org/2000/svg" width="80" height="96" viewBox="0 0 80 96" fill="none">
+              <path d="M32.3504 23.9507L27.6504 29.5791L42.9171 47.9013L27.6504 66.2235L32.3504 71.8519L52.3504 47.9013L32.3504 23.9507Z" fill="#3B3A3A"/>
+              </svg> </a>
+        </div>
+    
+    </pagination-template>
+  </div>
+  <div class="grid" >
+    <div class="card" *ngFor="let log of categories  | paginate: {itemsPerPage: pageSize, currentPage: page,  }">
+      <img src={{log.image}} alt={{log.name}}>
+    </div>
+  </div>
+</div>
+

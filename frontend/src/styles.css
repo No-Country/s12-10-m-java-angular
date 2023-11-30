@@ -7,7 +7,7 @@
 }
 
 body {
-    background-color: #F5F5F5;
+    background-color: #ffffff;
     font-family: Roboto, arial, sans-serif;
     
     width: 100%;
@@ -24,8 +24,8 @@ body {
 h2.title{
     font-size: 2rem;
     line-height: 2rem; 
-    color: #585858;
-    font-weight: bold;
+    color: #242221;
+    font-weight: 500;
 }
 
 /* SMALL */

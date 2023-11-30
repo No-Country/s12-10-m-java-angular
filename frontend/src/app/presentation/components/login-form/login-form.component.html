@@ -26,9 +26,9 @@
   </div>
   
   <div class="w-full">
-    <div class="flex w-full mb-6 justify-center">
-      <button type="submit" class="default-button w-full min-w-[100px]  max-w-[300px] min-[905px]:max-w-full text-[#FFFFFC] bg-[#069150] hover:bg-[#15AD67]" [disabled]="loginForm.invalid" tabindex="3"  role="button" [disabled]="this.loginForm.invalid" [attr.aria-disabled]="this.loginForm.invalid">Log in</button>
-    </div>
+      <app-button class="mb-6 w-full flex justify-center items-center" (click)="onSubmit()" className="w-full min-w-[100px]  max-w-[300px] min-[905px]:max-w-full" [isDisable]="loginForm.invalid">
+          Log in
+      </app-button>
     <hr class="mb-6 border-t">
     <app-link path="/register" textLink="You still do not have an account?" className="mt-4 text-center text-[#069150] hover:text-[#15AD67]"></app-link>
   </div>

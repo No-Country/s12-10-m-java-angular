@@ -47,13 +47,16 @@ export class RegisterComponent implements OnInit, OnDestroy  {
       next(registerResponse: any): void{
         this.register = registerResponse;
         service.setInStorage(this.register);
-        toast.error("Success", "Register in.", 5);
+        toast.success("Success", "Register in.", 5);
       },
       error(err: any): void{
-        toast.error("Error", err.message, 5);
+        console.log(err);
+        toast.error("Error", err.error.message, 5);
       },
       complete(): void{
-        if(this.register.ID !== registerSubmitted.ID) localStorage.setItem("ID", this.register.ID);
+        if(this.register.id !== registerSubmitted.id) localStorage.setItem("id", this.register.id);
+
+        setTimeout(()=>router.navigate(["/"]), 700);
       }
     };
 

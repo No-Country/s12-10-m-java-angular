@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #f1f4fd;
+  }
+  
+  .container {
+    max-width: 100vw;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+  }
+  
+  .image-list {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 18px;
+    font-size: 0;
+    list-style: none;
+    margin-bottom: 30px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Styles for mobile and tablets */
+  @media only screen and (max-width: 1023px) {
+  
+    .image-list {
+      gap: 10px;
+      margin-bottom: 15px;
+      scroll-snap-type: x mandatory;
+    }
+  }
