@@ -1,7 +1,7 @@
 <div class="container">
   <ul class="image-list" #bookList>
     @for (book of booksArray; track book.ID) {
-      <app-card-book [book]="book"></app-card-book> 
+      <card-book [book]="book"></card-book> 
   } @empty {
       <span>No hay libros</span>
   }
