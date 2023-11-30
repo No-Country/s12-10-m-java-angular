@@ -11,12 +11,24 @@
     align-items: center;
     margin-left: 2vw;
     color: #FFF;
+    
 }
 
 .navbar-g-links a {
-    margin-left: .5vw;
-    margin-right: .5vw;
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
+    opacity: .85;
+    font-weight: 500;
+    transition-timing-function: ease-out;
+    transition-duration: 90ms;
+    transition-property: color, opacity;
 }
+.navbar-g-links a:hover {
+    color: #0B733D;
+    transition-timing-function: ease-in;
+    opacity: 1;
+}
+
 .navbar-g-contact {
     margin-left: 5vw;
 }
@@ -57,6 +69,7 @@
     align-items: center;
     min-height: 60px;
 }
+
 
 .navbar-logo {
     margin-left: 2vw;
@@ -127,7 +140,16 @@
     justify-content: center;
     align-items: center;
     text-wrap: nowrap;
+    transition-timing-function: ease-out;
+    transition-duration: 90ms;
+    transition-property: color, opacity;
 }
+
+.navbar-w-list-item a:hover{
+    color: #0B733D;
+    transition-timing-function: ease-in;
+}
+
 
 .navbar-w-list-category-icon {
     color: #000;
