@@ -43,6 +43,7 @@ section{
     aspect-ratio: 1/.11;
     flex-shrink: 0;
     margin: 3vh ;
+    outline: none;
   }
   input::placeholder{
     color: #585858;
