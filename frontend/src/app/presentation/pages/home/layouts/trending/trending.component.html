@@ -1,4 +1,6 @@
+<h2 class="title mx-[5dvw] mb-[48px]"> Trending <strong class="text-[#33B672] font-medium">Books</strong></h2>
 <div class="container">
+
   <ul class="image-list" #bookList>
     @for (book of booksArray; track book.ID) {
       <card-book [book]="book"></card-book> 
