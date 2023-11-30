@@ -6,6 +6,10 @@
     scroll-behavior: smooth;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 body {
     background-color: #ffffff;
     font-family: Roboto, arial, sans-serif;
