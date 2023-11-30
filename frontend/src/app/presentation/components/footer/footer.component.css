@@ -1,0 +1,125 @@
+.footer {
+    background-color: #33B672;
+    min-height: 20vh;
+    padding: 10px 0 0 0;
+}
+
+.footer-container {
+    color: #fff;
+    margin: 0vh 3vw;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+}
+
+.footer-logo {
+    margin: auto;
+    max-width: 300px;
+    font-size: 50px;
+}
+
+.footer-titles {
+    font-size: 30px;
+    text-align: center;
+}
+
+.footer-categories {
+    padding: 10px;
+}
+
+.footer-categories-list ul li {
+    padding: 10px 15px;
+}
+
+.footer-categories-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-help {
+    padding: 10px;
+    margin: 0px 30px;
+}
+
+.footer-help ul li {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.footer-help ul li svg { 
+    margin-right: 10px;
+}
+
+.footer-help-addressicon important {
+    margin-right: 8px;
+}
+
+.footer-assistance {
+    padding: 10px;
+}
+
+.footer-assistance ul li {
+    padding: 10px;
+}
+
+.footer hr {
+    border: none;
+    background-color: rgba(78, 73, 73, 0.3);
+    height: 2px;
+}
+
+.footer-contactline-social {
+    margin: 1vh 1.5vw 1vh 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.footer-contactline-social a {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    margin: 10px;
+}
+
+.footer-contactline-social a svg {
+    width: 75%;
+    height: 75%;
+    fill: #fff;
+}
+
+.footer-contactline-social a svg:hover {
+    fill: #000;
+}
+
+.footer-contactline {
+    margin: 0vh 1vw;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #fff;
+}
+
+.footer-contactline-links {
+    display: flex;
+    align-items: center;
+}
+
+.footer-contactline-links ul {
+    display: flex;
+}
+
+.footer-contactline-links ul a {
+    margin-left: 2vw;
+}
+
+.footer-rights {
+    color: #fff;
+    text-align: left;
+    margin: 15px 1vw;
+}

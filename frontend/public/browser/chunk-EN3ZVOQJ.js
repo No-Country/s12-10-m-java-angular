@@ -1,2 +1,0 @@
-import{Ua as i,V as o,Va as a,cb as r,ib as c}from"./chunk-KRCTIDCF.js";var f=(()=>{let t=class t{constructor(){}ngOnInit(){}};t.\u0275fac=function(n){return new(n||t)},t.\u0275cmp=o({type:t,selectors:[["app-not-found"]],standalone:!0,features:[c],decls:2,vars:0,template:function(n,p){n&1&&(i(0,"p"),r(1,` not-found works!
-`),a())},changeDetection:0});let e=t;return e})();export{f as NotFoundComponent};

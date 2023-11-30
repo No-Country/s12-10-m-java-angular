@@ -1,6 +1,6 @@
 .navbar-g {
     background-color: #15AD67;
-    min-height: 71px;
+    min-height: 40px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -23,7 +23,6 @@
 
 .navbar-g-list {
     margin-right: 5vw;
-    min-height: 71px;
     display: flex;
     justify-content: right;
     align-items: center;
@@ -56,14 +55,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    min-height: 100px;
+    min-height: 60px;
 }
 
 .navbar-logo {
     margin-left: 2vw;
-    margin-right: 2vw;
+    margin-right: auto;
     font-size: 32px;
-    width: 30vw;
     text-wrap: nowrap;
 }
 

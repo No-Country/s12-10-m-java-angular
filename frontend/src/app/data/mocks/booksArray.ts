@@ -139,4 +139,74 @@ export const booksArray: Book[]=[
       author: "Issac Newton",
       price: 7000
     },
+    // { 
+    //   ID: 10,
+    //   img: "../../assets/booksImages/1.jpg",
+    //   name: "Memoir of Vincent Van gogh",
+    //   author: "genre 6",
+    //   price: 500
+    // },
+    // { 
+    //   ID: 20,
+    //   img: "../../assets/booksImages/2.jpg",
+    //   name: "Helvetica",
+    //   author: "genre 6",
+    //   price: 500
+    // },
+    // { 
+    //   ID: 30,
+    //   img: "../../assets/booksImages/3.jpg",
+    //   name: "Scheveningnen",
+    //   author: "genre 6",
+    //   price: 1000
+    // },
+    // { 
+    //   ID: 40,
+    //   img: "../../assets/booksImages/4.jpg",
+    //   name: "The graphic design",
+    //   author: "genre 6",
+    //   price: 7000
+    // },
+    // { 
+    //   ID: 50,
+    //   img: "../../assets/booksImages/5.jpg",
+    //   name: "The graphic design",
+    //   author: "genre 6",
+    //   price: 7000
+    // },
+    // { 
+    //   ID: 60,
+    //   img: "../../assets/booksImages/6.jpg",
+    //   name: "The graphic design",
+    //   author: "genre 6",
+    //   price: 7000
+    // },
+    { 
+      ID: 1,
+      img: "../../assets/booksImages/book_1.png",
+      name: "The prince",
+      author: "Nicolas Maquiavelo",
+      price: 500
+    },
+    { 
+      ID: 2,
+      img: "../../assets/booksImages/book_2.png",
+      name: "The greatest cover-up in history",
+      author: "Howerd Dilan",
+      price: 500
+    },
+    { 
+      ID: 3,
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ6EO4caRrtQkHq2YBXezwxuOiYNP4rD1evg&usqp=CAU",
+      name: "Hide and seek",
+      author: "Olivia Wilson",
+      price: 1000
+    },
+    { 
+      ID: 4,
+      img: "https://images2.penguinrandomhouse.com/cover/9780525559238",
+      name: "Rules for visiting",
+      author: "Jesica Francis Kane",
+      price: 7000
+    },
   ];
