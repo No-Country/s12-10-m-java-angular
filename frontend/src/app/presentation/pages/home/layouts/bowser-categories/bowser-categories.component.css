@@ -33,21 +33,33 @@
     align-items: center; 
     justify-content:center;
   }
-  .grid {
-    display: grid;
+  .grid-container {
+    display: flex;
     grid-template-columns: repeat(auto-fill, minmax(20rem, 2fr));
-    justify-content: space-around;
+    gap: 8vw;
     margin: 0 auto;
     max-width: 85vw;
     padding-top: 5vh;
+    justify-content: center;
+    align-items: center; 
   }
  
+.grid-item{
+  display:inline-table;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
 
+.grid-item h5{
+  padding: 5.5%;
+  color: black;
+}
   .card {
-    background-color: #E4E4E4;
+    background-color: #06915040;
     border-radius: 50px;
     border: 1px solid #CCC;
-    width: 13vw;
+    width: 18vh;
     aspect-ratio: 2.3/2;
     display: flex;
     align-items: center;
@@ -61,7 +73,7 @@
 
   .card img {
     display: block;
-    width: 8vw;
+    width: 10vh;
     height: auto;
     border-radius: 8px;
     object-fit: cover;

@@ -6,3 +6,4 @@ export class Categories {
         public image: string,
     ) {}
 }
+
