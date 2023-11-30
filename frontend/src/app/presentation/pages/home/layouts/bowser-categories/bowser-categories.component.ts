@@ -18,6 +18,8 @@ export class BowserCategoriesComponent implements OnInit {
   public page!:number;
   public pageSize: number;
 
+  
+
   constructor(
     private _service: CategoryArray,
     private resizeService: ResizeService
