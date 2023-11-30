@@ -1,6 +1,5 @@
 package com.noCountry.library.controller;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.noCountry.library.dto.Book.BookCardResponse;
@@ -16,9 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/*
-@CrossOrigin(origins = "${ALLOWED_ORIGINS}")
-*/
 @RestController
 @RequestMapping("/book")
 public class BookController {

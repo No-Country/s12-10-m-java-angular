@@ -8,15 +8,18 @@ import com.noCountry.library.entities.Author;
 import com.noCountry.library.entities.Book;
 import com.noCountry.library.entities.Editorial;
 import com.noCountry.library.entities.enums.Genre;
+import com.noCountry.library.exception.NotFoundException;
 import com.noCountry.library.repository.AuthorRepository;
 import com.noCountry.library.repository.BookRepository;
 import com.noCountry.library.repository.EditorialRepository;
 import com.noCountry.library.service.BookService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -38,11 +41,20 @@ public class BookServiceImpl implements BookService {
         this.editorialRepository = editorialRepository;
     }
 
+    @Transactional
     @Override
-    public BookResponse createdBook(BookRequest bookRequest) {
+    public BookResponse createdBook(BookRequest bookRequest) throws Exception {
+        bookRepository.findById(bookRequest.getIdBook()).ifPresent(object -> {
+            //throw new Exception();
+        });
 
-        Author author = authorRepository.findById(bookRequest.getIdAuthor()).get();
-        Editorial editorial = editorialRepository.findById(bookRequest.getIdEditorial()).get();
+
+        Optional<Author> author = authorRepository.findById(bookRequest.getIdAuthor());
+        isEmptyObject(author);
+
+        Optional<Editorial> editorial = editorialRepository.findById(bookRequest.getIdEditorial());
+        isEmptyObject(editorial);
+
         Genre genre = searchGenre(bookRequest.getGenre());
 
         Book book = mapperBooks.bookRequestToBook(bookRequest);
@@ -51,8 +63,8 @@ public class BookServiceImpl implements BookService {
         book.setCreationDate(LocalDate.now());
         book.setModificationDate(LocalDate.now());
 
-        book.setAuthor(author);
-        book.setEditorial(editorial);
+        book.setAuthor(author.get());
+        book.setEditorial(editorial.get());
         book.setGenre(genre);
 
         bookRepository.save(book);
@@ -60,30 +72,43 @@ public class BookServiceImpl implements BookService {
         return mapperBooks.bookToBookResponse(book);
     }
 
+    @Transactional
     @Override
     public void deleteBook(String id) {
-        Book deletedBook = bookRepository.findById(id).get();
+        Optional<Book> book = bookRepository.findById(id);
+        isEmptyObject(book);
 
-        if (deletedBook != null) {
-            deletedBook.setStatus(false);
-            deletedBook.setModificationDate(LocalDate.now());
-        }
+        Book deletedBook = book.get();
+        deletedBook.setStatus(false);
+        deletedBook.setModificationDate(LocalDate.now());
 
         bookRepository.save(deletedBook);
     }
 
+    @Transactional
     @Override
     public BookResponse updateBook(BookRequest book) {
+        Optional<Book> auxBook = bookRepository.findById(book.getIdBook());
+        isEmptyObject(auxBook);
+
+        Book updatedBook = auxBook.get();
+        updatedBook.setModificationDate(LocalDate.now());
+        // demas sets
+        // ver que atributos vamos a querer modificar del libro y cuales no
 
 
 
-        return null;
+        bookRepository.save(updatedBook);
+
+        return mapperBooks.bookToBookResponse(updatedBook);
     }
 
     @Override
     public BookResponse getBookById(String id) {
+        Optional<Book> auxBook = bookRepository.findById(id);
+        isEmptyObject(auxBook);
 
-        Book book = bookRepository.findById(id).get();
+        Book book = auxBook.get();
 
         return mapperBooks.bookToBookResponse(book);
     }
@@ -97,14 +122,10 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookCardResponse getBookForCard(String id) {
-        Book book = bookRepository.findById(id).get();
-        BookCardResponse bookResponse = new BookCardResponse();
+        Optional<Book> book = bookRepository.findById(id);
+        isEmptyObject(book);
 
-        if (book != null) {
-            bookResponse = mapperBooks.bookToBookCardResponse(book);
-        }
-
-        return bookResponse;
+        return mapperBooks.bookToBookCardResponse(book.get());
     }
 
     @Override
@@ -114,10 +135,13 @@ public class BookServiceImpl implements BookService {
         return mapperBooks.listBooksToListCardBooks(books);
     }
 
+    @Transactional
     @Override
     public void addImagesBook(String id, String img) {
+        Optional<Book> auxBook = bookRepository.findById(id);
+        isEmptyObject(auxBook);
 
-        Book book = bookRepository.findById(id).get();
+        Book book = auxBook.get();
 
         if (img != null) {
             book.getUrlImages().add(img);
@@ -125,6 +149,44 @@ public class BookServiceImpl implements BookService {
         }
 
         bookRepository.save(book);
+    }
+
+    @Override
+    public void addQuantityAvailable(String id, Integer amount) {
+
+    }
+
+    @Override
+    public void subtractAmount(String id, Integer amount) {
+
+    }
+
+
+
+
+    @Override
+    public List<BookResponse> searchByCategory(String category) {
+        return null;
+    }
+
+    @Override
+    public List<BookResponse> searchByTrend() {
+        return null;
+    }
+
+    @Override
+    public List<BookResponse> searchByRating(Integer searchedRating) {
+        return null;
+    }
+
+    @Override
+    public List<BookResponse> searchByAuthor(String idAuthor) {
+        return null;
+    }
+
+    @Override
+    public List<BookResponse> searchByEditorial(String idEditorial) {
+        return null;
     }
 
     private Genre searchGenre(String genre) {
@@ -136,6 +198,14 @@ public class BookServiceImpl implements BookService {
         }
         return null;
     }
+
+
+    private void isEmptyObject(Optional<?> object) throws NotFoundException {
+        if (object.isEmpty()){
+            throw new NotFoundException("Could not found " + object.getClass());
+        }
+    }
+
 
 
 }

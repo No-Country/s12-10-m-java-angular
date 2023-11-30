@@ -7,6 +7,6 @@ public class UpdatePasswordDto {
 
     private String email;
     private String password;
-    private String passwordRepeat;
-
+    private String newPassword;
+    private String newPasswordRepeat;
 }

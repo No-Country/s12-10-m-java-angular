@@ -2,11 +2,11 @@ package com.noCountry.library.service.impl;
 
 import com.noCountry.library.dto.RegisterRequest;
 import com.noCountry.library.dto.User.MappingUserDto;
-import com.noCountry.library.dto.User.ResponseUserDto;
 import com.noCountry.library.dto.User.UpdatePasswordDto;
 import com.noCountry.library.entities.User;
 import com.noCountry.library.entities.enums.Role;
 import com.noCountry.library.exception.InvalidPasswordException;
+import com.noCountry.library.exception.NotFoundException;
 import com.noCountry.library.repository.UserRepository;
 import com.noCountry.library.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,13 +68,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserById(String id) {
-        return userRepository.findById(id).get();
+    public UserDto getUser(String email) {
+        Optional<User> auxUser = findByEmail(email);
+        isEmptyUser(auxUser);
+
+        return mapperUser.userToUserDto(auxUser.get());
     }
+
 
     @Transactional
     @Override
-    public ResponseUserDto updateUser(UserDto userDTO) {
+    public UserDto updateUser(UserDto userDTO) {
+        Optional<User> auxUser = userRepository.findByEmail(userDTO.getEmail());
+        isEmptyUser(auxUser);
 
         User updateUser = mapperUser.userDtoToUser(userDTO);
 
@@ -110,11 +116,19 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Override
+    public void olvidoContraseña() {
+
+    }
+
 
     @Transactional
     @Override
-    public void deleteUser(String id) {
-        User user = userRepository.findById(id).get();
+    public void deleteUser(String email) {
+        Optional<User> auxUser = userRepository.findByEmail(email);
+        isEmptyUser(auxUser);
+
+        User user = auxUser.get();
         user.setModificationDate(LocalDate.now());
         user.setStatus(false);
 
@@ -123,8 +137,11 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public void unsubscribeEmailUser(String id) {
-        User user = userRepository.findById(id).get();
+    public void unsubscribeEmailUser(String email) {
+        Optional<User> auxUser = userRepository.findByEmail(email);
+        isEmptyUser(auxUser);
+
+        User user = auxUser.get();
 
         if (user.getIsSubscribed()) {
             user.setIsSubscribed(false);
@@ -141,7 +158,6 @@ public class UserServiceImpl implements UserService {
         if (!newUser.getPassword().equals(newUser.getPasswordRepeat())){ //Que las contraseñas considan
             throw new InvalidPasswordException("Las contraseñas no coinciden");
         }
-
     }
 
     private void sendEmailWelcome(String name, String email) {
@@ -154,6 +170,13 @@ public class UserServiceImpl implements UserService {
         emailService.sendWelcomeEmail(email,
                 "Bienvenido a la librería YEY!",
                 "welcome.html", templateModel);
+    }
+
+
+    private void isEmptyUser(Optional<User> user) throws NotFoundException {
+        if (user.isEmpty()){
+            throw new NotFoundException("Could not found user");
+        }
     }
 
 
