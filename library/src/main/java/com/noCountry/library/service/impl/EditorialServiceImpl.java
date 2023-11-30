@@ -4,6 +4,8 @@ import com.noCountry.library.dto.Book.BookResponse;
 import com.noCountry.library.dto.Editorial.EditorialDto;
 import com.noCountry.library.dto.Editorial.MapperEditorial;
 import com.noCountry.library.entities.Editorial;
+import com.noCountry.library.exception.BadRequestException;
+import com.noCountry.library.exception.NotFoundException;
 import com.noCountry.library.repository.EditorialRepository;
 import com.noCountry.library.service.EditorialService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EditorialServiceImpl implements EditorialService {
@@ -26,7 +29,13 @@ public class EditorialServiceImpl implements EditorialService {
     }
 
     @Override
-    public EditorialDto createEditorial(EditorialDto editorialDto) {
+    public EditorialDto createEditorial(EditorialDto editorialDto) throws IllegalAccessException {
+
+        Optional<Editorial> auxEditorial = editorialRepository.findById(editorialDto.getIdEditorial());
+        if (auxEditorial.isPresent()) {
+            throw new BadRequestException("La editorial ya se encuentra registrada");
+        }
+
         Editorial editorial = mapperEditorial.editorialDtoToEditorial(editorialDto);
 
         editorial.setStatus(true);
@@ -62,6 +71,17 @@ public class EditorialServiceImpl implements EditorialService {
     public void addBookToEditorial(String idEditorial, String idBook) {
 
     }
+
+
+
+    private void isEmptyEditorial(Optional<Editorial> editorial) throws NotFoundException {
+        if (editorial.isEmpty()){
+            throw new NotFoundException("Could not found editorial");
+        }
+    }
+
+
+
 
 
 }

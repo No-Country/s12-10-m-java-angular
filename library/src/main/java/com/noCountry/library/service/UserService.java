@@ -1,6 +1,5 @@
 package com.noCountry.library.service;
 
-import com.noCountry.library.dto.User.ResponseUserDto;
 import com.noCountry.library.dto.User.UpdatePasswordDto;
 import com.noCountry.library.dto.User.UserDto;
 import com.noCountry.library.entities.User;
@@ -14,15 +13,17 @@ public interface UserService {
 
     Optional<User> findByEmail(String email);
 
-    public ResponseUserDto updateUser(UserDto userDTO);
+    UserDto getUser(String email);
 
-    public void updatePasswordUser(UpdatePasswordDto userDTO);
+    UserDto updateUser(UserDto userDTO);
 
-    public void deleteUser(String id);
+    void updatePasswordUser(UpdatePasswordDto userDTO);
 
-    public User getUserById(String id);
+    void olvidoContraseña();
 
-    public void unsubscribeEmailUser(String id);
+    void deleteUser(String email);
+
+    void unsubscribeEmailUser(String email);
 
 
 }

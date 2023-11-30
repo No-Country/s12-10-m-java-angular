@@ -20,8 +20,13 @@ public class Book extends PersistenceObject {
 	private String title;
 	private Double price;
     private Integer pages;
-    private Integer quantity;
+    private Integer quantityAvailable;
+	private Integer salesAmount;
+	private Integer rating;
     private String description;
+
+	private String initialImage;
+	private ArrayList<String> urlImages;
 
 	@Enumerated(EnumType.STRING)
 	private Genre genre;
@@ -33,7 +38,5 @@ public class Book extends PersistenceObject {
     @ManyToOne
     @JoinColumn(name = "editorial_id", referencedColumnName = "id")
 	private Editorial editorial;
-
-	private ArrayList<String> urlImages;
 
 }

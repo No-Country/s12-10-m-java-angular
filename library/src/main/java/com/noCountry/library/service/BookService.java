@@ -8,20 +8,38 @@ import java.util.List;
 
 public interface BookService {
 
-    public BookResponse createdBook(BookRequest book);
+    BookResponse createdBook(BookRequest book) throws Exception;
 
-    public void deleteBook(String id);
+    void deleteBook(String id);
 
-    public BookResponse updateBook(BookRequest book);
+    BookResponse updateBook(BookRequest book);
 
-    public BookResponse getBookById(String id);
+    BookResponse getBookById(String id);
 
-    public List<BookResponse> getAllBooks();
+    List<BookResponse> getAllBooks();
 
-    public BookCardResponse getBookForCard(String id);
+    BookCardResponse getBookForCard(String id);
 
-    public List<BookCardResponse> getAllBooksForCard();
+    List<BookCardResponse> getAllBooksForCard();
 
-    public void addImagesBook(String id, String img);
+    void addImagesBook(String id, String img);
+
+
+    void addQuantityAvailable(String id, Integer amount);
+
+    void subtractAmount(String id, Integer amount);
+
+
+
+    List<BookResponse> searchByCategory(String category);
+
+    List<BookResponse> searchByTrend();
+
+    List<BookResponse> searchByRating(Integer searchedRating);
+
+    List<BookResponse> searchByAuthor(String idAuthor);
+
+    List<BookResponse> searchByEditorial(String idEditorial);
+
 
 }
