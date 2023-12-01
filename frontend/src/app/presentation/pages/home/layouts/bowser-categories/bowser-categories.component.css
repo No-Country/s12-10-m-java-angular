@@ -1,16 +1,9 @@
 .cabeza {
     padding-top: 7.5vh;
-    padding-left: 7.5vw;
-    font-style: normal;
     display: inline-flex;
     align-items: center; 
     justify-content:space-between;
     width: 100vw;
-  }
-
-  .title .color{
-    color: #33B672;
-    font-weight: 500;
   }
 
   pagination-template {

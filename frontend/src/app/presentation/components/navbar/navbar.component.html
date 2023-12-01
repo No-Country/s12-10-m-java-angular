@@ -47,12 +47,26 @@
             </svg>
         </div>
         <ul class="navbar-w-list max-[1000px]:!hidden">
-            <li class="navbar-w-list-item"><a routerLink=""> Categories
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="navbar-w-list-category-icon">
-                <path d="M7 10L12 15L17 10H7Z" fill="black"/>
-                </svg>
+            <li class="navbar-w-list-item dropdown">
+                <a routerLink=""> Categories
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="navbar-w-list-category-icon">
+                    <path d="M7 10L12 15L17 10H7Z" fill="black"/>
+                  </svg>
                 </a>
-            </li>
+                <div class="dropdown-content">
+                  <!-- Contenido del dropdown -->
+                  <a href="#">Self Help</a>
+                  <a href="#">Comedy</a>
+                  <a href="#">Fantasy</a>
+                  <a href="#">Fiction</a>
+                  <a href="#">History</a>
+                  <a href="#">Horror</a>
+                  <a href="#">Poetry</a>
+                  <a href="#">Police</a>
+                  <a href="#">Romance</a>
+                </div>
+              </li>
+              
             <li class="navbar-w-list-item"><a routerLink="">History</a></li>
             <li class="navbar-w-list-item"><a routerLink="">Buy again</a></li>
             <li class="navbar-w-list-item"><a routerLink="">
