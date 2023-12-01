@@ -49,6 +49,10 @@ export class CategoryArray {
          "Romance" ,
          "",
          "/assets/Icons-category/romance.png"),
+      new Categories( 9 ,
+         "Drama" ,
+         "",
+         "/assets/Icons-category/drama.png"),
       
     ];
     return category;
