@@ -42,6 +42,17 @@ public class User extends PersistenceObject implements UserDetails {
         return authorities;
     }
 
+    public Collection<?> updateRole(Role newRole){
+        this.role=newRole;
+
+        List<SimpleGrantedAuthority> newAuthorities = new ArrayList<>();
+        newAuthorities.add(new SimpleGrantedAuthority("ROLE_" + this.role.name()));
+
+        
+        return newAuthorities;
+    }
+
+
     @Override
     public String getUsername() {
         return email;
