@@ -10,6 +10,6 @@ public class BookCardResponse {
     private String title;
     private Double price;
     private  String author;
-    private ArrayList<String> urlImages;
+    private String initialImage;
 
 }

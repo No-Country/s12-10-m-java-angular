@@ -9,4 +9,5 @@ public class UpdatePasswordDto {
     private String password;
     private String newPassword;
     private String newPasswordRepeat;
+
 }

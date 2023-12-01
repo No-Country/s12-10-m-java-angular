@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 @Entity
@@ -20,6 +21,7 @@ public class Book extends PersistenceObject {
 	private String title;
 	private Double price;
     private Integer pages;
+	private LocalDate d;
     private Integer quantityAvailable;
 	private Integer salesAmount;
 	private Integer rating;

@@ -13,7 +13,9 @@ public class BookResponse {
     private String title;
     private Double price;
     private Integer pages;
-    private Integer quantity;
+    private Integer quantityAvailable;
+    private Integer salesAmount;
+    private Integer rating;
     private String description;
     private String genre;
 
