@@ -31,7 +31,7 @@
     </div>
     <div class="h-[74px] mb-4 md:mb-2">
         <div class="input-group" [ngClass]="{'form-error': registerForm.get('password')?.touched && (registerForm.get('password')?.hasError('required') || registerForm.get('password')?.hasError('pattern'))}">
-          <input [type]="viewPassword ? 'text' : 'password'" autocomplete="off" required="" type="password" id="password" class="form-input"
+          <input [type]="viewPassword ? 'text' : 'password'" autocomplete="off" required="" type="password" id="password" class="form-input pass"
           formControlName="password" autocomplete="password" name="password" aria-disabled="false" aria-label="Password" tabindex="3" autocapitalize="none" dir="ltr" required>
           <img src="../../../../assets/icons/show.webp" alt="Show password" class="icon" loading="lazy" (click)="toogleViewPassword($event)">
           <label for="password" class="form-label ellipsis ...">Password</label>
@@ -41,7 +41,7 @@
     </div>
     <div class="h-[74px] mb-4 md:mb-2">
       <div class="input-group" [ngClass]="{'form-error': registerForm.get('passwordRepeat')?.touched && (registerForm.get('passwordRepeat')?.hasError('required') || registerForm.get('passwordRepeat')?.hasError('passwordMismatch'))}">
-        <input  autocomplete="off" required="" type="password" id="passwordRepeat" class="form-input"
+        <input  autocomplete="off" required="" type="password" id="passwordRepeat" class="form-input pass"
         formControlName="passwordRepeat" autocomplete="password" name="passwordRepeat" aria-disabled="false" aria-label="passwordRepeat" tabindex="4" autocapitalize="none" dir="ltr" required>
         <label for="password" class="form-label ellipsis ...">Repeat Password</label>
     </div>

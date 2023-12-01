@@ -18,9 +18,9 @@ export class BowserCategoriesComponent implements OnInit {
   public page!:number;
   public pageSize: number;
   @Input() id!: string;
-@Input() maxSize!: number;
-@Output() pageChange!: EventEmitter<number>;
-@Output() pageBoundsCorrection!: EventEmitter<number>;
+  @Input() maxSize!: number;
+  @Output() pageChange!: EventEmitter<number>;
+  @Output() pageBoundsCorrection!: EventEmitter<number>;
 
   constructor(
     private _service: CategoryArray,
