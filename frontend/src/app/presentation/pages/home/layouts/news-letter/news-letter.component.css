@@ -53,18 +53,4 @@ section{
     line-height: normal;
     padding-left: 2%;
   }
-
-  .button{
-    border-radius: 50px;
-    background: #33B672;
-    width: 28vw;
-    aspect-ratio: 1/.11;
-    flex-shrink: 0;
-    margin: 3vh ;
-    color: #FFFFFC;
-    text-align: center;
-    font-weight: 500;
-    line-height: normal;
-    font-size: 1.2vw;
-  }
   

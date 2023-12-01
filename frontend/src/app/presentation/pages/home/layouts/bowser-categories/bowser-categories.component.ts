@@ -17,6 +17,10 @@ export class BowserCategoriesComponent implements OnInit {
   public categories!: Array<Categories>;
   public page!:number;
   public pageSize: number;
+  @Input() id!: string;
+  @Input() maxSize!: number;
+  @Output() pageChange!: EventEmitter<number>;
+  @Output() pageBoundsCorrection!: EventEmitter<number>;
 
   constructor(
     private _service: CategoryArray,
@@ -35,16 +39,12 @@ export class BowserCategoriesComponent implements OnInit {
     });
   }
   private calculatePageSize(screenWidth: number): number {
-    if (screenWidth <= 770) {
+    if (screenWidth <= 570) {
       return 1;
-    } else if (screenWidth <= 900) {
+    } else if (screenWidth <= 700) {
       return 2;
-    } else if (screenWidth <= 1247) {
-      return 3;
-    } else if (screenWidth <= 1590) {
-      return 4;
     } else {
-      return 5;
+      return 3;
     }
   }
   
