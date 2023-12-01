@@ -14,13 +14,13 @@ public class BookRequest {
     private String title;
     private Double price;
     private Integer pages;
-    private Integer quantity;
+    private Integer quantityAvailable;
     private String description;
     private String genre;
 
     private String idAuthor;
     private String idEditorial;
 
-    private ArrayList<String> urlImages;
+    private String initialImage;
 
 }
