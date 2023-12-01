@@ -6,6 +6,6 @@ import com.noCountry.library.entities.Author;
 
 public interface AuthorService {
 	
-	public ResponseEntity<String> save (Author author);
+	ResponseEntity<String> save (Author author);
 	
 }
