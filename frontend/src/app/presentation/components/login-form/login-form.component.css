@@ -63,6 +63,11 @@
     height: 51px;
 
     caret-color: #C88D65;
+    
+  }
+
+  .input-group input.pass.form-input{
+    padding-inline-end: 2.5rem;
   }
 
   .move-label{

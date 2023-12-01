@@ -71,7 +71,7 @@
 }
 
 .footer-contactline-social {
-    margin: 1vh 1.5vw 1vh 0;
+    margin: 1vh 4vw 1vh 0;
     display: flex;
     justify-content: flex-end;
 }
@@ -90,10 +90,15 @@
     width: 75%;
     height: 75%;
     fill: #fff;
+    transition-property: transform, filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
 }
 
 .footer-contactline-social a svg:hover {
-    fill: #000;
+    /* fill: #000; */
+    transform: translate(0, -4px) rotate(0) skewX(0) skewY(0) scaleX(1.1) scaleY(1.1);
+    filter: contrast(1.25);
 }
 
 .footer-contactline {

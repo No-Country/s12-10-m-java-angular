@@ -12,7 +12,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RegisterComponent, LoginComponent, NavbarComponent,NgxPaginationModule, FooterComponent],
+  imports: [CommonModule, RouterOutlet, RegisterComponent, LoginComponent, NavbarComponent, NgxPaginationModule, FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   providers: [ToastService]
