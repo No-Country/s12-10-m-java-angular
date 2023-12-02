@@ -40,11 +40,11 @@ export class BowserCategoriesComponent implements OnInit {
   }
   private calculatePageSize(screenWidth: number): number {
     if (screenWidth <= 570) {
-      return 1;
-    } else if (screenWidth <= 700) {
       return 2;
-    } else {
+    } else if (screenWidth <= 1300) {
       return 3;
+    } else {
+      return 5;
     }
   }
   

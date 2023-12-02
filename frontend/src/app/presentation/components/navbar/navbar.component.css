@@ -160,3 +160,23 @@
 .navbar-w-list-cart-icon {
     margin-right: .4rem;
 }
+
+.navbar-w-list-item {
+    position: relative;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 5vw;
+    height: 8vh;
+    overflow-y: scroll;
+  }
+  
+  .navbar-w-list-item:hover .dropdown-content {
+    display: block;
+  }
