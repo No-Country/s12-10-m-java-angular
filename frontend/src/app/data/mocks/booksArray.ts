@@ -94,7 +94,7 @@ export const booksArray: Book[]=[
       ID: 2,
       img: "../../assets/booksImages/book_2.png",
       name: "The greatest cover-up in history",
-      author: "Howerd Dilan",
+      author: "Howerd Dilan el the best",
       price: 500
     },
     { 

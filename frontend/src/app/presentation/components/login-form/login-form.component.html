@@ -3,7 +3,7 @@
   <div class="w-full max-w-[366px] h-[74px]">
 
     <div class="input-group w-full" [ngClass]="{'form-error': loginForm.get('email')?.touched && (loginForm.get('email')?.hasError('required') || loginForm.get('email')?.hasError('pattern'))}">   
-      <input type="text" id="email-login" formControlName="email" autocomplete="email" name="email-login" class="form-input" aria-disabled="false" aria-label="Email" tabindex="0" autocapitalize="none" dir="ltr" required>
+      <input type="text" id="email-login" formControlName="email" for="email-login" autocomplete="email" name="email-login" class="form-input" aria-disabled="false" aria-label="Email" tabindex="0" autocapitalize="none" dir="ltr" required>
       <label for="email-login" class="form-label">Email</label>
     </div>
 
@@ -14,7 +14,7 @@
   <div class="w-full max-w-[366px] h-[97px]">
 
     <div class="input-group w-full" [ngClass]="{'form-error': loginForm.get('password')?.touched && (loginForm.get('password')?.hasError('required') || loginForm.get('password')?.hasError('pattern'))}">
-      <input [type]="viewPassword ? 'text' : 'password'" id="password-login" formControlName="password" autocomplete="off" name="password-login" class="form-input pass" aria-disabled="false" aria-label="Password" tabindex="1" autocapitalize="none" dir="ltr" required>
+      <input [type]="viewPassword ? 'text' : 'password'" id="password-login" for="password-login" formControlName="password" autocomplete="off" name="password-login" class="form-input pass" aria-disabled="false" aria-label="Password" tabindex="1" autocapitalize="none" dir="ltr" required>
       <img src="../../../../assets/icons/show.webp" alt="Show password" class="icon" loading="lazy" (click)="toogleViewPassword($event)">
       <label for="password-login" class="form-label">Password</label>
     </div>

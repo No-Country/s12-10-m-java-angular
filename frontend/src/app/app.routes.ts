@@ -6,7 +6,7 @@ import { RegisterService } from './data/services/register/register.service';
 export const routes: Routes = [
     {
         path: '',
-        title: 'Home',
+        title: 'Books Leaks - Home page',
         loadComponent: ()=> import('@presentation/pages/home/home.component').then(c => c.HomeComponent),
     },
     {
