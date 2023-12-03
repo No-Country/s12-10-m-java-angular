@@ -9,6 +9,7 @@ import { ToastComponent } from '@presentation/components/toast/toast.component';
 import { ToastService } from 'app/data/services/toast/Toast.service';
 import { ToastModel, ToastPosition, ToastType } from 'app/data/models/toast.model';
 import { AuthResponse } from 'app/data/models/AuthResponse';
+import { LoggedInService } from 'app/data/services/login/loggedIn.service';
 
 @Component({
   standalone: true,
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit, OnDestroy  {
   private readonly toast = inject(ToastService);
   private readonly service: LoginService = inject(LoginService);
   private readonly router: Router = inject(Router);
+  private readonly loggedInState: LoggedInService = inject(LoggedInService);
 
   private destroy$: Subject<void>;
 
@@ -40,18 +42,14 @@ export class LoginComponent implements OnInit, OnDestroy  {
     const service = this.service;
     const router = this.router;
     const toast = this.toast;
+    const loggedInState = this.loggedInState;
     toast.info("Sending", "Waiting answer.", 5);
 
     const loginObserver = {
-      login: {} as AuthResponse,
       next(loginResponse: AuthResponse): void {
-        this.login.id =   loginResponse.id;
-        this.login.name = loginResponse.name;
-        this.login.lastName = loginResponse.lastName;
-        this.login.email = loginResponse.email;
-        this.login.jwt = loginResponse.jwt;
+        loginResponse.isActive = true;
+        loggedInState.setLogin(loginResponse);
 
-        service.setInStorage(this.login);
         toast.success("Success", "Logging in.", 5);
       },
       error(err: any): void{
