@@ -1,6 +1,6 @@
 <article #cardBook class="card-book" [id]="book.ID" >
 
-    <section class="img-wrapper" routerLink="" >
+    <section class="img-wrapper" routerLink="/" >
         <a class="img-container" [ngClass]="{'blur-md': isNumberId(book.ID) }">
             <img [ngSrc]="book.img" fill priority alt="Front of men&#039;s Basic Tee in black.">
         </a>
@@ -9,7 +9,7 @@
 
     <section class="content-info">
         <h2 [title]="book.name">
-            <a class="w-full" routerLink="">
+            <a class="w-full" routerLink="/">
                 {{ book.name }}
             </a>
         </h2>
@@ -18,14 +18,14 @@
 
         <div class="w-full flex justify-between items-center">
             <p class="mt-2 font-medium price text-[#242221] cursor-pointer">
-                <a class="w-full" routerLink="/login" >
+                <a class="w-full" routerLink="/" >
                     ${{ book.price }}
                 </a>
             </p>
 
             <app-button class="hidden min-[710px]:block" className="min-w-[75px] !py-2" title="Add to cart">
-                <a routerLink="">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" width="25px" fill="#ffffff"
+                <a routerLink="/">
+                    <svg class="ionicon" width="25px" fill="#ffffff"
                         viewBox="0 0 512 512">
                         <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                             stroke-width="32"

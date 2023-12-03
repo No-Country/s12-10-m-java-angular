@@ -6,10 +6,14 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
   imports: [CommonModule],
   selector: 'app-button',
   template: `
-    <button class="default-button" [type]="type" [ngClass]="className" name="default-button" [disabled]="isDisable" [attr.aria-disabled]="isDisable" dir="ltr" role="button">
+    <button class="default-button" [type]="type" [ngClass]="className" name="default-button" [disabled]="isDisable" [attr.aria-disabled]="isDisable">
       <ng-content></ng-content>
     </button>
   `,
+  host: {
+    role: 'button',
+    dir: 'ltr',
+  },
   styleUrl: './default-button.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -20,7 +24,7 @@ export class DefaultButtonComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
 }
