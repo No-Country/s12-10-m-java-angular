@@ -7,19 +7,25 @@ import { NumberDetailComponent } from './number-detail.component';
 
 describe('NumberDetailComponent', () => {
   let component: NumberDetailComponent;
-  let fixture: ComponentFixture<NumberDetailComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ NumberDetailComponent ]
-    })
-    .compileComponents();
-  }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(NumberDetailComponent);
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [NumberDetailComponent],
+    }).compileComponents();
+  });
+
+
+  it('should create the app', () => {
+    const fixture = TestBed.createComponent(NumberDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+  });
+
+  it('should create the app', () => {
+    const fixture = TestBed.createComponent(NumberDetailComponent);
+    component= fixture.componentInstance;
+    expect(fixture).toBeTruthy();
   });
 
   it('should create', () => {

@@ -11,19 +11,29 @@ export const routes: Routes = [
     },
     {
         path: 'login',
-        title: 'Login',
+        title: 'Books Leaks - Login Page',
         loadComponent: () => import('@presentation/pages/login/login.component').then(c => c.LoginComponent),
         providers: [LoginService],
     },
     {
         path: 'register',
-        title: 'Register',
+        title: 'Books Leaks - Register page',
         loadComponent: () => import('@presentation/pages/register/register.component').then(c => c.RegisterComponent),
         providers: [RegisterService ]
     },
     {
+        path: 'shop',
+        title: 'Books Leaks - Shop page',
+        loadComponent: () => import('@presentation/pages/shop/shop.component').then(c => c.ShopComponent),
+    },
+    {
+        path: 'cart',
+        title: 'Books Leaks - Cart page',
+        loadComponent: () => import('@presentation/pages/cart/cart.component').then(c => c.CartComponent),
+    },
+    {
         path: 'forgot-password',
-        title: 'Forgot Password',
+        title: 'Books Leaks - Forgot Password page',
         loadComponent: () => import('@presentation/pages/forgot-password/forgot-password.component').then(c => c.ForgotPasswordComponent),
         providers: [LoginService ],
     },

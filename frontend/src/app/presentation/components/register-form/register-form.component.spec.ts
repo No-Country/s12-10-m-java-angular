@@ -1,26 +1,27 @@
 /* tslint:disable:no-unused-variable */
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+import { RegisterFormComponent } from './register-form.component';
 
-import { RegisterComponent } from './register.component';
 
-describe('RegisterComponent', () => {
-  let component: RegisterComponent;
+describe('RegisterFormComponent', () => {
+  let component: RegisterFormComponent;
+
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RegisterComponent],
+      imports: [RegisterFormComponent],
     }).compileComponents();
   });
 
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(RegisterComponent);
+    const fixture = TestBed.createComponent(RegisterFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(RegisterComponent);
+    const fixture = TestBed.createComponent(RegisterFormComponent);
     component= fixture.componentInstance;
     expect(fixture).toBeTruthy();
   });
