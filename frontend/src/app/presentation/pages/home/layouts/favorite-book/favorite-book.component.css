@@ -66,12 +66,13 @@
     display: grid;
     grid-template-rows: 1fr 1fr 1fr;
     place-content: center;
-    justify-content: start;
-    justify-items: start;
+    justify-content: center;
+    justify-items: center;
     align-items: center;
     width: 100%;
     margin-block-start: 1rem;
     max-width: 45dvw;
+    row-gap: .2rem;
 }
 
 .favorite-container app-button{
@@ -86,6 +87,7 @@
         font-size: clamp(1.5rem, 4dvw, 3rem);
     }
 }
+
 @media only screen and (min-width: 710px)  {
     .favorite-container  .favorite-book-wrapper {
         grid-template-rows: .2fr .6fr 80px; 
@@ -127,8 +129,6 @@
         grid-area: 1 / 2 / 3 / 3;
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: 1fr;
-        justify-content: center;
-        justify-items: center;
     }
 
 }

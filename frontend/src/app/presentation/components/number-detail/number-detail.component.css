@@ -23,11 +23,11 @@
     }
 
     .number-detail strong {
-        font-size: clamp(1.5rem, 7dvw, 2.5rem);
+        font-size: clamp(1.5rem, 9dvw, 2.5rem);
         color: #1E1E1E;
         font-weight: 500;
         width: 100%;
-        min-width: 85px;
+        min-width: 90px;
     }
 
     .number-detail figcaption{
