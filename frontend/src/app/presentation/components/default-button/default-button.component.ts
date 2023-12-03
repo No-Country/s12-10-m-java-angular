@@ -6,7 +6,7 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
   imports: [CommonModule],
   selector: 'app-button',
   template: `
-    <button class="default-button" [type]="type" [ngClass]="className" name="default-button" [disabled]="isDisable" [attr.aria-disabled]="isDisable" accesskey="Enter" dir="ltr" role="button">
+    <button class="default-button" [type]="type" [ngClass]="className" name="default-button" [disabled]="isDisable" [attr.aria-disabled]="isDisable" dir="ltr" role="button">
       <ng-content></ng-content>
     </button>
   `,
