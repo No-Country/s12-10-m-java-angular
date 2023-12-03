@@ -6,7 +6,7 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
   imports: [CommonModule],
   selector: 'app-button',
   template: `
-    <button class="default-button" [type]="type" [ngClass]="className" name="default-button" [disabled]="isDisable" [attr.aria-disabled]="isDisable">
+    <button class="default-button" [type]="type" [ngClass]="className" name="default-button" [title]="title" [attr.aria-label]="title" [attr.aria-disabled] [disabled]="isDisable" [attr.aria-disabled]="isDisable">
       <ng-content></ng-content>
     </button>
   `,
@@ -21,6 +21,7 @@ export class DefaultButtonComponent implements OnInit {
   @Input() public isDisable: boolean = false;
   @Input() public type: string = "button";
   @Input() public className: string = "";
+  @Input() public title: string = "";
 
   constructor() { }
 
