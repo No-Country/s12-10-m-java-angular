@@ -28,7 +28,7 @@ public class UserController {
     public ResponseEntity<?> getUserById(@PathVariable String id) throws Exception {
         try {
             User user = userService.getUserById(id);
-            return ResponseEntity.ok(user);
+            return new ResponseEntity<>(user, HttpStatus.OK);
         } catch (Exception e){
             throw new Exception(e.getMessage());
         }
@@ -59,7 +59,7 @@ public class UserController {
     public ResponseEntity<?> updateUser(@RequestBody @Valid UserDto userDto) throws Exception {
         try {
             ResponseUserDto userUpdated = userService.updateUser(userDto);
-            return ResponseEntity.status(HttpStatus.OK).body(userUpdated);
+            return new ResponseEntity<>(userUpdated, HttpStatus.OK);
         } catch (Exception e){
             throw new Exception(e.getMessage());
         }

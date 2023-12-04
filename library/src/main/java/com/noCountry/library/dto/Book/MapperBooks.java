@@ -4,16 +4,14 @@ import com.noCountry.library.entities.Book;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class MapperBooks {
 
     public Book bookRequestToBook(BookRequest bookRequest) {
         Book book = new Book();
-
-        book.setStatus(true);
-        book.setCreationDate(LocalDate.now());
-        book.setModificationDate(LocalDate.now());
 
         book.setId(bookRequest.getIdBook());
         book.setISBN(bookRequest.getISBN());
@@ -47,6 +45,18 @@ public class MapperBooks {
         return bookResponse;
     }
 
+    public List<BookResponse> listBooksToListResponseBooks(List<Book> listBooks) {
+
+        List<BookResponse> listResponse = new ArrayList<>();
+
+        for (Book book: listBooks) {
+            listResponse.add(bookToBookResponse(book));
+        }
+
+        return listResponse;
+    }
+
+
     public BookCardResponse bookToBookCardResponse(Book book) {
         String author = book.getAuthor().getName() + book.getAuthor().getLastName();
 
@@ -58,6 +68,16 @@ public class MapperBooks {
         bookResponse.setUrlImages(book.getUrlImages());
 
         return bookResponse;
+    }
+
+    public List<BookCardResponse> listBooksToListCardBooks(List<Book> listBooks) {
+        List<BookCardResponse> listCardBook = new ArrayList<>();
+
+        for (Book book: listBooks) {
+            listCardBook.add(bookToBookCardResponse(book));
+        }
+
+        return listCardBook;
     }
 
 

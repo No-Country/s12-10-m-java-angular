@@ -1,0 +1,60 @@
+<form class="px-8 pt-6 pb-8 mb-4 bg-[#FFFBFE] rounded" 
+[formGroup]="registerForm" (submit)="onSubmit()">
+    <div class="mb-4 md:flex ">
+      <div class="h-[74px] mb-4 md:mb-0">
+        <div class="input-group">
+          <input autocomplete="off" required="" type="text" id="name-register" class="form-input"
+          formControlName="name" autocomplete="given-name" for="name-register" name="name-register" aria-disabled="false" aria-label="Name" autocapitalize="none" dir="ltr" required>
+          <label for="name-register" class="form-label ellipsis ...">First Name</label>
+      </div>
+      <error-message [showError]="registerForm.get('name')?.touched && (registerForm.get('name')?.hasError('pattern') || registerForm.get('name')?.hasError('required'))"
+    errorMessage="Write a valid name" errorClass="text-red-500" />
+      </div>
+      <div class="h-[74px] md:ml-3">
+        <div class="input-group">
+          <input autocomplete="off" required="" type="text" id="lastName-register" class="form-input"
+          formControlName="lastName" autocomplete="family-name" for="lastName-register" name="lastName-register" aria-disabled="false" aria-label="LastName" autocapitalize="none" dir="ltr" required>
+          <label for="lastName-register" class="form-label ellipsis ...">Last Name</label>
+      </div>
+      <error-message [showError]="registerForm.get('lastName')?.touched && (registerForm.get('lastName')?.hasError('pattern') || registerForm.get('lastName')?.hasError('required'))"
+    errorMessage="Write a valid last name" errorClass="text-red-500" />
+      </div>
+    </div>
+    <div class="h-[74px] mb-4 md:mb-2">
+      <div class="input-group">
+        <input autocomplete="off" required="" type="text" id="email-register" class="form-input"
+        formControlName="email" autocomplete="email" for="email-register" name="email-register" aria-disabled="false" aria-label="Email" autocapitalize="none" dir="ltr" required>
+        <label for="email-register" class="form-label ellipsis ...">Email</label>
+    </div>
+    <error-message [showError]="registerForm.get('email')?.touched && (registerForm.get('email')?.hasError('pattern') || registerForm.get('email')?.hasError('required'))"
+    errorMessage="Write a valid email address" errorClass="text-red-500" />
+    </div>
+    <div class="h-[74px] mb-4 md:mb-2">
+        <div class="input-group">
+          <input [type]="viewPassword ? 'text' : 'password'" autocomplete="off" required="" type="password" id="password-register" class="form-input pass"
+          formControlName="password" autocomplete="password" name="password-register" for="password-register" aria-disabled="false" aria-label="Password" autocapitalize="none" dir="ltr" required>
+          <img src="../../../../assets/icons/show.webp" alt="Show password" class="icon" loading="lazy" (click)="toogleViewPassword($event)">
+          <label for="password-register" class="form-label ellipsis ...">Password</label>
+      </div>
+      <error-message [showError]="registerForm.get('password')?.touched && (registerForm.get('password')?.hasError('pattern') || registerForm.get('password')?.hasError('required'))"
+    errorMessage="Write a valid password" errorClass="text-red-500" />
+    </div>
+    <div class="h-[74px] mb-4 md:mb-2">
+      <div class="input-group">
+        <input  autocomplete="off" required type="password" id="password-repeat-register" class="form-input pass"
+        formControlName="passwordRepeat" autocomplete="password" for="password-repeat-register" name="password-repeat-register" aria-disabled="false" aria-label="passwordRepeat" autocapitalize="none" dir="ltr" required>
+        <label for="password-repeat-register" class="form-label ellipsis ...">Repeat Password</label>
+    </div>
+    <error-message [showError]="registerForm.get('passwordRepeat')?.touched && (registerForm.get('passwordRepeat')?.hasError('passwordMismatch') || registerForm.get('passwordRepeat')?.hasError('required'))"
+  errorMessage="Write a valid password, passwords do not match" errorClass="text-red-500" />
+  </div>
+    <div class="mb-6 text-center">
+      <app-button class="mb-6 w-full flex justify-center items-center" type="submit" className="w-full min-w-[100px]  max-w-[300px] min-[905px]:max-w-full" [isDisable]="registerForm.invalid">
+        Register Account
+      </app-button>
+    </div>
+    <hr class="mb-6 border-t" />
+    <app-link textLink="Already have an account ? Login!" path="/login" className="text-center text-[#069150] hover:text-[#15AD67]">
+    </app-link>
+</form>
+

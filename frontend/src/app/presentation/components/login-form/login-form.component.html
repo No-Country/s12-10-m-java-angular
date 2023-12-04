@@ -1,0 +1,35 @@
+<form class="login-form gap-y-6" [formGroup]="loginForm" (submit)="onSubmit()">
+
+  <div class="w-full max-w-[366px] h-[74px]">
+
+    <div class="input-group w-full">   
+      <input type="text" id="email-login" formControlName="email" for="email-login" autocomplete="email" name="email-login" class="form-input" aria-disabled="false" aria-label="Email" autocapitalize="none" dir="ltr" required>
+      <label for="email-login" class="form-label">Email</label>
+    </div>
+
+    <error-message [showError]="loginForm.get('email')?.touched && (loginForm.get('email')?.hasError('pattern') || loginForm.get('email')?.hasError('required'))"
+    errorMessage="Write a valid email address" errorClass="text-red-500" />
+  </div>
+
+  <div class="w-full max-w-[366px] h-[97px]">
+
+    <div class="input-group w-full">
+      <input [type]="viewPassword ? 'text' : 'password'" id="password-login" for="password-login" formControlName="password" autocomplete="off" name="password-login" class="form-input pass" aria-disabled="false" aria-label="Password" autocapitalize="none" dir="ltr" required>
+      <img src="../../../../assets/icons/show.webp" alt="Show password" class="icon" loading="lazy" (click)="toogleViewPassword($event)">
+      <label for="password-login" class="form-label">Password</label>
+    </div>
+
+    <error-message [showError]="loginForm.get('password')?.touched && (loginForm.get('password')?.hasError('pattern') || loginForm.get('password')?.hasError('required'))"
+    errorMessage="Write a valid password" errorClass="text-red-500" />
+    
+    <app-link class="w-full flex justify-start" path="/forgot-password" textLink="¿Forgot your password?" className="mt-4 mr-auto justify-start text-left text-[#069150] hover:text-[#15AD67]"></app-link>
+  </div>
+  
+  <div class="w-full">
+      <app-button class="mb-6 w-full flex justify-center items-center" type="submit" className="w-full min-w-[100px]  max-w-[300px] min-[905px]:max-w-full" [isDisable]="loginForm.invalid">
+          Log in
+      </app-button>
+    <hr class="mb-6 border-t">
+    <app-link path="/register" textLink="You still do not have an account?" className="mt-4 text-center text-[#069150] hover:text-[#15AD67]"></app-link>
+  </div>
+</form>
