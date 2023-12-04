@@ -2,26 +2,30 @@ package com.noCountry.library.dto.Book;
 
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 @Data
 public class BookResponse {
 
     private String idBook;
 
-    private Long ISBN;
+    private String ISBN;
     private String title;
     private Double price;
     private Integer pages;
+    private LocalDate publicationDate;
     private Integer quantityAvailable;
     private Integer salesAmount;
     private Integer rating;
     private String description;
+    private String collection;
     private String genre;
 
     private String completeNameAuthor;
     private String nameEditorial;
 
-    private ArrayList<String> urlImages;
+    private List<String> urlImages;
 
 }

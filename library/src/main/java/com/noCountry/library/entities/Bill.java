@@ -21,7 +21,7 @@ public class Bill {
     // para facilitar el registro de las compras
     // y no haria falta q tenga el registro de las 2 fechas (creacion y modificacion)
     // porq el de creacion ya se realiza y se detalla en la factura.
-    // porq me parece q en una factura no se puede modificar, ne caso de ser erronea, solo se anula y se genera otra
+    // porq me parece q en una factura no se puede modificar, en caso de ser erronea, solo se anula y se genera otra
 
     @Id
     private Long id;

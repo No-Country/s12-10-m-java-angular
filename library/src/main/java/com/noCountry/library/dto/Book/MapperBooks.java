@@ -3,7 +3,6 @@ package com.noCountry.library.dto.Book;
 import com.noCountry.library.entities.Book;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,8 +17,11 @@ public class MapperBooks {
         book.setTitle(bookRequest.getTitle());
         book.setPrice(bookRequest.getPrice());
         book.setPages(bookRequest.getPages());
+
+        book.setPublicationDate(bookRequest.getPublicationDate());
         book.setQuantityAvailable(bookRequest.getQuantityAvailable());
         book.setDescription(bookRequest.getDescription());
+        book.setCollection(bookRequest.getCollection());
         book.setInitialImage(bookRequest.getInitialImage());
 
         return book;
@@ -35,13 +37,19 @@ public class MapperBooks {
         bookResponse.setTitle(book.getTitle());
         bookResponse.setPrice(book.getPrice());
         bookResponse.setPages(book.getPages());
+
+        bookResponse.setPublicationDate(book.getPublicationDate());
         bookResponse.setQuantityAvailable(book.getQuantityAvailable());
         bookResponse.setSalesAmount(book.getSalesAmount());
         bookResponse.setRating(book.getRating());
+
         bookResponse.setDescription(book.getDescription());
+        bookResponse.setCollection(book.getCollection());
+
         bookResponse.setGenre(book.getGenre().name());
         bookResponse.setCompleteNameAuthor(author);
         bookResponse.setNameEditorial(book.getEditorial().getName());
+
         bookResponse.setUrlImages(book.getUrlImages());
 
         return bookResponse;

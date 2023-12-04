@@ -8,6 +8,7 @@ import com.noCountry.library.entities.Author;
 import com.noCountry.library.entities.Book;
 import com.noCountry.library.entities.Editorial;
 import com.noCountry.library.entities.enums.Genre;
+import com.noCountry.library.exception.BadRequestException;
 import com.noCountry.library.exception.NotFoundException;
 import com.noCountry.library.repository.AuthorRepository;
 import com.noCountry.library.repository.BookRepository;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,9 +47,8 @@ public class BookServiceImpl implements BookService {
     @Override
     public BookResponse createdBook(BookRequest bookRequest) throws Exception {
         bookRepository.findById(bookRequest.getIdBook()).ifPresent(object -> {
-            //throw new Exception();
+            throw new BadRequestException("El libro ingresado ya se encuentra registrado.");
         });
-
 
         Optional<Author> author = authorRepository.findById(bookRequest.getIdAuthor());
         isEmptyObject(author);
@@ -59,7 +60,9 @@ public class BookServiceImpl implements BookService {
 
         Book book = mapperBooks.bookRequestToBook(bookRequest);
 
-        book.setStatus(true);
+        book.setSalesAmount(0);
+        book.setRating(0);
+
         book.setCreationDate(LocalDate.now());
         book.setModificationDate(LocalDate.now());
 
@@ -143,49 +146,153 @@ public class BookServiceImpl implements BookService {
 
         Book book = auxBook.get();
 
-        if (img != null) {
-            book.getUrlImages().add(img);
-            book.setModificationDate(LocalDate.now());
+        if (book.getUrlImages() == null) {
+            book.setUrlImages(new ArrayList<>());
         }
+
+        if (img == null || img.isEmpty()) {
+            throw new BadRequestException("La imagen a almacenar esta vacia");
+        }
+
+        book.getUrlImages().add(img);
+        book.setModificationDate(LocalDate.now());
 
         bookRepository.save(book);
     }
 
+    @Transactional
     @Override
-    public void addQuantityAvailable(String id, Integer amount) {
+    public BookResponse addQuantityAvailable(String id, Integer amount) {
+        Optional<Book> auxBook = bookRepository.findById(id);
+        isEmptyObject(auxBook);
 
+        Book book = auxBook.get();
+
+        if (amount < 0) {
+            throw  new BadRequestException("La cantidad a agregar no puede ser 0 ni negativa.");
+        }
+
+        int quantity = book.getQuantityAvailable() + amount;
+        book.setQuantityAvailable(quantity);
+        book.setModificationDate(LocalDate.now());
+
+        bookRepository.save(book);
+
+        return mapperBooks.bookToBookResponse(book);
+    }
+
+    @Transactional
+    @Override
+    public BookResponse subtractAmount(String id, Integer amount) {
+        Optional<Book> auxBook = bookRepository.findById(id);
+        isEmptyObject(auxBook);
+
+        Book book = auxBook.get();
+
+        if (book.getQuantityAvailable() < amount) {
+            throw new BadRequestException("No hay stock sufienciente.");
+        }
+
+        if (book.getSalesAmount() == null) {
+            book.setSalesAmount(0);
+        }
+
+        int salesAmount = book.getSalesAmount() + amount;
+        int quantityAvailable = book.getQuantityAvailable() - amount;
+
+        book.setSalesAmount(salesAmount);
+        book.setQuantityAvailable(quantityAvailable);
+        book.setModificationDate(LocalDate.now());
+
+        bookRepository.save(book);
+
+        return mapperBooks.bookToBookResponse(book);
     }
 
     @Override
-    public void subtractAmount(String id, Integer amount) {
+    public BookResponse addVote(String id, Integer vote) {
 
+        if (vote <= 0 || vote > 5) {
+            throw new BadRequestException("El voto no puede ser menor a 1 ni amyor a 5.");
+        }
+
+        Optional<Book> auxBook = bookRepository.findById(id);
+        isEmptyObject(auxBook);
+
+        Book book = auxBook.get();
+
+        /*
+        Consultar cual de las 2 formas vistas para almacenar un rating
+        consideran mejor para que se implemente..
+        1) nuevos atributos
+        1) nueva clase
+         */
+
+        return mapperBooks.bookToBookResponse(book);
     }
 
 
-
-
     @Override
-    public List<BookResponse> searchByCategory(String category) {
-        return null;
+    public List<BookResponse> searchByGenre(String genre) {
+        Genre genreElement = searchGenre(genre);
+
+        if (genreElement == null ) {
+            throw new BadRequestException("El genero ingresado no existe.");
+        }
+
+        Optional<List<Book>> auxBooks = bookRepository.findByGenre(genreElement);
+
+        if (auxBooks.get().isEmpty()) {
+            System.out.println("La lista esta vacia");
+        }
+
+        return mapperBooks.listBooksToListResponseBooks(auxBooks.get());
     }
 
     @Override
     public List<BookResponse> searchByTrend() {
-        return null;
+        // Devuelve los 5 libros mas vendidos
+        Optional<List<Book>> auxBook = bookRepository.findTop5ByOrderBySalesAmountAsc();
+
+        return mapperBooks.listBooksToListResponseBooks(auxBook.get());
     }
 
     @Override
-    public List<BookResponse> searchByRating(Integer searchedRating) {
-        return null;
+    public List<BookResponse> searchByHighestRating() {
+        Optional<List<Book>> auxBook = bookRepository.findTop5ByOrderByRatingAsc();
+
+        return mapperBooks.listBooksToListResponseBooks(auxBook.get());
     }
 
     @Override
     public List<BookResponse> searchByAuthor(String idAuthor) {
-        return null;
+        Optional<Author> author = authorRepository.findById(idAuthor);
+        isEmptyObject(author);
+
+        Optional<List<Book>> auxBook = bookRepository.findByAuthorId(idAuthor);
+
+        return mapperBooks.listBooksToListResponseBooks(auxBook.get());
     }
 
     @Override
     public List<BookResponse> searchByEditorial(String idEditorial) {
+        Optional<Editorial> editorial = editorialRepository.findById(idEditorial);
+        isEmptyObject(editorial);
+
+        Optional<List<Book>> auxBook = bookRepository.findByEditorialId(idEditorial);
+
+        return mapperBooks.listBooksToListResponseBooks(auxBook.get());
+    }
+
+    @Override
+    public List<BookResponse> searchByTitle(String title) {
+        Optional<List<Book>> auxBook = bookRepository.findByTitleContaining(title);
+
+        return mapperBooks.listBooksToListResponseBooks(auxBook.get());
+    }
+
+    @Override
+    public List<BookResponse> searchLastAdditions() {
         return null;
     }
 

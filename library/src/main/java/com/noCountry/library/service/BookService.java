@@ -25,21 +25,27 @@ public interface BookService {
     void addImagesBook(String id, String img);
 
 
-    void addQuantityAvailable(String id, Integer amount);
+    BookResponse addQuantityAvailable(String id, Integer amount);
 
-    void subtractAmount(String id, Integer amount);
+    BookResponse subtractAmount(String id, Integer amount);
+
+    BookResponse addVote(String id, Integer vote);
 
 
 
-    List<BookResponse> searchByCategory(String category);
+    List<BookResponse> searchByGenre(String genre);
 
     List<BookResponse> searchByTrend();
 
-    List<BookResponse> searchByRating(Integer searchedRating);
+    List<BookResponse> searchByHighestRating();
 
     List<BookResponse> searchByAuthor(String idAuthor);
 
     List<BookResponse> searchByEditorial(String idEditorial);
+
+    List<BookResponse> searchByTitle(String title);
+
+    List<BookResponse> searchLastAdditions();
 
 
 }
