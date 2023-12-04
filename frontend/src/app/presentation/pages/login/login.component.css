@@ -1,7 +1,19 @@
+.login-container  {
+    --txt-color-100: #585858;
+    --txt-color-200: #49454F;
+    --txt-color-300: #202124;
 
+    --bg-color-100: #FFFBFE;
+    --bg-color-200: #c8c8c8;
+
+    --accent-color-100: #C88D65;
+    --accent-color-200: #BA703C;
+      
+    --error-color-100: #ca3126;
+    --error-color-200: #D93025;
+}
 
 .login-container {
-    font-family: Roboto, arial, sans-serif;
     flex-shrink: 0;
     background-color: #FFFBFE;
     width: 100%;
@@ -9,6 +21,8 @@
     margin-block: auto;
     padding-block-start: 2.5rem;
     padding-inline: 1rem; 
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 
 /* SMALL */

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { DefaultButtonComponent } from '@presentation/components/default-button/default-button.component';
 import { ErrorMessageComponent } from '@presentation/components/error-message/error-message.component';
 import { LinkComponent } from '@presentation/components/link/link.component';
 import { ToastComponent } from '@presentation/components/toast/toast.component';
@@ -10,7 +11,7 @@ import { Subject, first, takeUntil } from 'rxjs';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ToastComponent, ErrorMessageComponent, LinkComponent],
+  imports: [CommonModule, ReactiveFormsModule, ToastComponent, ErrorMessageComponent, LinkComponent, DefaultButtonComponent],
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.css'],

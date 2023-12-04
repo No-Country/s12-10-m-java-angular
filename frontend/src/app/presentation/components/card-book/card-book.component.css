@@ -1,5 +1,6 @@
 .card-book {
-    width: 250px;
+    width: 110px;
+    height: 170px;
     aspect-ratio: 2/1;
     position: relative;
     z-index: 20;
@@ -17,18 +18,19 @@
     border-radius: 0.9375rem 0.9375rem 0rem 0rem;
     background: linear-gradient(180deg, #EEE 0%, #DFDFDF 50%, #FFF 100%);    ;
     width: 100%;
-    aspect-ratio: 2/2;
+    aspect-ratio: 10/9;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    outline: none;
 
 }
 
 .card-book .img-wrapper .img-container {
     overflow: hidden;
     position: relative;
-    width: 155px;
+    width: 70px;
     aspect-ratio: 1/1;
     opacity: .9;
     transition-duration: 250ms;
@@ -39,51 +41,162 @@
 
 .card-book .img-wrapper .img-container img{
     object-fit: scale-down;
-
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15), 0px 8px 12px 6px rgba(0, 0, 0, 0.30);
 }
 
 
 .card-book .content-info{
+    background: transparent;
+    flex-direction: column;
+    box-sizing: border-box;
+
     display: flex;
     flex-grow: 1;
     flex-shrink: 1;
-    min-height: 51px;
     border-radius: 0rem 0rem 0.9375rem 0.9375rem;
-    background: transparent;
-    flex-direction: column;
-    padding: 10px;
-    box-sizing: border-box;
+
+
+    padding-inline: 10px;
+
+    min-height: 65px;
+    max-height: 65px;
 }
 
 .card-book .content-info h2 {
-    font-weight: 500;
+    font-weight: 600;
     color: #242221;
 
     line-height: normal;
     white-space: nowrap;
-    overflow: hidden;
     text-overflow: ellipsis;
-    font-size: 1.25rem;
-    cursor: pointer;
     transition-duration: 100ms;
     transition-timing-function: ease;
     transition-property: color;
+
+    font-size: 1rem;  
+    cursor: pointer;
+
+    min-height: 20px;
+    overflow: hidden;
+}
+
+.card-book .content-info p {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: left;
+    vertical-align: text-top;
+    direction: ltr;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    color: #242221;
+
+    font-weight: 500;
+
+    font-size: .65rem;
+    line-height: .875rem;
+
+    height: 19px;
+    min-height: 19px;
+    max-height: 20px;
+}
+
+.card-book .content-info p.price {
+    font-size: .9rem;
+    min-height: 23px;
+    max-height: 23px;
+    margin-top: 0px;
 }
 
 .card-book .content-info h2:hover {
     color: #069150;
 }
 
-.default-button{
-    text-overflow: ellipsis;
-      border-radius: 3.125rem;
-      padding-inline: 0.25rem;
-      padding-block: 0.6rem;
-      font-size: .875rem;
-      font-weight: 500;
-      transition: background .19s linear, box-shadow .17s cubic-bezier(0.65, 0.05, 0.36, 1);
-  }
-  
-  .default-button:hover{
-      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.30);
+@media only screen and (min-width: 450px) {
+    .card-book {
+        width: 130px;
+        aspect-ratio: 2/1;
+        height: 190px;
+    }
+
+    .card-book .img-wrapper .img-container {
+        width: 80px;
+       
+    }
+
+    .card-book .img-wrapper  {
+        aspect-ratio: 10/9;
+    }
+
+    .card-book .content-info{
+        min-height: 65px;
+        padding-inline: 10px;
+        max-height: 65px;
+    }
+
+    .card-book .content-info h2 {
+        font-size: 2.7dvw;  
+    }
+
+    .card-book .content-info p {
+        font-size: 1.6dvw;
+        line-height: 1rem;
+        height: 19px;
+        min-height: 19px;
+        max-height: 20px;
+    }
+
+    .card-book .content-info p.price {
+        font-size: 2.5dvw;
+        min-height: 23px;
+        max-height: 23px;
+        margin-top: 0px;
+    }
+}
+
+  @media only screen and (min-width: 705px) {
+    .card-book {
+        width: 250px;
+        aspect-ratio: 2/1;
+        height: auto;
+    }
+
+    .card-book .img-wrapper .img-container {
+        width: 155px;
+    }
+
+    .card-book .img-wrapper  {
+        aspect-ratio: 2/2;
+    }
+
+    .card-book .img-wrapper .img-container img{
+        box-shadow: none;
+    }
+
+    .card-book .content-info{
+        min-height: 51px;
+        max-height: none;
+        padding: 10px;
+    }
+    .card-book .content-info h2 {
+        font-size: 1.25rem;
+ 
+    }
+    .card-book .content-info p {
+        margin-block-start: .25rem;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+
+        height: 40px;
+        max-height: 40px;
+
+        white-space: pre-line;
+    }
+
+    .card-book .content-info p.price{
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
   }

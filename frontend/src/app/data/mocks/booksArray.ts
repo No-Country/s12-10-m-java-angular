@@ -85,56 +85,56 @@ export const booksArray: Book[]=[
   export const BOOK_DETAIL_MOOK: BookDetail[]=[
     { 
       ID: 1,
-      img: "../../assets/booksImages/book_1.png",
+      img: "../../assets/booksImages/book_1.webp",
       name: "The prince",
       author: "Nicolas Maquiavelo",
       price: 500
     },
     { 
       ID: 2,
-      img: "../../assets/booksImages/book_2.png",
+      img: "../../assets/booksImages/book_2.webp",
       name: "The greatest cover-up in history",
-      author: "Howerd Dilan",
+      author: "Howerd Dilan el the best",
       price: 500
     },
     { 
       ID: 3,
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ6EO4caRrtQkHq2YBXezwxuOiYNP4rD1evg&usqp=CAU",
+      img: "../../assets/booksImages/book_4.webp",
       name: "Hide and seek",
       author: "Olivia Wilson",
       price: 1000
     },
     { 
       ID: 4,
-      img: "https://images2.penguinrandomhouse.com/cover/9780525559238",
+      img: "../../assets/booksImages/book_5.webp",
       name: "Rules for visiting",
       author: "Jesica Francis Kane",
       price: 7000
     },
     { 
       ID: 5,
-      img: "https://www.barnesandnoble.com/blog/wp-content/uploads/2013/11/night_circus.jpg",
+      img: "../../assets/booksImages/book_6.webp",
       name: "Night Circus",
       author: "Erin Morgenstern",
       price: 500
     },
     { 
       ID: 6,
-      img: "https://www.adazing.com/wp-content/uploads/2020/06/hp-2.jpg",
+      img: "../../assets/booksImages/book_7.webp",
       name: "The beast in cave",
       author: "H.P. Lovecraft",
       price: 7000
     },
     { 
       ID: 7,
-      img: "https://upload.wikimedia.org/wikipedia/en/1/10/The_grand_design_book_cover.jpg",
+      img: "../../assets/booksImages/book_8.webp",
       name: "The grand design",
       author: "Stephen hawking and Leonard Mlodinow",
       price: 7000
     },
     { 
       ID: 8,
-      img: "https://m.media-amazon.com/images/I/71WL+-1uQaL._AC_UF1000,1000_QL80_.jpg",
+      img: "../../assets/booksImages/book_9.webp",
       name: "Opticks",
       author: "Issac Newton",
       price: 7000
@@ -183,28 +183,28 @@ export const booksArray: Book[]=[
     // },
     { 
       ID: 1,
-      img: "../../assets/booksImages/book_1.png",
+      img: "../../assets/booksImages/book_1.webp",
       name: "The prince",
       author: "Nicolas Maquiavelo",
       price: 500
     },
     { 
       ID: 2,
-      img: "../../assets/booksImages/book_2.png",
+      img: "../../assets/booksImages/book_2.webp",
       name: "The greatest cover-up in history",
       author: "Howerd Dilan",
       price: 500
     },
     { 
       ID: 3,
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ6EO4caRrtQkHq2YBXezwxuOiYNP4rD1evg&usqp=CAU",
+      img: "../../assets/booksImages/book_4.webp",
       name: "Hide and seek",
       author: "Olivia Wilson",
       price: 1000
     },
     { 
       ID: 4,
-      img: "https://images2.penguinrandomhouse.com/cover/9780525559238",
+      img: "../../assets/booksImages/book_5.webp",
       name: "Rules for visiting",
       author: "Jesica Francis Kane",
       price: 7000

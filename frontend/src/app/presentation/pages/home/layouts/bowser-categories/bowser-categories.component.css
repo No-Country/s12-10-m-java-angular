@@ -1,24 +1,16 @@
-.title {
-    padding-top: 5vh;
-    padding-left: 5vw;
-    font-size: 5vh;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
+.cabeza {
+    padding-top: 7.5vh;
     display: inline-flex;
     align-items: center; 
     justify-content:space-between;
     width: 100vw;
-  }
-  .title .color{
-    color: #33B672;
   }
 
   pagination-template {
     display: flex;
     justify-content:flex-end;
     align-items: center; 
-    padding-right: 5vw;
+    padding-right: 10vw;
   }
   
   .pagination-previous,
@@ -29,37 +21,63 @@
   }
 
   .products-container {
-    width: 100%;
+    width: 100vw;
     height: auto;
+    align-items: center; 
+    justify-content:center;
   }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(190px, 2fr));
-    gap: 120px;
-    justify-content: center;
+  .grid-container {
+    display: flex;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 2fr));
+    gap: 8vw;
     margin: 0 auto;
-    max-width: 90vw;
+    max-width: 85vw;
     padding-top: 5vh;
+    justify-content: center;
+    align-items: center; 
   }
  
+.grid-item{
+  display:inline-table;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
 
+.grid-item h5{
+  padding: 5.5%;
+  color: black;
+}
   .card {
-    background-color: #E4E4E4;
+    background-color: #06915040;
     border-radius: 50px;
     border: 1px solid #CCC;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 250px;
-    height: 215px;
+    width: 18vh;
+    aspect-ratio: 2.3/2;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+    cursor: pointer;
+    transition-duration: 250ms;
+    transition-timing-function: ease-out;
+    transition-property: opacity, transform;
   }
 
   .card img {
     display: block;
-    width: 149px;
+    width: 10vh;
     height: auto;
     border-radius: 8px;
     object-fit: cover;
+    
+    transition-duration: 250ms;
+    transition-timing-function: ease-out;
+    transition-property: opacity, transform;
   }
+
+  .card:hover img{
+    transform: scaleX( -1);
+    opacity: 1;
+  }
+

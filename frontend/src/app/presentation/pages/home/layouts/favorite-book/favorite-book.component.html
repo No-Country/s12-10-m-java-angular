@@ -1,34 +1,32 @@
-<section class="favorite-container mx-[5dvw]">
+<section class="favorite-container mx-14 my-10">
 
-    <div class="flex justify-between">
+    <div class="favorite-book-wrapper relative">
 
         <div class="left-content">
-            <picture class="w-[40dvw] relative left-[-12%]">
+            <picture class="w-full h-full max-w-[900px] max-h-[900px] relative  min-[1640px]:left-[-17%]">
                 <img ngSrc="../../../../../../assets/imgs/learn-book-svg.webp" fill alt="Learn book img" aria-disabled="true">
             </picture>
         </div>
 
+        <h2 class="title ms-[3.5rem] min-[710px]:ms-0">
+            Find your <strong class="text-[#33B672] font-medium">favorite</strong> books <br/> here
+        </h2>
+        
         <div class="right-content">
-            <h2 class="title">
-                Find yout <strong class="text-[#33B672] font-medium">favorite</strong> books here
-            </h2>
-
-            <div>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad animi dolorem optio vitae neque eius quibusdam maxime nesciunt aliquid. Veritatis, porro? Ducimus.
-                </p>
-            </div>
-
-            <div class="number-detail-list">
-                <number-detail number="50" [detail]="'Books \nBest Seller'"></number-detail>
-                <number-detail number="60" [detail]="'Books \nfor comming'"></number-detail>
-                <number-detail number="150" [detail]="'Books \ntotally products'"></number-detail>
-            </div>
-
-            <app-button class="w-full flex mt-4" className="w-full max-w-[200px] mt-4 text-[1.7dvw]">
-                Explore
-            </app-button>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad animi dolorem optio vitae neque eius quibusdam maxime nesciunt aliquid. Veritatis, porro? Ducimus.
+            </p>
+      
+    
+                <div class="number-detail-list">
+                    <number-detail number="50"  class="w-full" [detail]="'Best\n Seller'"></number-detail>
+                    <number-detail number="60"  class="w-full" [detail]="'For\n comming'"></number-detail>
+                    <number-detail number="150" class="w-full" [detail]="'Totally\n products'"></number-detail>
+                </div>
         </div>
-
+        <app-button class="w-full flex" className="w-full max-w-[185px] text-[1.7dvw]">
+            Explore
+        </app-button>
+    
     </div>
 </section>
