@@ -9,10 +9,11 @@ import { Router } from '@angular/router';
 import { ToastService } from 'app/data/services/toast/Toast.service';
 import { LoggedInService } from 'app/data/services/login/loggedIn.service';
 import { AuthResponse } from 'app/data/models/AuthResponse';
+import { NavBarFormsComponent } from '@presentation/components/nav-bar-forms/nav-bar-forms.component';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RegisterFormComponent, ToastComponent],
+  imports: [CommonModule, RegisterFormComponent, ToastComponent, NavBarFormsComponent],
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
