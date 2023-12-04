@@ -291,6 +291,11 @@ public class BookServiceImpl implements BookService {
         return mapperBooks.listBooksToListResponseBooks(auxBook.get());
     }
 
+    @Override
+    public List<BookResponse> searchLastAdditions() {
+        return null;
+    }
+
     private Genre searchGenre(String genre) {
 
         for (Genre element: Genre.values()) {

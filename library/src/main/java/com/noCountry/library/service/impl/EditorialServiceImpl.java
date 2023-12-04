@@ -26,16 +26,13 @@ public class EditorialServiceImpl implements EditorialService {
 
     private final MapperEditorial mapperEditorial;
 
-    private final BookRepository bookRepository;
-
     private final MapperBooks mapperBooks;
 
     @Autowired
     public EditorialServiceImpl(EditorialRepository editorialRepository, MapperEditorial mapperEditorial,
-                                MapperBooks mapperBooks, BookRepository bookRepository) {
+                                MapperBooks mapperBooks) {
         this.editorialRepository = editorialRepository;
         this.mapperEditorial = mapperEditorial;
-        this.bookRepository = bookRepository;
         this.mapperBooks = mapperBooks;
     }
 
@@ -85,25 +82,6 @@ public class EditorialServiceImpl implements EditorialService {
         return mapperBooks.listBooksToListResponseBooks(editorial.getBooks());
     }
 
-    @Override
-    public void addBookToEditorial(String idEditorial, String idBook) {
-        Editorial editorial = getExistingEditorial(idEditorial);
-        Optional<Book> auxBook = bookRepository.findById(idBook);
-
-        if (auxBook.isEmpty()) {
-            throw new BadRequestException("El id del libro a agregar, no existe.");
-        }
-
-        if (editorial.getBooks().isEmpty()) {
-            ArrayList<Book> books = new ArrayList<>();
-            editorial.setBooks(books);
-        }
-
-        editorial.getBooks().add(auxBook.get());
-        editorialRepository.save(editorial);
-    }
-
-
     private Editorial getExistingEditorial(String id) throws NotFoundException {
         Optional<Editorial> auxEditorial = editorialRepository.findById(id);
 
@@ -113,9 +91,6 @@ public class EditorialServiceImpl implements EditorialService {
 
         return auxEditorial.get();
     }
-
-
-
 
 
 }

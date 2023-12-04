@@ -15,6 +15,4 @@ public interface EditorialService {
 
     List<BookResponse> getListBookOfEditorial(String id);
 
-    void addBookToEditorial(String idEditorial, String idBook);
-
 }

@@ -35,11 +35,11 @@ public class Book extends PersistenceObject {
 	@Enumerated(EnumType.STRING)
 	private Genre genre;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "author_id", referencedColumnName = "id")
 	private Author author;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "editorial_id", referencedColumnName = "id")
 	private Editorial editorial;
 

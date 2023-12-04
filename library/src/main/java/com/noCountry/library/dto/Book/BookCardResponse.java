@@ -9,7 +9,7 @@ public class BookCardResponse {
 
     private String title;
     private Double price;
-    private  String author;
+    private String author;
     private String initialImage;
 
 }

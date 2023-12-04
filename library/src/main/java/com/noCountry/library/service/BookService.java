@@ -45,5 +45,7 @@ public interface BookService {
 
     List<BookResponse> searchByTitle(String title);
 
+    List<BookResponse> searchLastAdditions();
+
 
 }

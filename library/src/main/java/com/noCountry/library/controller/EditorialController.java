@@ -32,6 +32,7 @@ public class EditorialController {
         }
     }
 
+    // Endpoint de prueba, se reemplaza con la busqueda dentor de libro
     @GetMapping(path = "/{id}/books")
     public ResponseEntity<?> getBooksByEditorial(@PathVariable String id) throws Exception {
         try {
@@ -47,16 +48,6 @@ public class EditorialController {
         try {
             EditorialDto editorial = editorialService.createEditorial(editorialRequest);
             return new ResponseEntity<>(editorial, HttpStatus.CREATED);
-        } catch (Exception e){
-            throw new Exception(e.getMessage());
-        }
-    }
-
-    @PostMapping(path = "/{idEditorial}/book/{idBook}")
-    public ResponseEntity<?> addBookToEditorial(@PathVariable String idEditorial, @PathVariable String idBook) throws Exception {
-        try {
-            editorialService.addBookToEditorial(idEditorial, idBook);
-            return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (Exception e){
             throw new Exception(e.getMessage());
         }
