@@ -6,14 +6,15 @@ import { NewArribalComponent } from './layouts/new-arribal/new-arribal.component
 import { HeroComponent } from './layouts/hero/hero.component';
 import { BowserCategoriesComponent } from './layouts/bowser-categories/bowser-categories.component';
 import { FavoriteBookComponent } from './layouts/favorite-book/favorite-book.component';
+import { FooterComponent } from "../../components/footer/footer.component";
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, BowserCategoriesComponent, HeroComponent, FavoriteBookComponent, NewArribalComponent, NewsLetterComponent, TrendingComponent],
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    standalone: true,
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [CommonModule, BowserCategoriesComponent, HeroComponent, FavoriteBookComponent, NewArribalComponent, NewsLetterComponent, TrendingComponent, FooterComponent]
 })
 export class HomeComponent implements OnInit {
 
