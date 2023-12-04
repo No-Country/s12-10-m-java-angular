@@ -31,6 +31,7 @@ section{
       }
       input{
         min-width: 70vw;
+        height: 4.3vh;
       }
      #pc{
       display: none;
@@ -59,8 +60,9 @@ section{
     width: 28vw;
     aspect-ratio: 1/.11;
     flex-shrink: 0;
-    margin: 3vh ;
+    margin: 5vh ;
     outline: none;
+    padding-left: 3% ;
   }
   input::placeholder{
     color: #585858;
@@ -68,7 +70,6 @@ section{
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    padding-left: 2%;
   }
 
   input:focus {
@@ -76,4 +77,5 @@ section{
     border: 4px solid #C88D65;
     background: #FFF;
 }
+
   
