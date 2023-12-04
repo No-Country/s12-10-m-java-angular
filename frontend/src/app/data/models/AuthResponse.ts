@@ -6,4 +6,5 @@ export interface AuthResponse {
     email: string;
     role: string;
     jwt: string;
+    isActive?: boolean;
 }
