@@ -26,5 +26,16 @@ export class LoggedInService extends SignalsStoreService<AuthResponse>{
     this.set("id", updatedId);
   }
 
+  public logOut(){
+    localStorage.removeItem("id");
+    localStorage.removeItem("name");
+    localStorage.removeItem("lastName");
+    localStorage.removeItem("email");
+    localStorage.removeItem("role");
+    localStorage.removeItem("token");
+
+    this.setState({} as AuthResponse);
+  }
+
 
 }

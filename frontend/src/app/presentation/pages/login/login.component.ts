@@ -46,17 +46,20 @@ export class LoginComponent implements OnInit, OnDestroy  {
     toast.info("Sending", "Waiting answer.", 5);
 
     const loginObserver = {
+      response: {} as AuthResponse,
       next(loginResponse: AuthResponse): void {
         loginResponse.isActive = true;
         loggedInState.setLogin(loginResponse);
-
+        this.response = loginResponse;
         toast.success("Success", "Logging in.", 5);
       },
       error(err: any): void{
         toast.error("Error", "An unexpected error has occurred with the server", 5);
       },
       complete(): void {
-        setTimeout(()=>router.navigate(["/"]), 700);
+        console.log(this.response.role);
+        if(this.response.role === "USER")
+          setTimeout(()=>router.navigate(["/"]), 700);
       }
     };
 

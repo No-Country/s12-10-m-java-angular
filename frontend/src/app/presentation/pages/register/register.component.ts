@@ -59,9 +59,8 @@ export class RegisterComponent implements OnInit, OnDestroy  {
       },
       complete(): void{
         if(this.register.id !== registerSubmitted.id) loggedInState.updateId(this.register.id as string);
-
-        
-        setTimeout(()=>router.navigate(["/"]), 700);
+        console.log(this.register.role);
+        if(this.register.role === "USER") setTimeout(()=>router.navigate(["/"]), 700);
       }
     };
 
