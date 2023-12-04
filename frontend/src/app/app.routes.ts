@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { ToastService } from './data/services/toast/Toast.service';
 import { LoginService } from './data/services/login/login.service';
 import { RegisterService } from './data/services/register/register.service';
+import { ShopService } from './data/services/shop/shop.service';
 
 export const routes: Routes = [
     {
@@ -25,6 +26,7 @@ export const routes: Routes = [
         path: 'shop',
         title: 'Books Leaks - Shop page',
         loadComponent: () => import('@presentation/pages/shop/shop.component').then(c => c.ShopComponent),
+        providers: [ ShopService ]
     },
     {
         path: 'cart',

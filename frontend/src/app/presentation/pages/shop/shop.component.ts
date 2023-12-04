@@ -1,5 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import { BOOK_DETAIL_MOOK } from 'app/data/mocks/booksArray';
+import { ShopService } from 'app/data/services/shop/shop.service';
+import { of } from 'rxjs';
 
 @Component({
   standalone: true,
@@ -10,10 +13,18 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShopComponent implements OnInit {
-
+  protected readonly shopService: ShopService = inject(ShopService);
+  protected readonly books = this.shopService.state.asReadonly();
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    of(BOOK_DETAIL_MOOK).subscribe((data: any) => {
+        this.shopService.setState(data);
+    });
+  }
+
+  fillters(){
+
   }
 
 }

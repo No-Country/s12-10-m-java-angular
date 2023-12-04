@@ -3,11 +3,10 @@ import { ChangeDetectionStrategy, Component, Injector, OnDestroy, OnInit, inject
 import { LoginFormComponent } from '../../components/login-form/login-form.component';
 import { UserLoginState } from 'app/data/models/userLoginState';
 import { LoginService } from 'app/data/services/login/login.service';
-import { Observable, Subject, Subscription, catchError, first, takeUntil } from 'rxjs';
+import { Observable, Subject, first, takeUntil } from 'rxjs';
 import { Router } from '@angular/router';
 import { ToastComponent } from '@presentation/components/toast/toast.component';
 import { ToastService } from 'app/data/services/toast/Toast.service';
-import { ToastModel, ToastPosition, ToastType } from 'app/data/models/toast.model';
 import { AuthResponse } from 'app/data/models/AuthResponse';
 import { LoggedInService } from 'app/data/services/login/loggedIn.service';
 
