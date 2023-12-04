@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { DefaultButtonComponent } from '@presentation/components/default-button/default-button.component';
 import { ErrorMessageComponent } from '@presentation/components/error-message/error-message.component';
 import { LinkComponent } from '@presentation/components/link/link.component';
+import { NavBarFormsComponent } from '@presentation/components/nav-bar-forms/nav-bar-forms.component';
 import { ToastComponent } from '@presentation/components/toast/toast.component';
 import { LoginService } from 'app/data/services/login/login.service';
 import { ToastService } from 'app/data/services/toast/Toast.service';
@@ -11,7 +12,7 @@ import { Subject, first, takeUntil } from 'rxjs';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ToastComponent, ErrorMessageComponent, LinkComponent, DefaultButtonComponent],
+  imports: [CommonModule, ReactiveFormsModule, ToastComponent, ErrorMessageComponent, LinkComponent, DefaultButtonComponent, NavBarFormsComponent],
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.css'],

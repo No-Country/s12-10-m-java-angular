@@ -23,12 +23,10 @@ import { LoggedInService } from './data/services/login/loggedIn.service';
         RouterOutlet,
         RegisterComponent,
         LoginComponent,
-        NavbarComponent,
         NgxPaginationModule,
         FooterComponent,
         ShopComponent,
-        CartComponent,
-        Navbar2Component
+        CartComponent
     ]
 })
 export class AppComponent implements OnInit {
