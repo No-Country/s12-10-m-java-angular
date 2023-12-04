@@ -1,17 +1,21 @@
 package com.noCountry.library.service.impl;
 
 import com.noCountry.library.dto.Book.BookResponse;
+import com.noCountry.library.dto.Book.MapperBooks;
 import com.noCountry.library.dto.Editorial.EditorialDto;
 import com.noCountry.library.dto.Editorial.MapperEditorial;
+import com.noCountry.library.entities.Book;
 import com.noCountry.library.entities.Editorial;
 import com.noCountry.library.exception.BadRequestException;
 import com.noCountry.library.exception.NotFoundException;
+import com.noCountry.library.repository.BookRepository;
 import com.noCountry.library.repository.EditorialRepository;
 import com.noCountry.library.service.EditorialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,10 +26,17 @@ public class EditorialServiceImpl implements EditorialService {
 
     private final MapperEditorial mapperEditorial;
 
+    private final BookRepository bookRepository;
+
+    private final MapperBooks mapperBooks;
+
     @Autowired
-    public EditorialServiceImpl(EditorialRepository editorialRepository, MapperEditorial mapperEditorial) {
+    public EditorialServiceImpl(EditorialRepository editorialRepository, MapperEditorial mapperEditorial,
+                                MapperBooks mapperBooks, BookRepository bookRepository) {
         this.editorialRepository = editorialRepository;
         this.mapperEditorial = mapperEditorial;
+        this.bookRepository = bookRepository;
+        this.mapperBooks = mapperBooks;
     }
 
     @Override
@@ -38,7 +49,6 @@ public class EditorialServiceImpl implements EditorialService {
 
         Editorial editorial = mapperEditorial.editorialDtoToEditorial(editorialDto);
 
-        editorial.setStatus(true);
         editorial.setCreationDate(LocalDate.now());
         editorial.setModificationDate(LocalDate.now());
 
@@ -49,7 +59,7 @@ public class EditorialServiceImpl implements EditorialService {
 
     @Override
     public void deleteEditorial(String id) {
-        Editorial editorial = editorialRepository.findById(id).get();
+        Editorial editorial = getExistingEditorial(id);
 
         editorial.setStatus(false);
         editorial.setModificationDate(LocalDate.now());
@@ -58,26 +68,50 @@ public class EditorialServiceImpl implements EditorialService {
     }
 
     @Override
-    public EditorialDto getById(String id) {
-        return null;
+    public EditorialDto getEditorialById(String id) {
+        Editorial editorial = getExistingEditorial(id);
+
+        return mapperEditorial.editorialToEditorialDto(editorial);
     }
 
     @Override
-    public List<BookResponse> listBookOfEditorial(String id) {
-        return null;
+    public List<BookResponse> getListBookOfEditorial(String id) {
+        Editorial editorial = getExistingEditorial(id);
+
+        if (editorial.getBooks().isEmpty()) {
+            throw new BadRequestException("No hay libros cargados en la editorial " + editorial.getName());
+        }
+
+        return mapperBooks.listBooksToListResponseBooks(editorial.getBooks());
     }
 
     @Override
     public void addBookToEditorial(String idEditorial, String idBook) {
+        Editorial editorial = getExistingEditorial(idEditorial);
+        Optional<Book> auxBook = bookRepository.findById(idBook);
 
+        if (auxBook.isEmpty()) {
+            throw new BadRequestException("El id del libro a agregar, no existe.");
+        }
+
+        if (editorial.getBooks().isEmpty()) {
+            ArrayList<Book> books = new ArrayList<>();
+            editorial.setBooks(books);
+        }
+
+        editorial.getBooks().add(auxBook.get());
+        editorialRepository.save(editorial);
     }
 
 
+    private Editorial getExistingEditorial(String id) throws NotFoundException {
+        Optional<Editorial> auxEditorial = editorialRepository.findById(id);
 
-    private void isEmptyEditorial(Optional<Editorial> editorial) throws NotFoundException {
-        if (editorial.isEmpty()){
+        if (auxEditorial.isEmpty()){
             throw new NotFoundException("Could not found editorial");
         }
+
+        return auxEditorial.get();
     }
 
 

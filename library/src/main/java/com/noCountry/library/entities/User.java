@@ -31,7 +31,7 @@ public class User extends PersistenceObject implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     protected Role role;
-    protected Boolean isSubscribed;
+    protected Boolean isSubscribed = true;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

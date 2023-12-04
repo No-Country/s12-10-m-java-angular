@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -17,18 +18,19 @@ import java.util.ArrayList;
 @Table(name = "tbl_book")
 public class Book extends PersistenceObject {
 
-	private Long ISBN;
+	private String ISBN;
 	private String title;
 	private Double price;
     private Integer pages;
-	private LocalDate d;
+	private LocalDate publicationDate;
     private Integer quantityAvailable;
 	private Integer salesAmount;
 	private Integer rating;
     private String description;
+	private String collection;
 
 	private String initialImage;
-	private ArrayList<String> urlImages;
+	private List<String> urlImages = new ArrayList<>();
 
 	@Enumerated(EnumType.STRING)
 	private Genre genre;

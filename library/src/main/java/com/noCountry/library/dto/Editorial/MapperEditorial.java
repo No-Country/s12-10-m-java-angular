@@ -11,7 +11,7 @@ public class MapperEditorial {
 
         editorial.setId(editorialDto.getIdEditorial());
         editorial.setName(editorialDto.getName());
-        editorial.setEmail(editorialDto.getEmail());
+        editorial.setUrl(editorialDto.getUrl());
 
         return editorial;
     }
@@ -21,10 +21,11 @@ public class MapperEditorial {
 
         editorialDto.setIdEditorial(editorial.getId());
         editorialDto.setName(editorial.getName());
-        editorialDto.setEmail(editorial.getEmail());
+        editorialDto.setUrl(editorial.getUrl());
 
         return editorialDto;
     }
+
 
 
 }

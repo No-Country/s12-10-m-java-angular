@@ -11,9 +11,9 @@ public interface EditorialService {
 
     void deleteEditorial(String id);
 
-    EditorialDto getById(String id);
+    EditorialDto getEditorialById(String id);
 
-    List<BookResponse> listBookOfEditorial(String id);
+    List<BookResponse> getListBookOfEditorial(String id);
 
     void addBookToEditorial(String idEditorial, String idBook);
 

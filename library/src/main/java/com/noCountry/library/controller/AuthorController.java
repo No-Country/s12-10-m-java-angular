@@ -1,6 +1,8 @@
 package com.noCountry.library.controller;
 
+import com.noCountry.library.dto.Author.AuthorDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,8 +23,19 @@ public class AuthorController {
 	@Autowired
 	private AuthorServiceImpl service;
 
-	@PostMapping("/save")
+	/*@PostMapping("/save")
 	public ResponseEntity<String> save(@RequestBody Author author) {
 		return service.save(author);
+	}*/
+
+	@PostMapping(path = "/createAuthor")
+	public ResponseEntity<?> createAuthor(@RequestBody AuthorDto authorDto) throws Exception {
+		try {
+			AuthorDto author = service.createAuthor(authorDto);
+			return new ResponseEntity<>(author, HttpStatus.CREATED);
+		} catch(Exception e) {
+			throw new Exception(e.getMessage());
+		}
 	}
+
 }

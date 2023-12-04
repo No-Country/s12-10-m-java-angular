@@ -87,6 +87,38 @@ public class BookController {
         }
     }
 
+    // Endpoint temporal hasta q este la clase ventas
+    @PostMapping(path = "/{id}/quatityAvaible/{amount}")
+    public ResponseEntity<?> addQuantityAvailable(@PathVariable String id, @PathVariable Integer amount) throws Exception {
+        try {
+            BookResponse book = bookService.addQuantityAvailable(id, amount);
+            return new ResponseEntity<>(book, HttpStatus.CREATED);
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    // Endpoint temporal hasta q este la clase ventas
+    @PostMapping(path = "/{id}/subtractAmount/{amount}")
+    public ResponseEntity<?> subtractAmount(@PathVariable String id, @PathVariable Integer amount) throws Exception {
+        try {
+            BookResponse book = bookService.subtractAmount(id, amount);
+            return new ResponseEntity<>(book, HttpStatus.CREATED);
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @PutMapping(path = "/{id}/vote/{vote}")
+    public ResponseEntity<?> addVote(@PathVariable String id, @PathVariable Integer vote) throws Exception {
+        try {
+            BookResponse book = bookService.addVote(id, vote);
+            return new ResponseEntity<>(book, HttpStatus.CREATED);
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<?> deleteBook(@PathVariable String id) throws Exception {
@@ -98,5 +130,64 @@ public class BookController {
         }
     }
 
+    @GetMapping(path = "/searchGenre/{genre}")
+    public ResponseEntity<?> getBookByGenre(@PathVariable String genre) throws Exception {
+        try {
+            List<BookResponse> book = bookService.searchByGenre(genre);
+            return new ResponseEntity<>(book, HttpStatus.OK);
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @GetMapping(path = "/searchTrend")
+    public ResponseEntity<?> getBookByTrend() throws Exception {
+        try {
+            List<BookResponse> book = bookService.searchByTrend();
+            return new ResponseEntity<>(book, HttpStatus.OK);
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @GetMapping(path = "/searchHighestRating")
+    public ResponseEntity<?> getBookBy() throws Exception {
+        try {
+            List<BookResponse> book = bookService.searchByHighestRating();
+            return new ResponseEntity<>(book, HttpStatus.OK);
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @GetMapping(path = "/searchAuthor/{idAuthor}")
+    public ResponseEntity<?> getBookByAuthor(@PathVariable String idAuthor) throws Exception {
+        try {
+            List<BookResponse> book = bookService.searchByAuthor(idAuthor);
+            return new ResponseEntity<>(book, HttpStatus.OK);
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @GetMapping(path = "/searchEditorial/{idEditorial}")
+    public ResponseEntity<?> getBookByEditorial(@PathVariable String idEditorial) throws Exception {
+        try {
+            List<BookResponse> book = bookService.searchByEditorial(idEditorial);
+            return new ResponseEntity<>(book, HttpStatus.OK);
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @GetMapping(path = "/searchTitle/{title}")
+    public ResponseEntity<?> getBookByTitle(@PathVariable String title) throws Exception {
+        try {
+            List<BookResponse> book = bookService.searchByTitle(title);
+            return new ResponseEntity<>(book, HttpStatus.OK);
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
 
 }
