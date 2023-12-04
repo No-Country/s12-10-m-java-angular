@@ -1,3 +1,7 @@
+form{
+  height: 100%;
+}
+
 .input-group {
   display: -webkit-flex;
   display: flex;
