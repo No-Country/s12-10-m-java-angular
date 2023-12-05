@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { ToastService } from './data/services/toast/Toast.service';
 import { LoginService } from './data/services/login/login.service';
 import { RegisterService } from './data/services/register/register.service';
+import { BookDetailCardComponent } from '@presentation/components/book-detail-card/book-detail-card.component';
 
 export const routes: Routes = [
     {
@@ -26,6 +27,12 @@ export const routes: Routes = [
         title: 'Forgot Password',
         loadComponent: () => import('@presentation/pages/forgot-password/forgot-password.component').then(c => c.ForgotPasswordComponent),
         providers: [LoginService ],
+    },
+    {
+        path: 'detail',
+        title: 'Detail Book',
+        loadComponent: () => import('@presentation/components/book-detail-card/book-detail-card.component').then(c => c.BookDetailCardComponent),
+        providers: [BookDetailCardComponent ],
     },
     {
         path: '404',
