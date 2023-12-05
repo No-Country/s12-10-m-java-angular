@@ -1,9 +1,6 @@
 package com.noCountry.library.service.impl;
 
-import com.noCountry.library.dto.Book.BookCardResponse;
-import com.noCountry.library.dto.Book.BookRequest;
-import com.noCountry.library.dto.Book.BookResponse;
-import com.noCountry.library.dto.Book.MapperBooks;
+import com.noCountry.library.dto.Book.*;
 import com.noCountry.library.entities.Author;
 import com.noCountry.library.entities.Book;
 import com.noCountry.library.entities.Editorial;
@@ -16,6 +13,10 @@ import com.noCountry.library.repository.EditorialRepository;
 import com.noCountry.library.service.BookService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -117,10 +118,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookResponse> getAllBooks() {
-        List<Book> books = bookRepository.findAll();
+    public PaginatedBookResponseDTO<BookResponse> getAllBooks(Integer pageNumber, Integer sizeElement) {
+        Pageable page = PageRequest.of(pageNumber, sizeElement);
+        Page<Book> pagesBook = bookRepository.findAll(page);
 
-        return mapperBooks.listBooksToListResponseBooks(books);
+        return pagesBookToPagesDto(pagesBook);
     }
 
     @Override
@@ -132,10 +134,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookCardResponse> getAllBooksForCard() {
-        List<Book> books = bookRepository.findAll();
+    public PaginatedBookResponseDTO<BookCardResponse> getAllBooksForCard(Integer pageNumber, Integer sizeElement) {
+        Pageable page = PageRequest.of(pageNumber, sizeElement);
+        Page<Book> pagesBook = bookRepository.findAll(page);
 
-        return mapperBooks.listBooksToListCardBooks(books);
+        return pagesBookToPaginationCard(pagesBook);
     }
 
     @Transactional
@@ -233,20 +236,21 @@ public class BookServiceImpl implements BookService {
 
 
     @Override
-    public List<BookResponse> searchByGenre(String genre) {
+    public PaginatedBookResponseDTO<BookResponse> searchByGenre(String genre, Integer pageNumber, Integer sizeElement) {
         Genre genreElement = searchGenre(genre);
 
         if (genreElement == null ) {
             throw new BadRequestException("El genero ingresado no existe.");
         }
 
-        Optional<List<Book>> auxBooks = bookRepository.findByGenre(genreElement);
+        Pageable page = PageRequest.of(pageNumber, sizeElement);
+        Page<Book> pagesBook = bookRepository.findByGenre(genreElement, page);
 
-        if (auxBooks.get().isEmpty()) {
-            System.out.println("La lista esta vacia");
+        if (pagesBook.isEmpty()) {
+            throw new BadRequestException("No se encontraron libros del genero " + genre);
         }
 
-        return mapperBooks.listBooksToListResponseBooks(auxBooks.get());
+        return pagesBookToPagesDto(pagesBook);
     }
 
     @Override
@@ -264,25 +268,6 @@ public class BookServiceImpl implements BookService {
         return mapperBooks.listBooksToListResponseBooks(auxBook.get());
     }
 
-    @Override
-    public List<BookResponse> searchByAuthor(String idAuthor) {
-        Optional<Author> author = authorRepository.findById(idAuthor);
-        isEmptyObject(author);
-
-        Optional<List<Book>> auxBook = bookRepository.findByAuthorId(idAuthor);
-
-        return mapperBooks.listBooksToListResponseBooks(auxBook.get());
-    }
-
-    @Override
-    public List<BookResponse> searchByEditorial(String idEditorial) {
-        Optional<Editorial> editorial = editorialRepository.findById(idEditorial);
-        isEmptyObject(editorial);
-
-        Optional<List<Book>> auxBook = bookRepository.findByEditorialId(idEditorial);
-
-        return mapperBooks.listBooksToListResponseBooks(auxBook.get());
-    }
 
     @Override
     public List<BookResponse> searchByTitle(String title) {
@@ -314,5 +299,28 @@ public class BookServiceImpl implements BookService {
     }
 
 
+    private PaginatedBookResponseDTO<BookResponse> pagesBookToPagesDto(Page<Book> pagesBook) {
+        PaginatedBookResponseDTO<BookResponse> bookResponseDTO = new PaginatedBookResponseDTO<>();
+
+        List<Book> bookList = pagesBook.getContent();
+
+        bookResponseDTO.setContent(mapperBooks.listBooksToListResponseBooks(bookList));
+        bookResponseDTO.setTotalPages(pagesBook.getTotalPages());
+        bookResponseDTO.setTotalElements(pagesBook.getTotalElements());
+
+        return bookResponseDTO;
+    }
+
+    private PaginatedBookResponseDTO<BookCardResponse> pagesBookToPaginationCard(Page<Book> pagesBook) {
+        PaginatedBookResponseDTO<BookCardResponse> bookCardResponseDTO = new PaginatedBookResponseDTO<>();
+
+        List<Book> bookList = pagesBook.getContent();
+
+        bookCardResponseDTO.setContent(mapperBooks.listBooksToListCardBooks(bookList));
+        bookCardResponseDTO.setTotalPages(pagesBook.getTotalPages());
+        bookCardResponseDTO.setTotalElements(pagesBook.getTotalElements());
+
+        return bookCardResponseDTO;
+    }
 
 }

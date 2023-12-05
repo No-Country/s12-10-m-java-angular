@@ -1,11 +1,8 @@
 package com.noCountry.library.controller;
 
+import com.noCountry.library.dto.Book.*;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.noCountry.library.dto.Book.BookCardResponse;
-import com.noCountry.library.dto.Book.BookRequest;
-import com.noCountry.library.dto.Book.BookResponse;
-import com.noCountry.library.dto.Book.UrlImage;
 import com.noCountry.library.service.impl.BookServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,10 +34,12 @@ public class BookController {
         }
     }
 
-    @GetMapping(path = "/allBooks")
-    public ResponseEntity<?> getAllBooks() throws Exception {
+    @GetMapping(path = "/allBooks"
+    )
+    public ResponseEntity<?> getAllBooks(@RequestParam(defaultValue = "0") int page,
+                                         @RequestParam(defaultValue = "5") int size) throws Exception {
         try {
-            List<BookResponse> books = bookService.getAllBooks();
+            PaginatedBookResponseDTO<BookResponse> books = bookService.getAllBooks(page, size);
             return new ResponseEntity<>(books, HttpStatus.OK);
         } catch (Exception e){
             throw new Exception(e.getMessage());
@@ -58,9 +57,10 @@ public class BookController {
     }
 
     @GetMapping(path = "/toCard/allBooks")
-    public ResponseEntity<?> getAllBooksToCard() throws Exception {
+    public ResponseEntity<?> getAllBooksToCard(@RequestParam(defaultValue = "0") int page,
+                                               @RequestParam(defaultValue = "5") int size) throws Exception {
         try {
-            List<BookCardResponse> books = bookService.getAllBooksForCard();
+            PaginatedBookResponseDTO<BookCardResponse> books = bookService.getAllBooksForCard(page, size);
             return new ResponseEntity<>(books, HttpStatus.OK);
         } catch (Exception e){
             throw new Exception(e.getMessage());
@@ -131,9 +131,11 @@ public class BookController {
     }
 
     @GetMapping(path = "/searchGenre/{genre}")
-    public ResponseEntity<?> getBookByGenre(@PathVariable String genre) throws Exception {
+    public ResponseEntity<?> getBookByGenre(@PathVariable String genre,
+                                            @RequestParam(defaultValue = "0") int page,
+                                            @RequestParam(defaultValue = "5") int size) throws Exception {
         try {
-            List<BookResponse> book = bookService.searchByGenre(genre);
+            PaginatedBookResponseDTO<BookResponse> book = bookService.searchByGenre(genre, page, size);
             return new ResponseEntity<>(book, HttpStatus.OK);
         } catch (Exception e){
             throw new Exception(e.getMessage());

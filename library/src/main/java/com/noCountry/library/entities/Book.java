@@ -28,6 +28,7 @@ public class Book extends PersistenceObject {
 	private Integer rating;
     private String description;
 	private String collection;
+	private String language;
 
 	private String initialImage;
 	private List<String> urlImages = new ArrayList<>();
