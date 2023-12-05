@@ -111,7 +111,7 @@
 }
 
 .card-book .content-info h2:hover {
-    color: #069150;
+    color: oklch(57.71% 0.144 154.06);
 }
 
 @media only screen and (min-width: 450px) {
