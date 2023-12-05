@@ -1,0 +1,92 @@
+https://librarync1.fly.dev/api/v1
+
+		UserPOST	/authenticate/registerRegisterRequest
+{
+     String    id
+	String    name
+	String    lastName
+	String    email
+	String    password
+	String    passwordRepeat
+}RegisterResponse
+{
+String 	name;
+String	lastName;
+String 	email;
+String 	role;
+List<?> 	list;
+String 	jwt;
+}201 CREATED
+POST	/authenticate/loginLoginRequest
+{
+String	email;
+String 	password;
+}LoginResponse
+{
+String	 jwt;
+}200 OK
+GET	/authenticate/profileGET	/user/{email}Response: 
+UserDto
+{
+String 	name;
+String    lastName;
+String 	email;
+}200 OK
+DELETE	/user/{email}200 OK
+DELETE	/user/unsubscribe/{email}200 OK
+		BookGET	/book/{id} ID del libro en la URLBookResponse200 OK
+GET	/book/allBooks?page=0&size=5List<BookResponse>200 OK
+GET	/book/toCard/{id}BookCardResponse
+{
+String 	title;
+Double 	price;
+String 	author;
+String	initialImage;
+}200 OK
+GET	/book/toCard/allBooks?page=0&size=5List<BookCardResponse>200 OK
+POST	/book/createBookRequest:
+  BookRequestResponse:
+	BookResponse 201 CREATED
+POST	/book/addImage/{id}Request:
+  String image;201 CREATED
+DELETE	/book/{id}200 OK
+BookRequest
+{
+    String 	idBook;
+    String 	ISBN;
+    String 	title;
+    Double 	price;
+    Integer 	pages;
+    LocalDate 	publicationDate;
+    Integer 	quantityAvailable;
+    String 	description;
+    String 	collection;
+    String 	genre;
+    String 	idAuthor;
+    String 	idEditorial;
+    String 	initialImage;
+}
+BookResponse
+{
+    String	idBook;
+    String 	ISBN;
+    String 	title;
+    Double	price;
+    Integer 	pages;
+    LocalDate 	publicationDate;
+    Integer 	quantityAvailable;
+    Integer 	salesAmount;
+    Integer 	rating;
+    String 	description;
+    String 	collection;
+    String 	genre;
+    String 	completeNameAuthor;
+    String 	nameEditorial;
+    List<String> 	urlImages;
+}
+
+		EditorialGET	/editorial/{id}Response:EditorialDto
+200 OKPOST	/editorial/createEditorial
+Request:EditorialDto
+Response:EditorialDto201 CREATED
+DELETE	/editorial/{id}200 OK
