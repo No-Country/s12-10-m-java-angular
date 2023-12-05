@@ -11,9 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.noCountry.library.entities.Author;
 import com.noCountry.library.service.impl.AuthorServiceImpl;
 
-/*
+
 @CrossOrigin(origins = "${ALLOWED_ORIGINS}")
-*/
 @RestController
 @RequestMapping("/author")
 public class AuthorController {

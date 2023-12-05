@@ -11,41 +11,40 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-/*
 @CrossOrigin(origins = "${ALLOWED_ORIGINS}")
-*/
 @RestController
 @RequestMapping("/authenticate")
 public class AuthenticateController {
 
-    @Autowired
-    private AuthenticationService authenticationService;
+	@Autowired
+	private AuthenticationService authenticationService;
 
-    @GetMapping("/hello")
-    public ResponseEntity<?> hello(){
-        return ResponseEntity.status(HttpStatus.OK).body("Hello");
+	@GetMapping("/hello")
+	public ResponseEntity<?> hello() {
+		
+		return ResponseEntity.status(HttpStatus.OK).body("Hello");
+	}
 
-    }
+	@PostMapping
+	@RequestMapping("/register")
+	public ResponseEntity<UserDetailsDTO> registerUser(@RequestBody @Valid RegisterRequest newUser) {
+		
+		UserDetailsDTO userDetailsDTO = authenticationService.registerUser(newUser);
+		return ResponseEntity.status(HttpStatus.CREATED).body(userDetailsDTO);
+	}
 
-    @PostMapping
-    @RequestMapping("/register")
-    public ResponseEntity<UserDetailsDTO> registerUser (@RequestBody @Valid RegisterRequest newUser){
-        UserDetailsDTO userDetailsDTO = authenticationService.registerUser(newUser);
-        return ResponseEntity.status(HttpStatus.CREATED).body(userDetailsDTO);
-    }
+	@PostMapping("/login")
+	public ResponseEntity<UserDetailsDTO> login(@RequestBody @Valid LoginRequest login) {
 
-    @PostMapping("/login")
-    public ResponseEntity<UserDetailsDTO> login (@RequestBody @Valid LoginRequest login){
+		UserDetailsDTO userDetailsDTO = authenticationService.login(login);
+		return ResponseEntity.status(HttpStatus.OK).body(userDetailsDTO);
+	}
 
-        UserDetailsDTO userDetailsDTO = authenticationService.login(login);
-
-        return ResponseEntity.status(HttpStatus.OK).body(userDetailsDTO);
-    }
-
-    @GetMapping("/profile")
-    public ResponseEntity<User> findMyProfile(){
-        User user = authenticationService.findLoggedInUser();
-        return ResponseEntity.status(HttpStatus.OK).body(user);
-    }
+	@GetMapping("/profile")
+	public ResponseEntity<User> findMyProfile() {
+		
+		User user = authenticationService.findLoggedInUser();
+		return ResponseEntity.status(HttpStatus.OK).body(user);
+	}
 
 }

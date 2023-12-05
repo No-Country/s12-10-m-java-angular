@@ -136,7 +136,7 @@ public class UserServiceImpl implements UserService {
 
     private void validatePassword(RegisterRequest newUser) {
         if (!StringUtils.hasText(newUser.getPassword()) || !StringUtils.hasText(newUser.getPasswordRepeat())){ // Valida que contenga texto
-            throw new InvalidPasswordException("Las contraseñas no coinciden");
+            throw new InvalidPasswordException("Las contraseñas no tienen texto");
         }
         if (!newUser.getPassword().equals(newUser.getPasswordRepeat())){ //Que las contraseñas considan
             throw new InvalidPasswordException("Las contraseñas no coinciden");

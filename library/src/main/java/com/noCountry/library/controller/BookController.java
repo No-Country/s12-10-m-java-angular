@@ -16,9 +16,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/*
+
 @CrossOrigin(origins = "${ALLOWED_ORIGINS}")
-*/
 @RestController
 @RequestMapping("/book")
 public class BookController {

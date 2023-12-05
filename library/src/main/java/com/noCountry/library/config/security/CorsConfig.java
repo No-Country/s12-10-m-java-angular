@@ -1,7 +1,6 @@
 /*
 package com.noCountry.library.config.security;
 
-import jakarta.annotation.Priority;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +15,6 @@ public class CorsConfig {
 	String allowedOrigin;
 
 	@Bean
-	@Priority(0)
 	public CorsFilter corsFilter() {
 		CorsConfiguration config = new CorsConfiguration();
 		config.setAllowCredentials(true);

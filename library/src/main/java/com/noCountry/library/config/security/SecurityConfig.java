@@ -19,8 +19,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -55,12 +53,12 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedOrigin("*"); //Configuracion de los origenes de la peticion
+        configuration.addAllowedOrigin("*");
+        //configuration.setAllowedOrigins(List.of("https://booksleaks.netlify.app/", "http://localhost:4200/*"));
         configuration.setAllowedMethods(Arrays.asList("*")); //Configuracion de los metodos que van a estar permitidos (GET,POST,etc)
         configuration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
         configuration.setMaxAge(3600l);
-        configuration.setAllowCredentials(true); //Si acepta cookies como session id en caso de usar sesiones o el bearer token
-
+        
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
