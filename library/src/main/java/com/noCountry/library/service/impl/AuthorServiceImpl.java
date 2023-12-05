@@ -5,6 +5,8 @@ import com.noCountry.library.repository.AuthorRepository;
 import com.noCountry.library.service.AuthorService;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,4 +43,17 @@ public class AuthorServiceImpl implements AuthorService {
 		return response;
 
 	}
+
+	@Override
+	public List<Author> getAll() {
+		List<Author> list = new ArrayList<>();
+		try {
+			list = authorRepository.findByStatusTrue();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	
 }
