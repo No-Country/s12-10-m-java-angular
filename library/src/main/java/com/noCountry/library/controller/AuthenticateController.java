@@ -20,15 +20,9 @@ public class AuthenticateController {
 	@Autowired
 	private AuthenticationService authenticationService;
 
-	@GetMapping("/hello")
-	public ResponseEntity<?> hello() {
-		
-		return ResponseEntity.status(HttpStatus.OK).body("Hello");
-	}
-
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/hello")
-    public ResponseEntity<?> helloo(){
+    public ResponseEntity<?> hello(){
         return ResponseEntity.status(HttpStatus.OK).body("Hello");
     }
 

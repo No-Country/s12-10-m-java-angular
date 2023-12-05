@@ -163,26 +163,6 @@ public class BookController {
         }
     }
 
-    /*@GetMapping(path = "/searchAuthor/{idAuthor}")
-    public ResponseEntity<?> getBookByAuthor(@PathVariable String idAuthor) throws Exception {
-        try {
-            List<BookResponse> book = bookService.searchByAuthor(idAuthor);
-            return new ResponseEntity<>(book, HttpStatus.OK);
-        } catch (Exception e){
-            throw new Exception(e.getMessage());
-        }
-    }
-
-    @GetMapping(path = "/searchEditorial/{idEditorial}")
-    public ResponseEntity<?> getBookByEditorial(@PathVariable String idEditorial) throws Exception {
-        try {
-            List<BookResponse> book = bookService.searchByEditorial(idEditorial);
-            return new ResponseEntity<>(book, HttpStatus.OK);
-        } catch (Exception e){
-            throw new Exception(e.getMessage());
-        }
-    }*/
-
     @GetMapping(path = "/searchTitle/{title}")
     public ResponseEntity<?> getBookByTitle(@PathVariable String title) throws Exception {
         try {
