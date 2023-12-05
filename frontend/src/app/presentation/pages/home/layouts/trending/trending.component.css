@@ -22,7 +22,7 @@
   .image-list {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    gap: 18px;
+    gap: 30px;
     font-size: 0;
     list-style: none;
     margin-bottom: 30px;
