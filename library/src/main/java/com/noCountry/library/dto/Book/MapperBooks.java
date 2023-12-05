@@ -3,7 +3,6 @@ package com.noCountry.library.dto.Book;
 import com.noCountry.library.entities.Book;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,9 +17,12 @@ public class MapperBooks {
         book.setTitle(bookRequest.getTitle());
         book.setPrice(bookRequest.getPrice());
         book.setPages(bookRequest.getPages());
-        book.setQuantity(bookRequest.getQuantity());
+
+        book.setPublicationDate(bookRequest.getPublicationDate());
+        book.setQuantityAvailable(bookRequest.getQuantityAvailable());
         book.setDescription(bookRequest.getDescription());
-        book.setUrlImages(bookRequest.getUrlImages());
+        book.setCollection(bookRequest.getCollection());
+        book.setInitialImage(bookRequest.getInitialImage());
 
         return book;
     }
@@ -35,18 +37,25 @@ public class MapperBooks {
         bookResponse.setTitle(book.getTitle());
         bookResponse.setPrice(book.getPrice());
         bookResponse.setPages(book.getPages());
-        bookResponse.setQuantity(book.getQuantity());
+
+        bookResponse.setPublicationDate(book.getPublicationDate());
+        bookResponse.setQuantityAvailable(book.getQuantityAvailable());
+        bookResponse.setSalesAmount(book.getSalesAmount());
+        bookResponse.setRating(book.getRating());
+
         bookResponse.setDescription(book.getDescription());
+        bookResponse.setCollection(book.getCollection());
+
         bookResponse.setGenre(book.getGenre().name());
         bookResponse.setCompleteNameAuthor(author);
         bookResponse.setNameEditorial(book.getEditorial().getName());
+
         bookResponse.setUrlImages(book.getUrlImages());
 
         return bookResponse;
     }
 
     public List<BookResponse> listBooksToListResponseBooks(List<Book> listBooks) {
-
         List<BookResponse> listResponse = new ArrayList<>();
 
         for (Book book: listBooks) {
@@ -65,7 +74,7 @@ public class MapperBooks {
         bookResponse.setTitle(book.getTitle());
         bookResponse.setPrice(book.getPrice());
         bookResponse.setAuthor(author);
-        bookResponse.setUrlImages(book.getUrlImages());
+        bookResponse.setInitialImage(book.getInitialImage());
 
         return bookResponse;
     }

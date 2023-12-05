@@ -7,14 +7,12 @@ import java.util.List;
 
 public interface EditorialService {
 
-    public EditorialDto createEditorial(EditorialDto editorialDto);
+    EditorialDto createEditorial(EditorialDto editorialDto) throws IllegalAccessException;
 
-    public void deleteEditorial(String id);
+    void deleteEditorial(String id);
 
-    public EditorialDto getById(String id);
+    EditorialDto getEditorialById(String id);
 
-    public List<BookResponse> listBookOfEditorial(String id);
-
-    public void addBookToEditorial(String idEditorial, String idBook);
+    List<BookResponse> getListBookOfEditorial(String id);
 
 }

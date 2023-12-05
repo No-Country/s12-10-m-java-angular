@@ -1,6 +1,9 @@
 package com.noCountry.library.service.impl;
 
+import com.noCountry.library.dto.Author.AuthorDto;
+import com.noCountry.library.dto.Author.MapperAuthor;
 import com.noCountry.library.entities.Author;
+import com.noCountry.library.exception.BadRequestException;
 import com.noCountry.library.repository.AuthorRepository;
 import com.noCountry.library.service.AuthorService;
 
@@ -19,6 +22,25 @@ public class AuthorServiceImpl implements AuthorService {
 
 	@Autowired
 	private AuthorRepository authorRepository;
+
+	@Autowired
+	private MapperAuthor mapperAuthor;
+
+	@Override
+	public AuthorDto createAuthor(AuthorDto authorDto) {
+		Optional<Author> auxAuthor = authorRepository.findById(authorDto.getId());
+		if (auxAuthor.isPresent()) {
+			throw new BadRequestException("El author ingresado ya existe");
+		}
+
+		Author author = mapperAuthor.authorDtoToAuthor(authorDto);
+		author.setCreationDate(LocalDate.now());
+		author.setModificationDate(LocalDate.now());
+
+		authorRepository.save(author);
+
+		return mapperAuthor.authorToAuthorDto(author);
+	}
 
 	@Override
 	public ResponseEntity<String> save(Author author) {
@@ -55,5 +77,5 @@ public class AuthorServiceImpl implements AuthorService {
 		return list;
 	}
 	
-	
+
 }

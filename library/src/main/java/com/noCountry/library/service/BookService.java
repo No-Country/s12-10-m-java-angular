@@ -3,25 +3,46 @@ package com.noCountry.library.service;
 import com.noCountry.library.dto.Book.BookCardResponse;
 import com.noCountry.library.dto.Book.BookRequest;
 import com.noCountry.library.dto.Book.BookResponse;
+import com.noCountry.library.dto.Book.PaginatedBookResponseDTO;
 
 import java.util.List;
 
 public interface BookService {
 
-    public BookResponse createdBook(BookRequest book);
+    BookResponse createdBook(BookRequest book) throws Exception;
 
-    public void deleteBook(String id);
+    void deleteBook(String id);
 
-    public BookResponse updateBook(BookRequest book);
+    BookResponse updateBook(BookRequest book);
 
-    public BookResponse getBookById(String id);
+    BookResponse getBookById(String id);
 
-    public List<BookResponse> getAllBooks();
+    PaginatedBookResponseDTO<BookResponse> getAllBooks(Integer pageNumber, Integer sizeElement);
 
-    public BookCardResponse getBookForCard(String id);
+    BookCardResponse getBookForCard(String id);
 
-    public List<BookCardResponse> getAllBooksForCard();
+    PaginatedBookResponseDTO<BookCardResponse> getAllBooksForCard(Integer pageNumber, Integer sizeElement);
 
-    public void addImagesBook(String id, String img);
+    void addImagesBook(String id, String img);
+
+
+    BookResponse addQuantityAvailable(String id, Integer amount);
+
+    BookResponse subtractAmount(String id, Integer amount);
+
+    BookResponse addVote(String id, Integer vote);
+
+
+
+    PaginatedBookResponseDTO<BookResponse> searchByGenre(String genre, Integer pageNumber, Integer sizeElement);
+
+    List<BookResponse> searchByTrend();
+
+    List<BookResponse> searchByHighestRating();
+
+    List<BookResponse> searchByTitle(String title);
+
+    List<BookResponse> searchLastAdditions();
+
 
 }
