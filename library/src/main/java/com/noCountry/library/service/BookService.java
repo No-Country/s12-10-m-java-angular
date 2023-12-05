@@ -3,6 +3,7 @@ package com.noCountry.library.service;
 import com.noCountry.library.dto.Book.BookCardResponse;
 import com.noCountry.library.dto.Book.BookRequest;
 import com.noCountry.library.dto.Book.BookResponse;
+import com.noCountry.library.dto.Book.PaginatedBookResponseDTO;
 
 import java.util.List;
 
@@ -16,11 +17,11 @@ public interface BookService {
 
     BookResponse getBookById(String id);
 
-    List<BookResponse> getAllBooks();
+    PaginatedBookResponseDTO<BookResponse> getAllBooks(Integer pageNumber, Integer sizeElement);
 
     BookCardResponse getBookForCard(String id);
 
-    List<BookCardResponse> getAllBooksForCard();
+    PaginatedBookResponseDTO<BookCardResponse> getAllBooksForCard(Integer pageNumber, Integer sizeElement);
 
     void addImagesBook(String id, String img);
 
@@ -33,15 +34,11 @@ public interface BookService {
 
 
 
-    List<BookResponse> searchByGenre(String genre);
+    PaginatedBookResponseDTO<BookResponse> searchByGenre(String genre, Integer pageNumber, Integer sizeElement);
 
     List<BookResponse> searchByTrend();
 
     List<BookResponse> searchByHighestRating();
-
-    List<BookResponse> searchByAuthor(String idAuthor);
-
-    List<BookResponse> searchByEditorial(String idEditorial);
 
     List<BookResponse> searchByTitle(String title);
 
