@@ -1,5 +1,6 @@
 package com.noCountry.library.dto.Book;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -24,6 +25,7 @@ public class BookResponse {
     private String genre;
     private String language;
 
+    @JsonProperty("author")
     private String completeNameAuthor;
     private String nameEditorial;
 

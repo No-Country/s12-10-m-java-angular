@@ -86,14 +86,13 @@ PaginatedBookResponseDTO<BookCardDescription>
 
 
 
-GET	/book/searchByCriteria?page={page}&size={size}&minPrice={minPrice}&maxPrice={maxPrice}&minPages={minPages}&genre={genre}&language={language}&searchEvenNotAvailable={searchEvenNotAvailable}&orderBy={}&secondOrderBy={}&ascOrDesc={}
+GET	/book/searchByCriteria?page={page}&size={size}&minPrice={minPrice}&maxPrice={maxPrice}&minPages={minPages}&genre={genre}&language={language}&searchEvenNotAvailable={searchEvenNotAvailable}&orderBy={}&ascOrDesc={}
 donde: {searchEvenNotAvailable} va a ser 0 si el usuario quiere mostrar los libros sin stock
 Ordenamiento: 
-	orderBy={Tipo de ordenamiento primario} 
-	secondOrderBy={Tipo de ordenamiento secundario}
+	orderBy={Tipo de ordenamiento} 
 	ascOrDesc={Orden ascendente o descendente} -> asc / desc
 
-Tipos de ordenamiento: (price; 
+Tipos de ordenamiento: (price;
 			publicationDate;
 			salesAmount; (tendencia)
 			rating; <- todavia no hay votacion cargada asiq no anda
@@ -105,9 +104,33 @@ PaginatedBookResponseDTO<BookToSearch>
 
 
 
-GET /book/searchGenre/{genre}?page=0&size=5
+GET 	/book/searchGenre/{genre}?page=0&size=5
 Response:
-	PaginatedBookResponseDTO<BookResponse>
+	PaginatedBookResponseDTO<BookToSearch>
+200 OK
+
+
+
+
+GET 	/book/searchTitle/{title}?page=0&size=5
+Response:
+	PaginatedBookResponseDTO<BookToSearch>
+200 OK
+
+
+
+
+GET 	/book/searchLatestAdded?page=0&size=5
+Response:
+	PaginatedBookResponseDTO<BookToSearch>
+200 OK
+
+
+
+
+GET 	/book/searchHighestRating?page=0&size=5
+Response:
+	PaginatedBookResponseDTO<BookToSearch>
 200 OK
 
 

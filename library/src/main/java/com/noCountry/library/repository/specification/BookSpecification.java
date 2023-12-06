@@ -44,8 +44,11 @@ public class BookSpecification {
             }
 
             if (searchEvenNotAvailable != null && searchEvenNotAvailable == 0) {
-                // Buscamos los libros auqnue no haya stock
+                // Buscamos los libros con y sin stock
                 predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("quantityAvailable"), 0));
+            } else {
+                // por defecto siempre devolvemos los libros con stock
+                predicates.add(criteriaBuilder.greaterThan(root.get("quantityAvailable"), 0));
             }
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));

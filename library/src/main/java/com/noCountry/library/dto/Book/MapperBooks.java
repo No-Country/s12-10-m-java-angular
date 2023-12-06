@@ -28,7 +28,7 @@ public class MapperBooks {
     }
 
     public BookResponse bookToBookResponse(Book book) {
-        String author = book.getAuthor().getName() + book.getAuthor().getLastName();
+        String author = book.getAuthor().getName() + " " + book.getAuthor().getLastName();
 
         BookResponse bookResponse = new BookResponse();
 
@@ -72,7 +72,7 @@ public class MapperBooks {
 
 
     public BookCardResponse bookToBookCardResponse(Book book) {
-        String author = book.getAuthor().getName() + book.getAuthor().getLastName();
+        String author = book.getAuthor().getName() + " " + book.getAuthor().getLastName();
 
         BookCardResponse bookResponse = new BookCardResponse();
 
@@ -95,7 +95,7 @@ public class MapperBooks {
     }
 
     public BookCardDescription bookToBookCardDescription(Book book) {
-        String author = book.getAuthor().getName() + book.getAuthor().getLastName();
+        String author = book.getAuthor().getName() + " " + book.getAuthor().getLastName();
 
         BookCardDescription bookResponse = new BookCardDescription();
 
@@ -120,7 +120,7 @@ public class MapperBooks {
 
     public BookToSearch bookToBookToSearch(Book book) {
         BookToSearch bookDetails = new BookToSearch();
-        String author = book.getAuthor().getName() + book.getAuthor().getLastName();
+        String author = book.getAuthor().getName() + " " +  book.getAuthor().getLastName();
 
         bookDetails.setID(book.getId());
         bookDetails.setName(book.getTitle());

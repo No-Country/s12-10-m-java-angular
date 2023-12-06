@@ -52,7 +52,11 @@ public class BookServiceImpl implements BookService {
     @Override
     public BookResponse createdBook(BookRequest bookRequest) throws BadRequestException {
         bookRepository.findById(bookRequest.getIdBook()).ifPresent(object -> {
-            throw new BadRequestException("El libro ingresado ya se encuentra registrado.");
+            throw new BadRequestException("El ID del libro ya se encuentra registrado.");
+        });
+
+        bookRepository.findByISBN(bookRequest.getISBN()).ifPresent(object -> {
+            throw new BadRequestException("El ISBN del libro ya se encuentra registrado.");
         });
 
         Optional<Author> author = authorRepository.findById(bookRequest.getIdAuthor());
@@ -68,6 +72,7 @@ public class BookServiceImpl implements BookService {
 
         book.setSalesAmount(0);
         book.setRating(0);
+        book.getUrlImages().add(bookRequest.getInitialImage());
 
         book.setCreationDate(LocalDate.now());
         book.setModificationDate(LocalDate.now());
@@ -105,7 +110,6 @@ public class BookServiceImpl implements BookService {
         updatedBook.setModificationDate(LocalDate.now());
         // demas sets
         // ver que atributos vamos a querer modificar del libro y cuales no
-
 
 
         bookRepository.save(updatedBook);
@@ -163,17 +167,17 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public PaginatedBookResponseDTO<BookToSearch> getBooksByCriteria(Integer pageNumber, Integer sizeElement,
-                                                          Double minPrice, Double maxPrice, Integer minPages,
-                                                          String genre, String language, Integer searchEvenNotAvailable,
-                                                          String orderBy, String secondOrderBy, String ascOrDesc) {
+                                                                     Double minPrice, Double maxPrice, Integer minPages,
+                                                                     String genre, String language, Integer searchEvenNotAvailable,
+                                                                     String orderBy, String ascOrDesc) {
 
         Genre thisGenre = searchGenre(genre);
         Language thisLanguage = searchLanguage(language);
 
         Specification<Book> spec = BookSpecification.filterByCriteria(minPrice, maxPrice, minPages,
-                                                                thisGenre, thisLanguage, searchEvenNotAvailable);
+                thisGenre, thisLanguage, searchEvenNotAvailable);
 
-        Sort sort = getSortFromOrderBy(orderBy, secondOrderBy, ascOrDesc);
+        Sort sort = getSortFromOrderBy(orderBy, ascOrDesc);
         Pageable pageable = PageRequest.of(pageNumber, sizeElement, sort);
         Page<Book> page = bookRepository.findAll(spec, pageable);
 
@@ -212,7 +216,7 @@ public class BookServiceImpl implements BookService {
         Book book = auxBook.get();
 
         if (amount < 0) {
-            throw  new BadRequestException("La cantidad a agregar no puede ser 0 ni negativa.");
+            throw new BadRequestException("La cantidad a agregar no puede ser 0 ni negativa.");
         }
 
         int quantity = book.getQuantityAvailable() + amount;
@@ -279,7 +283,7 @@ public class BookServiceImpl implements BookService {
     public PaginatedBookResponseDTO<BookToSearch> searchByGenre(String genre, Integer pageNumber, Integer sizeElement) {
         Genre genreElement = searchGenre(genre);
 
-        if (genreElement == null ) {
+        if (genreElement == null) {
             throw new BadRequestException("El genero ingresado no existe.");
         }
 
@@ -305,35 +309,26 @@ public class BookServiceImpl implements BookService {
         return pagesBookToPagination(pagesBook, mapperBooks::listBookToListBookToSearch);
     }
 
-
     @Override
-    public List<BookResponse> searchByTrend() {
-        // Devuelve los 5 libros mas vendidos
-        Optional<List<Book>> auxBook = bookRepository.findTop5ByOrderBySalesAmountAsc();
+    public PaginatedBookResponseDTO<BookToSearch> searchLatestAdded(Integer pageNumber, Integer sizeElement) {
+        Pageable page = PageRequest.of(pageNumber, sizeElement);
+        Page<Book> pagesBook = bookRepository.findAllByOrderByCreationDateDesc(page);
 
-        return mapperBooks.listBooksToListResponseBooks(auxBook.get());
+        return pagesBookToPagination(pagesBook, mapperBooks::listBookToListBookToSearch);
     }
 
     @Override
-    public List<BookResponse> searchByHighestRating() {
-        Optional<List<Book>> auxBook = bookRepository.findTop5ByOrderByRatingAsc();
+    public PaginatedBookResponseDTO<BookToSearch> searchByHighestRating(Integer pageNumber, Integer sizeElement) {
+        Pageable page = PageRequest.of(pageNumber, sizeElement);
+        Page<Book> pagesBook = bookRepository.findAllByOrderByRatingDesc(page);
 
-        return mapperBooks.listBooksToListResponseBooks(auxBook.get());
+        return pagesBookToPagination(pagesBook, mapperBooks::listBookToListBookToSearch);
     }
-
-
-
-
-    @Override
-    public List<BookResponse> searchLastAdditions() {
-        return null;
-    }
-
 
 
     private Genre searchGenre(String genre) {
 
-        for (Genre element: Genre.values()) {
+        for (Genre element : Genre.values()) {
             if (element.name().equalsIgnoreCase(genre)) {
                 return element;
             }
@@ -342,7 +337,7 @@ public class BookServiceImpl implements BookService {
     }
 
     private Language searchLanguage(String language) {
-        for (Language element: Language.values()) {
+        for (Language element : Language.values()) {
             if (element.name().equalsIgnoreCase(language)) {
                 return element;
             }
@@ -352,7 +347,7 @@ public class BookServiceImpl implements BookService {
 
 
     private void isEmptyObject(Optional<?> object) throws NotFoundException {
-        if (object.isEmpty()){
+        if (object.isEmpty()) {
             throw new NotFoundException("Could not found " + object.getClass());
         }
     }
@@ -371,56 +366,26 @@ public class BookServiceImpl implements BookService {
         return bookResponseDTO;
     }
 
-    private Sort getSortFromOrderBy(String orderBy, String secondOrderBy, String ascOrDesc) {
-        if (orderBy == null && secondOrderBy == null) {
+    private Sort getSortFromOrderBy(String orderBy, String ascOrDesc) {
+        if (orderBy == null) {
             return Sort.unsorted();
         }
 
-        Sort.Order primaryOrder = null;
-        Sort.Order secondaryOrder = null;
+        Sort.Order primaryOrder;
 
-        if (orderBy != null) {
-            primaryOrder = switch (orderBy) {
-                case "alphabetically" -> Sort.Order.by("title");
-                case "publicationDate" -> Sort.Order.by("publicationDate");
-                case "salesAmount" -> Sort.Order.by("salesAmount");
-                case "rating" -> Sort.Order.by("rating");
-                case "price" -> Sort.Order.by("price");
-                default -> throw new IllegalArgumentException("OrderBy no es un parametro valido: " + orderBy);
-            };
-        }
-
-        if (secondOrderBy != null) {
-            secondaryOrder = switch (secondOrderBy) {
-                case "alphabetically" -> Sort.Order.by("title");
-                case "publicationDate" -> Sort.Order.by("publicationDate");
-                case "salesAmount" -> Sort.Order.by("salesAmount");
-                case "rating" -> Sort.Order.by("rating");
-                case "price" -> Sort.Order.by("price");
-                default -> throw new IllegalArgumentException("secondOrderBy no es un parametro valido: " + secondOrderBy);
-            };
-        }
+        primaryOrder = switch (orderBy) {
+            case "alphabetically" -> Sort.Order.by("title");
+            case "publicationDate" -> Sort.Order.by("publicationDate");
+            case "salesAmount" -> Sort.Order.by("salesAmount");
+            case "rating" -> Sort.Order.by("rating");
+            case "price" -> Sort.Order.by("price");
+            default -> throw new IllegalArgumentException("OrderBy no es un parametro valido: " + orderBy);
+        };
 
         if ("DESC".equalsIgnoreCase(ascOrDesc)) {
-            if (primaryOrder != null && secondaryOrder != null) {
-                return Sort.by(primaryOrder).descending().and(Sort.by(secondaryOrder).descending());
-            } else if (primaryOrder != null) {
-                return Sort.by(primaryOrder).descending();
-            } else if (secondaryOrder != null) {
-                return Sort.by(secondaryOrder).descending();
-            } else {
-                return Sort.unsorted();
-            }
+            return Sort.by(primaryOrder).descending();
         } else {
-            if (primaryOrder != null && secondaryOrder != null) {
-                return Sort.by(primaryOrder).ascending().and(Sort.by(secondaryOrder).ascending());
-            } else if (primaryOrder != null) {
-                return Sort.by(primaryOrder).ascending();
-            } else if (secondaryOrder != null) {
-                return Sort.by(secondaryOrder).ascending();
-            } else {
-                return Sort.unsorted();
-            }
+            return Sort.by(primaryOrder).ascending();
         }
     }
 
