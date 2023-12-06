@@ -35,7 +35,10 @@ String 	email;
 DELETE	/user/{email}200 OK
 DELETE	/user/unsubscribe/{email}200 OK
 		BookGET	/book/{id} ID del libro en la URLBookResponse200 OK
-GET	/book/allBooks?page=0&size=5List<BookResponse>200 OK
+
+GET	/book/allBooks?page=0&size=5
+Response:	PaginatedBookResponseDTO<BookResponse>200 OK
+
 GET	/book/toCard/{id}BookCardResponse
 {
 String 	title;
@@ -43,12 +46,41 @@ Double 	price;
 String 	author;
 String	initialImage;
 }200 OK
-GET	/book/toCard/allBooks?page=0&size=5List<BookCardResponse>200 OK
+
+GET	/book/toCard/allBooks?page=0&size=5PaginatedBookResponseDTO<BookCardResponse>200 OK
+
+
+GET	/book/toCardDescription/{id}
+Response:
+BookCardDescription
+{
+String 	title;
+Double 	price;
+String 	author;
+String	initialImage;
+String	description;
+}
+200 OK
+
+
+GET	/book/toCardDescription/allBooks?page=0&size=5
+Response: 
+PaginatedBookResponseDTO<BookCardDescription>
+200 OK
+
+
+GET	/book/searchByCriteria?page={page}&size={size}&minPrice={minPrice}&maxPrice={maxPrice}&minPages={minPages}&genre={genre}&language={language}&searchEvenNotAvailable={searchEvenNotAvailable}
+donde: {searchEvenNotAvailable} va a ser 0 si el usuario quiere mostrar los libros sin stock
+Response:
+PaginatedBookResponseDTO<BookToSearch>
+
 POST	/book/createBookRequest:
   BookRequestResponse:
 	BookResponse 201 CREATED
+
 POST	/book/addImage/{id}Request:
   String image;201 CREATED
+
 DELETE	/book/{id}200 OK
 BookRequest
 {
@@ -62,6 +94,7 @@ BookRequest
     String 	description;
     String 	collection;
     String 	genre;
+    String	language;
     String 	idAuthor;
     String 	idEditorial;
     String 	initialImage;
@@ -80,10 +113,33 @@ BookRequest
     String 	description;
     String 	collection;
     String 	genre;
+    String	language;
     String 	completeNameAuthor;
     String 	nameEditorial;
     List<String> 	urlImages;
-}
+}PaginatedBookResponseDTO<T>
+{
+   "content": [
+	{ AnyBook },
+	{ AnyBook },
+	{ AnyBook }
+    ],
+    "totalPages": 4,
+    "totalElements": 12,
+    "isLast": false
+}
+
+BookToSearch
+{
+    String 	ID;
+    String 	author;
+    String 	name;
+    Double 	price;
+    String 	image;
+    String 	description;
+}
+
+
 
 		EditorialGET	/editorial/{id}Response:EditorialDto
 200 OKPOST	/editorial/createEditorial

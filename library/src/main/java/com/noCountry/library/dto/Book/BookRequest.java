@@ -40,6 +40,9 @@ public class BookRequest {
     private String genre;
 
     @NotBlank (message = "Este campo es obligatorio")
+    private String language;
+
+    @NotBlank (message = "Este campo es obligatorio")
     private String idAuthor;
 
     @NotBlank (message = "Este campo es obligatorio")
