@@ -1,26 +1,44 @@
 import { Injectable, Injector } from '@angular/core';
 import { BookDetail } from 'app/data/models/book';
-import { Observable, of, tap } from 'rxjs';
+import { Observable, catchError, of, tap } from 'rxjs';
 import { ApiService } from '../api.service';
+import { SignalsStoreService } from '../store/StoreSignals.service';
+import { BOOK_DETAIL_MOOK } from 'app/data/mocks/booksArray';
+import { RxjsStoreService } from '../store/StoreRxJs.service';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class BooksService {
-  private cachedBooks: BookDetail[] = [];
+@Injectable()
+export class BooksService extends RxjsStoreService<BookDetail[]> {
+  private cachedBooks: BookDetail[];
 
   private api: ApiService = this.injector.get(ApiService)
 
-  constructor(private injector: Injector) { }
+  constructor(private injector: Injector) { 
+    super(Array(0) as BookDetail[]);
+    this.cachedBooks = [];
+  }
   
-  public list(): Observable<BookDetail[]> {
-    if (this.cachedBooks.length > 0) {
-      return of(this.cachedBooks);
-    } else {
-      return this.api.httpGet('book/toCard/allBooks?page=0&size=5').pipe(
-        tap((books) => {
-          this.cachedBooks = books;
-        })
+  /**
+   * Recupera una lista de libros del backend
+   *
+   * @return {void} no retorna nada
+   */
+  public list(): void {
+
+    if (this.cachedBooks.length === 0) {
+      this.api.httpGet('book/toCard/allBooks?page=0&size=5', false)
+      .subscribe(
+        {
+          next: (books)=>{
+            this.setState(Object.values( BOOK_DETAIL_MOOK ));
+            this.cachedBooks = BOOK_DETAIL_MOOK;
+            console.log("Mook 1: ", BOOK_DETAIL_MOOK);
+          },
+          error: (error: any )=>{
+            this.setState(Object.values( BOOK_DETAIL_MOOK ));
+            this.cachedBooks = BOOK_DETAIL_MOOK;
+            console.log("Mook 2: ", BOOK_DETAIL_MOOK);
+          }
+        }
       );
     }
   }

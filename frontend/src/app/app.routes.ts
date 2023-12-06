@@ -47,7 +47,7 @@ export const routes: Routes = [
         loadComponent: ()=> import('@presentation/pages/cart/cart.component').then(c => c.CartComponent),
     },
     {
-        path: 'detail',
+        path: 'book/:id',
         title: 'Detail Book',
         loadComponent: () => import('@presentation/components/book-detail-card/book-detail-card.component').then(c => c.BookDetailCardComponent),
         providers: [BookDetailCardComponent ],
