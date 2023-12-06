@@ -8,29 +8,29 @@
             <a class="nav-1" href="">Go back to Sotre</a>
             <a class="nav-2" href="">Share book</a>
         </div>
-        <app-detail-card></app-detail-card>
+        <app-detail-card [book]="book"></app-detail-card>
         <div class="tables">
             <div class="table-data-1">
                 <table>
                         <h2>Detalles:</h2>
                     <tbody>
                         <tr class="type-1" id="inicio">
-                            <td>Title</td><td>1</td>
+                            <td>Title</td><td>{{book.title}}</td>
                         </tr>
                         <tr class="type-2">
-                            <td>Author</td><td>1</td>
+                            <td>Author</td><td>{{book.author}}</td>
                         </tr>
                         <tr class="type-1">
-                            <td>Editorial</td><td>1</td>
+                            <td>Editorial</td><td>{{book.nameEditorial}}</td>
                         </tr>
                         <tr class="type-2">
-                            <td>ISBN</td><td>1</td>
+                            <td>ISBN</td><td>{{book.isbn}}</td>
                         </tr>
                         <tr class="type-1">
-                            <td>Publication Date</td><td>1</td>
+                            <td>Publication Date</td><td>{{book.publicationDate}}</td>
                         </tr>
                         <tr class="type-2" id="final">
-                            <td>Page Number</td><td>1</td>
+                            <td>Page Number</td><td>{{book.pages}}</td>
                         </tr>
                     </tbody>
                 </table>

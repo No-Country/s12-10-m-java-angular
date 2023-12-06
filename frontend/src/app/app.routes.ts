@@ -4,6 +4,7 @@ import { LoginService } from './data/services/login/login.service';
 import { RegisterService } from './data/services/register/register.service';
 import { ShopService } from './data/services/shop/shop.service';
 import { BookDetailComponent } from '@presentation/pages/book-detail/book-detail.component';
+import { BooksService } from './data/services/books/books.service';
 
 
 export const routes: Routes = [
@@ -52,7 +53,7 @@ export const routes: Routes = [
         path: 'book/:id',
         title: 'Detail Book',
         loadComponent: () => import('@presentation/pages/book-detail/book-detail.component').then(c => c.BookDetailComponent),
-        
+        providers: [BooksService],
     },
     {
         path: '404',
