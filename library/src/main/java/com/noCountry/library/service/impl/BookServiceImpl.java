@@ -5,11 +5,13 @@ import com.noCountry.library.entities.Author;
 import com.noCountry.library.entities.Book;
 import com.noCountry.library.entities.Editorial;
 import com.noCountry.library.entities.enums.Genre;
+import com.noCountry.library.entities.enums.Language;
 import com.noCountry.library.exception.BadRequestException;
 import com.noCountry.library.exception.NotFoundException;
 import com.noCountry.library.repository.AuthorRepository;
 import com.noCountry.library.repository.BookRepository;
 import com.noCountry.library.repository.EditorialRepository;
+import com.noCountry.library.repository.specification.BookSpecification;
 import com.noCountry.library.service.BookService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +19,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -46,7 +50,7 @@ public class BookServiceImpl implements BookService {
 
     @Transactional
     @Override
-    public BookResponse createdBook(BookRequest bookRequest) throws Exception {
+    public BookResponse createdBook(BookRequest bookRequest) throws BadRequestException {
         bookRepository.findById(bookRequest.getIdBook()).ifPresent(object -> {
             throw new BadRequestException("El libro ingresado ya se encuentra registrado.");
         });
@@ -58,6 +62,7 @@ public class BookServiceImpl implements BookService {
         isEmptyObject(editorial);
 
         Genre genre = searchGenre(bookRequest.getGenre());
+        Language language = searchLanguage(bookRequest.getLanguage());
 
         Book book = mapperBooks.bookRequestToBook(bookRequest);
 
@@ -70,6 +75,7 @@ public class BookServiceImpl implements BookService {
         book.setAuthor(author.get());
         book.setEditorial(editorial.get());
         book.setGenre(genre);
+        book.setLanguage(language);
 
         bookRepository.save(book);
 
@@ -112,9 +118,7 @@ public class BookServiceImpl implements BookService {
         Optional<Book> auxBook = bookRepository.findById(id);
         isEmptyObject(auxBook);
 
-        Book book = auxBook.get();
-
-        return mapperBooks.bookToBookResponse(book);
+        return mapperBooks.bookToBookResponse(auxBook.get());
     }
 
     @Override
@@ -122,7 +126,7 @@ public class BookServiceImpl implements BookService {
         Pageable page = PageRequest.of(pageNumber, sizeElement);
         Page<Book> pagesBook = bookRepository.findAll(page);
 
-        return pagesBookToPagesDto(pagesBook);
+        return pagesBookToPagination(pagesBook, mapperBooks::listBooksToListResponseBooks);
     }
 
     @Override
@@ -138,8 +142,44 @@ public class BookServiceImpl implements BookService {
         Pageable page = PageRequest.of(pageNumber, sizeElement);
         Page<Book> pagesBook = bookRepository.findAll(page);
 
-        return pagesBookToPaginationCard(pagesBook);
+        return pagesBookToPagination(pagesBook, mapperBooks::listBooksToListCardBooks);
     }
+
+    @Override
+    public BookCardDescription getBookForCardDescription(String id) {
+        Optional<Book> book = bookRepository.findById(id);
+        isEmptyObject(book);
+
+        return mapperBooks.bookToBookCardDescription(book.get());
+    }
+
+    @Override
+    public PaginatedBookResponseDTO<BookCardDescription> getAllBooksForCardDescription(Integer pageNumber, Integer sizeElement) {
+        Pageable page = PageRequest.of(pageNumber, sizeElement);
+        Page<Book> pagesBook = bookRepository.findAll(page);
+
+        return pagesBookToPagination(pagesBook, mapperBooks::listBookToListBookCardDescription);
+    }
+
+    @Override
+    public PaginatedBookResponseDTO<BookToSearch> getBooksByCriteria(Integer pageNumber, Integer sizeElement,
+                                                          Double minPrice, Double maxPrice, Integer minPages,
+                                                          String genre, String language, Integer searchEvenNotAvailable,
+                                                          String orderBy, String secondOrderBy, String ascOrDesc) {
+
+        Genre thisGenre = searchGenre(genre);
+        Language thisLanguage = searchLanguage(language);
+
+        Specification<Book> spec = BookSpecification.filterByCriteria(minPrice, maxPrice, minPages,
+                                                                thisGenre, thisLanguage, searchEvenNotAvailable);
+
+        Sort sort = getSortFromOrderBy(orderBy, secondOrderBy, ascOrDesc);
+        Pageable pageable = PageRequest.of(pageNumber, sizeElement, sort);
+        Page<Book> page = bookRepository.findAll(spec, pageable);
+
+        return pagesBookToPagination(page, mapperBooks::listBookToListBookToSearch);
+    }
+
 
     @Transactional
     @Override
@@ -236,7 +276,7 @@ public class BookServiceImpl implements BookService {
 
 
     @Override
-    public PaginatedBookResponseDTO<BookResponse> searchByGenre(String genre, Integer pageNumber, Integer sizeElement) {
+    public PaginatedBookResponseDTO<BookToSearch> searchByGenre(String genre, Integer pageNumber, Integer sizeElement) {
         Genre genreElement = searchGenre(genre);
 
         if (genreElement == null ) {
@@ -250,8 +290,21 @@ public class BookServiceImpl implements BookService {
             throw new BadRequestException("No se encontraron libros del genero " + genre);
         }
 
-        return pagesBookToPagesDto(pagesBook);
+        return pagesBookToPagination(pagesBook, mapperBooks::listBookToListBookToSearch);
     }
+
+    @Override
+    public PaginatedBookResponseDTO<BookToSearch> searchByTitle(String title, Integer pageNumber, Integer sizeElement) {
+        Pageable page = PageRequest.of(pageNumber, sizeElement);
+        Page<Book> pagesBook = bookRepository.findByTitleContaining(title, page);
+
+        if (pagesBook.isEmpty()) {
+            throw new BadRequestException("No se encontraron libros con el texto ingresado ");
+        }
+
+        return pagesBookToPagination(pagesBook, mapperBooks::listBookToListBookToSearch);
+    }
+
 
     @Override
     public List<BookResponse> searchByTrend() {
@@ -269,22 +322,28 @@ public class BookServiceImpl implements BookService {
     }
 
 
-    @Override
-    public List<BookResponse> searchByTitle(String title) {
-        Optional<List<Book>> auxBook = bookRepository.findByTitleContaining(title);
 
-        return mapperBooks.listBooksToListResponseBooks(auxBook.get());
-    }
 
     @Override
     public List<BookResponse> searchLastAdditions() {
         return null;
     }
 
+
+
     private Genre searchGenre(String genre) {
 
         for (Genre element: Genre.values()) {
-            if (element.name().equals(genre)) {
+            if (element.name().equalsIgnoreCase(genre)) {
+                return element;
+            }
+        }
+        return null;
+    }
+
+    private Language searchLanguage(String language) {
+        for (Language element: Language.values()) {
+            if (element.name().equalsIgnoreCase(language)) {
                 return element;
             }
         }
@@ -299,28 +358,70 @@ public class BookServiceImpl implements BookService {
     }
 
 
-    private PaginatedBookResponseDTO<BookResponse> pagesBookToPagesDto(Page<Book> pagesBook) {
-        PaginatedBookResponseDTO<BookResponse> bookResponseDTO = new PaginatedBookResponseDTO<>();
+    private <T> PaginatedBookResponseDTO<T> pagesBookToPagination(Page<Book> pagesBook, Function<List<Book>, List<T>> mapper) {
+        PaginatedBookResponseDTO<T> bookResponseDTO = new PaginatedBookResponseDTO<>();
 
         List<Book> bookList = pagesBook.getContent();
 
-        bookResponseDTO.setContent(mapperBooks.listBooksToListResponseBooks(bookList));
+        bookResponseDTO.setContent(mapper.apply(bookList));
         bookResponseDTO.setTotalPages(pagesBook.getTotalPages());
         bookResponseDTO.setTotalElements(pagesBook.getTotalElements());
+        bookResponseDTO.setIsLast(pagesBook.isLast());
 
         return bookResponseDTO;
     }
 
-    private PaginatedBookResponseDTO<BookCardResponse> pagesBookToPaginationCard(Page<Book> pagesBook) {
-        PaginatedBookResponseDTO<BookCardResponse> bookCardResponseDTO = new PaginatedBookResponseDTO<>();
+    private Sort getSortFromOrderBy(String orderBy, String secondOrderBy, String ascOrDesc) {
+        if (orderBy == null && secondOrderBy == null) {
+            return Sort.unsorted();
+        }
 
-        List<Book> bookList = pagesBook.getContent();
+        Sort.Order primaryOrder = null;
+        Sort.Order secondaryOrder = null;
 
-        bookCardResponseDTO.setContent(mapperBooks.listBooksToListCardBooks(bookList));
-        bookCardResponseDTO.setTotalPages(pagesBook.getTotalPages());
-        bookCardResponseDTO.setTotalElements(pagesBook.getTotalElements());
+        if (orderBy != null) {
+            primaryOrder = switch (orderBy) {
+                case "alphabetically" -> Sort.Order.by("title");
+                case "publicationDate" -> Sort.Order.by("publicationDate");
+                case "salesAmount" -> Sort.Order.by("salesAmount");
+                case "rating" -> Sort.Order.by("rating");
+                case "price" -> Sort.Order.by("price");
+                default -> throw new IllegalArgumentException("OrderBy no es un parametro valido: " + orderBy);
+            };
+        }
 
-        return bookCardResponseDTO;
+        if (secondOrderBy != null) {
+            secondaryOrder = switch (secondOrderBy) {
+                case "alphabetically" -> Sort.Order.by("title");
+                case "publicationDate" -> Sort.Order.by("publicationDate");
+                case "salesAmount" -> Sort.Order.by("salesAmount");
+                case "rating" -> Sort.Order.by("rating");
+                case "price" -> Sort.Order.by("price");
+                default -> throw new IllegalArgumentException("secondOrderBy no es un parametro valido: " + secondOrderBy);
+            };
+        }
+
+        if ("DESC".equalsIgnoreCase(ascOrDesc)) {
+            if (primaryOrder != null && secondaryOrder != null) {
+                return Sort.by(primaryOrder).descending().and(Sort.by(secondaryOrder).descending());
+            } else if (primaryOrder != null) {
+                return Sort.by(primaryOrder).descending();
+            } else if (secondaryOrder != null) {
+                return Sort.by(secondaryOrder).descending();
+            } else {
+                return Sort.unsorted();
+            }
+        } else {
+            if (primaryOrder != null && secondaryOrder != null) {
+                return Sort.by(primaryOrder).ascending().and(Sort.by(secondaryOrder).ascending());
+            } else if (primaryOrder != null) {
+                return Sort.by(primaryOrder).ascending();
+            } else if (secondaryOrder != null) {
+                return Sort.by(secondaryOrder).ascending();
+            } else {
+                return Sort.unsorted();
+            }
+        }
     }
 
 }

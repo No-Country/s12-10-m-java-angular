@@ -10,5 +10,6 @@ public class PaginatedBookResponseDTO<T> {
     private List<T> content;
     private Integer totalPages;
     private Long totalElements;
+    private Boolean isLast;
 
 }

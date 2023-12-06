@@ -1,9 +1,8 @@
 package com.noCountry.library.service;
 
-import com.noCountry.library.dto.Book.BookCardResponse;
-import com.noCountry.library.dto.Book.BookRequest;
-import com.noCountry.library.dto.Book.BookResponse;
-import com.noCountry.library.dto.Book.PaginatedBookResponseDTO;
+import com.noCountry.library.dto.Book.*;
+import com.noCountry.library.entities.enums.Genre;
+import com.noCountry.library.entities.enums.Language;
 
 import java.util.List;
 
@@ -23,6 +22,15 @@ public interface BookService {
 
     PaginatedBookResponseDTO<BookCardResponse> getAllBooksForCard(Integer pageNumber, Integer sizeElement);
 
+    BookCardDescription getBookForCardDescription(String id);
+
+    PaginatedBookResponseDTO<BookCardDescription> getAllBooksForCardDescription(Integer pageNumber, Integer sizeElement);
+
+    PaginatedBookResponseDTO<BookToSearch> getBooksByCriteria(Integer pageNumber, Integer sizeElement,
+                                                   Double minPrice, Double maxPrice, Integer minPages,
+                                                   String genre, String language, Integer searchEvenNotAvailable,
+                                                   String orderBy, String secondOrderBy, String ascOrDesc);
+
     void addImagesBook(String id, String img);
 
 
@@ -34,13 +42,16 @@ public interface BookService {
 
 
 
-    PaginatedBookResponseDTO<BookResponse> searchByGenre(String genre, Integer pageNumber, Integer sizeElement);
+    PaginatedBookResponseDTO<BookToSearch> searchByGenre(String genre, Integer pageNumber, Integer sizeElement);
+
+    PaginatedBookResponseDTO<BookToSearch> searchByTitle(String title, Integer pageNumber, Integer sizeElement);
+
+
+
 
     List<BookResponse> searchByTrend();
 
     List<BookResponse> searchByHighestRating();
-
-    List<BookResponse> searchByTitle(String title);
 
     List<BookResponse> searchLastAdditions();
 

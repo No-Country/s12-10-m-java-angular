@@ -2,6 +2,7 @@ package com.noCountry.library.entities;
 
 import com.noCountry.library.entities.enums.Genre;
 
+import com.noCountry.library.entities.enums.Language;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,10 +29,12 @@ public class Book extends PersistenceObject {
 	private Integer rating;
     private String description;
 	private String collection;
-	private String language;
 
 	private String initialImage;
 	private List<String> urlImages = new ArrayList<>();
+
+	@Enumerated(EnumType.STRING)
+	private Language language;
 
 	@Enumerated(EnumType.STRING)
 	private Genre genre;

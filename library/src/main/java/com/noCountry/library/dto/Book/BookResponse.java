@@ -22,6 +22,7 @@ public class BookResponse {
     private String description;
     private String collection;
     private String genre;
+    private String language;
 
     private String completeNameAuthor;
     private String nameEditorial;

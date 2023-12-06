@@ -47,6 +47,11 @@ public class MapperBooks {
         bookResponse.setCollection(book.getCollection());
 
         bookResponse.setGenre(book.getGenre().name());
+
+        if (book.getLanguage() != null) {
+            bookResponse.setLanguage(book.getLanguage().name());
+        }
+
         bookResponse.setCompleteNameAuthor(author);
         bookResponse.setNameEditorial(book.getEditorial().getName());
 
@@ -89,5 +94,52 @@ public class MapperBooks {
         return listCardBook;
     }
 
+    public BookCardDescription bookToBookCardDescription(Book book) {
+        String author = book.getAuthor().getName() + book.getAuthor().getLastName();
+
+        BookCardDescription bookResponse = new BookCardDescription();
+
+        bookResponse.setTitle(book.getTitle());
+        bookResponse.setPrice(book.getPrice());
+        bookResponse.setAuthor(author);
+        bookResponse.setInitialImage(book.getInitialImage());
+        bookResponse.setDescription(book.getDescription());
+
+        return bookResponse;
+    }
+
+    public List<BookCardDescription> listBookToListBookCardDescription(List<Book> listBooks) {
+        List<BookCardDescription> listBookDto = new ArrayList<>();
+
+        for (Book book: listBooks) {
+            listBookDto.add(bookToBookCardDescription(book));
+        }
+
+        return listBookDto;
+    }
+
+    public BookToSearch bookToBookToSearch(Book book) {
+        BookToSearch bookDetails = new BookToSearch();
+        String author = book.getAuthor().getName() + book.getAuthor().getLastName();
+
+        bookDetails.setID(book.getId());
+        bookDetails.setName(book.getTitle());
+        bookDetails.setAuthor(author);
+        bookDetails.setImage(book.getInitialImage());
+        bookDetails.setPrice(book.getPrice());
+        bookDetails.setDescription(book.getDescription());
+
+        return bookDetails;
+    }
+
+    public List<BookToSearch> listBookToListBookToSearch(List<Book> books) {
+        List<BookToSearch> listResponse = new ArrayList<>();
+
+        for (Book book: books) {
+            listResponse.add(bookToBookToSearch(book));
+        }
+
+        return listResponse;
+    }
 
 }
