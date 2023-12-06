@@ -22,12 +22,11 @@ public class AuthorServiceImpl implements AuthorService {
 
 	@Autowired
 	private AuthorRepository authorRepository;
-
 	@Autowired
 	private MapperAuthor mapperAuthor;
 
 	@Override
-	public AuthorDto createAuthor(AuthorDto authorDto) {
+	public AuthorDto save (AuthorDto authorDto) {
 		Optional<Author> auxAuthor = authorRepository.findById(authorDto.getId());
 		if (auxAuthor.isPresent()) {
 			throw new BadRequestException("El author ingresado ya existe");
@@ -43,27 +42,25 @@ public class AuthorServiceImpl implements AuthorService {
 	}
 
 	@Override
-	public ResponseEntity<String> save(Author author) {
+	public ResponseEntity<String> delete(String id) {
 		ResponseEntity<String> response = null;
+		Optional<Author> author = authorRepository.findById(id);
 		try {
-			Optional<Author> existingAuthor = authorRepository.findByName(author.getName());
-			if (existingAuthor.isPresent()) {
-				response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Autor ya registrado");
+			if (author.isPresent()) {
+				Author logicalAuthorRemoval = author.get();
+				logicalAuthorRemoval.setStatus(Boolean.FALSE);
+				logicalAuthorRemoval.setModificationDate(LocalDate.now());
+				authorRepository.save(logicalAuthorRemoval);
+				response = ResponseEntity.ok("Author with ID " + id + " logically removed successfully");
 			} else {
-				author.setStatus(Boolean.TRUE);
-				author.setCreationDate(LocalDate.now());
-				author.setModificationDate(LocalDate.now());
-
-				authorRepository.save(author);
-				response = ResponseEntity.ok("Author: " + author.getName() + " saved succesfully");
+				response = ResponseEntity.status(HttpStatus.NOT_FOUND).body("Author with ID " + id + " not found");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			response = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body("Failed to save author: " + author.getName());
+					.body("Failed to delete author with ID " + id);
 		}
 		return response;
-
 	}
 
 	@Override

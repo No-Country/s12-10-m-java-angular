@@ -10,10 +10,10 @@ import com.noCountry.library.entities.Author;
 
 public interface AuthorService {
 
-	public ResponseEntity<String> save(Author author);
+	List<Author> getAll();
 
-	public List<Author> getAll();
-
-	AuthorDto createAuthor(AuthorDto authorDto);
+	AuthorDto save(AuthorDto authorDto);
+	
+	ResponseEntity<String> delete(String id);
 
 }
