@@ -6,6 +6,15 @@
     min-height: 60px;
 }
 
+.navbar-logo {
+    margin-left: 2vw;
+    margin-right: auto;
+    font-size: 32px;
+    font-weight: bold;
+    text-wrap: nowrap;
+    color: oklch(68.96% 0.15 155.76);
+}
+
 .search-bar {
     position: relative;
     width: 100%;
