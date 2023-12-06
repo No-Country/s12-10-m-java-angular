@@ -42,7 +42,7 @@ export const routes: Routes = [
         providers: [LoginService ],
     },
     {
-        path: 'detail',
+        path: 'book/:id',
         title: 'Detail Book',
         loadComponent: () => import('@presentation/components/book-detail-card/book-detail-card.component').then(c => c.BookDetailCardComponent),
         providers: [BookDetailCardComponent ],
