@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, ElementRef, Renderer2, ViewChild, A
 import { BOOK_DETAIL_MOOK } from 'app/data/mocks/booksArray';
 import { BookDetail } from 'app/data/models/book';
 import { CardBookComponent } from "../../../../components/card-book/card-book.component";
-// import { DefaultButtonComponent } from '@presentation/components/default-button/default-button.component'; DefaultButtonComponent
+import { DefaultButtonComponent } from '@presentation/components/default-button/default-button.component'; 
 import { CardBookHorizontalComponent } from '@presentation/components/card-book-horizontal/card-book-horizontal.component';
 
 @Component({
@@ -12,7 +12,7 @@ import { CardBookHorizontalComponent } from '@presentation/components/card-book-
     templateUrl: './trending.component.html',
     styleUrls: ['./trending.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [CommonModule, CardBookComponent, CardBookHorizontalComponent]
+    imports: [CommonModule, CardBookComponent, CardBookHorizontalComponent, DefaultButtonComponent]
 })
 export class TrendingComponent implements AfterViewInit{
 
