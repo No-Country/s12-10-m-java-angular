@@ -4,17 +4,24 @@ import { CardBookComponent } from './card-book.component';
 
 describe('CardBookComponent', () => {
   let component: CardBookComponent;
-  let fixture: ComponentFixture<CardBookComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CardBookComponent]
-    })
-    .compileComponents();
-    
-    fixture = TestBed.createComponent(CardBookComponent);
+      imports: [CardBookComponent],
+    }).compileComponents();
+  });
+
+
+  it('should create the app', () => {
+    const fixture = TestBed.createComponent(CardBookComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+  });
+
+  it('should create the app', () => {
+    const fixture = TestBed.createComponent(CardBookComponent);
+    component= fixture.componentInstance;
+    expect(fixture).toBeTruthy();
   });
 
   it('should create', () => {

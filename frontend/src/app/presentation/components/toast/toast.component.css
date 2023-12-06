@@ -1,33 +1,21 @@
 .top-right {
     top: 2%;
     right: 2%;
-
-    transition: transform .6s ease-in-out;
 }
 
 .bottom-right {
     bottom: 2%;
     right: 2%;
-    transition: transform .6s ease-in-out;
-    animation: toast-in-right .7s;
-
-    transition: transform .6s ease-in;
 }
 
 .top-left{
     bottom: 2%;
     left: 2%;
-
-    transition: transform .6s ease-in;
-    animation: toast-in-left .7s;
 }
 
 .bottom-left{
     top: 2%;
     left: 2%;
-
-    transition: transform .6s ease-in;
-    animation: toast-in-left .7s;
 }
 
 .center {
@@ -108,7 +96,7 @@
     background-color: #3C58BA;
 }
 .toast div.bar.success-bar {
-    background-color: #069150;
+    background-color: oklch(57.71% 0.144 154.06);
 }
 .toast div.bar.warning-bar{
     background-color: #BA703C;
@@ -192,43 +180,6 @@
         white-space: nowrap;
     }
 }
-
-@keyframes toast-in-right {
-	from {
-	  transform: translateX(100%);
-	  
-	}
-	to {
-	  transform: translateX(0);
-	}
-}
-
-@keyframes toast-in-left {
-	from {
-		transform: translateX(-100%);
-		
-	}
-	to {
-		transform: translateX(0);
-	}
-}
-
-@keyframes toast-out-right {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(100%);
-    }
-  }
-
-  .animate-in-right {
-    animation: toast-in-right .7s;
-  }
-  
-  .animate-in-left {
-    animation: toast-in-left .7s;
-  }
 
   @keyframes fade-out {
     from {

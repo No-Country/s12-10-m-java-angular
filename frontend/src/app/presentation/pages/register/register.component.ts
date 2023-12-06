@@ -7,10 +7,13 @@ import { Subject, takeUntil, first } from 'rxjs';
 import { ToastComponent } from '@presentation/components/toast/toast.component';
 import { Router } from '@angular/router';
 import { ToastService } from 'app/data/services/toast/Toast.service';
+import { LoggedInService } from 'app/data/services/login/loggedIn.service';
+import { AuthResponse } from 'app/data/models/AuthResponse';
+import { NavBarFormsComponent } from '@presentation/components/nav-bar-forms/nav-bar-forms.component';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RegisterFormComponent, ToastComponent],
+  imports: [CommonModule, RegisterFormComponent, ToastComponent, NavBarFormsComponent],
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
@@ -21,6 +24,7 @@ export class RegisterComponent implements OnInit, OnDestroy  {
   private readonly toast = inject(ToastService);
   private readonly service: RegisterService = inject(RegisterService);
   private readonly router: Router = inject(Router);
+  private readonly loggedInState: LoggedInService = inject(LoggedInService);
 
   private destroy$: Subject<void>;
 
@@ -40,13 +44,14 @@ export class RegisterComponent implements OnInit, OnDestroy  {
     const service = this.service;
     const router = this.router;
     const toast = this.toast;
+    const loggedInState = this.loggedInState;
     toast.info("Sending", "Waiting answer.", 5);
 
     const registerObserver = {
-      register: registerSubmitted,
-      next(registerResponse: any): void{
+      register: {} as AuthResponse,
+      next(registerResponse: AuthResponse): void{
         this.register = registerResponse;
-        service.setInStorage(this.register);
+        loggedInState.setLogin(registerResponse);
         toast.success("Success", "Register in.", 5);
       },
       error(err: any): void{
@@ -54,9 +59,9 @@ export class RegisterComponent implements OnInit, OnDestroy  {
         toast.error("Error", err.error.message, 5);
       },
       complete(): void{
-        if(this.register.id !== registerSubmitted.id) localStorage.setItem("id", this.register.id);
-
-        setTimeout(()=>router.navigate(["/"]), 700);
+        if(this.register.id !== registerSubmitted.id) loggedInState.updateId(this.register.id as string);
+        console.log(this.register.role);
+        if(this.register.role === "USER") setTimeout(()=>router.navigate(["/"]), 700);
       }
     };
 
