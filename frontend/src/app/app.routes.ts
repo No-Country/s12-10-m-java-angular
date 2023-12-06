@@ -40,6 +40,11 @@ export const routes: Routes = [
         providers: [LoginService ],
     },
     {
+        path: 'Cart',
+        title: 'Cart',
+        loadComponent: ()=> import('@presentation/pages/cart/cart.component').then(c => c.CartComponent),
+    },
+    {
         path: '404',
         title: 'Page Not Found',
         loadComponent: () => import('@presentation/pages/not-found/not-found.component').then(c => c.NotFoundComponent),
