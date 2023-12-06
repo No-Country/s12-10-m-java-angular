@@ -20,7 +20,7 @@ export class SignalsStoreService<T> extends AbstractStoreService< T, Signal<T[an
     }
     
  
-    public setState(partialState: Partial<T>): void {
+    public setState(partialState: Partial<T> | null): void {
       this.state.update((currentValue) => ({ ...currentValue, ...partialState }));
     }
   }
