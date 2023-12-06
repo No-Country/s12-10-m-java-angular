@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
+@CrossOrigin(origins = "${ALLOWED_ORIGINS}")
 @RestController
 @RequestMapping("/book")
 public class BookController {
@@ -196,12 +198,7 @@ public class BookController {
         }
     }
 
-
-
-
-
-
-/*    @GetMapping(path = "/searchTrend")
+    @GetMapping(path = "/searchTrend")
     public ResponseEntity<?> getBookByTrend() throws Exception {
         try {
             List<BookResponse> book = bookService.searchByTrend();
@@ -221,7 +218,14 @@ public class BookController {
         }
     }
 
-
-    */
+    @GetMapping(path = "/searchTitle/{title}")
+    public ResponseEntity<?> getBookByTitle(@PathVariable String title) throws Exception {
+        try {
+            List<BookResponse> book = bookService.searchByTitle(title);
+            return new ResponseEntity<>(book, HttpStatus.OK);
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
 
 }

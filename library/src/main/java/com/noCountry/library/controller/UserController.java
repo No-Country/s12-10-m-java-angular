@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+@CrossOrigin(origins = "${ALLOWED_ORIGINS}")
 @RestController
 @RequestMapping("/user")
 public class UserController {

@@ -46,6 +46,7 @@ public class SecurityConfig {
                    authRequestConfig.requestMatchers(HttpMethod.POST,"/authenticate/register").permitAll();
                    authRequestConfig.requestMatchers(HttpMethod.POST,"/authenticate/**").permitAll();
                    authRequestConfig.requestMatchers(HttpMethod.GET,"/authenticate/hello").permitAll();
+                   authRequestConfig.requestMatchers("/author/**").permitAll();
                    authRequestConfig.anyRequest().authenticated();
                })
                .build();
@@ -55,12 +56,12 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedOrigin("*"); //Configuracion de los origenes de la peticion
+        configuration.addAllowedOrigin("*");
+        //configuration.setAllowedOrigins(List.of("https://booksleaks.netlify.app/", "http://localhost:4200/*"));
         configuration.setAllowedMethods(Arrays.asList("*")); //Configuracion de los metodos que van a estar permitidos (GET,POST,etc)
         configuration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
         configuration.setMaxAge(3600l);
-        configuration.setAllowCredentials(true); //Si acepta cookies como session id en caso de usar sesiones o el bearer token
-
+        
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
