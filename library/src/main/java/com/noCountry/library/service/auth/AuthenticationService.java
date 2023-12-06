@@ -16,67 +16,59 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Map;
 
-
 @Service
 public class AuthenticationService {
 
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private JwtService jwtService;
+	@Autowired
+	private UserService userService;
+	@Autowired
+	private JwtService jwtService;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
-    public UserDetailsDTO registerUser(RegisterRequest newUser) {
+	@Autowired
+	private AuthenticationManager authenticationManager;
 
-        User user = userService.registeUser(newUser);
-        String jwt = jwtService.generateToken(user,generateExtraClaims(user));
+	public UserDetailsDTO registerUser(RegisterRequest newUser) {
 
-        UserDetailsDTO userDetailsDTO = UserDetailsDTO.builder()
-                .name(user.getName())
-                .lastName(user.getLastName())
-                .email(user.getEmail())
-                .jwt(jwt)
-                .role(user.getRole().name())
-                .list(user.getAuthorities().stream().toList())
-                .build();
+		User user = userService.registeUser(newUser);
+		String jwt = jwtService.generateToken(user, generateExtraClaims(user));
 
-        return userDetailsDTO;
-    }
+		UserDetailsDTO userDetailsDTO = UserDetailsDTO.builder().name(user.getName()).lastName(user.getLastName())
+				.email(user.getEmail()).jwt(jwt).role(user.getRole().name())
+				.list(user.getAuthorities().stream().toList()).build();
 
-    private Map<String, Object> generateExtraClaims(User user) {
-        Map<String,Object> extraClaims = new HashMap<>();
-        extraClaims.put("name",user.getName());
-        extraClaims.put("lastName",user.getLastName());
-        extraClaims.put("authorities",user.getAuthorities());
+		return userDetailsDTO;
+	}
 
-        return extraClaims;
-    }
+	private Map<String, Object> generateExtraClaims(User user) {
+		
+		Map<String, Object> extraClaims = new HashMap<>();
+		extraClaims.put("name", user.getName());
+		extraClaims.put("lastName", user.getLastName());
+		extraClaims.put("authorities", user.getAuthorities());
 
-    public UserDetailsDTO login(LoginRequest login) {
+		return extraClaims;
+	}
 
-        Authentication authentication = new UsernamePasswordAuthenticationToken(login.getEmail(),login.getPassword());
-        authenticationManager.authenticate(authentication);
+	public UserDetailsDTO login(LoginRequest login) {
 
-        User userDetails = userService.findByEmail(login.getEmail()).get();
-        String jwt = jwtService.generateToken(userDetails,generateExtraClaims(userDetails));
-        UserDetailsDTO userDetailsDTO = UserDetailsDTO.builder()
-                .name(userDetails.getName())
-                .lastName(userDetails.getLastName())
-                .email(userDetails.getEmail())
-                .jwt(jwt)
-                .role(userDetails.getRole().name())
-                .list(userDetails.getAuthorities().stream().toList())
-                .build();
-        return userDetailsDTO;
+		Authentication authentication = new UsernamePasswordAuthenticationToken(login.getEmail(), login.getPassword());
+		authenticationManager.authenticate(authentication);
 
-    }
+		User userDetails = userService.findByEmail(login.getEmail()).get();
+		String jwt = jwtService.generateToken(userDetails, generateExtraClaims(userDetails));
+		UserDetailsDTO userDetailsDTO = UserDetailsDTO.builder().name(userDetails.getName())
+				.lastName(userDetails.getLastName()).email(userDetails.getEmail()).jwt(jwt)
+				.role(userDetails.getRole().name()).list(userDetails.getAuthorities().stream().toList()).build();
+		return userDetailsDTO;
 
-    public User findLoggedInUser() {
+	}
 
-        Authentication auth = (UsernamePasswordAuthenticationToken)SecurityContextHolder.getContext().getAuthentication();
-            String username = (String)auth.getPrincipal();
-            return userService.findByEmail(username).orElseThrow(()-> new NotFoundException("User not found"));
+	public User findLoggedInUser() {
 
-    }
+		Authentication auth = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext()
+				.getAuthentication();
+		String username = (String) auth.getPrincipal();
+		return userService.findByEmail(username).orElseThrow(() -> new NotFoundException("User not found"));
+
+	}
 }

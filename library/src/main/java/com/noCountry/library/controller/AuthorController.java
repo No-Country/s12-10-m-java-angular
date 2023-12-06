@@ -1,11 +1,15 @@
 package com.noCountry.library.controller;
 
+import java.util.List;
 import com.noCountry.library.dto.Author.AuthorDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,9 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.noCountry.library.entities.Author;
 import com.noCountry.library.service.impl.AuthorServiceImpl;
 
-/*
+
 @CrossOrigin(origins = "${ALLOWED_ORIGINS}")
-*/
 @RestController
 @RequestMapping("/author")
 public class AuthorController {
@@ -23,19 +26,29 @@ public class AuthorController {
 	@Autowired
 	private AuthorServiceImpl service;
 
-	/*@PostMapping("/save")
-	public ResponseEntity<String> save(@RequestBody Author author) {
-		return service.save(author);
-	}*/
-
-	@PostMapping(path = "/createAuthor")
+	@PostMapping(path = "/save")
 	public ResponseEntity<?> createAuthor(@RequestBody AuthorDto authorDto) throws Exception {
 		try {
-			AuthorDto author = service.createAuthor(authorDto);
+			AuthorDto author = service.save(authorDto);
 			return new ResponseEntity<>(author, HttpStatus.CREATED);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}
+	}
+
+	@GetMapping("/list")
+	public List<AuthorDto> getAll() {
+		return service.getAll();
+	}
+
+	@PutMapping("/update/{id}")
+	public ResponseEntity<String> update(@PathVariable String id, @RequestBody AuthorDto authorDto) {
+		return service.update(id, authorDto);
+	}
+
+	@PutMapping("/delete/{id}")
+	public ResponseEntity<String> delete(@PathVariable String id) {
+		return service.delete(id);
 	}
 
 }
