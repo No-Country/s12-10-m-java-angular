@@ -14,17 +14,15 @@ import java.util.Optional;
 @Repository
 public interface BookRepository extends JpaRepository<Book, String>, JpaSpecificationExecutor<Book> {
 
+    Optional<Book> findByISBN(String isbn);
+
     Page<Book> findByGenre(Genre genre, Pageable pageable);
 
     Page<Book> findByTitleContaining(String partialTitle, Pageable pageable);
 
+    Page<Book> findAllByOrderByCreationDateDesc(Pageable pageable);
 
-
-
-    Optional<List<Book>> findTop5ByOrderBySalesAmountAsc();
-
-    Optional<List<Book>> findTop5ByOrderByRatingAsc();
-
+    Page<Book> findAllByOrderByRatingDesc(Pageable pageable);
 
 
 

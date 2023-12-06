@@ -1,8 +1,6 @@
 package com.noCountry.library.service;
 
 import com.noCountry.library.dto.Book.*;
-import com.noCountry.library.entities.enums.Genre;
-import com.noCountry.library.entities.enums.Language;
 
 import java.util.List;
 
@@ -29,7 +27,7 @@ public interface BookService {
     PaginatedBookResponseDTO<BookToSearch> getBooksByCriteria(Integer pageNumber, Integer sizeElement,
                                                    Double minPrice, Double maxPrice, Integer minPages,
                                                    String genre, String language, Integer searchEvenNotAvailable,
-                                                   String orderBy, String secondOrderBy, String ascOrDesc);
+                                                   String orderBy, String ascOrDesc);
 
     void addImagesBook(String id, String img);
 
@@ -46,14 +44,11 @@ public interface BookService {
 
     PaginatedBookResponseDTO<BookToSearch> searchByTitle(String title, Integer pageNumber, Integer sizeElement);
 
+    PaginatedBookResponseDTO<BookToSearch> searchLatestAdded(Integer pageNumber, Integer sizeElement);
+
+    PaginatedBookResponseDTO<BookToSearch> searchByHighestRating(Integer pageNumber, Integer sizeElement);
 
 
-
-    List<BookResponse> searchByTrend();
-
-    List<BookResponse> searchByHighestRating();
-
-    List<BookResponse> searchLastAdditions();
 
 
 }

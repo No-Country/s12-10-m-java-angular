@@ -96,13 +96,12 @@ public class BookController {
                                                 @RequestParam(required = false) String language,
                                                 @RequestParam(required = false) Integer searchEvenNotAvailable,
                                                 @RequestParam(required = false) String orderBy,
-                                                @RequestParam(required = false) String secondOrderBy,
                                                 @RequestParam(required = false) String ascOrDesc) throws Exception {
         try {
             PaginatedBookResponseDTO<BookToSearch> books =
                     bookService.getBooksByCriteria(page, size,minPrice, maxPrice, minPages,
                                                 genre, language, searchEvenNotAvailable,
-                                                orderBy, secondOrderBy, ascOrDesc);
+                                                orderBy, ascOrDesc);
             return new ResponseEntity<>(books, HttpStatus.OK);
         } catch (Exception e){
             throw new Exception(e.getMessage());
@@ -132,6 +131,31 @@ public class BookController {
             throw new Exception(e.getMessage());
         }
     }
+
+    @GetMapping(path = "/searchLatestAdded")
+    public ResponseEntity<?> getBookLatestAdded(@RequestParam(defaultValue = "0") int page,
+                                                @RequestParam(defaultValue = "5") int size) throws Exception {
+        try {
+            PaginatedBookResponseDTO<BookToSearch> book = bookService.searchLatestAdded(page, size);
+            return new ResponseEntity<>(book, HttpStatus.OK);
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @GetMapping(path = "/searchHighestRating")
+    public ResponseEntity<?> searchByHighestRating(@RequestParam(defaultValue = "0") int page,
+                                                   @RequestParam(defaultValue = "5") int size) throws Exception {
+        try {
+            PaginatedBookResponseDTO<BookToSearch> book = bookService.searchByHighestRating(page, size);
+            return new ResponseEntity<>(book, HttpStatus.OK);
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+
+
 
 
     @PostMapping(path = "/createBook")
@@ -200,28 +224,5 @@ public class BookController {
 
 
 
-
-/*    @GetMapping(path = "/searchTrend")
-    public ResponseEntity<?> getBookByTrend() throws Exception {
-        try {
-            List<BookResponse> book = bookService.searchByTrend();
-            return new ResponseEntity<>(book, HttpStatus.OK);
-        } catch (Exception e){
-            throw new Exception(e.getMessage());
-        }
-    }
-
-    @GetMapping(path = "/searchHighestRating")
-    public ResponseEntity<?> getBookBy() throws Exception {
-        try {
-            List<BookResponse> book = bookService.searchByHighestRating();
-            return new ResponseEntity<>(book, HttpStatus.OK);
-        } catch (Exception e){
-            throw new Exception(e.getMessage());
-        }
-    }
-
-
-    */
 
 }
