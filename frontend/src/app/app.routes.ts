@@ -23,7 +23,7 @@ export const routes: Routes = [
         providers: [RegisterService ]
     },
     {
-        path: 'shop',
+        path: 'shop/:searchTerm',
         title: 'Books Leaks - Shop page',
         loadComponent: () => import('@presentation/pages/shop/shop.component').then(c => c.ShopComponent),
         providers: [ ShopService ]

@@ -18,4 +18,5 @@ export interface BookDetail {
     name: string;
     price: number;
     img: string;
+    description: string;
 }

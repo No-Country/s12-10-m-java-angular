@@ -82,12 +82,13 @@ export const booksArray: Book[]=[
   ];
 
 
-  export const BOOK_DETAIL_MOOK: BookDetail[]=[
+  export const BOOK_DETAIL_MOOK: BookDetail[] =[
     { 
       ID: 1,
       img: "../../assets/booksImages/book_1.webp",
       name: "The prince",
       author: "Nicolas Maquiavelo",
+      description: "a",
       price: 500
     },
     { 
@@ -95,6 +96,7 @@ export const booksArray: Book[]=[
       img: "../../assets/booksImages/book_2.webp",
       name: "The greatest cover-up in history",
       author: "Howerd Dilan el the best",
+      description: "a",
       price: 500
     },
     { 
@@ -102,6 +104,7 @@ export const booksArray: Book[]=[
       img: "../../assets/booksImages/book_4.webp",
       name: "Hide and seek",
       author: "Olivia Wilson",
+      description: "a",
       price: 1000
     },
     { 
@@ -109,6 +112,7 @@ export const booksArray: Book[]=[
       img: "../../assets/booksImages/book_5.webp",
       name: "Rules for visiting",
       author: "Jesica Francis Kane",
+      description: "a",
       price: 7000
     },
     { 
@@ -116,6 +120,7 @@ export const booksArray: Book[]=[
       img: "../../assets/booksImages/book_6.webp",
       name: "Night Circus",
       author: "Erin Morgenstern",
+      description: "a",
       price: 500
     },
     { 
@@ -123,6 +128,7 @@ export const booksArray: Book[]=[
       img: "../../assets/booksImages/book_7.webp",
       name: "The beast in cave",
       author: "H.P. Lovecraft",
+      description: "a",
       price: 7000
     },
     { 
@@ -130,6 +136,7 @@ export const booksArray: Book[]=[
       img: "../../assets/booksImages/book_8.webp",
       name: "The grand design",
       author: "Stephen hawking and Leonard Mlodinow",
+      description: "a",
       price: 7000
     },
     { 
@@ -137,6 +144,7 @@ export const booksArray: Book[]=[
       img: "../../assets/booksImages/book_9.webp",
       name: "Opticks",
       author: "Issac Newton",
+      description: "a",
       price: 7000
     },
     // { 
@@ -186,6 +194,7 @@ export const booksArray: Book[]=[
       img: "../../assets/booksImages/book_1.webp",
       name: "The prince",
       author: "Nicolas Maquiavelo",
+      description: "a",
       price: 500
     },
     { 
@@ -193,6 +202,7 @@ export const booksArray: Book[]=[
       img: "../../assets/booksImages/book_2.webp",
       name: "The greatest cover-up in history",
       author: "Howerd Dilan",
+      description: "a",
       price: 500
     },
     { 
@@ -200,6 +210,7 @@ export const booksArray: Book[]=[
       img: "../../assets/booksImages/book_4.webp",
       name: "Hide and seek",
       author: "Olivia Wilson",
+      description: "a",
       price: 1000
     },
     { 
@@ -207,6 +218,7 @@ export const booksArray: Book[]=[
       img: "../../assets/booksImages/book_5.webp",
       name: "Rules for visiting",
       author: "Jesica Francis Kane",
+      description: "a",
       price: 7000
     },
   ];

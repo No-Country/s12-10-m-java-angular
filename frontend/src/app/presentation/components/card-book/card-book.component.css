@@ -78,6 +78,7 @@
 
     min-height: 20px;
     overflow: hidden;
+    outline: none;
 }
 
 .card-book .content-info p {
@@ -110,8 +111,9 @@
     margin-top: 0px;
 }
 
-.card-book .content-info h2:hover {
+.card-book .content-info h2:hover, .card-book .content-info h2:focus {
     color: #069150;
+    
 }
 
 @media only screen and (min-width: 450px) {
