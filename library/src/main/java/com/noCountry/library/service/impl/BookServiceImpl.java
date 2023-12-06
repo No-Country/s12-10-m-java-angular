@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -163,15 +164,17 @@ public class BookServiceImpl implements BookService {
     @Override
     public PaginatedBookResponseDTO<BookToSearch> getBooksByCriteria(Integer pageNumber, Integer sizeElement,
                                                           Double minPrice, Double maxPrice, Integer minPages,
-                                                          String genre, String language, Integer searchEvenNotAvailable) {
+                                                          String genre, String language, Integer searchEvenNotAvailable,
+                                                          String orderBy, String secondOrderBy, String ascOrDesc) {
 
-        Genre areGenre = searchGenre(genre);
-        Language areLanguage = searchLanguage(language);
+        Genre thisGenre = searchGenre(genre);
+        Language thisLanguage = searchLanguage(language);
 
         Specification<Book> spec = BookSpecification.filterByCriteria(minPrice, maxPrice, minPages,
-                                                                areGenre, areLanguage, searchEvenNotAvailable);
+                                                                thisGenre, thisLanguage, searchEvenNotAvailable);
 
-        Pageable pageable = PageRequest.of(pageNumber, sizeElement);
+        Sort sort = getSortFromOrderBy(orderBy, secondOrderBy, ascOrDesc);
+        Pageable pageable = PageRequest.of(pageNumber, sizeElement, sort);
         Page<Book> page = bookRepository.findAll(spec, pageable);
 
         return pagesBookToPagination(page, mapperBooks::listBookToListBookToSearch);
@@ -273,7 +276,7 @@ public class BookServiceImpl implements BookService {
 
 
     @Override
-    public PaginatedBookResponseDTO<BookResponse> searchByGenre(String genre, Integer pageNumber, Integer sizeElement) {
+    public PaginatedBookResponseDTO<BookToSearch> searchByGenre(String genre, Integer pageNumber, Integer sizeElement) {
         Genre genreElement = searchGenre(genre);
 
         if (genreElement == null ) {
@@ -287,10 +290,20 @@ public class BookServiceImpl implements BookService {
             throw new BadRequestException("No se encontraron libros del genero " + genre);
         }
 
-        return pagesBookToPagination(pagesBook, mapperBooks::listBooksToListResponseBooks);
+        return pagesBookToPagination(pagesBook, mapperBooks::listBookToListBookToSearch);
     }
 
+    @Override
+    public PaginatedBookResponseDTO<BookToSearch> searchByTitle(String title, Integer pageNumber, Integer sizeElement) {
+        Pageable page = PageRequest.of(pageNumber, sizeElement);
+        Page<Book> pagesBook = bookRepository.findByTitleContaining(title, page);
 
+        if (pagesBook.isEmpty()) {
+            throw new BadRequestException("No se encontraron libros con el texto ingresado ");
+        }
+
+        return pagesBookToPagination(pagesBook, mapperBooks::listBookToListBookToSearch);
+    }
 
 
     @Override
@@ -309,17 +322,14 @@ public class BookServiceImpl implements BookService {
     }
 
 
-    @Override
-    public List<BookResponse> searchByTitle(String title) {
-        Optional<List<Book>> auxBook = bookRepository.findByTitleContaining(title);
 
-        return mapperBooks.listBooksToListResponseBooks(auxBook.get());
-    }
 
     @Override
     public List<BookResponse> searchLastAdditions() {
         return null;
     }
+
+
 
     private Genre searchGenre(String genre) {
 
@@ -361,6 +371,57 @@ public class BookServiceImpl implements BookService {
         return bookResponseDTO;
     }
 
+    private Sort getSortFromOrderBy(String orderBy, String secondOrderBy, String ascOrDesc) {
+        if (orderBy == null && secondOrderBy == null) {
+            return Sort.unsorted();
+        }
 
+        Sort.Order primaryOrder = null;
+        Sort.Order secondaryOrder = null;
+
+        if (orderBy != null) {
+            primaryOrder = switch (orderBy) {
+                case "alphabetically" -> Sort.Order.by("title");
+                case "publicationDate" -> Sort.Order.by("publicationDate");
+                case "salesAmount" -> Sort.Order.by("salesAmount");
+                case "rating" -> Sort.Order.by("rating");
+                case "price" -> Sort.Order.by("price");
+                default -> throw new IllegalArgumentException("OrderBy no es un parametro valido: " + orderBy);
+            };
+        }
+
+        if (secondOrderBy != null) {
+            secondaryOrder = switch (secondOrderBy) {
+                case "alphabetically" -> Sort.Order.by("title");
+                case "publicationDate" -> Sort.Order.by("publicationDate");
+                case "salesAmount" -> Sort.Order.by("salesAmount");
+                case "rating" -> Sort.Order.by("rating");
+                case "price" -> Sort.Order.by("price");
+                default -> throw new IllegalArgumentException("secondOrderBy no es un parametro valido: " + secondOrderBy);
+            };
+        }
+
+        if ("DESC".equalsIgnoreCase(ascOrDesc)) {
+            if (primaryOrder != null && secondaryOrder != null) {
+                return Sort.by(primaryOrder).descending().and(Sort.by(secondaryOrder).descending());
+            } else if (primaryOrder != null) {
+                return Sort.by(primaryOrder).descending();
+            } else if (secondaryOrder != null) {
+                return Sort.by(secondaryOrder).descending();
+            } else {
+                return Sort.unsorted();
+            }
+        } else {
+            if (primaryOrder != null && secondaryOrder != null) {
+                return Sort.by(primaryOrder).ascending().and(Sort.by(secondaryOrder).ascending());
+            } else if (primaryOrder != null) {
+                return Sort.by(primaryOrder).ascending();
+            } else if (secondaryOrder != null) {
+                return Sort.by(secondaryOrder).ascending();
+            } else {
+                return Sort.unsorted();
+            }
+        }
+    }
 
 }

@@ -32,8 +32,7 @@ public class BookController {
         }
     }
 
-    @GetMapping(path = "/allBooks"
-    )
+    @GetMapping(path = "/allBooks")
     public ResponseEntity<?> getAllBooks(@RequestParam(defaultValue = "0") int page,
                                          @RequestParam(defaultValue = "5") int size) throws Exception {
         try {
@@ -95,18 +94,44 @@ public class BookController {
                                                 @RequestParam(required = false) Integer minPages,
                                                 @RequestParam(required = false) String genre,
                                                 @RequestParam(required = false) String language,
-                                                @RequestParam(required = false) Integer searchEvenNotAvailable) throws Exception {
+                                                @RequestParam(required = false) Integer searchEvenNotAvailable,
+                                                @RequestParam(required = false) String orderBy,
+                                                @RequestParam(required = false) String secondOrderBy,
+                                                @RequestParam(required = false) String ascOrDesc) throws Exception {
         try {
             PaginatedBookResponseDTO<BookToSearch> books =
                     bookService.getBooksByCriteria(page, size,minPrice, maxPrice, minPages,
-                                                genre, language, searchEvenNotAvailable);
+                                                genre, language, searchEvenNotAvailable,
+                                                orderBy, secondOrderBy, ascOrDesc);
             return new ResponseEntity<>(books, HttpStatus.OK);
         } catch (Exception e){
             throw new Exception(e.getMessage());
         }
     }
 
+    @GetMapping(path = "/searchGenre/{genre}")
+    public ResponseEntity<?> getBookByGenre(@PathVariable String genre,
+                                            @RequestParam(defaultValue = "0") int page,
+                                            @RequestParam(defaultValue = "5") int size) throws Exception {
+        try {
+            PaginatedBookResponseDTO<BookToSearch> book = bookService.searchByGenre(genre, page, size);
+            return new ResponseEntity<>(book, HttpStatus.OK);
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
 
+    @GetMapping(path = "/searchTitle/{title}")
+    public ResponseEntity<?> getBookByTitle(@PathVariable String title,
+                                            @RequestParam(defaultValue = "0") int page,
+                                            @RequestParam(defaultValue = "5") int size) throws Exception {
+        try {
+            PaginatedBookResponseDTO<BookToSearch> book = bookService.searchByTitle(title, page, size);
+            return new ResponseEntity<>(book, HttpStatus.OK);
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
 
 
     @PostMapping(path = "/createBook")
@@ -172,38 +197,8 @@ public class BookController {
     }
 
 
-    @GetMapping(path = "/searchBy")
-    public ResponseEntity<?> searchBy(@RequestParam(defaultValue = "0") int page,
-                                      @RequestParam(defaultValue = "5") int size,
-                                      @RequestParam(required = false) int priceMin,
-                                      @RequestParam(required = false) int priceMax,
-                                      @RequestParam(required = false) String genre,
-                                      @RequestParam(required = false) String language,
-                                      @RequestParam(required = false) String isAvailable) throws Exception {
-        try {
-
-            // ver q tipo de dto devolver. completo, tipo card, o card con description
 
 
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch (Exception e){
-            throw new Exception(e.getMessage());
-        }
-    }
-
-
-
-    @GetMapping(path = "/searchGenre/{genre}")
-    public ResponseEntity<?> getBookByGenre(@PathVariable String genre,
-                                            @RequestParam(defaultValue = "0") int page,
-                                            @RequestParam(defaultValue = "5") int size) throws Exception {
-        try {
-            PaginatedBookResponseDTO<BookResponse> book = bookService.searchByGenre(genre, page, size);
-            return new ResponseEntity<>(book, HttpStatus.OK);
-        } catch (Exception e){
-            throw new Exception(e.getMessage());
-        }
-    }
 
 
 /*    @GetMapping(path = "/searchTrend")
@@ -226,14 +221,7 @@ public class BookController {
         }
     }
 
-    @GetMapping(path = "/searchTitle/{title}")
-    public ResponseEntity<?> getBookByTitle(@PathVariable String title) throws Exception {
-        try {
-            List<BookResponse> book = bookService.searchByTitle(title);
-            return new ResponseEntity<>(book, HttpStatus.OK);
-        } catch (Exception e){
-            throw new Exception(e.getMessage());
-        }
-    }*/
+
+    */
 
 }

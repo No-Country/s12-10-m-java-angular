@@ -28,7 +28,8 @@ public interface BookService {
 
     PaginatedBookResponseDTO<BookToSearch> getBooksByCriteria(Integer pageNumber, Integer sizeElement,
                                                    Double minPrice, Double maxPrice, Integer minPages,
-                                                   String genre, String language, Integer searchEvenNotAvailable);
+                                                   String genre, String language, Integer searchEvenNotAvailable,
+                                                   String orderBy, String secondOrderBy, String ascOrDesc);
 
     void addImagesBook(String id, String img);
 
@@ -41,13 +42,16 @@ public interface BookService {
 
 
 
-    PaginatedBookResponseDTO<BookResponse> searchByGenre(String genre, Integer pageNumber, Integer sizeElement);
+    PaginatedBookResponseDTO<BookToSearch> searchByGenre(String genre, Integer pageNumber, Integer sizeElement);
+
+    PaginatedBookResponseDTO<BookToSearch> searchByTitle(String title, Integer pageNumber, Integer sizeElement);
+
+
+
 
     List<BookResponse> searchByTrend();
 
     List<BookResponse> searchByHighestRating();
-
-    List<BookResponse> searchByTitle(String title);
 
     List<BookResponse> searchLastAdditions();
 

@@ -16,7 +16,9 @@ public interface BookRepository extends JpaRepository<Book, String>, JpaSpecific
 
     Page<Book> findByGenre(Genre genre, Pageable pageable);
 
-    Optional<List<Book>> findByTitleContaining(String partialTitle);
+    Page<Book> findByTitleContaining(String partialTitle, Pageable pageable);
+
+
 
 
     Optional<List<Book>> findTop5ByOrderBySalesAmountAsc();
