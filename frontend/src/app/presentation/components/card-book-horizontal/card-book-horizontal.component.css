@@ -1,0 +1,102 @@
+.card-book {        
+    max-width: 600px;
+    min-width: 200px;
+    aspect-ratio: 6/2;
+    display: flex;
+    position: relative;
+    z-index: 20;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.12);
+    border-radius: 5vw;
+    overflow:hidden;
+}
+
+.card-book .img-wrapper:hover .img-container {
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+.card-book .img-wrapper{
+    border-radius: 0.9375rem 0.9375rem 0rem 0rem;
+    background: linear-gradient(90deg, #EEE 0%, #DFDFDF 50%, #FFF 100%);    ;
+    width: 45%;
+    aspect-ratio: 2/2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    outline: none;
+}
+
+.card-book .img-wrapper .img-container {
+    overflow: hidden;
+    position: relative;
+    width: 155px;
+    aspect-ratio: 1/1;
+    opacity: .9;
+    transition-duration: 250ms;
+    transition-timing-function: ease-out;
+    transition-property: opacity, transform;
+    border-radius: .6rem;
+}
+
+.card-book .img-wrapper .img-container img{
+    object-fit: scale-down;
+    padding: 10%;
+}
+
+.card-book .content-info {
+    margin: auto 0px;
+    width: 90%;
+    font-weight: 500;
+    color: #242221;
+
+    line-height: normal;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition-duration: 100ms;
+    transition-timing-function: ease;
+    transition-property: color;
+}
+
+.card-book .content-info h2 {
+    font-weight: 500;
+    color: #242221;
+
+    line-height: normal;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition-duration: 100ms;
+    transition-timing-function: ease;
+    transition-property: color;
+}
+
+.card-book .content-info h2:hover {
+    color: #069150;
+}
+
+.default-button{
+    text-overflow: ellipsis;
+      border-radius: 3.125rem;
+      padding-inline: 0.25rem;
+      padding-block: 0.6rem;
+      font-size: .875rem;
+      font-weight: 500;
+      transition: background .19s linear, box-shadow .17s cubic-bezier(0.65, 0.05, 0.36, 1);
+  }
+  
+  .default-button:hover{
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.30);
+  }
+
+  .card-book.near-center-effect {
+    /* Estilos especiales para las tarjetas cerca del centro */
+    /* Puedes ajustar estos estilos según tus necesidades */
+    transform: scale(1.2);
+    transition: transform 0.3s ease-in-out;
+  }
