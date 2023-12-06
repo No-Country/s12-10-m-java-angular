@@ -35,15 +35,20 @@ public class AuthorController {
 			throw new Exception(e.getMessage());
 		}
 	}
-	
+
+	@GetMapping("/list")
+	public List<AuthorDto> getAll() {
+		return service.getAll();
+	}
+
+	@PutMapping("/update/{id}")
+	public ResponseEntity<String> update(@PathVariable String id, @RequestBody AuthorDto authorDto) {
+		return service.update(id, authorDto);
+	}
+
 	@PutMapping("/delete/{id}")
 	public ResponseEntity<String> delete(@PathVariable String id) {
 		return service.delete(id);
-	}
-	
-	@GetMapping("/list")
-	public List<Author> getAll (){
-		return service.getAll();
 	}
 
 }
