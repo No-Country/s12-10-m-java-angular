@@ -1,8 +1,7 @@
 import { Injectable, Injector } from '@angular/core';
-import { BookDetail } from 'app/data/models/book';
-import { Observable, catchError, of, tap } from 'rxjs';
+import { Book, BookDetail } from 'app/data/models/book';
+import { Observable } from 'rxjs';
 import { ApiService } from '../api.service';
-import { SignalsStoreService } from '../store/StoreSignals.service';
 import { BOOK_DETAIL_MOOK } from 'app/data/mocks/booksArray';
 import { RxjsStoreService } from '../store/StoreRxJs.service';
 
@@ -43,7 +42,7 @@ export class BooksService extends RxjsStoreService<BookDetail[]> {
     }
   }
 
-  public detail(id: number): Observable<BookDetail>{
+  public detail(id: number): Observable<Book>{
     return this.api.httpGet(`book/toCard/${id}`);
   } 
 
