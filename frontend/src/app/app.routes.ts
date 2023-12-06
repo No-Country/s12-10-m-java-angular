@@ -42,6 +42,13 @@ export const routes: Routes = [
         providers: [LoginService ],
     },
     {
+
+        
+        path: 'Cart',
+        title: 'Cart',
+        loadComponent: ()=> import('@presentation/pages/cart/cart.component').then(c => c.CartComponent),
+    },
+    {
         path: 'book/:id',
         title: 'Detail Book',
         loadComponent: () => import('@presentation/components/book-detail-card/book-detail-card.component').then(c => c.BookDetailCardComponent),
