@@ -3,16 +3,17 @@ import { ChangeDetectionStrategy, Component, Injector, OnDestroy, OnInit, inject
 import { LoginFormComponent } from '../../components/login-form/login-form.component';
 import { UserLoginState } from 'app/data/models/userLoginState';
 import { LoginService } from 'app/data/services/login/login.service';
-import { Observable, Subject, Subscription, catchError, first, takeUntil } from 'rxjs';
+import { Subject, first, takeUntil } from 'rxjs';
 import { Router } from '@angular/router';
 import { ToastComponent } from '@presentation/components/toast/toast.component';
 import { ToastService } from 'app/data/services/toast/Toast.service';
-import { ToastModel, ToastPosition, ToastType } from 'app/data/models/toast.model';
 import { AuthResponse } from 'app/data/models/AuthResponse';
+import { LoggedInService } from 'app/data/services/login/loggedIn.service';
+import { NavBarFormsComponent } from '@presentation/components/nav-bar-forms/nav-bar-forms.component';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, LoginFormComponent, ToastComponent],
+  imports: [CommonModule, LoginFormComponent, ToastComponent, NavBarFormsComponent],
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit, OnDestroy  {
   private readonly toast = inject(ToastService);
   private readonly service: LoginService = inject(LoginService);
   private readonly router: Router = inject(Router);
+  private readonly loggedInState: LoggedInService = inject(LoggedInService);
 
   private destroy$: Subject<void>;
 
@@ -40,25 +42,24 @@ export class LoginComponent implements OnInit, OnDestroy  {
     const service = this.service;
     const router = this.router;
     const toast = this.toast;
+    const loggedInState = this.loggedInState;
     toast.info("Sending", "Waiting answer.", 5);
 
     const loginObserver = {
-      login: {} as AuthResponse,
+      response: {} as AuthResponse,
       next(loginResponse: AuthResponse): void {
-        this.login.id =   loginResponse.id;
-        this.login.name = loginResponse.name;
-        this.login.lastName = loginResponse.lastName;
-        this.login.email = loginResponse.email;
-        this.login.jwt = loginResponse.jwt;
-
-        service.setInStorage(this.login);
-        toast.error("Success", "Logging in.", 5);
+        loginResponse.isActive = true;
+        loggedInState.setLogin(loginResponse);
+        this.response = loginResponse;
+        toast.success("Success", "Logging in.", 5);
       },
       error(err: any): void{
         toast.error("Error", "An unexpected error has occurred with the server", 5);
       },
       complete(): void {
-        setTimeout(()=>router.navigate(["/"]), 700);
+        console.log(this.response.role);
+        if(this.response.role === "USER")
+          setTimeout(()=>router.navigate(["/"]), 700);
       }
     };
 

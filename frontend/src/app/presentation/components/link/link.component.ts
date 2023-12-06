@@ -8,12 +8,15 @@ import { RouterLink } from '@angular/router';
   selector: 'app-link',
   template: `
     <div class="w-full flex justify-center items-center">
-      <a [routerLink]="[path]" [ngClass]="className" class="outline-none inline-block text-[.9rem] min-[1449px]:text-[1rem] cursor-pointer font-bold text-elipsis" role="link">
+      <a [routerLink]="[path]" [attr.aria-label]="textLink" [ngClass]="className" class="outline-none inline-block text-[.9rem] min-[1449px]:text-[1rem] cursor-pointer font-bold text-elipsis">
         {{ textLink }}
       </a>
     </div>
   `,
   styleUrls: ['./link.component.css'],
+  host: {
+    role: 'link',
+  },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LinkComponent implements OnInit {

@@ -1,10 +1,11 @@
+<h2 class="title mx-[7.5dvw] mb-[48px]"> Trending <strong class="text-[#33B672] font-medium">Books</strong></h2>
 <div class="container">
 
   <div class="image-list" #bookList (scroll)="onScroll()">
     @for (book of booksArray; track book.ID) {
       <!--   -->
       @if (screenWidth > 617) {
-        <app-card-book [book]="book" [className]="classOfCard"></app-card-book>
+        <card-book [book]="book" [className]="classOfCard"></card-book>
       }
       @else{
         <app-card-book-horizontal [book]="book" [className]="classOfCard" style="width: 90vw; margin: 0 5vw;"></app-card-book-horizontal>

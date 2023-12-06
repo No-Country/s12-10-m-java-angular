@@ -5,17 +5,29 @@ import { NewsLetterComponent } from './layouts/news-letter/news-letter.component
 import { NewArribalComponent } from './layouts/new-arribal/new-arribal.component';
 import { HeroComponent } from './layouts/hero/hero.component';
 import { BowserCategoriesComponent } from './layouts/bowser-categories/bowser-categories.component';
-// import { FavoriteBookComponent } from './layouts/favorite-book/favorite-book.component'; FavoriteBookComponent
-import { CardBookComponent } from '@presentation/components/card-book/card-book.component';
-import { CardBookHorizontalComponent } from '@presentation/components/card-book-horizontal/card-book-horizontal.component';
+import { FavoriteBookComponent } from './layouts/favorite-book/favorite-book.component';
+import { FooterComponent } from "../../components/footer/footer.component";
+import { NavbarComponent } from '@presentation/components/navbar/navbar.component';
+import { Navbar2Component } from '@presentation/components/navbar-2/navbar-2.component';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, BowserCategoriesComponent, HeroComponent, NewArribalComponent, NewsLetterComponent, TrendingComponent, CardBookHorizontalComponent],
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    standalone: true,
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+      CommonModule, 
+      BowserCategoriesComponent, 
+      HeroComponent, 
+      FavoriteBookComponent, 
+      NewArribalComponent, 
+      NewsLetterComponent, 
+      TrendingComponent, 
+      FooterComponent,
+      NavbarComponent,
+      Navbar2Component
+    ]
 })
 export class HomeComponent implements OnInit {
 

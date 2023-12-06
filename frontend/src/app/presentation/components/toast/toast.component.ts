@@ -16,7 +16,7 @@ export class ToastComponent implements OnInit {
   public readonly toasts = this.toast.state.asReadonly();
 
   constructor() { }
-
+  
   ngOnInit(): void {
   }
 

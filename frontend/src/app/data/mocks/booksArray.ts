@@ -85,86 +85,128 @@ export const booksArray: Book[]=[
   export const BOOK_DETAIL_MOOK: BookDetail[]=[
     { 
       ID: 1,
-      img: "../../assets/booksImages/1.jpg",
-      name: "Memoir of Vincent Van gogh",
-      author: "genre 6",
+      img: "../../assets/booksImages/book_1.webp",
+      name: "The prince",
+      author: "Nicolas Maquiavelo",
       price: 500
     },
     { 
       ID: 2,
-      img: "../../assets/booksImages/2.jpg",
-      name: "Helvetica",
-      author: "genre 6",
+      img: "../../assets/booksImages/book_2.webp",
+      name: "The greatest cover-up in history",
+      author: "Howerd Dilan el the best",
       price: 500
     },
     { 
       ID: 3,
-      img: "../../assets/booksImages/3.jpg",
-      name: "Scheveningnen",
-      author: "genre 6",
+      img: "../../assets/booksImages/book_4.webp",
+      name: "Hide and seek",
+      author: "Olivia Wilson",
       price: 1000
     },
     { 
       ID: 4,
-      img: "../../assets/booksImages/4.jpg",
-      name: "The graphic design",
-      author: "genre 6",
+      img: "../../assets/booksImages/book_5.webp",
+      name: "Rules for visiting",
+      author: "Jesica Francis Kane",
       price: 7000
     },
     { 
       ID: 5,
-      img: "../../assets/booksImages/5.jpg",
-      name: "The graphic design",
-      author: "genre 6",
-      price: 7000
+      img: "../../assets/booksImages/book_6.webp",
+      name: "Night Circus",
+      author: "Erin Morgenstern",
+      price: 500
     },
     { 
       ID: 6,
-      img: "../../assets/booksImages/6.jpg",
-      name: "The graphic design",
-      author: "genre 6",
+      img: "../../assets/booksImages/book_7.webp",
+      name: "The beast in cave",
+      author: "H.P. Lovecraft",
       price: 7000
     },
     { 
-      ID: 10,
-      img: "../../assets/booksImages/1.jpg",
-      name: "Memoir of Vincent Van gogh",
-      author: "genre 6",
+      ID: 7,
+      img: "../../assets/booksImages/book_8.webp",
+      name: "The grand design",
+      author: "Stephen hawking and Leonard Mlodinow",
+      price: 7000
+    },
+    { 
+      ID: 8,
+      img: "../../assets/booksImages/book_9.webp",
+      name: "Opticks",
+      author: "Issac Newton",
+      price: 7000
+    },
+    // { 
+    //   ID: 10,
+    //   img: "../../assets/booksImages/1.jpg",
+    //   name: "Memoir of Vincent Van gogh",
+    //   author: "genre 6",
+    //   price: 500
+    // },
+    // { 
+    //   ID: 20,
+    //   img: "../../assets/booksImages/2.jpg",
+    //   name: "Helvetica",
+    //   author: "genre 6",
+    //   price: 500
+    // },
+    // { 
+    //   ID: 30,
+    //   img: "../../assets/booksImages/3.jpg",
+    //   name: "Scheveningnen",
+    //   author: "genre 6",
+    //   price: 1000
+    // },
+    // { 
+    //   ID: 40,
+    //   img: "../../assets/booksImages/4.jpg",
+    //   name: "The graphic design",
+    //   author: "genre 6",
+    //   price: 7000
+    // },
+    // { 
+    //   ID: 50,
+    //   img: "../../assets/booksImages/5.jpg",
+    //   name: "The graphic design",
+    //   author: "genre 6",
+    //   price: 7000
+    // },
+    // { 
+    //   ID: 60,
+    //   img: "../../assets/booksImages/6.jpg",
+    //   name: "The graphic design",
+    //   author: "genre 6",
+    //   price: 7000
+    // },
+    { 
+      ID: 1,
+      img: "../../assets/booksImages/book_1.webp",
+      name: "The prince",
+      author: "Nicolas Maquiavelo",
       price: 500
     },
     { 
-      ID: 20,
-      img: "../../assets/booksImages/2.jpg",
-      name: "Helvetica",
-      author: "genre 6",
+      ID: 2,
+      img: "../../assets/booksImages/book_2.webp",
+      name: "The greatest cover-up in history",
+      author: "Howerd Dilan",
       price: 500
     },
     { 
-      ID: 30,
-      img: "../../assets/booksImages/3.jpg",
-      name: "Scheveningnen",
-      author: "genre 6",
+      ID: 3,
+      img: "../../assets/booksImages/book_4.webp",
+      name: "Hide and seek",
+      author: "Olivia Wilson",
       price: 1000
     },
     { 
-      ID: 40,
-      img: "../../assets/booksImages/4.jpg",
-      name: "The graphic design",
-      author: "genre 6",
-      price: 7000
-    },
-    { 
-      ID: 50,
-      img: "../../assets/booksImages/5.jpg",
-      name: "The graphic design",
-      author: "genre 6",
-      price: 7000
-    },
-    { 
-      ID: 60,
-      img: "../../assets/booksImages/6.jpg",
-      name: "The graphic design",
-      author: "genre 6",
+      ID: 4,
+      img: "../../assets/booksImages/book_5.webp",
+      name: "Rules for visiting",
+      author: "Jesica Francis Kane",
       price: 7000
     },
   ];

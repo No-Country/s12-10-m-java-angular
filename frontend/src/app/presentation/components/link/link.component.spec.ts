@@ -7,19 +7,24 @@ import { LinkComponent } from './link.component';
 
 describe('LinkComponent', () => {
   let component: LinkComponent;
-  let fixture: ComponentFixture<LinkComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ LinkComponent ]
-    })
-    .compileComponents();
-  }));
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [LinkComponent],
+    }).compileComponents();
+  });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(LinkComponent);
+
+  it('should create the app', () => {
+    const fixture = TestBed.createComponent(LinkComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+  });
+
+  it('should create the app', () => {
+    const fixture = TestBed.createComponent(LinkComponent);
+    component= fixture.componentInstance;
+    expect(fixture).toBeTruthy();
   });
 
   it('should create', () => {

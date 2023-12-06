@@ -7,19 +7,23 @@ import { ForgotPasswordComponent } from './forgot-password.component';
 
 describe('ForgotPasswordComponent', () => {
   let component: ForgotPasswordComponent;
-  let fixture: ComponentFixture<ForgotPasswordComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       declarations: [ ForgotPasswordComponent ]
-    })
-    .compileComponents();
-  }));
+    }).compileComponents();
+  });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ForgotPasswordComponent);
-    component = fixture.componentInstance;
+
+  it('should create the LoginComponent 1', () => {
+    const fixture = TestBed.createComponent(ForgotPasswordComponent);
     fixture.detectChanges();
+  });
+
+  it('should create the LoginComponent 2', () => {
+    const fixture = TestBed.createComponent(ForgotPasswordComponent);
+    component= fixture.componentInstance;
+    expect(fixture).toBeTruthy();
   });
 
   it('should create', () => {

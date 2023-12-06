@@ -1,0 +1,83 @@
+.cabeza {
+    padding-top: 7.5vh;
+    display: inline-flex;
+    align-items: center; 
+    justify-content:space-between;
+    width: 100vw;
+  }
+
+  pagination-template {
+    display: flex;
+    justify-content:flex-end;
+    align-items: center; 
+    padding-right: 10vw;
+  }
+  
+  .pagination-previous,
+  .pagination-next {
+    margin: 0;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  .products-container {
+    width: 100vw;
+    height: auto;
+    align-items: center; 
+    justify-content:center;
+  }
+  .grid-container {
+    display: flex;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 2fr));
+    gap: 8vw;
+    margin: 0 auto;
+    max-width: 85vw;
+    padding-top: 5vh;
+    justify-content: center;
+    align-items: center; 
+  }
+ 
+.grid-item{
+  display:inline-table;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.grid-item h5{
+  padding: 5.5%;
+  color: black;
+}
+  .card {
+    background-color: #06915040;
+    border-radius: 50px;
+    border: 1px solid #CCC;
+    width: 18vh;
+    aspect-ratio: 2.3/2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    transition-duration: 250ms;
+    transition-timing-function: ease-out;
+    transition-property: opacity, transform;
+  }
+
+  .card img {
+    display: block;
+    width: 10vh;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+    
+    transition-duration: 250ms;
+    transition-timing-function: ease-out;
+    transition-property: opacity, transform;
+  }
+
+  .card:hover img{
+    transform: scaleX( -1);
+    opacity: 1;
+  }
+
