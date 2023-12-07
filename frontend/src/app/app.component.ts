@@ -11,33 +11,38 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ShopComponent } from '@presentation/pages/shop/shop.component';
 import { CartComponent } from '@presentation/pages/cart/cart.component';
 import { LoggedInService } from './data/services/login/loggedIn.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './data/interceptor/tokenInterceptor';
 
 @Component({
-    selector: 'app-root',
-    standalone: true,
-    templateUrl: './app.component.html',
-    styleUrl: './app.component.css',
-    providers: [ToastService, LoggedInService],
-    imports: [
-        CommonModule,
-        RouterOutlet,
-        RegisterComponent,
-        LoginComponent,
-        NgxPaginationModule,
-        FooterComponent,
-        ShopComponent,
-        CartComponent
-    ]
+  selector: 'app-root',
+  standalone: true,
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+  providers: [
+    ToastService,
+    LoggedInService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    },
+  ],
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    RegisterComponent,
+    LoginComponent,
+    NgxPaginationModule,
+    FooterComponent,
+    ShopComponent,
+    CartComponent,
+  ],
 })
 export class AppComponent implements OnInit {
-  
-  
-  constructor() {
-    
-  }
+  constructor(private loggedIn: LoggedInService) {}
 
   ngOnInit(): void {
-
+    this.loggedIn.verifyLogin();
   }
-  
 }

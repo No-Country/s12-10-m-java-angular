@@ -2,12 +2,12 @@ import { Component, Input } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Book, BookDetail } from '../../../data/models/book';
 import { RouterLink } from '@angular/router';
-// import { DefaultButtonComponent } from '../default-button/default-button.component'; , DefaultButtonComponent esto abajo en imports
+import { DefaultButtonComponent } from '../default-button/default-button.component'; 
 
 @Component({
   selector: 'app-card-book-horizontal',
   standalone: true,
-  imports: [CommonModule, NgOptimizedImage, RouterLink],
+  imports: [CommonModule, NgOptimizedImage, DefaultButtonComponent, RouterLink],
   templateUrl: './card-book-horizontal.component.html',
   styleUrl: './card-book-horizontal.component.css'
 })
