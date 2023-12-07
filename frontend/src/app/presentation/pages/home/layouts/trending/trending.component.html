@@ -2,13 +2,13 @@
 <div class="container">
 
   <div class="image-list" #bookList (scroll)="onScroll()">
-    @for (book of booksArray; track book.ID) {
+    @for (book of booksWithOnCart; track book.ID) {
       <!--   -->
       @if (screenWidth > 617) {
         <card-book [book]="book" [className]="classOfCard"></card-book>
       }
       @else{
-        <app-card-book-horizontal [book]="book" [className]="classOfCard" style="width: 90vw; margin: 0 5vw;"></app-card-book-horizontal>
+        <app-card-book-horizontal [book]="book" [onCart]="book.onCart" [className]="classOfCard" style="width: 90vw; margin: 0 5vw;"></app-card-book-horizontal>
       }
       
   } @empty {
@@ -26,4 +26,4 @@
     </svg>
   </button>
 </div>
-<!-- <app-button routerLink="/login" class="mb-6 w-full" className="mx-auto min-w-[120px]  w-full max-w-[140px] min-[905px]:max-w-[12dvw] mt-[15px]">Shop</app-button> -->
+<app-button routerLink="/login" class="mb-6 w-full" className="mx-auto min-w-[120px]  w-full max-w-[140px] min-[905px]:max-w-[12dvw] mt-[15px]">Shop</app-button>

@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, Renderer2, ViewChild, AfterViewInit, HostListener } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Renderer2, ViewChild, AfterViewInit, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { BOOK_DETAIL_MOOK } from 'app/data/mocks/booksArray';
 import { BookDetail } from 'app/data/models/book';
 import { CardBookComponent } from "../../../../components/card-book/card-book.component";
 import { DefaultButtonComponent } from '@presentation/components/default-button/default-button.component'; 
 import { CardBookHorizontalComponent } from '@presentation/components/card-book-horizontal/card-book-horizontal.component';
+import { CartService } from 'app/data/services/cart/cart.service';
 
 @Component({
     standalone: true,
@@ -14,14 +15,29 @@ import { CardBookHorizontalComponent } from '@presentation/components/card-book-
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [CommonModule, CardBookComponent, CardBookHorizontalComponent, DefaultButtonComponent]
 })
-export class TrendingComponent implements AfterViewInit{
+export class TrendingComponent implements AfterViewInit, OnInit{
 
   protected booksArray: BookDetail[];
   protected classOfCard: string = "";
   protected scrollAmount: number = 279;
   protected screenWidth: number = window.innerWidth;
+  protected booksWithOnCart: (BookDetail & { onCart: boolean })[]=[];
+  protected BooksOnCart: BookDetail[]=[]; //servicio booksOnCart
 
-  constructor() {this.booksArray = BOOK_DETAIL_MOOK;}
+  constructor(private cartService: CartService) {this.booksArray = BOOK_DETAIL_MOOK; this.BooksOnCart = cartService.bringCartOfService(); } //traemos booksOnCart de el servicio
+
+  ngOnInit(){
+    //llamo el servicio y recibo array de id o de libros
+    //en el constructor o aca traigo los libros de trending
+    console.log(this.BooksOnCart)
+    this.booksWithOnCart = this.booksArray.map(book => {
+      let onCart = this.BooksOnCart.some(cartBook => cartBook.ID === book.ID);
+      return { ...book, onCart };
+    });
+    console.log(this.booksArray)
+
+    console.log(this.booksWithOnCart)
+  }
 
   @ViewChild('bookList') bookList!: ElementRef;
 
@@ -55,6 +71,8 @@ export class TrendingComponent implements AfterViewInit{
     }
 
   }
+
+
 
   onScroll(): void {/*
     if (this.bookList) {

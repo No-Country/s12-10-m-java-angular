@@ -1,51 +1,19 @@
 .arribal-container{
-
-    display: flex;
-    flex-direction: column;
-
     margin-inline: 1rem;
-
     padding-block: 1rem;
-
     margin-bottom: 5%;
 }
 
-
-.arribal-container .book-list{
-    margin-block-start: 2.5rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-
-    justify-content: center;
-    place-content: center;
-    justify-items: center;
-    column-gap: .95rem;
-    row-gap: 1.5rem;
-}
-
-@media only screen and (min-width: 451px) {
+@media only screen and (min-width: 554px) {
     .arribal-container .book-list{
-        grid-template-columns: 1fr 1fr 1fr;
-    }
-    .arribal-container{
-        margin-inline: 3rem;
-    }
-}
-
-@media only screen and (min-width: 550px) {
-    .arribal-container .book-list{
-        margin-block-start: 3rem;
-        justify-items: center;
-        column-gap: 1rem;
-        row-gap: 2rem;
-    }
-}
-
-@media only screen and (min-width: 705px) {
-    .arribal-container .book-list{
+        margin-block-start: 2.5rem;
+        display: grid;
         grid-template-columns: repeat(auto-fill, minmax(245px, 1fr));
-        justify-items: start;
+        justify-content: center;
         column-gap: 2rem;
         row-gap: 2.5rem;
+        justify-content: center;
+        place-content: center;
+        justify-items: center;
     }
 }
