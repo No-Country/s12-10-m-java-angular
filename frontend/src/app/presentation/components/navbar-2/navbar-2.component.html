@@ -9,9 +9,9 @@
     </div>
     <a class="navbar-logo max-[1000px]:hidden text-[#069150]" routerLink="">BookLeaks</a>
     <form class="search-bar" action="/shop">
-      <input type="search" class="search-bar-input" id="search" name="search" for="search"
+      <input type="search" class="search-bar-input" id="search" name="search" for="search" [(ngModel)]="searchTerm"  #ctrl="ngModel"
         placeholder="Búsqueda">
-      <svg width="45" height="39" viewBox="0 0 45 39" fill="none" xmlns="http://www.w3.org/2000/svg"
+      <svg width="45" height="39" viewBox="0 0 45 39" fill="none" xmlns="http://www.w3.org/2000/svg" (click)="search()"
         class="search-bar-icon">
         <g id="Icons/search_24px">
           <path id="icon" fill-rule="evenodd" clip-rule="evenodd"
