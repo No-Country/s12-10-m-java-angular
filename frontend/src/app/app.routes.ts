@@ -2,8 +2,8 @@ import { Params, Routes } from '@angular/router';
 import { ToastService } from './data/services/toast/Toast.service';
 import { LoginService } from './data/services/login/login.service';
 import { RegisterService } from './data/services/register/register.service';
-import { BookDetailCardComponent } from '@presentation/components/book-detail-card/book-detail-card.component';
 import { ShopService } from './data/services/shop/shop.service';
+import { BookDetailComponent } from '@presentation/pages/book-detail/book-detail.component';
 import { BooksService } from './data/services/books/books.service';
 
 
@@ -60,15 +60,12 @@ export const routes: Routes = [
       ).then((c) => c.ForgotPasswordComponent),
     providers: [LoginService],
   },
-  {
-    path: 'book/:id',
-    title: 'Detail Book',
-    loadComponent: () =>
-      import(
-        '@presentation/components/book-detail-card/book-detail-card.component'
-      ).then((c) => c.BookDetailCardComponent),
-    providers: [BookDetailCardComponent],
-  },
+    {
+        path: 'book/:id',
+        title: 'Detail Book',
+        loadComponent: () => import('@presentation/pages/book-detail/book-detail.component').then(c => c.BookDetailComponent),
+        providers: [BooksService],
+    },
   {
     path: '404',
     title: 'Page Not Found',
@@ -78,4 +75,5 @@ export const routes: Routes = [
       ),
   },
   { path: '**', redirectTo: '/404' },
+
 ];

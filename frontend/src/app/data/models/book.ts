@@ -1,15 +1,20 @@
 export interface Book {
     idBook: number;
-    status: number;
-    ISBN: number;
     title: string;
-    genre: string;
-    description: string;
-    pages: number;
-    autor: string;
-    editorial: string;
     price: number;
-    quantity: number;
+    pages: number;
+    publicationDate:string;
+    quantityAvaiable: number;
+    salesAmount:number;
+    rating:number;
+    description: string;
+    collection:string;
+    genre: string;
+    lenguage:string;
+    author:string;
+    nameEditorial:string;
+    urlImages:string;
+    isbn:number;
 }
 
 export interface BookDetail {
