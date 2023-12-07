@@ -58,13 +58,15 @@ export class ApiService {
 
   public httpGet(
     path: string,
-    isNedAuth: boolean = false,
-    params: any = {}
+    isNedAuth?: boolean,
+    params?: any
   ): Observable<any> {
     let url = this.createPath(path);
-    //url = this.createParams(url, params);
-    //console.log("URL FINAL:", url);
-    return this.http.get<any>(url, {params: params});
+
+    return this.http.get<any>(url, {
+      headers: this.createHeaders(isNedAuth === undefined ? false : isNedAuth),
+      params: !params ? {} : params,
+    });
   }
 
   public httpPost(
