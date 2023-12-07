@@ -45,7 +45,7 @@ export class ShopFiltersComponent implements OnInit {
     size: 9,
     orderBy: 'alphabetically',
     ascOrDesc: 'asc',
-    searchEvenNotAvailable: false,
+    searchEvenNotAvailable: 0,
   } as BookFilterProps;
   }
 
@@ -107,7 +107,7 @@ export class ShopFiltersComponent implements OnInit {
   }
 
   applyOutOfStock() {
-    this.props.searchEvenNotAvailable = !this.props.searchEvenNotAvailable;
+    this.props.searchEvenNotAvailable = this.props.searchEvenNotAvailable === 1 ? 0 : 1;
 
     this.sendProps();
   }

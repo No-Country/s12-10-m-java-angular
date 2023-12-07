@@ -76,7 +76,7 @@ export class ShopComponent implements OnInit {
     ) as BookFilterProps;
     this.shopService.getLeakedsBooks(props).subscribe({
       next: (books) => {
-        this.shopService.setState(books);
+        this.shopService.setState(books.content);
         this.loading.update((current) => !current);
       },
       error: (err: any) => {
@@ -87,7 +87,15 @@ export class ShopComponent implements OnInit {
 
   updateList(filterProps: BookFilterProps): void {
     this.loading.update((current) => !current);
-    this.shopService.getLeakedsBooks(filterProps);
+    this.shopService.getLeakedsBooks(filterProps).subscribe({
+      next: (books) => {
+        this.shopService.setState(books.content);
+        this.loading.update((current) => !current);
+      },
+      error: (err: any) => {
+        console.log(err);
+      },
+    });;
   }
 
   applySort(sort: Sorting) {

@@ -27,7 +27,6 @@ export class LoggedInService extends SignalsStoreService<AuthResponse>{
     const email = localStorage.getItem('email');
     const role = localStorage.getItem('role');
     const token = localStorage.getItem('token');
-
     this.setState({
       id: id as string,
       name: name as string,
