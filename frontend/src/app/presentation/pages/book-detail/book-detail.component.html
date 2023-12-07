@@ -10,11 +10,12 @@
         </div>
         <app-detail-card [book]="book"></app-detail-card>
         <div class="tables">
+            <div class="table-container">
+                <h2>Detalles:</h2>
             <div class="table-data-1">
                 <table>
-                        <h2>Detalles:</h2>
                     <tbody>
-                        <tr class="type-1" id="inicio">
+                        <tr class="type-1">
                             <td>Title</td><td>{{book.title}}</td>
                         </tr>
                         <tr class="type-2">
@@ -29,36 +30,33 @@
                         <tr class="type-1">
                             <td>Publication Date</td><td>{{book.publicationDate}}</td>
                         </tr>
-                        <tr class="type-2" id="final">
+                        <tr class="type-2">
                             <td>Page Number</td><td>{{book.pages}}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+            </div>
+            <div class="table-container">
+                <h2>Payment Methods:</h2>
             <div class="table-data-2">
                 <table>
-                        <h2>PaymentMethods:</h2>
                     <tbody>
-                        <tr class="type-1" id="inicio">
-                            <td>Title</td><td>1</td>
+                        <tr class="type-1">
+                            <td>Pay cash on site</td><td></td>
                         </tr>
                         <tr class="type-2">
-                            <td>Author</td><td>1</td>
+                            <td>Pay cash at home</td><td></td>
                         </tr>
                         <tr class="type-1">
-                            <td>Editorial</td><td>1</td>
+                            <td>Debit</td><td></td>
                         </tr>
                         <tr class="type-2">
-                            <td>ISBN</td><td>1</td>
-                        </tr>
-                        <tr class="type-1">
-                            <td>Publication Date</td><td>1</td>
-                        </tr>
-                        <tr class="type-2" id="final">
-                            <td>Page Number</td><td>1</td>
+                            <td>Credit card</td><td></td>
                         </tr>
                     </tbody>
                 </table>
+            </div>
             </div>
         </div>
     </div>
