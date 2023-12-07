@@ -338,10 +338,12 @@ public class BookServiceImpl implements BookService {
     private List<Genre> searchListGenres(List<String> genres) {
         List<Genre> genreList = new ArrayList<>();
 
-        for (String genreName : genres) {
-            Genre genre = searchGenre(genreName);
-            if (genre != null) {
-                genreList.add(genre);
+        if (genres != null) {
+            for (String genreName : genres) {
+                Genre genre = searchGenre(genreName);
+                if (genre != null) {
+                    genreList.add(genre);
+                }
             }
         }
 
@@ -360,10 +362,12 @@ public class BookServiceImpl implements BookService {
     private List<Language> searchListLanguage(List<String> languages) {
         List<Language> languageList = new ArrayList<>();
 
-        for (String element: languages) {
-            Language language = searchLanguage(element);
-            if (language != null) {
-                languageList.add(language);
+        if (languages != null) {
+            for (String element: languages) {
+                Language language = searchLanguage(element);
+                if (language != null) {
+                    languageList.add(language);
+                }
             }
         }
 
