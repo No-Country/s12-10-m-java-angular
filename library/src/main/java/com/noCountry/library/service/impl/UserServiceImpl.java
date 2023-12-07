@@ -1,6 +1,6 @@
 package com.noCountry.library.service.impl;
 
-import com.noCountry.library.dto.RegisterRequest;
+import com.noCountry.library.dto.auth.RegisterRequest;
 import com.noCountry.library.dto.User.MappingUserDto;
 import com.noCountry.library.dto.User.UpdatePasswordDto;
 import com.noCountry.library.entities.User;

@@ -3,7 +3,7 @@ package com.noCountry.library.service;
 import com.noCountry.library.dto.User.UpdatePasswordDto;
 import com.noCountry.library.dto.User.UserDto;
 import com.noCountry.library.entities.User;
-import com.noCountry.library.dto.RegisterRequest;
+import com.noCountry.library.dto.auth.RegisterRequest;
 
 import java.util.Optional;
 

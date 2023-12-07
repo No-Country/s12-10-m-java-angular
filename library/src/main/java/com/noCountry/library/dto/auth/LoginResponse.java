@@ -1,4 +1,4 @@
-package com.noCountry.library.dto;
+package com.noCountry.library.dto.auth;
 
 import lombok.Data;
 
