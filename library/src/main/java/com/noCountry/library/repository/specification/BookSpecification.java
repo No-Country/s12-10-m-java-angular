@@ -14,8 +14,9 @@ public class BookSpecification {
     public static Specification<Book> filterByCriteria(Double minPrice,
                                                        Double maxPrice,
                                                        Integer minPages,
-                                                       Genre genre,
-                                                       Language language,
+                                                       List<Genre> genres,
+                                                       List<Language> languages,
+                                                       String searchText,
                                                        Integer searchEvenNotAvailable
                                                        ) {
         return (root, query, criteriaBuilder) -> {
@@ -35,12 +36,14 @@ public class BookSpecification {
                 predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("pages"), minPages));
             }
 
-            if (genre != null) {
-                predicates.add(criteriaBuilder.equal(root.get("genre"), genre));
+            if (genres != null && !genres.isEmpty()) {
+                //predicates.add(criteriaBuilder.equal(root.get("genre"), genre));
+                predicates.add(root.get("genre").in(genres));
             }
 
-            if (language != null) {
-                predicates.add(criteriaBuilder.equal(root.get("language"), language));
+            if (languages != null && !languages.isEmpty()) {
+                //predicates.add(criteriaBuilder.equal(root.get("language"), language));
+                predicates.add(root.get("language").in(languages));
             }
 
             if (searchEvenNotAvailable != null && searchEvenNotAvailable == 0) {

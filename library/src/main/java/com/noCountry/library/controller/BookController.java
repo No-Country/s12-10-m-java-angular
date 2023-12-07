@@ -93,15 +93,16 @@ public class BookController {
                                                 @RequestParam(required = false) Double minPrice,
                                                 @RequestParam(required = false) Double maxPrice,
                                                 @RequestParam(required = false) Integer minPages,
-                                                @RequestParam(required = false) String genre,
-                                                @RequestParam(required = false) String language,
+                                                @RequestParam(required = false) List<String> genre,
+                                                @RequestParam(required = false) List<String> language,
+                                                @RequestParam(required = false) String searchText,
                                                 @RequestParam(required = false) Integer searchEvenNotAvailable,
                                                 @RequestParam(required = false) String orderBy,
                                                 @RequestParam(required = false) String ascOrDesc) throws Exception {
         try {
             PaginatedBookResponseDTO<BookToSearch> books =
                     bookService.getBooksByCriteria(page, size,minPrice, maxPrice, minPages,
-                                                genre, language, searchEvenNotAvailable,
+                                                genre, language, searchText, searchEvenNotAvailable,
                                                 orderBy, ascOrDesc);
             return new ResponseEntity<>(books, HttpStatus.OK);
         } catch (Exception e){
