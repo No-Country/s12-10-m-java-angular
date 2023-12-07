@@ -26,8 +26,8 @@ public interface BookService {
 
     PaginatedBookResponseDTO<BookToSearch> getBooksByCriteria(Integer pageNumber, Integer sizeElement,
                                                    Double minPrice, Double maxPrice, Integer minPages,
-                                                   String genre, String language, Integer searchEvenNotAvailable,
-                                                   String orderBy, String ascOrDesc);
+                                                   List<String> genres, List<String> languages, String searchText,
+                                                   Integer searchEvenNotAvailable, String orderBy, String ascOrDesc);
 
     void addImagesBook(String id, String img);
 

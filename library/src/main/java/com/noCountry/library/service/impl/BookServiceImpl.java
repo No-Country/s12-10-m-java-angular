@@ -168,14 +168,13 @@ public class BookServiceImpl implements BookService {
     @Override
     public PaginatedBookResponseDTO<BookToSearch> getBooksByCriteria(Integer pageNumber, Integer sizeElement,
                                                                      Double minPrice, Double maxPrice, Integer minPages,
-                                                                     String genre, String language, Integer searchEvenNotAvailable,
-                                                                     String orderBy, String ascOrDesc) {
-
-        Genre thisGenre = searchGenre(genre);
-        Language thisLanguage = searchLanguage(language);
+                                                                     List<String> genres, List<String> languages, String searchText,
+                                                                     Integer searchEvenNotAvailable, String orderBy, String ascOrDesc) {
+        List<Genre> genreList = searchListGenres(genres);
+        List<Language> languageList = searchListLanguage(languages);
 
         Specification<Book> spec = BookSpecification.filterByCriteria(minPrice, maxPrice, minPages,
-                thisGenre, thisLanguage, searchEvenNotAvailable);
+                genreList, languageList, searchText, searchEvenNotAvailable);
 
         Sort sort = getSortFromOrderBy(orderBy, ascOrDesc);
         Pageable pageable = PageRequest.of(pageNumber, sizeElement, sort);
@@ -336,6 +335,21 @@ public class BookServiceImpl implements BookService {
         return null;
     }
 
+    private List<Genre> searchListGenres(List<String> genres) {
+        List<Genre> genreList = new ArrayList<>();
+
+        if (genres != null) {
+            for (String genreName : genres) {
+                Genre genre = searchGenre(genreName);
+                if (genre != null) {
+                    genreList.add(genre);
+                }
+            }
+        }
+
+        return genreList;
+    }
+
     private Language searchLanguage(String language) {
         for (Language element : Language.values()) {
             if (element.name().equalsIgnoreCase(language)) {
@@ -345,6 +359,20 @@ public class BookServiceImpl implements BookService {
         return null;
     }
 
+    private List<Language> searchListLanguage(List<String> languages) {
+        List<Language> languageList = new ArrayList<>();
+
+        if (languages != null) {
+            for (String element: languages) {
+                Language language = searchLanguage(element);
+                if (language != null) {
+                    languageList.add(language);
+                }
+            }
+        }
+
+        return languageList;
+    }
 
     private void isEmptyObject(Optional<?> object) throws NotFoundException {
         if (object.isEmpty()) {

@@ -1,6 +1,9 @@
 https://librarync1.fly.dev/api/v1
 
-		UserPOST	/authenticate/registerRegisterRequest
+		User
+
+POST	/authenticate/register
+RegisterRequest
 {
      String    id
 	String    name
@@ -8,7 +11,8 @@ https://librarync1.fly.dev/api/v1
 	String    email
 	String    password
 	String    passwordRepeat
-}RegisterResponse
+}
+RegisterResponse
 {
 String 	name;
 String	lastName;
@@ -16,51 +20,81 @@ String 	email;
 String 	role;
 List<?> 	list;
 String 	jwt;
-}201 CREATED
+}
+201 CREATED
 
 
-POST	/authenticate/loginLoginRequest
+
+POST	/authenticate/login
+LoginRequest
 {
 String	email;
 String 	password;
-}LoginResponse
+}
+LoginResponse
 {
 String	 jwt;
-}200 OK
+}
+200 OK
 
 
-GET	/authenticate/profile
 
-GET	/user/{email}Response: 
+GET	/authenticate/profile
+
+
+
+GET	/user/{email}
+Response: 
 UserDto
 {
 String 	name;
 String    lastName;
 String 	email;
-}200 OK
+}
+200 OK
 
 
-DELETE	/user/{email}200 OK
+
+DELETE	/user/{email}
+200 OK
 
 
-DELETE	/user/unsubscribe/{email}200 OK
-		BookGET	/book/{id} ID del libro en la URLBookResponse200 OK
+
+DELETE	/user/unsubscribe/{email}
+200 OK
 
 
-GET	/book/allBooks?page=0&size=5
-Response:	PaginatedBookResponseDTO<BookResponse>200 OK
+		Book
+
+GET	/book/{id} 
+ID del libro en la URL
+BookResponse
+200 OK
 
 
-GET	/book/toCard/{id}BookCardResponse
+
+GET	/book/allBooks?page=0&size=5
+Response:
+	PaginatedBookResponseDTO<BookResponse>
+200 OK
+
+
+
+GET	/book/toCard/{id}
+BookCardResponse
 {
 String 	title;
 Double 	price;
 String 	author;
 String	initialImage;
-}200 OK
+}
+200 OK
 
 
-GET	/book/toCard/allBooks?page=0&size=5PaginatedBookResponseDTO<BookCardResponse>200 OK
+
+GET	/book/toCard/allBooks?page=0&size=5
+PaginatedBookResponseDTO<BookCardResponse>
+200 OK
 
 
 
@@ -86,8 +120,9 @@ PaginatedBookResponseDTO<BookCardDescription>
 
 
 
-GET	/book/searchByCriteria?page={page}&size={size}&minPrice={minPrice}&maxPrice={maxPrice}&minPages={minPages}&genre={genre}&language={language}&searchEvenNotAvailable={searchEvenNotAvailable}&orderBy={}&ascOrDesc={}
+GET	/book/searchByCriteria?page={page}&size={size}&minPrice={minPrice}&maxPrice={maxPrice}&minPages={minPages}&genre={List-genre}&language={List-language}&searchText={textoABuscar}&searchEvenNotAvailable={searchEvenNotAvailable}&orderBy={}&ascOrDesc={}
 donde: {searchEvenNotAvailable} va a ser 0 si el usuario quiere mostrar los libros sin stock
+        La lista de genres y languages se detallan en el endpoint separados por ,
 Ordenamiento: 
 	orderBy={Tipo de ordenamiento} 
 	ascOrDesc={Orden ascendente o descendente} -> asc / desc
@@ -135,18 +170,29 @@ Response:
 
 
 
-POST	/book/createBookRequest:
-  BookRequestResponse:
-	BookResponse 201 CREATED
+
+POST	/book/createBook
+Request:
+  BookRequest
+Response:
+	BookResponse 
+201 CREATED
 
 
 
-POST	/book/addImage/{id}Request:
-  String image;201 CREATED
+
+POST	/book/addImage/{id}
+Request:
+  String image;
+201 CREATED
 
 
-DELETE	/book/{id}200 OK
-
+
+DELETE	/book/{id}
+200 OK
+
+
+
 BookRequest
 {
     String 	idBook;
@@ -164,7 +210,8 @@ BookRequest
     String 	idEditorial;
     String 	initialImage;
 }
-BookResponse
+
+BookResponse
 {
     String	idBook;
     String 	ISBN;
@@ -182,7 +229,9 @@ BookRequest
     String 	completeNameAuthor;
     String 	nameEditorial;
     List<String> 	urlImages;
-}PaginatedBookResponseDTO<T>
+}
+
+PaginatedBookResponseDTO<T>
 {
    "content": [
 	{ AnyBook },
@@ -206,12 +255,28 @@ BookToSearch
 
 
 
-		EditorialGET	/editorial/{id}Response:EditorialDto
-200 OK
-
-POST	/editorial/createEditorial
-Request:EditorialDto
-Response:EditorialDto201 CREATED
+		Editorial
 
 
-DELETE	/editorial/{id}200 OK
+GET	/editorial/{id}
+Response:
+EditorialDto
+200 OK
+
+
+
+POST	/editorial/createEditorial
+Request:
+EditorialDto
+Response:
+EditorialDto
+201 CREATED
+
+
+
+DELETE	/editorial/{id}
+200 OK
+
+
+
+
