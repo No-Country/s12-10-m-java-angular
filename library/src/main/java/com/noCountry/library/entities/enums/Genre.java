@@ -10,5 +10,7 @@ public enum Genre {
 	SELF_HELP,
 	STORY,
 	HORROR,
-	COMEDY
+	COMEDY,
+	POLICE
+
 }
