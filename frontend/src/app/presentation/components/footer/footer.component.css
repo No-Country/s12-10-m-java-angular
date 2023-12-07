@@ -1,5 +1,5 @@
 .footer {
-    background-color: oklch(68.98% 0.15 155.68);
+    background-color: oklch(68.96% 0.15 155.76);
     min-height: 20vh;
     padding: 10px 0 0 0;
 }
@@ -132,7 +132,7 @@
 /* Footer mobile */
 
 .footer-mobile {
-    background-color: oklch(68.98% 0.15 155.68);
+    background-color: oklch(68.96% 0.15 155.76);
     color: #fff;
     padding: 5px;
 }
