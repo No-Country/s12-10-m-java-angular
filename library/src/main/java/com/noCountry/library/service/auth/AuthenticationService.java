@@ -1,8 +1,8 @@
 package com.noCountry.library.service.auth;
 
-import com.noCountry.library.dto.LoginRequest;
-import com.noCountry.library.dto.RegisterRequest;
-import com.noCountry.library.dto.UserDetailsDTO;
+import com.noCountry.library.dto.auth.LoginRequest;
+import com.noCountry.library.dto.auth.RegisterRequest;
+import com.noCountry.library.dto.auth.UserDetailsDTO;
 import com.noCountry.library.entities.User;
 import com.noCountry.library.exception.NotFoundException;
 import com.noCountry.library.service.UserService;

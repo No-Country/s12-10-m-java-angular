@@ -1,8 +1,8 @@
 package com.noCountry.library.controller;
 
-import com.noCountry.library.dto.LoginRequest;
-import com.noCountry.library.dto.RegisterRequest;
-import com.noCountry.library.dto.UserDetailsDTO;
+import com.noCountry.library.dto.auth.LoginRequest;
+import com.noCountry.library.dto.auth.RegisterRequest;
+import com.noCountry.library.dto.auth.UserDetailsDTO;
 import com.noCountry.library.entities.User;
 import com.noCountry.library.service.auth.AuthenticationService;
 import jakarta.validation.Valid;
