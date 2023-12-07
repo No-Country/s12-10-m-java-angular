@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, Renderer2, ViewChild, AfterViewInit, HostListener, OnDestroy, OnInit } from '@angular/core';
-import { BOOK_DETAIL_MOOK, BOOK_CART_MOOK } from 'app/data/mocks/booksArray';
+import { BOOK_DETAIL_MOOK } from 'app/data/mocks/booksArray';
 import { BookDetail } from 'app/data/models/book';
 import { CardBookComponent } from "../../../../components/card-book/card-book.component";
 import { DefaultButtonComponent } from '@presentation/components/default-button/default-button.component'; 
