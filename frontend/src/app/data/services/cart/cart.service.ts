@@ -1,5 +1,4 @@
 import { Injectable, OnInit } from '@angular/core';
-import { BOOK_CART_MOOK } from 'app/data/mocks/booksArray';
 import { BookDetail } from 'app/data/models/book';
 
 @Injectable({
