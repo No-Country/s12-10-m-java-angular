@@ -17,8 +17,10 @@
 
 .card-book .img-wrapper{
     border-radius: 0.9375rem 0.9375rem 0rem 0rem;
+
     background: linear-gradient(90deg, #EEE 0%, #DFDFDF 50%, #FFF 100%);    ; ;
     aspect-ratio: 2/2;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,6 +33,7 @@
     overflow: hidden;
     position: relative;
     height: 80%;
+
     aspect-ratio: 1/1;
     opacity: .9;
     transition-duration: 250ms;
@@ -65,15 +68,19 @@
 
 .card-book .content-info h2 {
     font-weight: 600;
+
     margin-top: 15px;
     font-size: 25px;
     width: 80%;
     margin-left: 0px;
+
     color: #242221;
 
     line-height: normal;
     white-space: nowrap;
     text-overflow: ellipsis;
+
+    transition-duration: 100ms;
     transition-timing-function: ease;
     transition-property: color;
 
@@ -82,12 +89,10 @@
 
     min-height: 20px;
     overflow: hidden;
-
 }
 
+
 .card-book .content-info p {
-    margin-top: 0px;
-    font-size: 10px;
     display: flex;
     justify-content: flex-start;
     align-items: center;

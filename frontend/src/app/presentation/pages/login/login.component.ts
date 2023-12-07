@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit, OnDestroy  {
 
   private destroy$: Subject<void>;
 
-  constructor(private readonly injector: Injector) { 
+  constructor(private readonly injector: Injector) {
     this.destroy$ = new Subject<void>();
   }
 
@@ -57,7 +57,6 @@ export class LoginComponent implements OnInit, OnDestroy  {
         toast.error("Error", "An unexpected error has occurred with the server", 5);
       },
       complete(): void {
-        console.log(this.response.role);
         if(this.response.role === "USER")
           setTimeout(()=>router.navigate(["/"]), 700);
       }
@@ -68,5 +67,5 @@ export class LoginComponent implements OnInit, OnDestroy  {
     .pipe(takeUntil(this.destroy$))
     .subscribe(loginObserver);
   }
-  
+
 }

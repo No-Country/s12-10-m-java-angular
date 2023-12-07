@@ -25,7 +25,7 @@
                 </div>
         </div>
         <app-button title="Explore button" class="flex mr-auto" className="w-full max-w-[185px] min-w-[185px] text-[1.7dvw]">
-            <a [routerLink]="['/shop/'+'All']" class="w-full">
+            <a routerLink="shop" [queryParams]="{ search: 'All' }" class="w-full">
                 Explore 
             </a>
         </app-button>

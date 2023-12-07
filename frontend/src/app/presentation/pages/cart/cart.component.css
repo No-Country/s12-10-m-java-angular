@@ -4,11 +4,6 @@
     margin-bottom: 5%;
 }
 
-
-.arribal-container .book-list{
-
-}
-
 @media only screen and (min-width: 554px) {
     .arribal-container .book-list{
         margin-block-start: 2.5rem;

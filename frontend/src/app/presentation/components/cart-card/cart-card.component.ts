@@ -7,6 +7,7 @@ import { CartService } from 'app/data/services/cart/cart.service';
 import { FormsModule } from '@angular/forms';
 
 
+
 @Component({
   selector: 'app-cart-card',
   standalone: true,
@@ -15,7 +16,6 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './cart-card.component.css'
 })
 export class CartCardComponent {
-
   @Input() public bookOfCard: { book: BookDetail, quantity: number };
   @Output() public deleteBook = new EventEmitter<BookDetail>();
 
@@ -34,6 +34,4 @@ export class CartCardComponent {
   increaseQuantity(){
     this.bookOfCard.quantity=this.bookOfCard.quantity+1;
   }
-
-
 }

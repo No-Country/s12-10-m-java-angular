@@ -7,7 +7,7 @@
       repudiandae earum ducimus illum molestias
     </p>
     <app-button class="flex mr-auto mb-6 cursor-default" title="Shop now button" className="min-w-[140px] max-w-[140px] min-[905px]:max-w-[12dvw] mt-[15px]">
-      <a [routerLink]="['/shop/'+'All']" class=" w-full">
+      <a routerLink="shop" [queryParams]="{ search: 'All' }" class=" w-full">
         Shop now
       </a>
     </app-button>

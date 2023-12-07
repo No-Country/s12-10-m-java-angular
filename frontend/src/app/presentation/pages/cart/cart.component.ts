@@ -9,6 +9,7 @@ import { NavbarComponent } from '@presentation/components/navbar/navbar.componen
 import { CartCardComponent } from '@presentation/components/cart-card/cart-card.component';
 import { CartService } from 'app/data/services/cart/cart.service';
 
+
 @Component({
   standalone: true,
   imports: [CommonModule, NavbarComponent, Navbar2Component, FooterComponent, CardBookComponent, CartCardComponent],
@@ -18,7 +19,6 @@ import { CartService } from 'app/data/services/cart/cart.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CartComponent implements OnInit {
-
   protected booksWQ: { book: BookDetail, quantity: number }[];
 
   constructor(public cartService: CartService) {

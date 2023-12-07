@@ -1,0 +1,10 @@
+<div  class="custom-select" >
+  <span class="sort-by" role="combobox" id="sortBy" aria-label="Selected Option" aria-haspopup="true" aria-expanded="false" [attr.aria-controls]="selectedOption.code" [title]="selectedOption.field" (click)="viewSortOptions=!viewSortOptions" dir="ltr">{{ selectedOption.field }}</span>
+  @if(viewSortOptions) {
+      <ul name="sortBy" class="sort-options" role="listbox" aria-label="Combobox options list">
+          @for (item of options; track item.code) {
+              <li role="option" [title]="item.field" [id]="item.code" [ngClass]="{'activate': selectedOption.code === item.code}" (click)="updateOption(item)"> {{ item.field }}</li>
+          }
+      </ul>
+  }
+</div>

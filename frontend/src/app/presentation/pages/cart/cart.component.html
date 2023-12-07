@@ -3,16 +3,12 @@
 <section #arribal class="arribal-container mx-14 my-10">
 
   <h2 class="title mx-[7.5dvw]"><strong class="text-[#33B672] font-medium"></strong> cart</h2>
-
  
     <div class="book-list">
      @for(bookOfCart of booksWQ ; track bookOfCart.book.ID){
           <app-cart-card (deleteBook)="discardBook(bookOfCart.book)" [bookOfCard]="bookOfCart"></app-cart-card>
-      } @empty {
       }
-
     </div>
-
-
 </section>
 <app-footer></app-footer>
+
