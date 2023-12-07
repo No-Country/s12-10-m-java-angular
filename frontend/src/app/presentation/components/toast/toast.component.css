@@ -96,7 +96,7 @@
     background-color: #3C58BA;
 }
 .toast div.bar.success-bar {
-    background-color: #069150;
+    background-color: oklch(57.71% 0.144 154.06);
 }
 .toast div.bar.warning-bar{
     background-color: #BA703C;

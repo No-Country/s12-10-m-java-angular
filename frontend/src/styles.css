@@ -58,3 +58,28 @@ h2.title{
         letter-spacing: -0.01563rem;
     }
 }
+app-button button a {
+    border-radius: 0.9375rem;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+}
+
+/* Estilo para quitar las flechas de incremento y decremento en input type="number" */
+input[type=number] {
+    -moz-appearance: textfield !important; /* Firefox */
+    appearance: textfield !important; /* Resto de navegadores */
+    -webkit-appearance: textfield !important;
+}
+  
+  /* Estilo adicional para navegadores que admiten la propiedad "appearance" */
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0 !important;
+  }

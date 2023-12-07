@@ -1,8 +1,17 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { CardBookComponent } from '@presentation/components/card-book/card-book.component';
+import { BOOK_DETAIL_MOOK } from 'app/data/mocks/booksArray';
+import { BookDetail } from 'app/data/models/book';
+import { Observable, delay, of } from 'rxjs';
+import { FooterComponent } from '@presentation/components/footer/footer.component';
+import { Navbar2Component } from '@presentation/components/navbar-2/navbar-2.component';
+import { NavbarComponent } from '@presentation/components/navbar/navbar.component';
+import { CartCardComponent } from '@presentation/components/cart-card/cart-card.component';
 
 @Component({
   standalone: true,
-  imports: [],
+  imports: [CommonModule, NavbarComponent, Navbar2Component, FooterComponent, CardBookComponent, CartCardComponent],
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
@@ -10,9 +19,17 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 })
 export class CartComponent implements OnInit {
 
-  constructor() { }
+  protected books: Observable<BookDetail[]>;
 
-  ngOnInit() {
+  constructor() {
+    this.books = new Observable();
+   }
+
+  ngOnInit(): void {
+
+    this.books = of(BOOK_DETAIL_MOOK).pipe(
+      delay(1000)
+    );
   }
 
 }

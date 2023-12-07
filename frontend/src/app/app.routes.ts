@@ -3,6 +3,9 @@ import { ToastService } from './data/services/toast/Toast.service';
 import { LoginService } from './data/services/login/login.service';
 import { RegisterService } from './data/services/register/register.service';
 import { ShopService } from './data/services/shop/shop.service';
+import { BookDetailComponent } from '@presentation/pages/book-detail/book-detail.component';
+import { BooksService } from './data/services/books/books.service';
+
 
 export const routes: Routes = [
     {
@@ -23,7 +26,7 @@ export const routes: Routes = [
         providers: [RegisterService ]
     },
     {
-        path: 'shop',
+        path: 'shop/:searchTerm',
         title: 'Books Leaks - Shop page',
         loadComponent: () => import('@presentation/pages/shop/shop.component').then(c => c.ShopComponent),
         providers: [ ShopService ]
@@ -38,6 +41,19 @@ export const routes: Routes = [
         title: 'Books Leaks - Forgot Password page',
         loadComponent: () => import('@presentation/pages/forgot-password/forgot-password.component').then(c => c.ForgotPasswordComponent),
         providers: [LoginService ],
+    },
+    {
+
+        
+        path: 'Cart',
+        title: 'Cart',
+        loadComponent: ()=> import('@presentation/pages/cart/cart.component').then(c => c.CartComponent),
+    },
+    {
+        path: 'book/:id',
+        title: 'Detail Book',
+        loadComponent: () => import('@presentation/pages/book-detail/book-detail.component').then(c => c.BookDetailComponent),
+        providers: [BooksService],
     },
     {
         path: '404',
