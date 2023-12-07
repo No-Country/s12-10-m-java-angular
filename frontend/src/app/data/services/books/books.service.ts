@@ -29,18 +29,21 @@ export class BooksService extends RxjsStoreService<BookDetail[]> {
       .subscribe(
         {
           next: (books)=>{
-            this.setState(Object.values( BOOK_DETAIL_MOOK ));
+            this.setState(books);
             this.cachedBooks = BOOK_DETAIL_MOOK;
-            console.log("Mook 1: ", BOOK_DETAIL_MOOK);
           },
           error: (error: any )=>{
-            this.setState(Object.values( BOOK_DETAIL_MOOK ));
+            console.log("EntrE?");
+            this.setState(BOOK_DETAIL_MOOK);
             this.cachedBooks = BOOK_DETAIL_MOOK;
-            console.log("Mook 2: ", BOOK_DETAIL_MOOK);
           }
         }
       );
     }
+  }
+
+  public getBookFiltered(page: number, size: number, minPrice: number, maxPrice: number){
+
   }
 
   public detail(id: number): Observable<BookDetail>{

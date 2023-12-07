@@ -24,7 +24,4 @@ export class CardBookComponent {
     return typeof ID === 'string'; 
   }
 
-  redirectToBookDetail(){
-  
-  }
 }

@@ -2,12 +2,10 @@ import { Injectable } from '@angular/core';
 import { SignalsStoreService } from '../store/StoreSignals.service';
 import { AuthResponse } from 'app/data/models/AuthResponse';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({providedIn: 'any'})
 export class LoggedInService extends SignalsStoreService<AuthResponse>{
 
-  constructor() { 
+  constructor() {
     super({} as AuthResponse);
   }
 
@@ -22,6 +20,24 @@ export class LoggedInService extends SignalsStoreService<AuthResponse>{
     this.setState(values);
   }
 
+  public verifyLogin(){
+    const id = localStorage.getItem('id');
+    const name = localStorage.getItem('name');
+    const lastName = localStorage.getItem('lastName');
+    const email = localStorage.getItem('email');
+    const role = localStorage.getItem('role');
+    const token = localStorage.getItem('token');
+
+    this.setState({
+      id: id as string,
+      name: name as string,
+      lastName: lastName as string,
+      email: email as string,
+      role: role as string,
+      jwt: token as string,
+    } as AuthResponse);
+  }
+
   public updateId(updatedId: string){
     this.set("id", updatedId);
   }
@@ -34,7 +50,8 @@ export class LoggedInService extends SignalsStoreService<AuthResponse>{
     localStorage.removeItem("role");
     localStorage.removeItem("token");
 
-    this.setState({} as AuthResponse);
+    this.setState(null);
+    location.reload();
   }
 
 
