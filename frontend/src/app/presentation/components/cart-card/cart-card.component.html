@@ -1,6 +1,6 @@
-<article #cardBook class="card-book" [id]="book.ID" >
+<article #cardBook class="card-book" [id]="bookOfCard.book.ID" >
 
-    <button class="absolute top-2 end-2 ">
+    <button (click)="deleteBook.emit(bookOfCard.book)" class="absolute top-2 end-2 ">
         <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 50 50" fill="none">
             <path d="M49 25C49 38.2548 38.2548 49 25 49C11.7452 49 1 38.2548 1 25C1 11.7452 11.7452 1 25 1C38.2548 1 49 11.7452 49 25Z" fill="white"/>
             <path fill-rule="evenodd" clip-rule="evenodd" d="M0 25C0 11.1975 11.1975 0 25 0C38.8025 0 50 11.1975 50 25C50 38.8025 38.8025 50 25 50C11.1975 50 0 38.8025 0 25ZM25 3.84615C13.3217 3.84615 3.84615 13.3217 3.84615 25C3.84615 36.6783 13.3217 46.1538 25 46.1538C36.6783 46.1538 46.1538 36.6783 46.1538 25C46.1538 13.3217 36.6783 3.84615 25 3.84615Z" fill="#FF4F4F"/>
@@ -10,36 +10,36 @@
 
 
     <section class="img-wrapper" routerLink="/" >
-        <a class="img-container" [ngClass]="{'blur-md': isNumberId(book.ID) }">
-            <img [ngSrc]="book.img" fill priority alt="Front of men&#039;s Basic Tee in black.">
+        <a class="img-container" [ngClass]="{'blur-md': isNumberId(bookOfCard.book.ID) }">
+            <img [ngSrc]="bookOfCard.book.img" fill priority alt="Front of men&#039;s Basic Tee in black.">
         </a>
     </section>
  
 
     <section class="content-info">
-        <h2 [title]="book.name">
+        <h2 [title]="bookOfCard.book.name">
             <a class="" routerLink="/">
-                {{ book.name }}
+                {{ bookOfCard.book.name }}
             </a>
         </h2>
 
-        <p>{{ book.author }}</p>
+        <p>{{ bookOfCard.book.author }}</p>
 
         <div class="w-full justify-between items-center">
             <p class="mt-2 price text-[#242221] cursor-pointer">
                 <a class="" routerLink="/" >
-                    ${{ book.price }}
+                    ${{ bookOfCard.book.price }}
                 </a>
             </p>
 
             <div class="flex my-3 min-[554px]:justify-center items-center">
-                <button class="bg-[#33B672] rounded-[5px] w-[35px] h-[35px] flex justify-center items-center">
+                <button (click)="decreaseQuantity()" class="bg-[#33B672] rounded-[5px] w-[35px] h-[35px] flex justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="11" height="3" viewBox="0 0 11 3" fill="none">
                         <path d="M10.6326 0.0524902V2.97894H0.373047V0.0524902H10.6326Z" fill="white"/>
                     </svg>
                 </button>
-                <input class="border-[3px] border-[#D9D9D9] mx-2 rounded-[5px] w-[90px] h-[35px]" type="number">
-                <button class="bg-[#33B672] w-[35px] rounded-[5px] h-[35px] flex justify-center items-center">
+                <input [(ngModel)]="bookOfCard.quantity" class="border-[3px] border-[#D9D9D9] mx-2 rounded-[5px] w-[90px] h-[35px]" type="number">
+                <button (click)="increaseQuantity()" class="bg-[#33B672] w-[35px] rounded-[5px] h-[35px] flex justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
                         <path d="M6.97801 15.8263V0.550049H10.0175V15.8263H6.97801ZM0.865234 9.70227V6.66283H16.1415V9.70227H0.865234Z" fill="white"/>
                     </svg>
