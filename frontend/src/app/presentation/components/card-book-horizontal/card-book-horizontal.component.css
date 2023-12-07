@@ -100,3 +100,31 @@
     transform: scale(1.2);
     transition: transform 0.3s ease-in-out;
   }
+
+  .green-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-overflow: ellipsis;
+    border-radius: 0.9375rem;
+    font-size: .875rem;
+    font-weight: 500;
+    background-color: #15AD67;
+    color: #FFFFFF;
+    height: 2.55rem;
+    outline: none;
+  }
+
+  .default-button:hover,  .default-button:focus {
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.30);
+      background-color: #069150;
+  }
+
+  
+  .green-button.take-out {
+    background-color: #D9D9D9;
+    color: #FFFFFF;
+    height: 2.55rem;
+    outline: none;
+  }
+
