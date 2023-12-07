@@ -1,3 +1,21 @@
-<p>
-  cart works!
-</p>
+<app-navbar></app-navbar>
+<app-navbar-2></app-navbar-2>
+<section #arribal class="arribal-container mx-14 my-10">
+
+  <h2 class="title mx-[7.5dvw]"><strong class="text-[#33B672] font-medium"></strong> cart</h2>
+
+ 
+    <div class="book-list">
+     @for(book of books | async; track book.ID){
+          <app-cart-card [book]="book"></app-cart-card>
+      } @empty {
+        @for(book of ["1","2","3","4","5","6","7","8"]; track book){
+          <app-cart-card [book]="{ID: book, name:'Loading...', description: 'Loading...', author: 'loading...', price: 0, img: '../../../../assets/imgs/book-placeholder.webp'}"></app-cart-card>
+        }
+      }
+
+    </div>
+
+
+</section>
+<app-footer></app-footer>

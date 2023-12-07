@@ -1,0 +1,68 @@
+<article #cardBook class="card-book" [id]="book.ID" >
+
+    <button class="absolute top-2 end-2 ">
+        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 50 50" fill="none">
+            <path d="M49 25C49 38.2548 38.2548 49 25 49C11.7452 49 1 38.2548 1 25C1 11.7452 11.7452 1 25 1C38.2548 1 49 11.7452 49 25Z" fill="white"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M0 25C0 11.1975 11.1975 0 25 0C38.8025 0 50 11.1975 50 25C50 38.8025 38.8025 50 25 50C11.1975 50 0 38.8025 0 25ZM25 3.84615C13.3217 3.84615 3.84615 13.3217 3.84615 25C3.84615 36.6783 13.3217 46.1538 25 46.1538C36.6783 46.1538 46.1538 36.6783 46.1538 25C46.1538 13.3217 36.6783 3.84615 25 3.84615Z" fill="#FF4F4F"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M16.5272 16.5272C17.2302 15.8243 18.3698 15.8243 19.0728 16.5272L25 22.4544L30.9272 16.5272C31.6302 15.8243 32.7698 15.8243 33.4728 16.5272C34.1757 17.2302 34.1757 18.3698 33.4728 19.0728L27.5456 25L33.4728 30.9272C34.1757 31.6302 34.1757 32.7698 33.4728 33.4728C32.7698 34.1757 31.6302 34.1757 30.9272 33.4728L25 27.5456L19.0728 33.4728C18.3698 34.1757 17.2302 34.1757 16.5272 33.4728C15.8243 32.7698 15.8243 31.6302 16.5272 30.9272L22.4544 25L16.5272 19.0728C15.8243 18.3698 15.8243 17.2302 16.5272 16.5272Z" fill="#FF4F4F"/>
+        </svg>
+    </button>
+
+
+    <section class="img-wrapper" routerLink="/" >
+        <a class="img-container" [ngClass]="{'blur-md': isNumberId(book.ID) }">
+            <img [ngSrc]="book.img" fill priority alt="Front of men&#039;s Basic Tee in black.">
+        </a>
+    </section>
+ 
+
+    <section class="content-info">
+        <h2 [title]="book.name">
+            <a class="w-full" routerLink="/">
+                {{ book.name }}
+            </a>
+        </h2>
+
+        <p>{{ book.author }}</p>
+
+        <div class="w-full justify-between items-center">
+            <p class="mt-2 font-medium price text-[#242221] cursor-pointer">
+                <a class="w-full" routerLink="/" >
+                    ${{ book.price }}
+                </a>
+            </p>
+
+            <div class="flex my-3 mx-auto justify-center items-center">
+                <button class="bg-[#33B672] rounded-[5px] w-[35px] h-[35px] flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="11" height="3" viewBox="0 0 11 3" fill="none">
+                        <path d="M10.6326 0.0524902V2.97894H0.373047V0.0524902H10.6326Z" fill="white"/>
+                    </svg>
+                </button>
+                <input class="border-[3px] border-[#D9D9D9] mx-2 rounded-[5px] w-[90px] h-[35px]" type="number">
+                <button class="bg-[#33B672] w-[35px] rounded-[5px] h-[35px] flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                        <path d="M6.97801 15.8263V0.550049H10.0175V15.8263H6.97801ZM0.865234 9.70227V6.66283H16.1415V9.70227H0.865234Z" fill="white"/>
+                    </svg>
+                </button>
+            </div>
+
+
+            <!-- <app-button class="hidden min-[710px]:block" className="min-w-[75px] !py-2" title="Add to cart">
+                <a routerLink="/">
+                    <svg class="ionicon" width="25px" fill="#c0cebe"
+                        viewBox="0 0 512 512">
+                        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="32"
+                            d="M80 176a16 16 0 00-16 16v216c0 30.24 25.76 56 56 56h272c30.24 0 56-24.51 56-54.75V192a16 16 0 00-16-16zM160 176v-32a96 96 0 0196-96h0a96 96 0 0196 96v32" />
+                    </svg>
+                </a>
+            </app-button> -->
+
+            
+        </div>
+
+
+
+    </section>
+
+</article>
