@@ -18,7 +18,6 @@ export class CardBookComponent implements OnInit {
     this.book = {} as BookDetail;
   }
   ngOnInit(): void {
-    console.log("book in card", this.book);
   }
 
   isStringId(ID: string | number) {

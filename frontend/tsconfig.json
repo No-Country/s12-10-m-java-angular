@@ -3,6 +3,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "src",
+    "esModuleInterop": true,
     "paths": {
       "@presentation/*": ["app/presentation/*"],
     },

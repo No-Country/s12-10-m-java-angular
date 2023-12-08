@@ -17,13 +17,13 @@ import { Navbar2Component } from '@presentation/components/navbar-2/navbar-2.com
     styleUrls: ['./home.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
-      CommonModule, 
-      BowserCategoriesComponent, 
-      HeroComponent, 
-      FavoriteBookComponent, 
-      NewArribalComponent, 
-      NewsLetterComponent, 
-      TrendingComponent, 
+      CommonModule,
+      BowserCategoriesComponent,
+      HeroComponent,
+      FavoriteBookComponent,
+      NewArribalComponent,
+      NewsLetterComponent,
+      TrendingComponent,
       FooterComponent,
       NavbarComponent,
       Navbar2Component
@@ -34,6 +34,12 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    /*
+    ScrollReveal().reveal('.header', {
+      distance: '-100px',
+      origin: 'bottom',
+      duration: 750,
+    });*/
   }
 
 }

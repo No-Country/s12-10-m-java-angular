@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit, Signal } from '@angular/core';
 import { CardBookComponent } from '@presentation/components/card-book/card-book.component';
-import { BOOK_DETAIL_MOOK } from 'app/data/mocks/booksArray';
 import { BookDetail } from 'app/data/models/book';
 import { BooksService } from 'app/data/services/books/books.service';
-import { Observable, delay, map, of, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
   standalone: true,

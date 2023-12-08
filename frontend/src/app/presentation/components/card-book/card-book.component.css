@@ -73,7 +73,7 @@
     transition-timing-function: ease;
     transition-property: color;
 
-    font-size: 1rem;  
+    font-size: 1rem;
     cursor: pointer;
 
     min-height: 20px;
@@ -114,6 +114,15 @@
 .card-book .content-info h2:hover, .card-book .content-info h2:focus {
     color: oklch(57.71% 0.144 154.06);
 }
+.up-button svg {
+  transition-property: scale;
+  transition-duration: 400ms;
+  transition-timing-function: ease;
+}
+
+.up-button:hover svg{
+  scale: 1.175;
+}
 
 @media only screen and (min-width: 450px) {
     .card-book {
@@ -124,7 +133,7 @@
 
     .card-book .img-wrapper .img-container {
         width: 80px;
-       
+
     }
 
     .card-book .img-wrapper  {
@@ -138,7 +147,7 @@
     }
 
     .card-book .content-info h2 {
-        font-size: 2.7dvw;  
+        font-size: 2.7dvw;
     }
 
     .card-book .content-info p {
@@ -183,7 +192,7 @@
     }
     .card-book .content-info h2 {
         font-size: 1.25rem;
- 
+
     }
     .card-book .content-info p {
         margin-block-start: .25rem;

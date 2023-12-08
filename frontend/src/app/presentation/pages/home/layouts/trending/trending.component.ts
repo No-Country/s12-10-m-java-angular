@@ -35,9 +35,6 @@ export class TrendingComponent implements AfterViewInit, OnInit{
       let onCart = this.BooksOnCart.some(cartBook => cartBook.id === book.id);
       return { ...book, onCart };
     });
-    console.log(this.booksArray)
-
-    console.log(this.booksWithOnCart)
   }
 
   @ViewChild('bookList') bookList!: ElementRef;

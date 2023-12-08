@@ -9,7 +9,7 @@ import { LoggedInService } from './login/loggedIn.service';
 export class ApiService {
   private prodURL: string = 'https://librarync1.fly.dev/api/v1';
   private devURL: string = 'http://localhost:8080/api/v1';
-  private http: HttpClient = this.injector.get(HttpClient);
+  private readonly http: HttpClient = this.injector.get(HttpClient);
 
   constructor(private injector: Injector) {}
 
@@ -46,24 +46,6 @@ export class ApiService {
     return `${this.prodURL}/${value}`;
   }
 
-  private createParams(url: string, params: any) {
-    let updated = url + '?';
-    Object.entries(params).forEach((value, index) => {
-      console.log("value is ? ", value[0]);
-      if (value[0] === 'searchEvenNotAvailable') {
-        console.log("Entre?",value[0]);
-        updated = `${updated}${value[0]}=${value[1] ? 1 : 0}${
-          Object.entries(params).length - 1 !== index ? '&' : ''
-        }`;
-      } else {
-        updated = `${updated}${value[0]}=${value[1]}${
-          Object.entries(params).length - 1 !== index ? '&' : ''
-        }`;
-      }
-    });
-    return updated;
-  }
-
   public httpGet(
     path: string,
     isNedAuth?: boolean,
@@ -84,7 +66,7 @@ export class ApiService {
   ): Observable<any> {
     const url = this.createPath(path);
     return this.http.post<any>(url, body, {
-      headers: this.createHeaders(isNedAuth === undefined ? false : isNedAuth),
+      headers: this.createHeaders((isNedAuth === undefined) ? false : isNedAuth),
     });
   }
 
