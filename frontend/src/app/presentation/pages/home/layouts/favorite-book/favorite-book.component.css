@@ -30,7 +30,7 @@
 
 .favorite-container .right-content {
     grid-area: 2 / 2 / 3 / 3;
-    
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -79,6 +79,11 @@
     grid-area: 3 / 1 / 4 / 3;
     place-content: center;
     max-height: 35px;
+
+       display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-inline: auto;
 }
 
 
@@ -90,7 +95,7 @@
 
 @media only screen and (min-width: 710px)  {
     .favorite-container  .favorite-book-wrapper {
-        grid-template-rows: .2fr .6fr 80px; 
+        grid-template-rows: .2fr .6fr 80px;
     }
 
     .favorite-container .left-content {
@@ -101,7 +106,7 @@
         height: 90%;
         left: -10%;
     }
-    
+
     .favorite-container .right-content {
         grid-area: 3 / -2 / 2 / 2;
     }
@@ -123,6 +128,8 @@
         grid-area: 3 / 2 / 4 / 3;
         place-content: flex-start;
         max-height: 40px;
+        width: 100%;
+        cursor: default;
     }
 
     .favorite-container .number-detail-list{

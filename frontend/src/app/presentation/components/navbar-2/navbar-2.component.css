@@ -7,8 +7,8 @@
 }
 
 .navbar-logo {
-    margin-left: 2vw;
-    margin-right: auto;
+    margin-inline-start: 5vw;
+    margin-inline-end: 1dvw;
     font-size: 32px;
     font-weight: bold;
     text-wrap: nowrap;
