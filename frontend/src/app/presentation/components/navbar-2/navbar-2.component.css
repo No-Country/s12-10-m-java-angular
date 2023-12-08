@@ -56,7 +56,9 @@
     border: 2px solid #C88D65;
     background: #FFF;
 }
-
+.search-bar-input ~ svg{
+  cursor: pointer;
+}
 .search-bar :is(input:focus) ~ .search-bar-icon path {
     fill: #C88D65;
     fill-opacity: 100%;
