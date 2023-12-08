@@ -34,9 +34,9 @@ export interface BookFilterProps {
   maxPrice?: number;
 
   minPage?: number;
-  genre?: string;
+  genre?: string[];
 
-  language?: string;
+  language?: string[];
   searchEvenNotAvailable: number;
 
   orderBy: string;
@@ -44,22 +44,23 @@ export interface BookFilterProps {
 }
 
 export enum Genre {
-    HORROR = "Horror",
-    FANTASY = "Fantasy",
-    ROMANCE = "Romance",
-    POETRY = "Poetry",
-    COMEDY = "Comedy",
-    SCIENCE_FICTION = "Science Fiction",
-    SELF_HELP = "Self Help",
-    DRAMA = "Drama",
-    HISTORY = "History",
-    POLITICAL = "Political",
-    THRILLER = "Thriller",
-    BIOGRAPHY = "Biography",
-    MYSTERY = "Mystery",
-    NON_FICTION = "Non Fiction",
-    TRAVEL = "Travel",
-    POLICY = "Policy"
+  DEFAULT = '',
+  HORROR = 'Horror',
+  FANTASY = 'Fantasy',
+  ROMANCE = 'Romance',
+  POETRY = 'Poetry',
+  COMEDY = 'Comedy',
+  SCIENCE_FICTION = 'Science Fiction',
+  SELF_HELP = 'Self Help',
+  DRAMA = 'Drama',
+  HISTORY = 'History',
+  POLITICAL = 'Political',
+  THRILLER = 'Thriller',
+  BIOGRAPHY = 'Biography',
+  MYSTERY = 'Mystery',
+  NON_FICTION = 'Non Fiction',
+  TRAVEL = 'Travel',
+  POLICY = 'Policy',
 };
 
 export enum Language {

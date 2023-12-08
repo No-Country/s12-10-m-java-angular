@@ -12,6 +12,6 @@ export class ShopService extends SignalsStoreService<BookDetail[]> {
   }
 
   public getLeakedsBooks(filterProps: BookFilterProps) {
-    return this.api.httpGet('book/searchByCriteria', true, filterProps);
+    return this.api.httpGet('book/searchByCriteria', false, filterProps);
   }
 }

@@ -13,6 +13,7 @@
     <shop-filters
       class="w-full flex"
       (filterProps)="updateList($event)"
+      [initialGenreFilter]="initGenre"
     ></shop-filters>
   </section>
   <section class="result-container">

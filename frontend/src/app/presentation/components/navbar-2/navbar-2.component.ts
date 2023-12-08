@@ -18,7 +18,7 @@ export class Navbar2Component implements OnInit {
 
   ngOnInit(): void {}
 
-  search() {
+  search(): void {
     this.router.navigate(['/shop?search=' + this.searchTerm]);
   }
 }

@@ -15,17 +15,17 @@
             <path d="M32.3504 23.9507L27.6504 29.5791L42.9171 47.9013L27.6504 66.2235L32.3504 71.8519L52.3504 47.9013L32.3504 23.9507Z" fill="#3B3A3A"/>
             </svg> </a>
       </div>
-    
+
     </pagination-template>
   </div>
   <div class="grid-container" >
     <div class="grid-item" *ngFor="let log of categories  | paginate: {itemsPerPage: pageSize, currentPage: page,  }">
-      <div class="card" >
+      <div class="card" [routerLink]="[log.url]" [queryParams]="{ search: 'All', genre: log.name }">
         <img src={{log.image}} alt={{log.name}}>
       </div>
       <h5>{{log.name}}</h5>
     </div>
-    
+
   </div>
 </div>
 

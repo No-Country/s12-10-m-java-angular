@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   BookFilterProps,
   GENRES,
@@ -26,6 +26,8 @@ import {
 export class ShopFiltersComponent implements OnInit {
   @Output() public filterProps: EventEmitter<BookFilterProps>;
 
+  @Input() public initialGenreFilter: Genre = Genre.DEFAULT;
+
   protected readonly GENRES: Genre[] = GENRES;
   protected readonly LANGUAGES: Language[] = LANGUAGES;
   protected genresApplied: Genre[] = [];
@@ -40,21 +42,15 @@ export class ShopFiltersComponent implements OnInit {
       minPage:  ['', Validators.min(1)],
     });
     this.filterProps = new EventEmitter();
-    this.props = {
-    page: 0,
-    size: 9,
-    orderBy: 'alphabetically',
-    ascOrDesc: 'asc',
-    searchEvenNotAvailable: 0,
-  } as BookFilterProps;
+    this.props = JSON.parse(
+      sessionStorage.getItem('props') as string
+    ) as BookFilterProps;
   }
 
   ngOnInit(): void {
-    const props = JSON.parse(
-      sessionStorage.getItem('props') as string
-    ) as BookFilterProps;
-    if (props !== undefined && props) this.props = props;
-    else sessionStorage.setItem('props', JSON.stringify(this.props));
+    if (this.initialGenreFilter && this.initialGenreFilter.valueOf() !== Genre.DEFAULT.valueOf()) {
+      this.genresApplied.push(this.initialGenreFilter);
+    }
   }
 
   applyGenre(genre: Genre) {
@@ -66,7 +62,7 @@ export class ShopFiltersComponent implements OnInit {
     }
 
     this.props.genre =
-      this.genresApplied.length > 0 ? this.genresApplied[0] : undefined;
+      this.genresApplied.length > 0 ? this.genresApplied : undefined;
 
     this.sendProps();
   }
@@ -79,7 +75,7 @@ export class ShopFiltersComponent implements OnInit {
     }
 
     this.props.language =
-      this.languageApplied.length > 0 ? this.languageApplied[0] : undefined;
+      this.languageApplied.length > 0 ? this.languageApplied : undefined;
 
     this.sendProps();
   }

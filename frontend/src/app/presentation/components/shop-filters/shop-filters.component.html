@@ -37,13 +37,14 @@
           <h3>Categories</h3>
           <span class="text-center">-</span>
       </div>
-      <ul class="categories" role="list">
+      <form class="categories" role="list">
         @for(genre of GENRES; track genre){
-          <li role="listitem" [class.active]="genresApplied.includes(genre)" [attr.aria-label]="'Fillter by '+genre.valueOf()" [id]="'filter-'+genre.valueOf()" (click)="applyGenre(genre)">
-            {{ genre.valueOf() }}
-          </li>
+          <label for="{{genre.valueOf()}}" role="checkbox" [class.active]="genresApplied.includes(genre)" [attr.aria-label]="'Fillter by '+genre.valueOf()" [attr.aria-cheked]="genresApplied.includes(genre)">
+              <input type="checkbox" id="{{genre.valueOf()}}" name="{{genre.valueOf()}}" [checked]="genresApplied.includes(genre)" (change)="applyGenre(genre)">
+              {{ genre.valueOf() }}
+          </label>
         }
-      </ul>
+      </form>
   </li>
   <li role="listitem" aria-label="Filter by Languages" class="filter-item">
       <div class="w-full flex justify-between items-center">
@@ -66,7 +67,7 @@
           <span class="text-center">-</span>
       </div>
       <form class="flex flex-col mt-3 gap-y-2 languages">
-          <label for="include-out-of-stock" name="include-out-of-stock" role="checkbox" [attr.aria-checked]="this.props.searchEvenNotAvailable" aria-label="When selecting, out-of-stock books were added">
+          <label for="include-out-of-stock" name="include-out-of-stock" role="checkbox" aria-label="When selecting, out-of-stock books were added">
               <input type="checkbox" id="include-out-of-stock" name="include-out-of-stock" (change)="applyOutOfStock()">
               Include out of stock
             </label>
