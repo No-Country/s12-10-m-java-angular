@@ -7,4 +7,18 @@
         margin-left: 4%;
         margin-right: 4%;
     }
+    .hidden{
+        display: none;
+        width: 0;
+    }
+    .sticky{
+        margin-bottom:3%;
+        width: 90%;
+        margin-right: 0;
+        flex-shrink: unset;
+    }
+
+    img{
+        max-width: 35vw;
+    }
 }

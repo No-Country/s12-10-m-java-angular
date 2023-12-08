@@ -10,7 +10,7 @@ export interface Book {
     description: string;
     collection:string;
     genre: string;
-    lenguage:string;
+    language:string;
     author:string;
     nameEditorial:string;
     urlImages:string;
