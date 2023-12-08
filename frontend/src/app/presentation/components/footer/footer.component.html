@@ -1,28 +1,23 @@
 <footer class="footer">
     <div class="footer-container max-[999px]:!hidden">
-        <div class="footer-logo">
+        <section class="footer-logo">
             <a routerLink=""><img src="" alt="">BookLeaks</a>
-        </div>
-        <div class="footer-categories">
+        </section>
+        <section class="footer-categories">
             <h3 class="footer-titles">Categories</h3>
             <div class="footer-categories-list">
-                <ul>
-                    <li><a routerLink="">Science Fiction</a></li>
-                    <li><a routerLink="">Romance</a></li>
-                    <li><a routerLink="">Drama</a></li>
-                    <li><a routerLink="">Fantasy</a></li>
-                    <li><a routerLink="">Policial</a></li>
-                </ul>
-                <ul>
-                    <li><a routerLink="">Poetry</a></li>
-                    <li><a routerLink="">Comedy</a></li>
-                    <li><a routerLink="">Self help</a></li>
-                    <li><a routerLink="">Horror</a></li>
-                    <li><a routerLink="">History</a></li>
+                <ul class="grid grid-cols-2">
+                  @for(genre of GENRES; track genre){
+                    <li role="link">
+                      <a routerLink="/shop" [queryParams]="{ search: 'All', genre: genre.valueOf() }" aria-label="Link to shop whith category filter" role="link">
+                        {{genre.valueOf()}}
+                      </a>
+                    </li>
+                  }
                 </ul>
             </div>
-        </div>
-        <div class="footer-help">
+        </section>
+        <section class="footer-help">
             <h3 class="footer-titles">Help & Contacts</h3>
             <ul>
                 <li>
@@ -53,8 +48,8 @@
                     Av. Victoria Aguiire 24261
                 </li>
             </ul>
-        </div>
-        <div class="footer-assistance">
+        </section>
+        <section class="footer-assistance">
             <h3 class="footer-titles">Assistance to the buyer</h3>
             <ul>
                 <li><a routerLink="">Find an order</a></li>
@@ -63,7 +58,7 @@
                 <li><a routerLink="">FAQ</a></li>
                 <li><a routerLink="">Terms of use site</a></li>
             </ul>
-        </div>
+        </section>
     </div>
     <hr class="max-[999px]:!hidden">
     <div class="footer-contactline max-[999px]:!hidden">

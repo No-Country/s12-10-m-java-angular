@@ -22,11 +22,6 @@ import { TokenInterceptor } from './data/interceptor/tokenInterceptor';
   providers: [
     ToastService,
     LoggedInService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true,
-    },
   ],
   imports: [
     CommonModule,

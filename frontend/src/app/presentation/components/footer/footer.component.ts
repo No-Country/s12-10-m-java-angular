@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { GENRES, Genre } from 'app/data/models/book';
 
 @Component({
   selector: 'app-footer',
@@ -9,6 +10,12 @@ import { RouterLink } from '@angular/router';
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.css'
 })
-export class FooterComponent {
+export class FooterComponent implements OnInit{
+  protected GENRES: Genre[] = GENRES;
 
+  constructor(){}
+
+  ngOnInit(): void {
+
+  }
 }

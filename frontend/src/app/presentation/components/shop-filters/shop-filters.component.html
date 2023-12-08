@@ -40,7 +40,7 @@
       <form class="categories" role="list">
         @for(genre of GENRES; track genre){
           <label for="{{genre.valueOf()}}" role="checkbox" [class.active]="genresApplied.includes(genre)" [attr.aria-label]="'Fillter by '+genre.valueOf()" [attr.aria-cheked]="genresApplied.includes(genre)">
-              <input type="checkbox" id="{{genre.valueOf()}}" name="{{genre.valueOf()}}" [checked]="genresApplied.includes(genre)" (change)="applyGenre(genre)">
+              <input type="checkbox" id="{{genre}}" name="{{genre.valueOf()}}" [checked]="genresApplied.includes(genre)" (change)="applyGenre(genre)">
               {{ genre.valueOf() }}
           </label>
         }

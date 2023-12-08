@@ -101,8 +101,8 @@ export class ShopFiltersComponent implements OnInit {
     let minPrice = this.filterForm.get('minPrice')?.value;
     let maxPrice = this.filterForm.get('maxPrice')?.value;
 
-    (maxPrice && maxPrice !== undefined && maxPrice !== null) && (this.props.maxPrice = maxPrice);
-    (minPrice && minPrice !== undefined && minPrice !== null) && (this.props.minPrice = minPrice);
+    (maxPrice !== undefined && maxPrice !== null) && (this.props.maxPrice = maxPrice);
+    (minPrice !== undefined && minPrice !== null) && (this.props.minPrice = minPrice);
 
     this.filterForm.get('minPrice')?.setValue('');
 

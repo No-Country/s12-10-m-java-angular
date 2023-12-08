@@ -114,13 +114,30 @@
 .card-book .content-info h2:hover, .card-book .content-info h2:focus {
     color: oklch(57.71% 0.144 154.06);
 }
-.up-button svg {
+
+
+button.up-button.take-out {
+  border-width: 1px;
+  border-color: #DFDFDF;
+  border-style: double;
+  cursor: default;
+  background-color: #DFDFDF;
+  color: #fff;
+  box-shadow: none;
+  outline: none;
+}
+
+button.up-button.take-out:hover, button.up-button.take-out:focus {
+  box-shadow: none;
+}
+
+.up-button.activate svg {
   transition-property: scale;
   transition-duration: 400ms;
   transition-timing-function: ease;
 }
 
-.up-button:hover svg{
+.up-button.activate:hover svg{
   scale: 1.175;
 }
 

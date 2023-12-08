@@ -59,7 +59,7 @@ export enum Genre {
   COMEDY = 'Comedy',
   SCIENCE_FICTION = 'Science Fiction',
   SELF_HELP = 'Self Help',
-  DRAMA = 'Drama',
+  DRAME = 'Drame',
   HISTORY = 'History',
   POLITICAL = 'Political',
   THRILLER = 'Thriller',
@@ -80,7 +80,16 @@ export enum Language {
 };
 
 export const GENRES: Genre[] = [
-    Genre.HORROR, Genre.SCIENCE_FICTION, Genre.FANTASY, Genre.POETRY, Genre.ROMANCE, Genre.SELF_HELP, Genre.POLICY, Genre.HISTORY, Genre.COMEDY,
+  Genre.HORROR,
+  Genre.SCIENCE_FICTION,
+  Genre.FANTASY,
+  Genre.POETRY,
+  Genre.ROMANCE,
+  Genre.SELF_HELP,
+  Genre.POLICY,
+  Genre.HISTORY,
+  Genre.COMEDY,
+  Genre.DRAME,
 ];
 
 export const LANGUAGES: Language[] = [
