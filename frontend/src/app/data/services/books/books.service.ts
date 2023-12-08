@@ -2,8 +2,6 @@ import { Injectable, Injector } from '@angular/core';
 import { Book, BookDetail, BookPagination } from 'app/data/models/book';
 import { Observable, Observer, first, map, of, take, takeUntil, tap } from 'rxjs';
 import { ApiService } from '../api.service';
-import { BOOK_DETAIL_MOOK } from 'app/data/mocks/booksArray';
-import { RxjsStoreService } from '../store/StoreRxJs.service';
 
 @Injectable()
 export class BooksService {

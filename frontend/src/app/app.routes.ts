@@ -42,7 +42,7 @@ export const routes: Routes = [
       import('@presentation/pages/shop/shop.component').then(
         (c) => c.ShopComponent
       ),
-    providers: [{ provide: ShopService, useClass: ShopService }],
+    providers: [ShopService],
   },
   {
     path: 'cart',
