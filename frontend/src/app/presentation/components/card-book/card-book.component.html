@@ -2,10 +2,10 @@
 
     <section class="img-wrapper" [routerLink]="['book/'+book.ID]" >
         <a class="img-container" [ngClass]="{'blur-md': isNumberId(book.ID) }">
-            <img [ngSrc]="book.img" fill priority alt="Front of men&#039;s Basic Tee in black.">
+            <img [ngSrc]="book.image" fill priority alt="Front of men&#039;s Basic Tee in black.">
         </a>
     </section>
- 
+
 
     <section class="content-info">
         <h2 [title]="book.name">

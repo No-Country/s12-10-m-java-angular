@@ -7,9 +7,7 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class TokenInterceptor implements HttpInterceptor {
   constructor() {}
 
@@ -29,6 +27,7 @@ export class TokenInterceptor implements HttpInterceptor {
       });
     }
 
+    console.log("request (interceptor)", request);
     return next.handle(request);
   }
 }

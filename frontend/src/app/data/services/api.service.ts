@@ -30,15 +30,15 @@ export class ApiService {
   private createHeaders(isNedAuth: boolean): HttpHeaders {
     let headers = {} as HttpHeaders;
     if (isNedAuth) {
-      const token = this.token();
+      const token = localStorage.getItem('token');
       headers = new HttpHeaders({
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`, //falta sacar token de local storage
-        });
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      });
     } else {
       headers = new HttpHeaders({
-          'Content-Type': 'application/json',
-        });
+        'Content-Type': 'application/json',
+      });
     }
 
     return headers;
@@ -48,10 +48,20 @@ export class ApiService {
     return `${this.prodURL}/${value}`;
   }
 
-  private createParams(url: string, params: any){
-    let updated = url+"?";
-    Object.entries(params).forEach((value, index)=>{
-      updated = `${updated}${value[0]}=${value[1]}${Object.entries(params).length-1 !== index ? "&" : ""}`;
+  private createParams(url: string, params: any) {
+    let updated = url + '?';
+    Object.entries(params).forEach((value, index) => {
+      console.log("value is ? ", value[0]);
+      if (value[0] === 'searchEvenNotAvailable') {
+        console.log("Entre?",value[0]);
+        updated = `${updated}${value[0]}=${value[1] ? 1 : 0}${
+          Object.entries(params).length - 1 !== index ? '&' : ''
+        }`;
+      } else {
+        updated = `${updated}${value[0]}=${value[1]}${
+          Object.entries(params).length - 1 !== index ? '&' : ''
+        }`;
+      }
     });
     return updated;
   }
@@ -75,7 +85,9 @@ export class ApiService {
     isNedAuth: boolean = false
   ): Observable<any> {
     const url = this.createPath(path);
-    return this.http.post<any>(url, body, {headers: this.createHeaders(isNedAuth)});
+    return this.http.post<any>(url, body, {
+      headers: this.createHeaders(isNedAuth),
+    });
   }
 
   public httpPut(

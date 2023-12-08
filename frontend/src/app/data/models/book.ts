@@ -22,7 +22,7 @@ export interface BookDetail {
     author: string;
     name: string;
     price: number;
-    img: string;
+    image: string;
     description: string;
 }
 
@@ -37,7 +37,7 @@ export interface BookFilterProps {
   genre?: string;
 
   language?: string;
-  searchEvenNotAvailable: boolean;
+  searchEvenNotAvailable: number;
 
   orderBy: string;
   ascOrDesc: string;
