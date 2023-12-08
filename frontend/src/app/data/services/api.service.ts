@@ -10,8 +10,6 @@ export class ApiService {
   private prodURL: string = 'https://librarync1.fly.dev/api/v1';
   private devURL: string = 'http://localhost:8080/api/v1';
   private http: HttpClient = this.injector.get(HttpClient);
-  private loggedInService: LoggedInService = this.injector.get(LoggedInService);
-  private readonly token = this.loggedInService.select('jwt');
 
   constructor(private injector: Injector) {}
 
@@ -82,11 +80,11 @@ export class ApiService {
   public httpPost(
     path: string,
     body: any,
-    isNedAuth: boolean = false
+    isNedAuth?: boolean
   ): Observable<any> {
     const url = this.createPath(path);
     return this.http.post<any>(url, body, {
-      headers: this.createHeaders(isNedAuth),
+      headers: this.createHeaders(isNedAuth === undefined ? false : isNedAuth),
     });
   }
 

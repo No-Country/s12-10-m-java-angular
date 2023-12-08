@@ -5,6 +5,7 @@ import { RegisterService } from './data/services/register/register.service';
 import { ShopService } from './data/services/shop/shop.service';
 import { BookDetailComponent } from '@presentation/pages/book-detail/book-detail.component';
 import { BooksService } from './data/services/books/books.service';
+import { bookDetailResolver } from './data/guards/BookDetail.resolver';
 
 
 export const routes: Routes = [
@@ -60,17 +61,18 @@ export const routes: Routes = [
       ).then((c) => c.ForgotPasswordComponent),
     providers: [LoginService],
   },
-    {
-        path: 'Cart',
-        title: 'Cart',
-        loadComponent: ()=> import('@presentation/pages/cart/cart.component').then(c => c.CartComponent),
+  {
+    path: 'book/:id',
+    title: 'Books Leaks - Detail Book page',
+    loadComponent: () =>
+      import('@presentation/pages/book-detail/book-detail.component').then(
+        (c) => c.BookDetailComponent
+      ),
+    providers: [BooksService],
+    resolve: {
+      book: bookDetailResolver,
     },
-    {
-        path: 'book/:id',
-        title: 'Detail Book',
-        loadComponent: () => import('@presentation/pages/book-detail/book-detail.component').then(c => c.BookDetailComponent),
-        providers: [BooksService],
-    },
+  },
   {
     path: '404',
     title: 'Page Not Found',
@@ -80,5 +82,4 @@ export const routes: Routes = [
       ),
   },
   { path: '**', redirectTo: '/404' },
-
 ];

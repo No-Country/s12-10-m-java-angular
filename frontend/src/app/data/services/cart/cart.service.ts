@@ -39,12 +39,12 @@ export class CartService {
   }
 
   deleteBookToCart(bookToDelete: BookDetail):void{
-    this.booksOnCart = this.booksOnCart.filter(bookAndQuantity => bookAndQuantity.book.ID !== bookToDelete.ID);
+    this.booksOnCart = this.booksOnCart.filter(bookAndQuantity => bookAndQuantity.book.id !== bookToDelete.id);
     this.updateLocalStorage(this.booksOnCart)
   }
 
   increaseBook(bookToIncrease: BookDetail):void{
-    const foundBook = this.booksOnCart.find(item => item.book.ID === bookToIncrease.ID);
+    const foundBook = this.booksOnCart.find(item => item.book.id === bookToIncrease.id);
     if (foundBook) {
       foundBook.quantity += 1;
     }
@@ -52,7 +52,7 @@ export class CartService {
   }
 
   decreaseBook(bookToDecrease: BookDetail):void{
-    const foundBook = this.booksOnCart.find(item => item.book.ID === bookToDecrease.ID);
+    const foundBook = this.booksOnCart.find(item => item.book.id === bookToDecrease.id);
     if (foundBook) {
       foundBook.quantity -= 1;
     }
@@ -60,7 +60,7 @@ export class CartService {
   }
 
   changeQuantityTo(bookTochangeQuantity: BookDetail, newQuantity: number):void{
-    const foundBook = this.booksOnCart.find(item => item.book.ID === bookTochangeQuantity.ID);
+    const foundBook = this.booksOnCart.find(item => item.book.id === bookTochangeQuantity.id);
     if (foundBook) {
       foundBook.quantity = newQuantity;
     }

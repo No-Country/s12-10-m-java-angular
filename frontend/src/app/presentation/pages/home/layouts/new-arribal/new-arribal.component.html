@@ -4,11 +4,11 @@
 
 
     <div class="book-list">
-     @for(book of books | async; track book.ID){
+     @for(book of books | async; track book.id){
           <card-book [book]="book"></card-book>
       } @empty {
-        @for(book of ["1","2","3","4","5","6","7","8"]; track book){
-          <card-book [book]="{ID: book, name:'Loading...', description: 'Loading...', author: 'loading...', price: 0, image: '../../../../assets/imgs/book-placeholder.webp'}"></card-book>
+        @for(book of [1,2,3,4,5,6,7,8]; track book){
+          <card-book [book]="{id: book, name:'Loading...', description: 'Loading...', author: 'loading...', price: 0, image: '../../../../assets/imgs/book-placeholder.webp'}"></card-book>
         }
       }
 

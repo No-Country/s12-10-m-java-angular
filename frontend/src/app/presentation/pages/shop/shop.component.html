@@ -35,7 +35,7 @@
 
       @if ( !this.loading() ){
         <div class="result-list">
-          @for(book of getBooks(); track book.ID){
+          @for(book of getBooks(); track book.id){
             <card-book [book]="book"></card-book>
             <app-card-book-horizontal [book]="book"> </app-card-book-horizontal>
           }

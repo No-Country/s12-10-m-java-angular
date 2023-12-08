@@ -30,7 +30,7 @@ export class CartComponent implements OnInit {
   }
 
   discardBook(bookToRemove: BookDetail){
-    this.booksWQ = this.booksWQ.filter(bookWithQuantity => bookWithQuantity.book.ID !== bookToRemove.ID);
+    this.booksWQ = this.booksWQ.filter(bookWithQuantity => bookWithQuantity.book.id !== bookToRemove.id);
     this.cartService.deleteBookToCart(bookToRemove)
   }
 

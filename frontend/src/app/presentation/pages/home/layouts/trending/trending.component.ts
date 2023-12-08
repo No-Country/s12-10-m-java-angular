@@ -32,7 +32,7 @@ export class TrendingComponent implements AfterViewInit, OnInit{
     //en el constructor o aca traigo los libros de trending
     console.log(this.BooksOnCart)
     this.booksWithOnCart = this.booksArray.map(book => {
-      let onCart = this.BooksOnCart.some(cartBook => cartBook.ID === book.ID);
+      let onCart = this.BooksOnCart.some(cartBook => cartBook.id === book.id);
       return { ...book, onCart };
     });
     console.log(this.booksArray)

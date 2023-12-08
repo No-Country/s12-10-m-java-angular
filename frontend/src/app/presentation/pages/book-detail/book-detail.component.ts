@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BookDetailCardComponent } from '@presentation/components/book-detail-card/book-detail-card.component';
 import { Navbar2Component } from '@presentation/components/navbar-2/navbar-2.component';
@@ -11,12 +11,13 @@ import { Book } from 'app/data/models/book';
 @Component({
   selector: 'app-book-detail',
   standalone: true,
-  imports: [CommonModule, BookDetailCardComponent, 
+  imports: [CommonModule, BookDetailCardComponent,
     FooterComponent,
     NavbarComponent,
     Navbar2Component],
   templateUrl: './book-detail.component.html',
-  styleUrl: './book-detail.component.css'
+  styleUrl: './book-detail.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookDetailComponent implements OnInit {
   public book: Book;
@@ -30,10 +31,14 @@ export class BookDetailComponent implements OnInit {
 
   ngOnInit() {
     // Obtén el id del libro de los parámetros de la ruta
-    const bookId = this.route.snapshot.paramMap.get('id');
+    //const bookId = this.route.snapshot.paramMap.get('id');
+    this.route.data.subscribe((data) => {
+      this.book = data['book'];
+    });
+
 
     // Verifica si se proporcionó un id y es un número
-    if (bookId && !isNaN(Number(bookId))) {
+   /* if (bookId && !isNaN(Number(bookId))) {
       // Llama al servicio para obtener los detalles del libro
       this.booksService.detail(Number(bookId)).subscribe({ next:
 
@@ -48,6 +53,8 @@ export class BookDetailComponent implements OnInit {
       );
     } else {
       console.error('ID del libro no válido');
-    }
+    }*/
+
   }
+
 }

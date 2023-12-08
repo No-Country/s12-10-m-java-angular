@@ -2,8 +2,7 @@
 <div class="container">
 
   <div class="image-list" #bookList (scroll)="onScroll()">
-    @for (book of booksWithOnCart; track book.ID) {
-      <!--   -->
+    @for (book of booksWithOnCart; track book.id) {
       @if (screenWidth > 617) {
         <card-book [book]="book" [className]="classOfCard"></card-book>
       }
@@ -27,5 +26,5 @@
   </button>
 </div>
 <app-button class="mb-6 w-full" className="mx-auto min-w-[120px]  w-full max-w-[140px] min-[905px]:max-w-[12dvw] mt-[15px]">
-  <a routerLink="shop" [queryParams]="{ search: 'All', sort: 'price' }">Shop</a>
+  <a routerLink="shop" [queryParams]="{ search: 'All', sort: 'price' }">See all</a>
 </app-button>

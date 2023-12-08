@@ -1,15 +1,15 @@
-<article #cardBook class="card-book" [id]="book.ID" >
+<article #cardBook class="card-book" [id]="book.id" >
 
-    <section class="img-wrapper" [routerLink]="['book/'+book.ID]" >
-        <a class="img-container" [ngClass]="{'blur-md': isNumberId(book.ID) }">
-            <img [ngSrc]="book.image" fill priority alt="Front of men&#039;s Basic Tee in black.">
+    <section class="img-wrapper" [routerLink]="['book/'+book.id]" (click)="view()">
+        <a class="img-container" [ngClass]="{'blur-md': !isStringId(book.id) }">
+            <img [ngSrc]="book.image" fill priority alt="Book front page image">
         </a>
     </section>
 
 
     <section class="content-info">
         <h2 [title]="book.name">
-            <a class="w-full" [routerLink]="['book/'+book.ID]">
+            <a class="w-full" [routerLink]="['book/'+book.id]">
                 {{ book.name }}
             </a>
         </h2>
@@ -18,7 +18,7 @@
 
         <div class="w-full flex justify-between items-center">
             <p class="mt-2 font-medium price text-[#242221] cursor-pointer hover:transform">
-                <a class="w-full" [routerLink]="['book/'+book.ID]" >
+                <a class="w-full" [routerLink]="['book/'+book.id]" >
                     ${{ book.price }}
                 </a>
             </p>

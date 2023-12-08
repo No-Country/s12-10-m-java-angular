@@ -18,7 +18,7 @@ export interface Book {
 }
 
 export interface BookDetail {
-    ID: string | number;
+    id: string | number;
     author: string;
     name: string;
     price: number;
@@ -41,6 +41,13 @@ export interface BookFilterProps {
 
   orderBy: string;
   ascOrDesc: string;
+}
+
+export interface BookPagination {
+  content: BookDetail[];
+  totalPages: number;
+  totalElements: number;
+  isLast: boolean;
 }
 
 export enum Genre {
