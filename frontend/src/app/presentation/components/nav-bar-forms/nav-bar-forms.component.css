@@ -1,9 +1,5 @@
 .navbar-g {
-    background-color: oklch(68.96% 0.15 155.76);
-    min-height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: none;
 }
 
 .navbar-logo {
@@ -19,7 +15,7 @@
     align-items: center;
     margin-left: 2vw;
     color: #FFF;
-    
+
 }
 
 /* 0B733D */
@@ -65,5 +61,31 @@
 .navbar-g-list-item-sett {
     width: 23px;
     aspect-ratio: 1/1;
-    
+
+}
+
+.mobile-header{
+  width: 100%;
+  height: auto;
+  min-height: 30px;
+  max-height: 40px;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  background: transparent;
+}
+
+@media only screen and (min-width: 705px) {
+  .navbar-g {
+        display: flex;
+    align-items: center;
+    justify-content: space-between;
+        background-color: oklch(68.96% 0.15 155.76);
+    min-height: 40px;
+  }
+  .mobile-header{
+    display: none;
+  }
 }

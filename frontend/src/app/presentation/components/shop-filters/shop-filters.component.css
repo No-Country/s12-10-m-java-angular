@@ -68,6 +68,10 @@
     display: flex;
     column-gap: 1rem;
     align-items: center;
+
+    transition-property: color, opacity;
+    transition-timing-function: linear;
+    transition-duration: 120ms;
 }
 
 .filters .filter-item .categories label.active{
@@ -95,4 +99,14 @@
     border-width: 1.5px;
     border-style: solid;
     border-color: #BA703C;
+}
+
+.app-button{
+    display: flex;
+    justify-content: center;
+    transition-property: opacity, visibility;
+    transition-duration: 250ms;
+    transition-timing-function: ease-in-out;
+    opacity: 0;
+    visibility: hidden;
 }

@@ -44,7 +44,7 @@
 
 .input-group input.form-input {
     padding: 13px 15px;
-    
+
     font-size: 1rem;
     line-height: 1.5rem;
     outline: none;
@@ -55,7 +55,7 @@
     margin: 1px 1px 0 1px;
 
     border: 2px solid rgb(200, 200, 200);
-    border-radius: 1.25rem; 
+    border-radius: 1.25rem;
     background: #FFFBFE;
     flex-grow: 1;
     flex-shrink: 1;
@@ -73,14 +73,14 @@ form input:not(:focus).form-input {
 }
 
 form input.form-input:focus {
-  border: 2px #C88D65 solid; 
+  border: 2px #C88D65 solid;
 }
 
 form input:focus ~ label.form-label{
   color: #BA703C;
 }
 
-form input:focus ~ label.form-label, form input.ng-valid.ng-dirty ~ label.form-label{
+form input:focus ~ label.form-label, form input.ng-valid.ng-dirty ~ label.form-label, form.ng-invalid  input.ng-invalid.ng-dirty ~ label.form-label{
   transform: scale(0.75) translateY(-39px);
   margin: 0em;
   margin-left: 1.3em;

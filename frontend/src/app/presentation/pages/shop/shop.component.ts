@@ -86,7 +86,7 @@ export class ShopComponent implements OnInit, OnDestroy {
     ) as BookFilterProps;
     this.shopService.getLeakedsBooks(props).subscribe({
       next: (books) => {
-        this.shopService.setState(books.content);
+        this.shopService.setState(books);
         this.loading.update((current) => !current);
       },
       error: (err: any) => {
@@ -154,6 +154,7 @@ export class ShopComponent implements OnInit, OnDestroy {
 
   updateList(filterProps: BookFilterProps): void {
     this.loading.update((current) => !current);
+    console.log("props",filterProps);
     this.shopService.getLeakedsBooks(filterProps).subscribe({
       next: (books) => {
         this.shopService.setState(books.content);
@@ -180,6 +181,6 @@ export class ShopComponent implements OnInit, OnDestroy {
   }
 
   getBooks() {
-    return Object.values(this.books());
+    return Object.values(this.books().content);
   }
 }

@@ -9,7 +9,7 @@
           <input type="number" formControlName="maxPrice" id="max-price-filter" name="max-price-filter" class="max-w-[100px]" placeholder="Max" dir="ltr" aria-label="Enter the maximum price you want to filter with" autocomplete="off" autocapitalize="none" aria-disabled="false">
 
           <app-button type="submit" title="Apply price filter"
-          [ngClass]="{'!visible': filterForm.get('minPrice')?.value >= 1 || filterForm.get('maxPrice')?.value >= 1}" class="flex justify-center invisible" className="w-full min-w-[60px] max-h-[1.75rem] text-[0.945rem]" (click)="applyPrice()">
+          [ngClass]="{'!visible !opacity-100': filterForm.get('minPrice')?.value >= 1 || filterForm.get('maxPrice')?.value >= 1}" class="app-button" className="w-full min-w-[60px] max-h-[1.75rem] text-[0.945rem]" (click)="applyPrice()">
               Apply
           </app-button>
       </form>
@@ -24,8 +24,8 @@
           <input type="number" formControlName="minPage" id="pages-filter" name="pages-filter" class="max-w-[80px]" placeholder="Min Number of pages" dir="ltr" aria-label="Enter the minimum number of pages" autocomplete="off" autocapitalize="none" aria-disabled="false">
 
           <app-button type="submit" title="Apply price filter"
-          class="flex justify-center invisible"
-          [ngClass]="{'!visible': filterForm.get('minPage')?.value >= 1}"
+          class="app-button"
+          [ngClass]="{'!visible !opacity-100': filterForm.get('minPage')?.value >= 1}"
           className="w-full min-w-[60px] max-h-[1.75rem] text-[0.945rem]" (click)="applyPageNumber()">
               Apply
           </app-button>

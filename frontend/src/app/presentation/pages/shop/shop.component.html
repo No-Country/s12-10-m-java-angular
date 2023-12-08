@@ -8,7 +8,12 @@
     <p class="search-term">
       {{ searchTerm }}
     </p>
-    <span>10 found books</span>
+    @if( !this.loading() ){
+      <span>{{ books().totalElements }} found books</span>
+    } @else {
+      <span>Looking for books...</span>
+    }
+
 
     <shop-filters
       class="w-full flex"

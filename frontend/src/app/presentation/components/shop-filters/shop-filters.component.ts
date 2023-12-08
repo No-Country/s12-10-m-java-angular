@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import {
   BookFilterProps,
   GENRES,
@@ -39,7 +46,7 @@ export class ShopFiltersComponent implements OnInit {
     this.filterForm = this.formBuilder.group({
       minPrice: ['', Validators.min(1)],
       maxPrice: ['', Validators.min(1)],
-      minPage:  ['', Validators.min(1)],
+      minPage: ['', Validators.min(1)],
     });
     this.filterProps = new EventEmitter();
     this.props = JSON.parse(
@@ -48,7 +55,10 @@ export class ShopFiltersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.initialGenreFilter && this.initialGenreFilter.valueOf() !== Genre.DEFAULT.valueOf()) {
+    if (
+      this.initialGenreFilter &&
+      this.initialGenreFilter.valueOf() !== Genre.DEFAULT.valueOf()
+    ) {
       this.genresApplied.push(this.initialGenreFilter);
     }
   }
@@ -90,20 +100,20 @@ export class ShopFiltersComponent implements OnInit {
   applyPrice(): void {
     let minPrice = this.filterForm.get('minPrice')?.value;
     let maxPrice = this.filterForm.get('maxPrice')?.value;
-    this.props.maxPrice =
-      maxPrice && maxPrice !== undefined ? maxPrice : undefined;
-    this.props.minPrice =
-      minPrice && minPrice !== undefined ? minPrice : undefined;
 
-      this.filterForm.get('minPrice')?.setValue('') ;
+    (maxPrice && maxPrice !== undefined && maxPrice !== null) && (this.props.maxPrice = maxPrice);
+    (minPrice && minPrice !== undefined && minPrice !== null) && (this.props.minPrice = minPrice);
 
-      this.filterForm.get('maxPrice')?.setValue('') ;
+    this.filterForm.get('minPrice')?.setValue('');
 
-      this.sendProps();
+    this.filterForm.get('maxPrice')?.setValue('');
+
+    this.sendProps();
   }
 
   applyOutOfStock() {
-    this.props.searchEvenNotAvailable = this.props.searchEvenNotAvailable === 1 ? 0 : 1;
+    this.props.searchEvenNotAvailable =
+      this.props.searchEvenNotAvailable === 1 ? 0 : 1;
 
     this.sendProps();
   }

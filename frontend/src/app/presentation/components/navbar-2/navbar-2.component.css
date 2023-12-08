@@ -48,6 +48,7 @@
     flex-shrink: 1;
     padding-inline-start: 15px;
     outline: none;
+    color: #1d1d1d;
 }
 
 .search-bar-input:focus {
@@ -99,7 +100,7 @@
 .navbar-w-list-item {
     position: relative;
   }
-  
+
 .dropdown-content {
     display: none;
     position: absolute;
@@ -111,7 +112,7 @@
     height: 8vh;
     overflow-y: scroll;
 }
-  
+
 .navbar-w-list-item:hover .dropdown-content {
     display: block;
 }
