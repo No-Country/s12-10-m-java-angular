@@ -42,7 +42,7 @@ export class BooksService extends RxjsStoreService<BookDetail[]> {
   }
 
   public detail(id: number): Observable<Book>{
-    return this.api.httpGet(`book/toCard/${id}`);
+    return this.api.httpGet(`book/toCard/${id}`, true);
   } 
 
   public save(book: BookDetail): Observable<any>{

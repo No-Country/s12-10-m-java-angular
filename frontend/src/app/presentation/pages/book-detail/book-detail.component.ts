@@ -35,14 +35,16 @@ export class BookDetailComponent implements OnInit {
     // Verifica si se proporcionó un id y es un número
     if (bookId && !isNaN(Number(bookId))) {
       // Llama al servicio para obtener los detalles del libro
-      this.booksService.detail(Number(bookId)).subscribe(
+      this.booksService.detail(Number(bookId)).subscribe({ next:
+
         (details) => {
           // Actualiza los detalles del libro en el componente
           this.book = details;
+          console.log(this.book)
         },
-        (error) => {
+        error:(error) => {
           console.error('Error obteniendo detalles del libro', error);
-        }
+        }}
       );
     } else {
       console.error('ID del libro no válido');
