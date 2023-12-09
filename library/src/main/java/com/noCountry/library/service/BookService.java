@@ -14,6 +14,8 @@ public interface BookService {
 
     BookResponse getBookById(String id);
 
+    void modifyGenre(String id, String genre);
+
     PaginatedBookResponseDTO<BookResponse> getAllBooks(Integer pageNumber, Integer sizeElement);
 
     BookCardResponse getBookForCard(String id);

@@ -64,7 +64,7 @@ DELETE	/user/unsubscribe/{email}
 200 OK
 
 
-		Book
+		    Book
 
 GET	/book/{id} 
 ID del libro en la URL
@@ -188,6 +188,17 @@ Request:
 
 
 
+
+PATCH   /book/updateBook
+Request:
+    BookRequest
+Response:
+	BookResponse
+201 CREATED
+
+
+
+
 DELETE	/book/{id}
 200 OK
 
@@ -224,7 +235,7 @@ BookResponse
     Integer 	rating;
     String 	description;
     String 	collection;
-    String 	genre;
+    String	genre;
     String	language;
     String 	completeNameAuthor;
     String 	nameEditorial;

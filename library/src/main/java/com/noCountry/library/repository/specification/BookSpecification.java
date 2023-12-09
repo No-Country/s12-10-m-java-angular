@@ -46,6 +46,8 @@ public class BookSpecification {
                 predicates.add(root.get("language").in(languages));
             }
 
+
+
             if (searchEvenNotAvailable != null && searchEvenNotAvailable == 0) {
                 // Buscamos los libros con y sin stock
                 predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("quantityAvailable"), 0));

@@ -33,6 +33,16 @@ public class BookController {
         }
     }
 
+    @GetMapping(path = "/{id}/{genre}")
+    public ResponseEntity<?> modifyGenre(@PathVariable String id, @PathVariable String genre) throws Exception {
+        try {
+            bookService.modifyGenre(id, genre);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
     @GetMapping(path = "/allBooks")
     public ResponseEntity<?> getAllBooks(@RequestParam(defaultValue = "0") int page,
                                          @RequestParam(defaultValue = "5") int size) throws Exception {
@@ -197,6 +207,16 @@ public class BookController {
         try {
             BookResponse book = bookService.subtractAmount(id, amount);
             return new ResponseEntity<>(book, HttpStatus.CREATED);
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @PatchMapping(path = "/updateBook")
+    public ResponseEntity<?> updateBook(@RequestBody @Valid BookRequest bookRequest) throws Exception {
+        try {
+            BookResponse bookResponse = bookService.updateBook(bookRequest);
+            return new ResponseEntity<>(bookResponse, HttpStatus.CREATED);
         } catch (Exception e){
             throw new Exception(e.getMessage());
         }

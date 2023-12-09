@@ -104,13 +104,73 @@ public class BookServiceImpl implements BookService {
     @Override
     public BookResponse updateBook(BookRequest book) {
         Optional<Book> auxBook = bookRepository.findById(book.getIdBook());
-        isEmptyObject(auxBook);
+
+        if (auxBook.isEmpty()) {
+            throw new BadRequestException("El libro a actualizar no se encuentra registardo");
+        }
 
         Book updatedBook = auxBook.get();
         updatedBook.setModificationDate(LocalDate.now());
-        // demas sets
-        // ver que atributos vamos a querer modificar del libro y cuales no
 
+        if (book.getIdBook() != null) {
+            updatedBook.setISBN(book.getIdBook());
+        }
+
+        if (book.getTitle() != null) {
+            updatedBook.setTitle(book.getTitle());
+        }
+
+        if (book.getPrice() != null) {
+            updatedBook.setPrice(book.getPrice());
+        }
+
+        if (book.getPages() != null) {
+            updatedBook.setPages(book.getPages());
+        }
+
+        if (book.getPublicationDate() != null) {
+            updatedBook.setPublicationDate(book.getPublicationDate());
+        }
+
+        if (book.getDescription() != null) {
+            updatedBook.setDescription(book.getDescription());
+        }
+
+        if (book.getCollection() != null) {
+            updatedBook.setCollection(book.getCollection());
+        }
+
+        if (book.getInitialImage() != null) {
+            updatedBook.setInitialImage(book.getInitialImage());
+        }
+
+        if (book.getGenre() != null) {
+            Genre updateGenre = searchGenre(book.getGenre());
+            if (updateGenre != null) {
+                updatedBook.setGenre(updateGenre);
+            }
+        }
+
+        if (book.getLanguage() != null) {
+            Language updateLanguage = searchLanguage(book.getLanguage());
+            if (updateLanguage != null) {
+                updatedBook.setLanguage(updateLanguage);
+            }
+        }
+
+        if (book.getIdAuthor() != null) {
+            Optional<Author> author = authorRepository.findById(book.getIdAuthor());
+            isEmptyObject(author);
+
+            updatedBook.setAuthor(author.get());
+        }
+
+        if (book.getIdEditorial() != null) {
+            Optional<Editorial> editorial = editorialRepository.findById(book.getIdEditorial());
+            isEmptyObject(editorial);
+
+            updatedBook.setEditorial(editorial.get());
+        }
 
         bookRepository.save(updatedBook);
 
@@ -123,6 +183,15 @@ public class BookServiceImpl implements BookService {
         isEmptyObject(auxBook);
 
         return mapperBooks.bookToBookResponse(auxBook.get());
+    }
+
+    @Override
+    public void modifyGenre(String id, String genre) {
+        Genre element = searchGenre(genre);
+
+        if (element != null) {
+            bookRepository.changeGenreById(id, element);
+        }
     }
 
     @Override
@@ -326,9 +395,10 @@ public class BookServiceImpl implements BookService {
 
 
     private Genre searchGenre(String genre) {
+        String formattedGenre = genre.replaceAll(" ", "_");
 
         for (Genre element : Genre.values()) {
-            if (element.name().equalsIgnoreCase(genre)) {
+            if (element.name().equalsIgnoreCase(formattedGenre)) {
                 return element;
             }
         }
@@ -338,7 +408,7 @@ public class BookServiceImpl implements BookService {
     private List<Genre> searchListGenres(List<String> genres) {
         List<Genre> genreList = new ArrayList<>();
 
-        if (genres != null) {
+        if (genres != null && !genres.isEmpty()) {
             for (String genreName : genres) {
                 Genre genre = searchGenre(genreName);
                 if (genre != null) {
@@ -376,7 +446,7 @@ public class BookServiceImpl implements BookService {
 
     private void isEmptyObject(Optional<?> object) throws NotFoundException {
         if (object.isEmpty()) {
-            throw new NotFoundException("Could not found " + object.getClass());
+            throw new NotFoundException("No se encontró el objeto buscado.");
         }
     }
 
