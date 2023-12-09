@@ -6,9 +6,9 @@
         <section class="footer-categories">
             <h3 class="footer-titles">Categories</h3>
             <div class="footer-categories-list">
-                <ul class="grid grid-cols-2">
+                <ul class="grid grid-cols-2" role="list">
                   @for(genre of GENRES; track genre){
-                    <li role="link">
+                    <li role="listitem">
                       <a routerLink="/shop" [queryParams]="{ search: 'All', genre: genre.valueOf() }" aria-label="Link to shop whith category filter" role="link">
                         {{genre.valueOf()}}
                       </a>
