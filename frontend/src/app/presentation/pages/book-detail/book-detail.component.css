@@ -16,12 +16,13 @@ section{
     color: #069150;
 }
 
+
 .table-container-1 h2,
 .table-container-2 h2{
     max-width: 50%;
     font-size: 3vh;
     color: #242221;
-    margin: 20px auto;
+    margin: 20px;
 }
 
 .tables {
@@ -44,18 +45,19 @@ section{
     border: 1px solid rgba(0, 0, 0, 0.20);
     border-radius: 10px;
     overflow: hidden;
-    margin: 20px auto;
+    margin: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 50%;
+    max-width: 70%;
 }
 
 td {
     padding-left: 3%;
-    width: 100%;
+    width: 10%;
     height: 5vh;
     color: #313131;
     font-weight: 525;
 }
+
 
 .type-1 {
     background-color: #eeeeee;
@@ -79,6 +81,6 @@ td {
     .table-data-1,
     .table-data-2 {
         margin: 10px; 
-        min-width: 100%;
+        min-width: 90%;
     }
 }

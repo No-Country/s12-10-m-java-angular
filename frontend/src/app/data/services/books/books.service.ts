@@ -48,7 +48,7 @@ export class BooksService {
   }
 
   public detail(id: string): Observable<Book> {
-    return this.api.httpGet(`book/toCard/${id}`, false);
+    return this.api.httpGet(`book/${id}`, false);
   }
 
   public save(book: BookDetail): Observable<any> {
