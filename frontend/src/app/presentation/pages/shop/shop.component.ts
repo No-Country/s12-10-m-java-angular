@@ -55,9 +55,9 @@ export class ShopComponent implements OnInit, OnDestroy {
 
   protected readonly books = this.shopService.state.asReadonly();
 
-  protected readonly searchTerm: string = '';
-  protected readonly sortParam: string = '';
-  protected readonly genreParam: string = '';
+  protected searchTerm: string = '';
+  protected sortParam: string = '';
+  protected genreParam: string = '';
 
   protected SORT: Sorting[];
   private readonly GENRES: Genre[] = GENRES;
@@ -66,9 +66,13 @@ export class ShopComponent implements OnInit, OnDestroy {
 
   constructor(private injector: Injector) {
     this.loading = signal(true);
-    this.searchTerm = this.router.snapshot.queryParams['search'] as string;
-    this.sortParam = this.router.snapshot.queryParams['sort'] as string;
-    this.genreParam = this.router.snapshot.queryParams['genre'] as string;
+
+    this.router.queryParams.subscribe((params) => {
+         this.searchTerm = params['search'] as string;
+         this.sortParam  = params['sort'] as string;
+         this.genreParam = params['genre'] as string;
+    });
+
     this.initGenre = Genre.DEFAULT;
     this.SORT = SORTING_VALUES;
   }
@@ -109,8 +113,8 @@ export class ShopComponent implements OnInit, OnDestroy {
         genre:
           this.initGenre && this.initGenre.valueOf() !== Genre.DEFAULT.valueOf()
             ? [this.initGenre.valueOf()]
-            : undefined,
-      })
+            : [],
+      } as BookFilterProps)
     );
   }
   private verifyGenre() {
@@ -129,7 +133,7 @@ export class ShopComponent implements OnInit, OnDestroy {
   }
 
   private verifySorting(): void {
-    if (this.sortParam !== '' && this.sortParam) {
+    if (this.sortParam !== '' && this.sortParam !== undefined && this.sortParam !== null) {
       let { index, element } = this.SORT.reduce(
         (acc, item, currentIndex) => {
           if (item.code === this.sortParam) {
@@ -147,14 +151,13 @@ export class ShopComponent implements OnInit, OnDestroy {
           ...this.SORT.slice(0, index),
           ...this.SORT.slice(index + 1),
         ];
-        console.log('update sort', this.SORT);
       }
     }
   }
 
   updateList(filterProps: BookFilterProps): void {
     this.loading.update((current) => !current);
-    console.log("props",filterProps);
+    console.log("props in updatelist",filterProps);
     this.shopService.getLeakedsBooks(filterProps).subscribe({
       next: (books) => {
         this.shopService.setState(books.content);

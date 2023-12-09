@@ -37,8 +37,8 @@ export class ShopFiltersComponent implements OnInit {
 
   protected readonly GENRES: Genre[] = GENRES;
   protected readonly LANGUAGES: Language[] = LANGUAGES;
-  protected genresApplied: Genre[] = [];
-  protected languageApplied: Language[] = [];
+  protected genresApplied: Genre[] = [] as Genre[];
+  protected languageApplied: Language[] = [] as Language[];
   protected filterForm: FormGroup;
   protected props: BookFilterProps;
 
@@ -49,12 +49,16 @@ export class ShopFiltersComponent implements OnInit {
       minPage: ['', Validators.min(1)],
     });
     this.filterProps = new EventEmitter();
-    this.props = JSON.parse(
-      sessionStorage.getItem('props') as string
-    ) as BookFilterProps;
+    this.props = {} as BookFilterProps;
   }
 
   ngOnInit(): void {
+      this.props = JSON.parse(
+          sessionStorage.getItem('props') as string
+        ) as BookFilterProps;
+    console.log('props in cons', this.props);
+
+
     if (
       this.initialGenreFilter &&
       this.initialGenreFilter.valueOf() !== Genre.DEFAULT.valueOf()
@@ -64,7 +68,11 @@ export class ShopFiltersComponent implements OnInit {
   }
 
   applyGenre(genre: Genre) {
-    if (!this.genresApplied.includes(genre)) {
+    console.log("genre:",genre);
+    if (
+      this.genresApplied.length === 0 ||
+      !this.genresApplied.includes(genre)
+    ) {
       this.genresApplied.push(genre);
     } else {
       let deleteIndex = this.genresApplied.indexOf(genre);
@@ -72,7 +80,7 @@ export class ShopFiltersComponent implements OnInit {
     }
 
     this.props.genre =
-      this.genresApplied.length > 0 ? this.genresApplied : undefined;
+      this.genresApplied.length > 0 ? this.genresApplied : ([] as Genre[]);
 
     this.sendProps();
   }
@@ -85,7 +93,9 @@ export class ShopFiltersComponent implements OnInit {
     }
 
     this.props.language =
-      this.languageApplied.length > 0 ? this.languageApplied : undefined;
+      this.languageApplied.length > 0
+        ? this.languageApplied
+        : ([] as Language[]);
 
     this.sendProps();
   }
@@ -101,8 +111,12 @@ export class ShopFiltersComponent implements OnInit {
     let minPrice = this.filterForm.get('minPrice')?.value;
     let maxPrice = this.filterForm.get('maxPrice')?.value;
 
-    (maxPrice !== undefined && maxPrice !== null) && (this.props.maxPrice = maxPrice);
-    (minPrice !== undefined && minPrice !== null) && (this.props.minPrice = minPrice);
+    maxPrice !== undefined &&
+      maxPrice !== null &&
+      (this.props.maxPrice = maxPrice);
+    minPrice !== undefined &&
+      minPrice !== null &&
+      (this.props.minPrice = minPrice);
 
     this.filterForm.get('minPrice')?.setValue('');
 

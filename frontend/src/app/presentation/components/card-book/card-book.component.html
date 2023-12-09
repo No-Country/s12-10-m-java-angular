@@ -1,6 +1,6 @@
 <article #cardBook class="card-book" [id]="book.id" >
 
-    <section class="img-wrapper" [routerLink]="['book/'+book.id]" (click)="view()">
+    <section class="img-wrapper" [routerLink]="['/book/'+book.id]" (click)="view()">
         <a class="img-container" [ngClass]="{'blur-md': !isStringId(book.id) }">
             <img [ngSrc]="book.image" fill priority alt="Book front page image">
         </a>
