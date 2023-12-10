@@ -53,7 +53,7 @@ export class TrendingComponent implements AfterViewInit, OnInit{
 
     private updateScrollAmount(): void {
     const screenWidth = window.innerWidth;
-    this.scrollAmount = screenWidth < 617 ? screenWidth : 279;
+    this.scrollAmount = screenWidth < 705 ? screenWidth : 279;
   }
 
   moveCarrusel(direccion: 'left' | 'right'): void {
