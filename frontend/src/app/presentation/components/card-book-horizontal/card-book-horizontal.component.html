@@ -1,8 +1,8 @@
 <article #cardBook class="card-book" [id]="book.id" [ngClass]="className" >
 
     <section class="img-wrapper" routerLink="" >
-        <a class="img-container" [ngClass]="{'blur-md': isNumberId(book.id) }">
-            <img [ngSrc]="book.image" fill priority alt="Front of men&#039;s Basic Tee in black.">
+        <a class="img-container" ><!--[ngClass]="{'blur-md': !isNumberId(book.id) }"-->
+            <img [ngSrc]="book.image" fill priority alt="image to book">
         </a>
     </section>
 

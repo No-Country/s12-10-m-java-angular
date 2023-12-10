@@ -26,14 +26,6 @@ export class CardBookHorizontalComponent {
     this.onCart = !this.onCart;
   }
 
-  removeFromCart(){
-    this.book
-  }
-
-  addToCart(){
-
-  }
-
   isNumberId(ID: string | number) {
     return typeof ID === 'string';
   }

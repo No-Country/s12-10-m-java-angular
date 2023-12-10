@@ -59,12 +59,14 @@ export class CartService {
     this.updateLocalStorage(this.booksOnCart)
   }
 
-  changeQuantityTo(bookTochangeQuantity: BookDetail, newQuantity: number):void{
-    const foundBook = this.booksOnCart.find(item => item.book.id === bookTochangeQuantity.id);
+  changeQuantityTo(bookTochangeQuantity: { book: BookDetail, quantity: number }):void{
+    const foundBook = this.booksOnCart.find(item => item.book.id === bookTochangeQuantity.book.id);
     if (foundBook) {
-      foundBook.quantity = newQuantity;
+      foundBook.quantity = bookTochangeQuantity.quantity;
+      console.log(foundBook.quantity,'cambio de numero a ')
     }
     this.updateLocalStorage(this.booksOnCart)
+
   }
 
   updateLocalStorage(booksOnCart: { book: BookDetail, quantity: number }[]){
