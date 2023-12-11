@@ -29,20 +29,15 @@ public class Book extends PersistenceObject {
 	private Integer rating;
     private String description;
 	private String collection;
-
 	private String initialImage;
 	private List<String> urlImages = new ArrayList<>();
-
 	@Enumerated(EnumType.STRING)
 	private Language language;
-
 	@Enumerated(EnumType.STRING)
 	private Genre genre;
-
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "author_id", referencedColumnName = "id")
 	private Author author;
-
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "editorial_id", referencedColumnName = "id")
 	private Editorial editorial;
