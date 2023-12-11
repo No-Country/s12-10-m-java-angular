@@ -56,9 +56,8 @@ public class BookSpecification {
 
             // Añadir la condición de estado solo si hay otros criterios de filtro presentes
             Predicate statusPredicate = criteriaBuilder.isTrue(root.get("status"));
-            Predicate finalPredicate = criteriaBuilder.and(statusPredicate, criteriaBuilder.and(predicates.toArray(new Predicate[0])));
 
-            return finalPredicate;
+            return criteriaBuilder.and(statusPredicate, criteriaBuilder.and(predicates.toArray(new Predicate[0])));
         };
     }
 
