@@ -1,4 +1,7 @@
 @media (max-width: 1024px) {
+    .w-full{
+        min-width: 90%;
+    }
     .mb-8{
         margin-left: 2%;
         margin-right: 2%;
@@ -7,9 +10,8 @@
         margin-left: 4%;
         margin-right: 4%;
     }
-    .hidden{
+    .hidden, .sticky{
         display: none;
-        width: 0;
     }
     .sticky{
         margin-bottom:3%;
@@ -21,4 +23,25 @@
     img{
         max-width: 35vw;
     }
+
+    .card{
+        border: none;
+    }
+
+    .amount{
+        background-color: #0000000D;
+        border-radius: 15px;
+        margin: 2%;
+        padding: 2%;
+    }
+}
+
+@media (min-width: 1024.1px) {
+    app-image-responsive{
+        display: none;
+    }
+}
+
+app-image-responsive{
+    min-width: 100%;
 }

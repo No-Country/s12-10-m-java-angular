@@ -1,0 +1,19 @@
+<!-- image-slider.component.html -->
+<main class="grid min-h-[30vh] w-full place-content-center bg-[#0000000D]">
+    <div class="relative mx-auto max-w-2xl overflow-hidden rounded-md bg-gray-100 sm:p-4">
+      <div class="absolute right-5 top-5 z-10 rounded-full bg-gray-600 px-2 text-center text-sm text-white">
+        <span>{{ currentIndex }}</span>/<span x-text="images.length">{{ images.length }}</span>
+      </div>
+      <div class="relative h-80 top-0" style="width: 70vw;">
+        <ng-container *ngFor="let image of images; let index = index" >
+          <div *ngIf="currentIndex === index + 1" 
+            (touchstart)="onTouchStart($event)"
+            (touchmove)="onTouchMove($event)"
+          class="bg-[#FFFFFF] min-h-[100%] flex items-center justify-center w-[70%] mx-auto">
+            <img [src]="image" alt="image" class="rounded-sm object-cover w-full h-auto max-w-[30vw]" />
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </main>
+  
