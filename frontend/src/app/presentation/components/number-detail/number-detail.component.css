@@ -15,11 +15,11 @@
 
 @media only screen and (max-width: 710px) {
     figure.number-detail {
-        flex-direction: row;
+        flex-direction: row-reverse;
         justify-content: start;
         align-items: start;
         column-gap: 1rem;
-        
+
     }
 
     .number-detail strong {
@@ -28,6 +28,7 @@
         font-weight: 500;
         width: 100%;
         min-width: 90px;
+        text-align: center;
     }
 
     .number-detail figcaption{
@@ -35,7 +36,8 @@
         display: flex;
         justify-content: flex-start;
         font-size: clamp(.75rem, 4dvw, 1rem);
+            align-self: center;
     }
-    
+
 }
 

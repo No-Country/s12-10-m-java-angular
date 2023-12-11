@@ -11,18 +11,14 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ShopComponent } from '@presentation/pages/shop/shop.component';
 import { CartComponent } from '@presentation/pages/cart/cart.component';
 import { LoggedInService } from './data/services/login/loggedIn.service';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { TokenInterceptor } from './data/interceptor/tokenInterceptor';
+import { OverlayComponent } from '@presentation/components/overlay/overlay.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  providers: [
-    ToastService,
-    LoggedInService,
-  ],
+  providers: [ToastService, LoggedInService],
   imports: [
     CommonModule,
     RouterOutlet,

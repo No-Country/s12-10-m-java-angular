@@ -1,6 +1,6 @@
 import { Injectable, Injector } from '@angular/core';
 import { ApiService } from '../api.service';
-import { BookDetail, BookFilterProps, BookPagination } from 'app/data/models/book';
+import { BookFilterProps, BookPagination } from 'app/data/models/book';
 import { SignalsStoreService } from '../store/StoreSignals.service';
 
 @Injectable()

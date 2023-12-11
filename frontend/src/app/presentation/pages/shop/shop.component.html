@@ -5,21 +5,61 @@
 
 <main class="shop-container">
   <section class="filter-container">
-    <p class="search-term">
-      {{ searchTerm }}
-    </p>
-    @if( !this.loading() ){
+    <div
+      class="w-full flex justify-between ml-4 mr-8 items-center min-[975px]:hidden"
+    >
+      @if( !this.loading() ){
       <span>{{ books().totalElements }} found books</span>
-    } @else {
+      } @else {
       <span>Looking for books...</span>
-    }
+      }
 
+      <button
+        class="text-[#069150] flex gap-x-1"
+        type="button"
+        id="openMobileFilters"
+        #openMobileFilters
+        (click)="openMobileFilter=!openMobileFilter"
+      >
+        Filters
+        <picture class="w-full">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M7 10L12 15L17 10H7Z" fill="#069150" />
+          </svg>
+        </picture>
+      </button>
+    </div>
+
+    <div class="hidden w-full min-[975px]:block">
+      <p class="search-term">
+        {{ searchTerm }}
+      </p>
+      @if( !this.loading() ){
+      <span>{{ books().totalElements }} found books</span>
+      } @else {
+      <span>Looking for books...</span>
+      }
+    </div>
 
     <shop-filters
-      class="w-full flex"
+      class="w-full hidden min-[975px]:flex"
       (filterProps)="updateList($event)"
       [initialGenreFilter]="initGenre"
     ></shop-filters>
+
+    @defer(on interaction(openMobileFilters)){
+      @if(openMobileFilter){
+        <shop-filter-mobile
+          class="block w-full min-[975px]:hidden"
+        ></shop-filter-mobile>
+      }
+    }
   </section>
   <section class="result-container">
     <div class="result-header">
@@ -37,23 +77,21 @@
       </div>
     </div>
 
-
-      @if ( !this.loading() ){
-        <div class="result-list">
-          @for(book of getBooks(); track book.id){
-            <card-book [book]="book"></card-book>
-            <app-card-book-horizontal [book]="book"> </app-card-book-horizontal>
-          }
-        </div>
-      } @else {
-        <div class="spinner grid grid-cols-3 w-full gap-x-8 justify-center ">
-          <dot-spinner></dot-spinner>
-        </div>
-
+    @if ( !this.loading() ){
+    <div class="result-list">
+      @for(book of getBooks(); track book.id){
+      <card-book [book]="book"></card-book>
+      <app-card-book-horizontal [book]="book"> </app-card-book-horizontal>
       }
+    </div>
+    } @else {
+    <div class="spinner grid grid-cols-3 w-full gap-x-8 justify-center">
+      <dot-spinner></dot-spinner>
+    </div>
 
-
+    }
   </section>
 </main>
 
+<overlay [ngClass]="{ hidden: !openMobileFilter }" (click)="openMobileFilter=!openMobileFilter"></overlay>
 <app-footer></app-footer>

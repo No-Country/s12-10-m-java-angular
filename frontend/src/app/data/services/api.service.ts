@@ -52,9 +52,10 @@ export class ApiService {
     params?: any
   ): Observable<any> {
     let url = this.createPath(path);
-
+    console.log("params", params);
     return this.http.get<any>(url, {
-      headers: this.createHeaders(isNedAuth === undefined ? false : isNedAuth),
+      headers:
+        this.createHeaders(isNedAuth === undefined ? false : isNedAuth),
       params: !params ? {} : params,
     });
   }

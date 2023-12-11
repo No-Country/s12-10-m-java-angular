@@ -29,6 +29,8 @@ import { ShopFiltersComponent } from '@presentation/components/shop-filters/shop
 import { CardBookHorizontalComponent } from '@presentation/components/card-book-horizontal/card-book-horizontal.component';
 import { BooksService } from 'app/data/services/books/books.service';
 import { SpinnerComponent } from '@presentation/components/app-spinner/spinner.component';
+import { ShopFilterMobileComponent } from '@presentation/components/shop-filter-mobile/shop-filter-mobile.component';
+import { OverlayComponent } from '@presentation/components/overlay/overlay.component';
 
 @Component({
   standalone: true,
@@ -43,6 +45,8 @@ import { SpinnerComponent } from '@presentation/components/app-spinner/spinner.c
     ShopFiltersComponent,
     CardBookHorizontalComponent,
     SpinnerComponent,
+    ShopFilterMobileComponent,
+    OverlayComponent,
   ],
   selector: 'app-shop',
   templateUrl: './shop.component.html',
@@ -64,13 +68,15 @@ export class ShopComponent implements OnInit, OnDestroy {
   protected initGenre: Genre;
   protected loading: WritableSignal<boolean>;
 
+  protected openMobileFilter: boolean = false;
+
   constructor(private injector: Injector) {
     this.loading = signal(true);
 
     this.router.queryParams.subscribe((params) => {
-         this.searchTerm = params['search'] as string;
-         this.sortParam  = params['sort'] as string;
-         this.genreParam = params['genre'] as string;
+      this.searchTerm = params['search'] as string;
+      this.sortParam = params['sort'] as string;
+      this.genreParam = params['genre'] as string;
     });
 
     this.initGenre = Genre.DEFAULT;
@@ -121,19 +127,21 @@ export class ShopComponent implements OnInit, OnDestroy {
     if (this.genreParam !== '' && this.genreParam) {
       let { genre } = this.GENRES.reduce(
         (genreSearch, item, currentIndex) => {
-          if (item.valueOf() === this.genreParam)  genreSearch.genre = item;
+          if (item.valueOf() === this.genreParam) genreSearch.genre = item;
           return genreSearch;
         },
         { genre: Genre.DEFAULT }
       );
-      if(genre !== Genre.DEFAULT && genre) this.initGenre = genre;
-
+      if (genre !== Genre.DEFAULT && genre) this.initGenre = genre;
     }
-
   }
 
   private verifySorting(): void {
-    if (this.sortParam !== '' && this.sortParam !== undefined && this.sortParam !== null) {
+    if (
+      this.sortParam !== '' &&
+      this.sortParam !== undefined &&
+      this.sortParam !== null
+    ) {
       let { index, element } = this.SORT.reduce(
         (acc, item, currentIndex) => {
           if (item.code === this.sortParam) {
@@ -157,10 +165,10 @@ export class ShopComponent implements OnInit, OnDestroy {
 
   updateList(filterProps: BookFilterProps): void {
     this.loading.update((current) => !current);
-    console.log("props in updatelist",filterProps);
+    console.log('props in updatelist', filterProps);
     this.shopService.getLeakedsBooks(filterProps).subscribe({
       next: (books) => {
-        this.shopService.setState(books.content);
+        this.shopService.setState(books);
         this.loading.update((current) => !current);
       },
       error: (err: any) => {
