@@ -53,8 +53,9 @@
                         <p class="mb-6">
                             <span class="text-3xl font-bold text-[#242221]">${{ book.price }}</span>
                             <br>
-                            <a href="#payment" class="max-w-md text-[#069150]" >
-                                See payments methods</a>
+                            <a id="paymentLink" class="max-w-md text-[#069150]" (click)="scrollToPayment()">
+                                See payment methods
+                            </a>
                         </p>
                             <h3 class=" text-2xl  text-[#242221]" >About Book:</h3>
                         <p class="max-w-md text-[#494949]">

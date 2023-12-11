@@ -27,4 +27,11 @@ export class BookDetailCardComponent {
         this.selectedImageUrl = imageUrl;
         console.log(this.selectedImageUrl);
     }
+    
+    scrollToPayment(): void {
+      const paymentSection = document.getElementById('payment');
+      if (paymentSection) {
+        paymentSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
 }

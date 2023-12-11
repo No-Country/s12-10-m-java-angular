@@ -45,3 +45,8 @@
 app-image-responsive{
     min-width: 100%;
 }
+
+#paymentLink,
+.max-w-ms{
+    cursor: pointer;
+}
