@@ -53,6 +53,16 @@ public class EditorialController {
         }
     }
 
+    @PatchMapping(path = "/update")
+    public ResponseEntity<?> updateEditorial(@RequestBody @Valid EditorialDto editorialRequest) throws Exception {
+        try {
+            EditorialDto editorial = editorialService.updateEditorial(editorialRequest);
+            return new ResponseEntity<>(editorial, HttpStatus.CREATED);
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<?> deleteEditorial(@PathVariable String id) throws Exception {
         try {

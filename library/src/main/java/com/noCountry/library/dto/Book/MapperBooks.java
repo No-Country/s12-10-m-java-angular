@@ -1,6 +1,7 @@
 package com.noCountry.library.dto.Book;
 
 import com.noCountry.library.entities.Book;
+import com.noCountry.library.entities.enums.Genre;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

@@ -82,6 +82,24 @@ public class EditorialServiceImpl implements EditorialService {
         return mapperBooks.listBooksToListResponseBooks(editorial.getBooks());
     }
 
+    @Override
+    public EditorialDto updateEditorial(EditorialDto editorial) {
+        Editorial editorialUpdate = getExistingEditorial(editorial.getIdEditorial());
+
+        if (editorial.getUrl() != null) {
+            editorialUpdate.setUrl(editorial.getUrl());
+        }
+
+        if (editorial.getName() != null) {
+            editorialUpdate.setName(editorial.getName());
+        }
+
+        editorialRepository.save(editorialUpdate);
+        editorialUpdate.setModificationDate(LocalDate.now());
+
+        return mapperEditorial.editorialToEditorialDto(editorialUpdate);
+    }
+
     private Editorial getExistingEditorial(String id) throws NotFoundException {
         Optional<Editorial> auxEditorial = editorialRepository.findById(id);
 

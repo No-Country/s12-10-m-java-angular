@@ -15,4 +15,6 @@ public interface EditorialService {
 
     List<BookResponse> getListBookOfEditorial(String id);
 
+    EditorialDto updateEditorial(EditorialDto editorial);
+
 }
