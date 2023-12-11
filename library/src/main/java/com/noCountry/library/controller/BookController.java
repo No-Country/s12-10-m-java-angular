@@ -157,8 +157,16 @@ public class BookController {
     }
 
 
-
-
+    @GetMapping(path = "/searchAllDeleted")
+    public ResponseEntity<?> searchAllDeleted(@RequestParam(defaultValue = "0") int page,
+                                              @RequestParam(defaultValue = "5") int size) throws Exception {
+        try {
+            PaginatedBookResponseDTO<BookToSearch> book = bookService.searchDeletedBooks(page, size);
+            return new ResponseEntity<>(book, HttpStatus.OK);
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
 
     @PostMapping(path = "/createBook")
     public ResponseEntity<?> createBook(@RequestBody @Valid BookRequest bookRequest) throws Exception {
@@ -197,6 +205,16 @@ public class BookController {
         try {
             BookResponse book = bookService.subtractAmount(id, amount);
             return new ResponseEntity<>(book, HttpStatus.CREATED);
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @PatchMapping(path = "/updateBook")
+    public ResponseEntity<?> updateBook(@RequestBody @Valid BookRequest bookRequest) throws Exception {
+        try {
+            BookResponse bookResponse = bookService.updateBook(bookRequest);
+            return new ResponseEntity<>(bookResponse, HttpStatus.CREATED);
         } catch (Exception e){
             throw new Exception(e.getMessage());
         }

@@ -165,10 +165,10 @@ public class UserServiceImpl implements UserService {
         Map<String, Object> templateModel = new HashMap<>();
 
         templateModel.put("userName", name);
-        templateModel.put("libraryName", "Libreria YEY!");
+        templateModel.put("libraryName", "BookLeaks");
 
         emailService.sendWelcomeEmail(email,
-                "Bienvenido a la librería YEY!",
+                "Bienvenido a la librería BookLeaks!",
                 "welcome.html", templateModel);
     }
 

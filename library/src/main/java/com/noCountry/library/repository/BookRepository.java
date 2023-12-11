@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -16,12 +15,14 @@ public interface BookRepository extends JpaRepository<Book, String>, JpaSpecific
 
     Optional<Book> findByISBN(String isbn);
 
-    Page<Book> findByGenre(Genre genre, Pageable pageable);
+    Page<Book> findByGenreAndStatusTrue(Genre genre, Pageable pageable);
 
     Page<Book> findByTitleContaining(String partialTitle, Pageable pageable);
 
     Page<Book> findAllByOrderByCreationDateDesc(Pageable pageable);
 
     Page<Book> findAllByOrderByRatingDesc(Pageable pageable);
+
+    Page<Book> findByStatusFalse(Pageable pageable);
 
 }
