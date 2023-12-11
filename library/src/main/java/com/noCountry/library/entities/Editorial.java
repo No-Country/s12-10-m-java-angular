@@ -19,7 +19,6 @@ public class Editorial extends PersistenceObject {
 
 	private String name;
 	private String url;
-
 	@OneToMany(mappedBy = "editorial")
 	private List<Book> books = new ArrayList<>();
 

@@ -1,11 +1,9 @@
 package com.noCountry.library.dto.Book;
 
-import com.noCountry.library.entities.enums.Genre;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 @Data
 public class BookRequest {

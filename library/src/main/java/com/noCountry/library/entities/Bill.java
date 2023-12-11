@@ -1,10 +1,15 @@
 package com.noCountry.library.entities;
-/*
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import jakarta.persistence.Column;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,26 +21,14 @@ import lombok.NoArgsConstructor;
 @Table(name = "tbl_bill")
 public class Bill {
 
-
-    // La factura si deberia de tener un id autoincremental normal.
-    // para facilitar el registro de las compras
-    // y no haria falta q tenga el registro de las 2 fechas (creacion y modificacion)
-    // porq el de creacion ya se realiza y se detalla en la factura.
-    // porq me parece q en una factura no se puede modificar, en caso de ser erronea, solo se anula y se genera otra
-
-    @Id
-    private Long id;
-
-    private Boolean status;
-
-
+	@Id
+	private String id;
+	private Boolean status;
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
-
-	@Column(length = 2048)
+	@OneToMany
 	private ArrayList<Book> books = new ArrayList<>();
-
 	private Double totalPrice;
-
 	private LocalDate dateBill;
 }
-*/

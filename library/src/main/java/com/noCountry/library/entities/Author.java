@@ -23,7 +23,6 @@ public class Author extends PersistenceObject {
 	private LocalDate birthday;
 	private String nationality;
     private String biography;
-
     @OneToMany(mappedBy = "author")
 	private List<Book> books = new ArrayList<>();
 
