@@ -18,6 +18,8 @@ import { FormsModule } from '@angular/forms';
 export class CartCardComponent {
   @Input() public bookOfCard: { book: BookDetail, quantity: number };
   @Output() public deleteBook = new EventEmitter<BookDetail>();
+  @Output() public bookWithNewQuantity = new EventEmitter<{ book: BookDetail, quantity: number }>();
+$Event: any;
 
   constructor(public cartService:CartService){
     this.bookOfCard = {} as { book: BookDetail, quantity: number };
@@ -33,5 +35,11 @@ export class CartCardComponent {
 
   increaseQuantity(){
     this.bookOfCard.quantity=this.bookOfCard.quantity+1;
+  }
+
+  onNumeroChange(bookOfCard: { book: BookDetail, quantity: number }){
+    this.cartService.changeQuantityTo(bookOfCard);
+    console.log(bookOfCard.book.name,bookOfCard.quantity)
+    this.bookWithNewQuantity.emit(bookOfCard);
   }
 }

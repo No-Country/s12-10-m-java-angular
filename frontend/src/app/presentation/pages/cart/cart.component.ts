@@ -20,9 +20,11 @@ import { CartService } from 'app/data/services/cart/cart.service';
 })
 export class CartComponent implements OnInit {
   protected booksWQ: { book: BookDetail, quantity: number }[];
+  public total: number = 0;
 
   constructor(public cartService: CartService) {
     this.booksWQ = cartService.bringCartOfServiceWithQuantity();
+    this.total=this.booksWQ.reduce((total, bookToCalculate) => total + bookToCalculate.quantity*bookToCalculate.book.price, 0);
     console.log(this.booksWQ)
    }
 
@@ -32,6 +34,23 @@ export class CartComponent implements OnInit {
   discardBook(bookToRemove: BookDetail){
     this.booksWQ = this.booksWQ.filter(bookWithQuantity => bookWithQuantity.book.id !== bookToRemove.id);
     this.cartService.deleteBookToCart(bookToRemove)
+  }
+
+  editquantityOf(bookToEditQuantity: { book: BookDetail, quantity: number }){
+    this.booksWQ.map(bookOfCart =>{
+      console.log(bookOfCart,bookToEditQuantity)
+      if(bookOfCart.book.id == bookToEditQuantity.book.id){
+        console.log(bookOfCart.book.id,'vs',bookToEditQuantity.book.id)
+        console.log(bookOfCart.book.author)
+        bookOfCart.quantity=bookToEditQuantity.quantity;
+        return bookOfCart
+      }
+      else{
+        return bookOfCart;
+      }
+    }
+    )
+    this.total=this.booksWQ.reduce((total, bookToCalculate) => total + bookToCalculate.quantity*bookToCalculate.book.price, 0);
   }
 
 }

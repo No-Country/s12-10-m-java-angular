@@ -2,13 +2,25 @@
 <app-navbar-2></app-navbar-2>
 <section #arribal class="arribal-container mx-14 my-10">
 
-  <h2 class="title mx-[7.5dvw]"><strong class="text-[#33B672] font-medium"></strong> cart</h2>
+  <div class="cart-header">
+    <svg class="cart-icon" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
+      <path d="M33.334 22.9167V14.5833C33.334 12.3732 32.456 10.2536 30.8932 8.69078C29.3304 7.12797 27.2108 6.25 25.0007 6.25C22.7905 6.25 20.6709 7.12797 19.1081 8.69078C17.5453 10.2536 16.6673 12.3732 16.6673 14.5833V22.9167M10.4173 18.75H39.584L41.6673 43.75H8.33398L10.4173 18.75Z" stroke="#222324" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <h2 class="cart-tittle"><strong class="text-[#33B672] font-medium"></strong> Cart</h2>
+  </div>
+
 
     <div class="book-list">
      @for(bookOfCart of booksWQ ; track bookOfCart.book.id){
-          <app-cart-card (deleteBook)="discardBook(bookOfCart.book)" [bookOfCard]="bookOfCart"></app-cart-card>
+          <app-cart-card (deleteBook)="discardBook(bookOfCart.book)" (bookWithNewQuantity)="editquantityOf($event)" [bookOfCard]="bookOfCart"></app-cart-card>
       }
     </div>
+
+  <section class="button-container">
+    <div class="total">Sub Total:{{total}}$</div>
+    <button class="buy-button">Buy</button>
+  </section>
+
 </section>
 <app-footer></app-footer>
 
