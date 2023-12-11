@@ -186,15 +186,6 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void modifyGenre(String id, String genre) {
-        Genre element = searchGenre(genre);
-
-        if (element != null) {
-            bookRepository.changeGenreById(id, element);
-        }
-    }
-
-    @Override
     public PaginatedBookResponseDTO<BookResponse> getAllBooks(Integer pageNumber, Integer sizeElement) {
         Pageable page = PageRequest.of(pageNumber, sizeElement);
         Page<Book> pagesBook = bookRepository.findAll(page);
@@ -356,7 +347,7 @@ public class BookServiceImpl implements BookService {
         }
 
         Pageable page = PageRequest.of(pageNumber, sizeElement);
-        Page<Book> pagesBook = bookRepository.findByGenre(genreElement, page);
+        Page<Book> pagesBook = bookRepository.findByGenreAndStatusTrue(genreElement, page);
 
         if (pagesBook.isEmpty()) {
             throw new BadRequestException("No se encontraron libros del genero " + genre);
@@ -389,6 +380,14 @@ public class BookServiceImpl implements BookService {
     public PaginatedBookResponseDTO<BookToSearch> searchByHighestRating(Integer pageNumber, Integer sizeElement) {
         Pageable page = PageRequest.of(pageNumber, sizeElement);
         Page<Book> pagesBook = bookRepository.findAllByOrderByRatingDesc(page);
+
+        return pagesBookToPagination(pagesBook, mapperBooks::listBookToListBookToSearch);
+    }
+
+    @Override
+    public PaginatedBookResponseDTO<BookToSearch> searchDeletedBooks(Integer pageNumber, Integer sizeElement) {
+        Pageable page = PageRequest.of(pageNumber, sizeElement);
+        Page<Book> pagesBook = bookRepository.findByStatusFalse(page);
 
         return pagesBookToPagination(pagesBook, mapperBooks::listBookToListBookToSearch);
     }

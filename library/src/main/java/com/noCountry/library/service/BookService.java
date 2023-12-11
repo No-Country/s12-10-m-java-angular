@@ -14,8 +14,6 @@ public interface BookService {
 
     BookResponse getBookById(String id);
 
-    void modifyGenre(String id, String genre);
-
     PaginatedBookResponseDTO<BookResponse> getAllBooks(Integer pageNumber, Integer sizeElement);
 
     BookCardResponse getBookForCard(String id);
@@ -50,7 +48,7 @@ public interface BookService {
 
     PaginatedBookResponseDTO<BookToSearch> searchByHighestRating(Integer pageNumber, Integer sizeElement);
 
-
+    PaginatedBookResponseDTO<BookToSearch> searchDeletedBooks(Integer pageNumber, Integer sizeElement);
 
 
 }

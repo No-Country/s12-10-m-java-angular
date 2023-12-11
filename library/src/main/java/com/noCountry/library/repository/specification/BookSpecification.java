@@ -46,8 +46,6 @@ public class BookSpecification {
                 predicates.add(root.get("language").in(languages));
             }
 
-
-
             if (searchEvenNotAvailable != null && searchEvenNotAvailable == 0) {
                 // Buscamos los libros con y sin stock
                 predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("quantityAvailable"), 0));
@@ -56,7 +54,11 @@ public class BookSpecification {
                 predicates.add(criteriaBuilder.greaterThan(root.get("quantityAvailable"), 0));
             }
 
-            return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
+            // Añadir la condición de estado solo si hay otros criterios de filtro presentes
+            Predicate statusPredicate = criteriaBuilder.isTrue(root.get("status"));
+            Predicate finalPredicate = criteriaBuilder.and(statusPredicate, criteriaBuilder.and(predicates.toArray(new Predicate[0])));
+
+            return finalPredicate;
         };
     }
 

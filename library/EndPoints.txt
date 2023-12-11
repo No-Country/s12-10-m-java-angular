@@ -67,8 +67,8 @@ DELETE	/user/unsubscribe/{email}
 		    Book
 
 GET	/book/{id} 
-ID del libro en la URL
-BookResponse
+Response:
+    BookResponse
 200 OK
 
 
@@ -81,7 +81,8 @@ Response:
 
 
 GET	/book/toCard/{id}
-BookCardResponse
+Response:
+    BookCardResponse
 {
 String 	title;
 Double 	price;
@@ -93,14 +94,15 @@ String	initialImage;
 
 
 GET	/book/toCard/allBooks?page=0&size=5
-PaginatedBookResponseDTO<BookCardResponse>
+Response:
+    PaginatedBookResponseDTO<BookCardResponse>
 200 OK
 
 
 
 GET	/book/toCardDescription/{id}
 Response:
-BookCardDescription
+    BookCardDescription
 {
 String 	title;
 Double 	price;
@@ -114,7 +116,7 @@ String	description;
 
 GET	/book/toCardDescription/allBooks?page=0&size=5
 Response: 
-PaginatedBookResponseDTO<BookCardDescription>
+    PaginatedBookResponseDTO<BookCardDescription>
 200 OK
 
 
@@ -133,7 +135,7 @@ Tipos de ordenamiento: (price;
 			rating; <- todavia no hay votacion cargada asiq no anda
 			alphabetically;)
 Response:
-PaginatedBookResponseDTO<BookToSearch>
+    PaginatedBookResponseDTO<BookToSearch>
 200 OK
 
 
@@ -271,16 +273,25 @@ BookToSearch
 
 GET	/editorial/{id}
 Response:
-EditorialDto
+    EditorialDto
 200 OK
 
 
 
 POST	/editorial/createEditorial
 Request:
-EditorialDto
+    EditorialDto
 Response:
-EditorialDto
+    EditorialDto
+201 CREATED
+
+
+
+PATCH   /editorial/update
+Request:
+    EditorialDto
+Response:
+    EditorialDto
 201 CREATED
 
 
