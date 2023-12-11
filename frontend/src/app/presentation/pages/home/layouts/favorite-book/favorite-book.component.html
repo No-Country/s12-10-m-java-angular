@@ -24,8 +24,10 @@
                     <number-detail number="150" class="w-full" [detail]="'Totally\n products'"></number-detail>
                 </div>
         </div>
-        <app-button class="w-full flex" className="w-full max-w-[185px] text-[1.7dvw]">
-            Explore
+        <app-button title="Explore button" class="flex mr-auto" className="w-full max-w-[185px] min-w-[185px] text-[1.7dvw]">
+            <a [routerLink]="['/shop/'+'All']" class="w-full">
+                Explore 
+            </a>
         </app-button>
     
     </div>

@@ -1,18 +1,18 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Book, BookDetail } from '../../../data/models/book';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { DefaultButtonComponent } from '../default-button/default-button.component';
 
+
 @Component({
+  selector: 'app-cart-card',
   standalone: true,
   imports: [CommonModule, NgOptimizedImage, RouterLink, DefaultButtonComponent],
-  selector: 'card-book',
-  templateUrl: './card-book.component.html',
-  styleUrl: './card-book.component.css'
+  templateUrl: './cart-card.component.html',
+  styleUrl: './cart-card.component.css'
 })
-
-export class CardBookComponent {
+export class CartCardComponent {
 
   @Input() public book: BookDetail;
 
@@ -22,9 +22,5 @@ export class CardBookComponent {
 
   isNumberId(ID: string | number) {
     return typeof ID === 'string'; 
-  }
-
-  redirectToBookDetail(){
-  
   }
 }

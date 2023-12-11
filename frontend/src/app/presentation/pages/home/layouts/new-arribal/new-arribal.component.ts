@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, Signal } from '@angular/core';
 import { CardBookComponent } from '@presentation/components/card-book/card-book.component';
 import { BOOK_DETAIL_MOOK } from 'app/data/mocks/booksArray';
 import { BookDetail } from 'app/data/models/book';
-import { Observable, delay, of } from 'rxjs';
+import { BooksService } from 'app/data/services/books/books.service';
+import { Observable, delay, map, of } from 'rxjs';
 
 @Component({
   standalone: true,
@@ -11,22 +12,17 @@ import { Observable, delay, of } from 'rxjs';
   selector: 'new-arribal-layout',
   templateUrl: './new-arribal.component.html',
   styleUrls: ['./new-arribal.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [ BooksService ]
 })
 export class NewArribalComponent implements OnInit {
-  protected books: Observable<BookDetail[]>;
+  protected books: Observable<BookDetail[]> = this.booksService.state$.pipe(map((data: any)=> Object.values(data)));
 
-  constructor() {
-    this.books = new Observable();
-   }
-
-  ngOnInit(): void {
-
-    this.books = of(BOOK_DETAIL_MOOK).pipe(
-      delay(1000)
-    );
+  constructor(private booksService: BooksService) {
   }
 
-  
+  ngOnInit(): void {
+    this.booksService.list();
+  }
 
-}
+  }
