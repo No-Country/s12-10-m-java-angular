@@ -46,6 +46,7 @@
 .favorite-container h2.title{
     grid-area: 1 / 1 / 2 / 3;
     width: 100%;
+    margin-inline-start: 3rem;
 }
 
 .favorite-container p{
@@ -117,6 +118,7 @@
         text-align: left;
         align-self: end;
         white-space: pre-line;
+        margin-inline-start: 0px;
     }
 
 

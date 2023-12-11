@@ -1,32 +1,52 @@
-import { Injectable } from '@angular/core';
+import { Injectable, effect } from '@angular/core';
 import { SignalsStoreService } from '../store/StoreSignals.service';
 import { AuthResponse } from 'app/data/models/AuthResponse';
 
-@Injectable({providedIn: 'any'})
-export class LoggedInService extends SignalsStoreService<AuthResponse>{
-
+@Injectable({ providedIn: 'root' })
+export class LoggedInService extends SignalsStoreService<AuthResponse> {
   constructor() {
     super({} as AuthResponse);
+
+    effect(() => {
+      const state = this.state.asReadonly();
+      (state().id !== undefined)
+        ? localStorage.setItem('id', state().id)
+        : localStorage.removeItem('id');
+
+      (state().name !== undefined)
+        ? localStorage.setItem('name', state().name)
+        : localStorage.removeItem('name');
+
+      (state().lastName !== undefined)
+        ? localStorage.setItem('lastName', state().lastName)
+        : localStorage.removeItem('lastName');
+
+      (state().email !== undefined)
+        ? localStorage.setItem('email', state().email)
+        : localStorage.removeItem('email');
+
+      (state().role !== undefined)
+        ? localStorage.setItem('role', state().role)
+        : localStorage.removeItem('role');
+
+      (state().jwt !== undefined)
+        ? localStorage.setItem('jwt', state().jwt)
+        : localStorage.removeItem('jwt');
+    });
   }
 
-  public setLogin(values: AuthResponse){
-    localStorage.setItem("id", !values.id ? "" : values.id);
-    localStorage.setItem("name", values.name);
-    localStorage.setItem("lastName", values.lastName);
-    localStorage.setItem("email", values.email);
-    localStorage.setItem("role", values.role);
-    localStorage.setItem("token", values.jwt);
-
+  public setLogin(values: AuthResponse) {
     this.setState(values);
   }
-
-  public verifyLogin(){
+  // <<
+  public verifyLogin() {
     const id = localStorage.getItem('id');
     const name = localStorage.getItem('name');
     const lastName = localStorage.getItem('lastName');
     const email = localStorage.getItem('email');
     const role = localStorage.getItem('role');
     const token = localStorage.getItem('token');
+
     this.setState({
       id: id as string,
       name: name as string,
@@ -37,21 +57,12 @@ export class LoggedInService extends SignalsStoreService<AuthResponse>{
     } as AuthResponse);
   }
 
-  public updateId(updatedId: string){
-    this.set("id", updatedId);
+  public updateId(updatedId: string) {
+    this.set('id', updatedId);
   }
 
-  public logOut(){
-    localStorage.removeItem("id");
-    localStorage.removeItem("name");
-    localStorage.removeItem("lastName");
-    localStorage.removeItem("email");
-    localStorage.removeItem("role");
-    localStorage.removeItem("token");
-
-    this.setState(null);
+  public logOut() {
+    this.setState({});
     location.reload();
   }
-
-
 }

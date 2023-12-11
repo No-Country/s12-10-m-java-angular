@@ -3,7 +3,7 @@
     height: 170px;
     aspect-ratio: 2/1;
     position: relative;
-    z-index: 20;
+    z-index: 10;
     box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.12);
     border-bottom-left-radius: 0.9375rem;
     border-bottom-right-radius: 0.9375rem;
@@ -127,7 +127,7 @@ button.up-button.take-out {
   outline: none;
 }
 
-button.up-button.take-out:hover, button.up-button.take-out:focus {
+button.up-button.take-out:hover, button.up-button.take-out:hover {
   box-shadow: none;
 }
 

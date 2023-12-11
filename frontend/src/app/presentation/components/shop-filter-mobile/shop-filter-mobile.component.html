@@ -1,0 +1,152 @@
+<section class="modal-filter">
+  <div class="flex justify-between">
+    <h3>Filter by</h3>
+
+    <button>Clean Filter</button>
+  </div>
+  <ul class="filter-list">
+    <li>
+      <div class="order-by">
+        <div>
+          <h4>Order by</h4>
+          <span>-</span>
+        </div>
+        <strong>Most relevant</strong>
+      </div>
+
+      <form class="filter-form">
+        @for(sorting of SORTING; track sorting.code){
+        <label
+          class="custom-radio"
+          role="radiogroup"
+          aria-label="Radio button to sort the books"
+        >
+          <input type="radio" name="orderBy" value="{{ sorting.code }}" />
+          <span class="checkmark"></span>
+          {{ sorting.field }}
+        </label>
+        }
+      </form>
+    </li>
+
+    <li>
+      <div class="flex justify-between">
+        <h4>Select Genre</h4>
+        <span>-</span>
+      </div>
+
+      <form class="filter-form" role="list">
+        @for(genre of GENRES; track '1-'+genre){
+        <label
+          class="custom-checkbox"
+          for="3-{{ genre.valueOf() }}"
+          role="checkbox"
+          [attr.aria-label]="'Fillter by ' + genre.valueOf()"
+        >
+          <input
+            type="checkbox"
+            id="3-{{ genre }}"
+            name="3-{{ genre.valueOf() }}"
+          />
+          <span class="checkmark"></span>
+          {{ genre.valueOf() }}
+        </label>
+        }
+      </form>
+    </li>
+
+    <li>
+      <div class="flex justify-between">
+        <h4>Price</h4>
+        <span>-</span>
+      </div>
+
+      <form
+        class="filter-form max-w-[410px] !flex-row items-center justify-around gap-x-2 mx-2"
+      >
+        <div class="input-group">
+          <input
+            type="number"
+            id="mobile-min-price"
+            formControlName="min-price"
+            for="mobile-min-price"
+            autocomplete="off"
+            name="mobile-min-price"
+            class="form-input"
+            aria-disabled="false"
+            aria-label="Min price"
+            autocapitalize="none"
+            dir="ltr"
+          />
+          <label for="mobile-min-price" class="form-label">Min price</label>
+        </div>
+
+        <div class="input-group">
+          <input
+            type="number"
+            id="mobile-max-price"
+            formControlName="max-price"
+            for="mobile-max-price"
+            autocomplete="off"
+            name="mobile-max-price"
+            class="form-input"
+            aria-disabled="false"
+            aria-label="Min price"
+            autocapitalize="none"
+            dir="ltr"
+          />
+          <label for="mobile-max-price" class="form-label">Max price</label>
+        </div>
+      </form>
+    </li>
+
+    <li>
+      <div class="flex justify-between">
+        <h4>Languages</h4>
+        <span>-</span>
+      </div>
+      <form class="filter-form" role="list">
+        @for(language of LANGUAGES; track '2-'+language){
+        <label
+          class="custom-checkbox"
+          for="2-{{ language.valueOf() }}"
+          role="checkbox"
+          [attr.aria-label]="'Fillter by ' + language.valueOf()"
+        >
+          <input
+            type="checkbox"
+            id="2-{{ language }}"
+            name="2-{{ language.valueOf() }}"
+          />
+          <span class="checkmark"></span>
+          {{ language.valueOf() }}
+        </label>
+        }
+      </form>
+    </li>
+
+    <li>
+      <div class="flex justify-between">
+        <h4>Availability</h4>
+        <span>-</span>
+      </div>
+
+      <form class="filter-form" role="list">
+        <label
+          class="custom-checkbox"
+          for="mobile-out-of-stock"
+          role="checkbox"
+          aria-label="Fillter by include out of stock"
+        >
+          <input
+            type="checkbox"
+            id="mobile-out-of-stock"
+            name="mobile-out-of-stock"
+          />
+          <span class="checkmark"></span>
+          Include out of stock
+        </label>
+      </form>
+    </li>
+  </ul>
+</section>

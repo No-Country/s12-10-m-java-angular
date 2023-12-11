@@ -59,7 +59,7 @@ export enum Genre {
   COMEDY = 'Comedy',
   SCIENCE_FICTION = 'Science Fiction',
   SELF_HELP = 'Self Help',
-  DRAME = 'Drame',
+  DRAMA = 'Drama',
   HISTORY = 'History',
   POLITICAL = 'Political',
   THRILLER = 'Thriller',
@@ -89,7 +89,7 @@ export const GENRES: Genre[] = [
   Genre.POLICY,
   Genre.HISTORY,
   Genre.COMEDY,
-  Genre.DRAME,
+  Genre.DRAMA,
 ];
 
 export const LANGUAGES: Language[] = [

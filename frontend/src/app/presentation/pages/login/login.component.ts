@@ -53,12 +53,18 @@ export class LoginComponent implements OnInit, OnDestroy  {
         this.response = loginResponse;
         toast.success("Success", "Logging in.", 5);
       },
-      error(err: any): void{
-        toast.error("Error", "An unexpected error has occurred with the server", 5);
+      error(response: any): void{
+        let message = 'An unexpected error has occurred with the server';
+
+        if (response.error.backendMessage.startsWith('Bad'))     message = 'Your password is not correct';
+        if (response.error.backendMessage.startsWith('Usuario')) message = 'The email is not registered';
+
+
+        toast.error('Oops...', message, 5);
       },
       complete(): void {
         if(this.response.role === "USER")
-          setTimeout(()=>router.navigate(["/"]), 700);
+          setTimeout(()=>router.navigate(["/"]), 500);
       }
     };
 

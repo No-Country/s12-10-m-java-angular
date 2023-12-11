@@ -10,11 +10,14 @@ import { CartService } from 'app/data/services/cart/cart.service';
   standalone: true,
   imports: [CommonModule, NgOptimizedImage, RouterLink, DefaultButtonComponent],
   templateUrl: './card-book-horizontal.component.html',
-  styleUrls: ['./card-book-horizontal.component.css', '../default-button/default-button.component.css']
+  styleUrls: [
+    './card-book-horizontal.component.css',
+    '../default-button/default-button.component.css',
+  ],
 })
 export class CardBookHorizontalComponent {
   @Input() public book: BookDetail;
-  @Input() public className: string = "";
+  @Input() public className: string = '';
   @Input() public onCart: boolean = false;
 
   constructor(public cartService: CartService) {
@@ -22,11 +25,19 @@ export class CardBookHorizontalComponent {
   }
 
   addOrRemove() {
-    this.onCart ? this.cartService.deleteBookToCart(this.book): this.cartService.addBookToCart(this.book);
+    this.onCart
+      ? this.cartService.deleteBookToCart(this.book)
+      : this.cartService.addBookToCart(this.book);
     this.onCart = !this.onCart;
   }
 
-  isNumberId(ID: string | number) {
+  removeFromCart() {
+    this.book;
+  }
+
+  addToCart() {}
+
+  isStringId(ID: string | number) {
     return typeof ID === 'string';
   }
 }

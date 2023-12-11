@@ -43,6 +43,7 @@ export const routes: Routes = [
         (c) => c.ShopComponent
       ),
     providers: [ShopService],
+    data: { preload: true },
   },
   {
     path: 'cart',
@@ -69,6 +70,7 @@ export const routes: Routes = [
         (c) => c.BookDetailComponent
       ),
     providers: [BooksService],
+    data: { preload: true },
     resolve: {
       book: bookDetailResolver,
     },
