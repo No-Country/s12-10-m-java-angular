@@ -384,15 +384,6 @@ public class BookServiceImpl implements BookService {
         return pagesBookToPagination(pagesBook, mapperBooks::listBookToListBookToSearch);
     }
 
-    @Override
-    public PaginatedBookResponseDTO<BookToSearch> searchDeletedBooks(Integer pageNumber, Integer sizeElement) {
-        Pageable page = PageRequest.of(pageNumber, sizeElement);
-        Page<Book> pagesBook = bookRepository.findByStatusFalse(page);
-
-        return pagesBookToPagination(pagesBook, mapperBooks::listBookToListBookToSearch);
-    }
-
-
     private Genre searchGenre(String genre) {
         String formattedGenre = genre.replaceAll(" ", "_");
 

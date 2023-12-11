@@ -156,18 +156,6 @@ public class BookController {
         }
     }
 
-
-    @GetMapping(path = "/searchAllDeleted")
-    public ResponseEntity<?> searchAllDeleted(@RequestParam(defaultValue = "0") int page,
-                                              @RequestParam(defaultValue = "5") int size) throws Exception {
-        try {
-            PaginatedBookResponseDTO<BookToSearch> book = bookService.searchDeletedBooks(page, size);
-            return new ResponseEntity<>(book, HttpStatus.OK);
-        } catch (Exception e){
-            throw new Exception(e.getMessage());
-        }
-    }
-
     @PostMapping(path = "/createBook")
     public ResponseEntity<?> createBook(@RequestBody @Valid BookRequest bookRequest) throws Exception {
         try {

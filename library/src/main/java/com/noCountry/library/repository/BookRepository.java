@@ -23,6 +23,4 @@ public interface BookRepository extends JpaRepository<Book, String>, JpaSpecific
 
     Page<Book> findAllByOrderByRatingDesc(Pageable pageable);
 
-    Page<Book> findByStatusFalse(Pageable pageable);
-
 }

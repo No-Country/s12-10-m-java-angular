@@ -48,7 +48,4 @@ public interface BookService {
 
     PaginatedBookResponseDTO<BookToSearch> searchByHighestRating(Integer pageNumber, Integer sizeElement);
 
-    PaginatedBookResponseDTO<BookToSearch> searchDeletedBooks(Integer pageNumber, Integer sizeElement);
-
-
 }
