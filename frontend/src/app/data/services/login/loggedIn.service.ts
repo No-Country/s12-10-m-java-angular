@@ -9,7 +9,7 @@ export class LoggedInService extends SignalsStoreService<AuthResponse> {
 
     effect(() => {
       const state = this.state.asReadonly();
-      (state().id !== undefined)
+      (state().id !== undefined && state().id !== null)
         ? localStorage.setItem('id', state().id)
         : localStorage.removeItem('id');
 
