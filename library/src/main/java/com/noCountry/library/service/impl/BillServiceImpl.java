@@ -1,7 +1,6 @@
 package com.noCountry.library.service.impl;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -14,8 +13,10 @@ import org.springframework.stereotype.Service;
 import com.noCountry.library.dto.Bill.BillDto;
 import com.noCountry.library.dto.Bill.MapperBill;
 import com.noCountry.library.entities.Bill;
+import com.noCountry.library.entities.User;
 import com.noCountry.library.exception.BadRequestException;
 import com.noCountry.library.repository.BillRepository;
+import com.noCountry.library.repository.UserRepository;
 import com.noCountry.library.service.BillService;
 
 @Service
@@ -24,21 +25,27 @@ public class BillServiceImpl implements BillService {
 	@Autowired
 	private BillRepository billRepository;
 	@Autowired
+	private UserRepository userRepository;
+	@Autowired
 	private MapperBill mapperBill;
 
 	@Override
 	public ResponseEntity<String> generateBill(BillDto billDto) {
 		ResponseEntity<String> response = null;
 		Optional<Bill> billOptional = billRepository.findById(billDto.getId());
+		Optional<User> userOptional = userRepository.findById(billDto.getUserId());
 		try {
 			if (billOptional.isPresent()) {
 				throw new BadRequestException("the bill already exists");
 			}
+			if(userOptional.isPresent()) {
 			Bill bill = mapperBill.billDtoToBill(billDto);
 			bill.setStatus(Boolean.TRUE);
 			bill.setDateBill(LocalDate.now());
+			bill.setUser(userOptional.get());
 			billRepository.save(bill);
 			response = ResponseEntity.ok("Bill added successfully");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			response = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to add bill");
@@ -48,12 +55,7 @@ public class BillServiceImpl implements BillService {
 
 	@Override
 	public List<BillDto> getAll() {
-		List<Bill> list = new ArrayList<>();
-		try {
-			list = billRepository.findByStatusTrue();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		List<Bill> list = billRepository.findByStatusTrue();
 		return list.stream().map(mapperBill::billToBillDto).collect(Collectors.toList());
 	}
 

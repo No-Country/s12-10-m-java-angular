@@ -2,6 +2,7 @@ package com.noCountry.library.entities;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -27,8 +28,8 @@ public class Bill {
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
-	@OneToMany
-	private ArrayList<Book> books = new ArrayList<>();
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Book> books = new ArrayList<>();
 	private Double totalPrice;
 	private LocalDate dateBill;
 }

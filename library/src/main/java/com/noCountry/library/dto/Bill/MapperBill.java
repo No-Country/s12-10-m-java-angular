@@ -17,10 +17,12 @@ public class MapperBill {
 	}
 	
 	public BillDto billToBillDto (Bill bill) {
+		String userId = bill.getUser().getId();
 		BillDto billDto = new BillDto();
 		
 		billDto.setId(bill.getId());
 		billDto.setDateBill(bill.getDateBill());
+		billDto.setUserId(userId);
 		billDto.setTotalPrice(bill.getTotalPrice());
 		
 		return billDto;
