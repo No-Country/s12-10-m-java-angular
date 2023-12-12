@@ -26,18 +26,28 @@ public class Book extends PersistenceObject {
 	private LocalDate publicationDate;
     private Integer quantityAvailable;
 	private Integer salesAmount;
-	private Integer rating;
+	private Double rating;
     private String description;
 	private String collection;
+
 	private String initialImage;
 	private List<String> urlImages = new ArrayList<>();
+
+	private List<Integer> voteList = new ArrayList<>();
+
 	@Enumerated(EnumType.STRING)
 	private Language language;
+
 	@Enumerated(EnumType.STRING)
 	private Genre genre;
+
+	@OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+	private List<Comment> comments = new ArrayList<>();
+
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "author_id", referencedColumnName = "id")
 	private Author author;
+
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "editorial_id", referencedColumnName = "id")
 	private Editorial editorial;

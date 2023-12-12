@@ -38,6 +38,8 @@ public interface BookService {
 
     BookResponse addVote(String id, Integer vote);
 
+    BookResponse addComment(CommentsDto comments);
+
 
 
     PaginatedBookResponseDTO<BookToSearch> searchByGenre(String genre, Integer pageNumber, Integer sizeElement);
@@ -47,5 +49,9 @@ public interface BookService {
     PaginatedBookResponseDTO<BookToSearch> searchLatestAdded(Integer pageNumber, Integer sizeElement);
 
     PaginatedBookResponseDTO<BookToSearch> searchByHighestRating(Integer pageNumber, Integer sizeElement);
+
+    PaginatedBookResponseDTO<CommentsDto> getCommentsByBookId(String bookId, Integer pageNumber, Integer sizeElement);
+
+
 
 }

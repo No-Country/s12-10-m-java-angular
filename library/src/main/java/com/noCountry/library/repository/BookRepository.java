@@ -5,8 +5,12 @@ import com.noCountry.library.entities.enums.Genre;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -22,5 +26,10 @@ public interface BookRepository extends JpaRepository<Book, String>, JpaSpecific
     Page<Book> findAllByOrderByCreationDateDesc(Pageable pageable);
 
     Page<Book> findAllByOrderByRatingDesc(Pageable pageable);
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE Book b SET b.rating = :nuevoRating WHERE b.id = :bookId")
+    void asignarRatingABook(@Param("bookId") String bookId, @Param("nuevoRating") Double nuevoRating);
 
 }

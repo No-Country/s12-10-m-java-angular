@@ -22,6 +22,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -71,7 +72,7 @@ public class BookServiceImpl implements BookService {
         Book book = mapperBooks.bookRequestToBook(bookRequest);
 
         book.setSalesAmount(0);
-        book.setRating(0);
+        book.setRating(0.0);
         book.getUrlImages().add(bookRequest.getInitialImage());
 
         book.setCreationDate(LocalDate.now());
@@ -315,27 +316,38 @@ public class BookServiceImpl implements BookService {
         return mapperBooks.bookToBookResponse(book);
     }
 
+    @Transactional
     @Override
     public BookResponse addVote(String id, Integer vote) {
 
         if (vote <= 0 || vote > 5) {
-            throw new BadRequestException("El voto no puede ser menor a 1 ni amyor a 5.");
+            throw new BadRequestException("El voto no puede ser menor a 1 ni mayor a 5.");
         }
 
         Optional<Book> auxBook = bookRepository.findById(id);
         isEmptyObject(auxBook);
 
         Book book = auxBook.get();
+        bookRepository.asignarRatingABook(id, Double.valueOf(vote));
 
-        /*
-        Consultar cual de las 2 formas vistas para almacenar un rating
-        consideran mejor para que se implemente..
-        1) nuevos atributos
-        1) nueva clase
-         */
+        book.getVoteList().add(vote);
+        book.setRating(averageCalculation(book.getVoteList()));
+        book.setModificationDate(LocalDate.now());
+
+        bookRepository.save(book);
+
+        System.out.println("El voto fue: " + vote);
+        System.out.println("El promedio es: " + book.getRating());
 
         return mapperBooks.bookToBookResponse(book);
     }
+
+    @Override
+    public BookResponse addComment(CommentsDto comments) {
+        return null;
+    }
+
+
 
 
     @Override
@@ -383,6 +395,15 @@ public class BookServiceImpl implements BookService {
 
         return pagesBookToPagination(pagesBook, mapperBooks::listBookToListBookToSearch);
     }
+
+    @Override
+    public PaginatedBookResponseDTO<CommentsDto> getCommentsByBookId(String bookId, Integer pageNumber, Integer sizeElement) {
+        return null;
+    }
+
+
+
+
 
     private Genre searchGenre(String genre) {
         String formattedGenre = genre.replaceAll(" ", "_");
@@ -476,5 +497,19 @@ public class BookServiceImpl implements BookService {
             return Sort.by(primaryOrder).ascending();
         }
     }
+
+    private Double averageCalculation(List<Integer> voteList) {
+        if (voteList.isEmpty()) {
+            throw new BadRequestException("No hay votos cargados en el libro.");
+        }
+
+        double addition = 0;
+        for (Integer number : voteList) {
+            addition += number;
+        }
+
+        return (addition / voteList.size());
+    }
+
 
 }

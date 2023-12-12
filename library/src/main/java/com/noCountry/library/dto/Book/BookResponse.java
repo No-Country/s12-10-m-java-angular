@@ -19,7 +19,7 @@ public class BookResponse {
     private LocalDate publicationDate;
     private Integer quantityAvailable;
     private Integer salesAmount;
-    private Integer rating;
+    private Double rating;
     private String description;
     private String collection;
     private String genre;
