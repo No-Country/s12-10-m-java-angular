@@ -77,6 +77,33 @@ export const routes: Routes = [
     },
   },
   {
+    path: 'admin',
+    loadComponent: () => import('@presentation/pages/panel/panel.component').then(
+      (c) => c.PanelComponent
+    ),
+    children: [
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+      },
+      {
+        path: 'dashboard',
+        title: 'Books Leaks - Dashboard',
+        loadComponent: () => import('@presentation/pages/panel/layouts/dashboard/dashboard.component').then(
+          (c)=> c.DashboardComponent
+        )
+      },
+      {
+        path: 'books',
+        title: 'Books Leaks - Admin books',
+        loadComponent: () => import('@presentation/pages/panel/layouts/admin-books/admin-books.component').then(
+          (c)=> c.AdminBooksComponent
+        )
+      }
+    ]
+  },
+  {
     path: '404',
     title: 'Page Not Found',
     loadComponent: () =>

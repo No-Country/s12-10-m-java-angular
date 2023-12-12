@@ -11,8 +11,7 @@ import { CartService } from 'app/data/services/cart/cart.service';
   imports: [CommonModule, NgOptimizedImage, RouterLink, DefaultButtonComponent],
   templateUrl: './card-book-horizontal.component.html',
   styleUrls: [
-    './card-book-horizontal.component.css',
-    '../default-button/default-button.component.css',
+    './card-book-horizontal.component.css'
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
