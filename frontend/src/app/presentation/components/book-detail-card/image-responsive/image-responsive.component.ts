@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Book } from 'app/data/models/book';
 
@@ -8,7 +8,7 @@ import { Book } from 'app/data/models/book';
   imports: [CommonModule],
   templateUrl: './image-responsive.component.html',
   styleUrl: './image-responsive.component.css',
-  
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ImageResponsiveComponent {
   @Input() public book: Book;
@@ -34,13 +34,17 @@ export class ImageResponsiveComponent {
   ngAfterViewInit(): void {
     this.initTouchEvents();
   }
-  
+
   initTouchEvents(): void {
     if (this.imageSlider) {
       const slider = this.imageSlider.nativeElement;
-  
-      slider.addEventListener('touchstart', (event: TouchEvent) => this.onTouchStart(event));
-      slider.addEventListener('touchmove', (event: TouchEvent) => this.onTouchMove(event));
+
+      slider.addEventListener('touchstart', (event: TouchEvent) =>
+        this.onTouchStart(event)
+      );
+      slider.addEventListener('touchmove', (event: TouchEvent) =>
+        this.onTouchMove(event)
+      );
     }
   }
 

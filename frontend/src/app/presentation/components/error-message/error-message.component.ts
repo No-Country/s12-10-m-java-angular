@@ -18,14 +18,14 @@ import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
         </span>
       }
   `,
-  styleUrls: ['./error-message.component.css'],
+  styles: '',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ErrorMessageComponent implements OnInit {
   @Input({required: true}) public errorMessage: string = "";
   @Input({required: true}) public showError: any = false;
   @Input() public errorClass: string = "";
-  
+
 
   constructor() { }
 

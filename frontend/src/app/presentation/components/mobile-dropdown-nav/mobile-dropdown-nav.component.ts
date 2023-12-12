@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -6,14 +6,15 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './mobile-dropdown-nav.component.html',
-  styleUrl: './mobile-dropdown-nav.component.css'
+  styleUrl: './mobile-dropdown-nav.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MobileDropdownNavComponent implements OnInit {
-  
+
   showDropdown = false;
 
   constructor (){}
-  
+
   ngOnInit(): void {
     throw new Error('Method not implemented.');
   }

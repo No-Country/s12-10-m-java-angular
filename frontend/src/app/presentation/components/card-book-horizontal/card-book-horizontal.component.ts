@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Book, BookDetail } from '../../../data/models/book';
 import { RouterLink } from '@angular/router';
@@ -14,6 +14,7 @@ import { CartService } from 'app/data/services/cart/cart.service';
     './card-book-horizontal.component.css',
     '../default-button/default-button.component.css',
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardBookHorizontalComponent {
   @Input() public book: BookDetail;

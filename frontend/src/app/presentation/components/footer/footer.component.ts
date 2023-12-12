@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { GENRES, Genre } from 'app/data/models/book';
@@ -8,14 +8,13 @@ import { GENRES, Genre } from 'app/data/models/book';
   standalone: true,
   imports: [CommonModule, RouterLink],
   templateUrl: './footer.component.html',
-  styleUrl: './footer.component.css'
+  styleUrl: './footer.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FooterComponent implements OnInit{
+export class FooterComponent implements OnInit {
   protected GENRES: Genre[] = GENRES;
 
-  constructor(){}
+  constructor() {}
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 }

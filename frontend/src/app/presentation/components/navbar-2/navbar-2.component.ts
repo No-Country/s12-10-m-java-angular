@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -9,7 +9,8 @@ import { MobileDropdownNavComponent } from "../mobile-dropdown-nav/mobile-dropdo
     standalone: true,
     templateUrl: './navbar-2.component.html',
     styleUrl: './navbar-2.component.css',
-    imports: [CommonModule, RouterLink, MobileDropdownNavComponent]
+    imports: [CommonModule, RouterLink, MobileDropdownNavComponent],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Navbar2Component implements OnInit {
   protected searchTerm: string = '';
