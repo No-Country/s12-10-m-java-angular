@@ -4,7 +4,7 @@ export interface Book {
     price: number;
     pages: number;
     publicationDate:string;
-    quantityAvaiable: number;
+    quantityAvailable: number;
     salesAmount:number;
     rating:number;
     description: string;
@@ -13,7 +13,7 @@ export interface Book {
     language:string;
     author:string;
     nameEditorial:string;
-    urlImages:string;
+    urlImages:string[];
     isbn:number;
 }
 

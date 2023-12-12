@@ -5,8 +5,9 @@
 <section>
     <div class="container">
         <div class="nav">
-            <a class="nav-1" href="">Go back to Sotre</a>
-            <a class="nav-2" href="">Share book</a>
+            <a class="nav-1" (click)="redirectToShop()">Go back to Sotre</a>
+            <a class="nav-2" (click)="shareBook()">Share book</a>
+            <div *ngIf="mostrarMensaje" class="mensaje">URL copiada</div>
         </div>
         <app-detail-card [book]="book"></app-detail-card>
         <div class="tables">
@@ -37,7 +38,7 @@
                 </table>
             </div>
             </div>
-            <div class="table-container-2">
+            <div class="table-container-2" id="payment">
                 <h2>Payment Methods:</h2>
             <div class="table-data-2">
                 <table>

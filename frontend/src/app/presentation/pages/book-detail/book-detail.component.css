@@ -1,4 +1,5 @@
 section{
+    padding-top: 2%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -6,14 +7,20 @@ section{
 
 .nav{
     display: flex;
-    justify-content:space-around;
+    justify-content:space-between;
     font-weight: 700;
+    padding-left: 2%;
+    padding-right: 2%;
+    margin-bottom: .3%;
+    cursor: pointer;
 }
 .nav-1{
     color:#242221 ;
+    cursor: pointer;
 }
 .nav-2{
     color: #069150;
+    cursor: pointer;
 }
 
 
@@ -84,3 +91,15 @@ td {
         min-width: 90%;
     }
 }
+
+.mensaje {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #069150;
+    color: white;
+    padding: 10px;
+    border-radius: 15px;
+    display: inline-block;
+  }

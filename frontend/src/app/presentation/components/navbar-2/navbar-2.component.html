@@ -1,17 +1,22 @@
 <section class="navbar-white">
   <nav class="navbar-w">
-    <div class="hamburguer-button min-[1000px]:hidden">
-      <svg xmlns="http://www.w3.org/2000/svg" width="43" height="39" viewBox="0 0 43 39" fill="none">
+    <div class="hamburguer-button min-[1000px]:hidden" (click)="showDropdown()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="43" height="39" viewBox="0 0 43 39" fill="none" *ngIf="!dropdownMenu">
         <path fill-rule="evenodd" clip-rule="evenodd"
           d="M5.375 13V9.75H37.625V13H5.375ZM5.375 21.125H37.625V17.875H5.375V21.125ZM5.375 29.25H37.625V26H5.375V29.25Z"
           fill="black" />
       </svg>
+      <svg width="30" height="30" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg" *ngIf="dropdownMenu" class="cross-logo">
+        <path d="M23 2.31643L20.6836 0L11.5 9.18357L2.31643 0L0 2.31643L9.18357 11.5L0 20.6836L2.31643 23L11.5 13.8164L20.6836 23L23 20.6836L13.8164 11.5L23 2.31643Z" fill="black"/>
+      </svg>
     </div>
     <a class="navbar-logo max-[1000px]:hidden text-[#069150]" routerLink="">BookLeaks</a>
-    <form class="search-bar">
-      <input type="search" class="search-bar-input" id="search" name="search" for="search" [(ngModel)]="searchTerm"
-        placeholder="Search for books..." (keydown.enter)="search()">
-      <svg width="45" height="39" viewBox="0 0 45 39" fill="none" xmlns="http://www.w3.org/2000/svg" (click)="search()"
+
+    <form class="search-bar" action="/shop/a" (submit)="search()">
+      <input type="text" class="search-bar-input" id="search-bar-input" name="search-bar-input" for="search-bar-input"
+        placeholder="Search for books...">
+      <svg width="45" height="39" viewBox="0 0 45 39" fill="none" xmlns="http://www.w3.org/2000/svg"
+
         class="search-bar-icon">
         <g id="Icons/search_24px">
           <path id="icon" fill-rule="evenodd" clip-rule="evenodd"
@@ -20,6 +25,11 @@
         </g>
       </svg>
     </form>
+    <div class="shop-button min-[1000px]:hidden">
+      <svg width="45" height="40" viewBox="0 0 25 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7.25 9.07692V7.30769C7.25 5.9 7.80312 4.54997 8.78769 3.55459C9.77226 2.5592 11.1076 2 12.5 2C13.8924 2 15.2277 2.5592 16.2123 3.55459C17.1969 4.54997 17.75 5.9 17.75 7.30769V9.07692M2.875 9.07692C2.64294 9.07692 2.42038 9.17012 2.25628 9.33602C2.09219 9.50192 2 9.72692 2 9.96154V21.9038C2 23.5758 3.40875 25 5.0625 25H19.9375C21.5912 25 23 23.6449 23 21.973V9.96154C23 9.72692 22.9078 9.50192 22.7437 9.33602C22.5796 9.17012 22.3571 9.07692 22.125 9.07692H2.875Z" stroke="#1E1E1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
     <ul class="navbar-w-list max-[1000px]:!hidden">
       <li class="navbar-w-list-item dropdown">
         <a routerLink=""> Categories
@@ -49,10 +59,12 @@
             class="navbar-w-list-cart-icon">
             <path
               d="M7.25 9.07692V7.30769C7.25 5.9 7.80312 4.54997 8.78769 3.55459C9.77226 2.5592 11.1076 2 12.5 2C13.8924 2 15.2277 2.5592 16.2123 3.55459C17.1969 4.54997 17.75 5.9 17.75 7.30769V9.07692M2.875 9.07692C2.64294 9.07692 2.42038 9.17012 2.25628 9.33602C2.09219 9.50192 2 9.72692 2 9.96154V21.9038C2 23.5758 3.40875 25 5.0625 25H19.9375C21.5912 25 23 23.6449 23 21.973V9.96154C23 9.72692 22.9078 9.50192 22.7437 9.33602C22.5796 9.17012 22.3571 9.07692 22.125 9.07692H2.875Z"
-              stroke="#1E1E1E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+              stroke="#1E1E1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
           Cart </a>
       </li>
     </ul>
   </nav>
+  <app-mobile-dropdown-nav *ngIf="dropdownMenu"></app-mobile-dropdown-nav>
 </section>
+
