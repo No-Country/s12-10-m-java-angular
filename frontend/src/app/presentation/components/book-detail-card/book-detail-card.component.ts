@@ -3,6 +3,7 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { DefaultButtonComponent } from '../default-button/default-button.component';
 import { Book } from 'app/data/models/book';
 import { ImageResponsiveComponent } from './image-responsive/image-responsive.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-detail-card',
@@ -15,7 +16,7 @@ export class BookDetailCardComponent {
   selectedImageUrl: string = '';
   @Input() public book: Book;
 
-  constructor(){
+  constructor( private router:Router){
     this.book = {} as Book;
   }
 
@@ -33,5 +34,9 @@ export class BookDetailCardComponent {
       if (paymentSection) {
         paymentSection.scrollIntoView({ behavior: 'smooth' });
       }
+    }
+
+    redirectToAuthor() {
+      this.router.navigate(['shop'], { queryParams: { search: this.book.author } });
     }
 }
