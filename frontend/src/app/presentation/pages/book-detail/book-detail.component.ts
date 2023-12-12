@@ -33,7 +33,6 @@ export class BookDetailComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe((data) => {
       this.book = data['book'];
-      console.log(this.book);
     });
   }
 

@@ -26,7 +26,6 @@ export class BookDetailCardComponent {
 
     setSelectedImage(imageUrl: string) {
         this.selectedImageUrl = imageUrl;
-        console.log(this.selectedImageUrl);
     }
     
     scrollToPayment(): void {

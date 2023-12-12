@@ -11,34 +11,34 @@ import { Book } from 'app/data/models/book';
   
 })
 export class ImageResponsiveComponent {
-
   @Input() public book: Book;
 
-  constructor(){
+  constructor() {
     this.book = {} as Book;
   }
 
   isNumberId(ID: string | number) {
-    return typeof ID === 'string'; 
-  }
-  currentIndex: number = 1;
-  /*FALTA REEMPLAZAR ESTO POR LAS IMAGENES DEL BACK */
-  images: string[] = [
-    "/assets/booksImages/1.jpg",
-    "/assets/booksImages/2.jpg",
-    "/assets/booksImages/3.jpg",
-  ];
-  @ViewChild('imageSlider') imageSlider!: ElementRef;
-  private touchStartX: number = 0;
- 
-  ngOnInit(): void {
-    this.initTouchEvents();
+    return typeof ID === 'string';
   }
 
+  currentIndex: number = 1;
+
+  @ViewChild('imageSlider') imageSlider!: ElementRef;
+  private touchStartX: number = 0;
+
+  ngOnInit(): void {
+    this.initTouchEvents();
+    console.log(this.book.urlImages);
+  }
+
+  ngAfterViewInit(): void {
+    this.initTouchEvents();
+  }
+  
   initTouchEvents(): void {
     if (this.imageSlider) {
       const slider = this.imageSlider.nativeElement;
-
+  
       slider.addEventListener('touchstart', (event: TouchEvent) => this.onTouchStart(event));
       slider.addEventListener('touchmove', (event: TouchEvent) => this.onTouchMove(event));
     }
@@ -62,12 +62,12 @@ export class ImageResponsiveComponent {
     if (this.currentIndex > 1) {
       this.currentIndex = this.currentIndex - 1;
     } else {
-      this.currentIndex = this.images.length;
+      this.currentIndex = this.book.urlImages.length;
     }
   }
 
   forward(): void {
-    if (this.currentIndex < this.images.length) {
+    if (this.currentIndex < this.book.urlImages.length) {
       this.currentIndex = this.currentIndex + 1;
     } else {
       this.currentIndex = 1;

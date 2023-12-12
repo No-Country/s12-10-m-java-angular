@@ -13,7 +13,7 @@ export interface Book {
     language:string;
     author:string;
     nameEditorial:string;
-    urlImages:string;
+    urlImages:string[];
     isbn:number;
 }
 
