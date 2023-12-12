@@ -28,8 +28,7 @@ _Permitirá la creación de cuentas con roles diferenciados (cliente y administr
 - Análisis de Ventas: Visualización de reportes detallados sobre las ventas por periodos.
 
 
-## URL 
-[url a Books Leaks](https://books-leaks.netlify.app/)
+## URL: [Link a books-leaks.netlify.app](https://books-leaks.netlify.app/)
 
 ## Demo
 Insert gif or link to demo
