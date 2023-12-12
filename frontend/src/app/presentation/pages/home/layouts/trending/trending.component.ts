@@ -25,11 +25,11 @@ export class TrendingComponent implements AfterViewInit, OnInit{
   protected booksWithOnCart: (BookDetail & { onCart: boolean })[]=[];
   protected BooksOnCart: BookDetail[]=[]; //servicio booksOnCart
 
-  constructor(private cartService: CartService) {this.booksArray = BOOK_DETAIL_MOOK; this.BooksOnCart = cartService.bringCartOfService(); } //traemos booksOnCart de el servicio
+  constructor(private cartService: CartService) {
+    this.booksArray = BOOK_DETAIL_MOOK; this.BooksOnCart = cartService.bringCartOfService();
+  }
 
   ngOnInit(){
-    //llamo el servicio y recibo array de id o de libros
-    //en el constructor o aca traigo los libros de trending
     console.log(this.BooksOnCart)
     this.booksWithOnCart = this.booksArray.map(book => {
       let onCart = this.BooksOnCart.some(cartBook => cartBook.id === book.id);

@@ -18,11 +18,6 @@ export class ApiService {
   Trending
   /book/searchByCriteria?page={page}&size={size}&minPrice={minPrice}&maxPrice={maxPrice}&minPages={minPages}&genre={genre}&language={language}&searchEvenNotAvailable={searchEvenNotAvailable}&orderBy={}&secondOrderBy={}&ascOrDesc={}
 
-  Ultimos agregados
-    Nuevo endpoint
-
-  Buscar categorias
-    /book/searchGenre/{genre}?page=0&size=5
 
   */
   private createHeaders(isNedAuth: boolean): HttpHeaders {
