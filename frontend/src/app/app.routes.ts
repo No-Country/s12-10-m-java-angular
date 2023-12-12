@@ -6,6 +6,7 @@ import { ShopService } from './data/services/shop/shop.service';
 import { BookDetailComponent } from '@presentation/pages/book-detail/book-detail.component';
 import { BooksService } from './data/services/books/books.service';
 import { bookDetailResolver } from './data/guards/BookDetail.resolver';
+import { FilterService } from './data/services/shop/filter.service';
 
 
 export const routes: Routes = [
@@ -42,7 +43,7 @@ export const routes: Routes = [
       import('@presentation/pages/shop/shop.component').then(
         (c) => c.ShopComponent
       ),
-    providers: [ShopService],
+    providers: [ShopService, FilterService],
     data: { preload: true },
   },
   {

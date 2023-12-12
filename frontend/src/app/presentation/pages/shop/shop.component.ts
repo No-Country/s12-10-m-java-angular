@@ -19,18 +19,26 @@ import { Navbar2Component } from '@presentation/components/navbar-2/navbar-2.com
 import { NavbarComponent } from '@presentation/components/navbar/navbar.component';
 import { BOOK_DETAIL_MOOK } from 'app/data/mocks/booksArray';
 import { ShopService } from 'app/data/services/shop/shop.service';
-import { delay, map, of } from 'rxjs';
+import { Observer, Subject, delay, first, map, of, takeUntil } from 'rxjs';
 import { ShopRoutes } from './shop.routing';
 import { DefaultButtonComponent } from '@presentation/components/default-button/default-button.component';
-import { BookDetail, BookFilterProps, GENRES, Genre } from 'app/data/models/book';
+import {
+  BookDetail,
+  BookFilterProps,
+  GENRES,
+  Genre,
+} from 'app/data/models/book';
 import { SORTING_VALUES, Sorting } from 'app/data/models/Sort';
 import { SortBoxComponent } from '@presentation/components/sort-box/sort-box.component';
 import { ShopFiltersComponent } from '@presentation/components/shop-filters/shop-filters.component';
 import { CardBookHorizontalComponent } from '@presentation/components/card-book-horizontal/card-book-horizontal.component';
 import { BooksService } from 'app/data/services/books/books.service';
 import { SpinnerComponent } from '@presentation/components/app-spinner/spinner.component';
-import { ShopFilterMobileComponent } from '@presentation/components/shop-filter-mobile/shop-filter-mobile.component';
 import { OverlayComponent } from '@presentation/components/overlay/overlay.component';
+import { ShopFilterMobileComponent } from '@presentation/components/shop-filters/mobile/shop-filter-mobile.component';
+import { FilterService } from 'app/data/services/shop/filter.service';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   standalone: true,
@@ -47,6 +55,7 @@ import { OverlayComponent } from '@presentation/components/overlay/overlay.compo
     SpinnerComponent,
     ShopFilterMobileComponent,
     OverlayComponent,
+    NgxPaginationModule,
   ],
   selector: 'app-shop',
   templateUrl: './shop.component.html',
@@ -56,142 +65,67 @@ import { OverlayComponent } from '@presentation/components/overlay/overlay.compo
 export class ShopComponent implements OnInit, OnDestroy {
   private router: ActivatedRoute = inject(ActivatedRoute);
   private readonly shopService: ShopService = inject(ShopService);
-
+  public readonly filterService: FilterService = inject(FilterService);
+  private destroy$: Subject<void>;
   protected readonly books = this.shopService.state.asReadonly();
-
   protected searchTerm: string = '';
   protected sortParam: string = '';
   protected genreParam: string = '';
-
-  protected SORT: Sorting[];
-  private readonly GENRES: Genre[] = GENRES;
-  protected initGenre: Genre;
   protected loading: WritableSignal<boolean>;
 
   protected openMobileFilter: boolean = false;
 
   constructor(private injector: Injector) {
-    this.loading = signal(true);
+    this.loading = signal(false);
 
     this.router.queryParams.subscribe((params) => {
       this.searchTerm = params['search'] as string;
-      this.sortParam = params['sort'] as string;
-      this.genreParam = params['genre'] as string;
+
+      this.filterService.verifySorting(params['sort'] as string);
+      this.filterService.verifyGenre(params['genre'] as string);
+      this.filterService.initFilterProps();
     });
 
-    this.initGenre = Genre.DEFAULT;
-    this.SORT = SORTING_VALUES;
+    this.destroy$ = new Subject();
   }
 
   ngOnDestroy(): void {
-    sessionStorage.removeItem('props');
+    this.filterService.deleteCacheProps();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   ngOnInit(): void {
-    this.verifySorting();
-    this.verifyGenre();
-    this.initFilterProps();
-    let props = JSON.parse(
-      sessionStorage.getItem('props') as string
-    ) as BookFilterProps;
-    this.shopService.getLeakedsBooks(props).subscribe({
-      next: (books) => {
-        this.shopService.setState(books);
-        this.loading.update((current) => !current);
-      },
-      error: (err: any) => {
-        console.log(err);
-      },
-    });
-  }
+    const loading = this.loading;
+    const shopService = this.shopService;
 
-  private initFilterProps(): void {
-    sessionStorage.setItem(
-      'props',
-      JSON.stringify({
-        page: 0,
-        size: 9,
-        orderBy: this.SORT[0].code.startsWith('alpha')
-          ? 'alphabetically'
-          : this.SORT[0].code,
-        ascOrDesc: this.SORT[0].order,
-        searchEvenNotAvailable: 0,
-        genre:
-          this.initGenre && this.initGenre.valueOf() !== Genre.DEFAULT.valueOf()
-            ? [this.initGenre.valueOf()]
-            : [],
-      } as BookFilterProps)
-    );
-  }
-  private verifyGenre() {
-    if (this.genreParam !== '' && this.genreParam) {
-      let { genre } = this.GENRES.reduce(
-        (genreSearch, item, currentIndex) => {
-          if (item.valueOf() === this.genreParam) genreSearch.genre = item;
-          return genreSearch;
-        },
-        { genre: Genre.DEFAULT }
-      );
-      if (genre !== Genre.DEFAULT && genre) this.initGenre = genre;
-    }
-  }
+    this.filterService.updateResultList
+      .asObservable()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((updateProps) => {
+        loading.update((current) => !current);
 
-  private verifySorting(): void {
-    if (
-      this.sortParam !== '' &&
-      this.sortParam !== undefined &&
-      this.sortParam !== null
-    ) {
-      let { index, element } = this.SORT.reduce(
-        (acc, item, currentIndex) => {
-          if (item.code === this.sortParam) {
-            acc.index = currentIndex;
-            acc.element = item;
-          }
-          return acc;
-        },
-        { index: -1, element: {} as Sorting }
-      );
-
-      if (index !== -1) {
-        this.SORT = [
-          element,
-          ...this.SORT.slice(0, index),
-          ...this.SORT.slice(index + 1),
-        ];
-      }
-    }
-  }
-
-  updateList(filterProps: BookFilterProps): void {
-    this.loading.update((current) => !current);
-    console.log('props in updatelist', filterProps);
-    this.shopService.getLeakedsBooks(filterProps).subscribe({
-      next: (books) => {
-        this.shopService.setState(books);
-        this.loading.update((current) => !current);
-      },
-      error: (err: any) => {
-        console.log(err);
-      },
-    });
-  }
-
-  applySort(sort: Sorting) {
-    let props = JSON.parse(
-      sessionStorage.getItem('props') as string
-    ) as BookFilterProps;
-
-    props.ascOrDesc = sort.order.valueOf();
-
-    if (sort.code.startsWith('alpha'))
-      props.orderBy = sort.code.substring(0, sort.code.lastIndexOf('-'));
-    else props.orderBy = sort.code;
-
-    this.updateList(props);
+        shopService
+          .getLeakedsBooks(updateProps)
+          .pipe(first())
+          .pipe(takeUntil(this.destroy$))
+          .subscribe({
+            next: (books) => {
+              shopService.setState(books);
+              loading.update((current) => !current);
+            },
+            error: (err: any) => {
+              console.log(err);
+            },
+          });
+      });
   }
 
   getBooks() {
-    return Object.values(this.books().content);
+    return this.books().content;
+  }
+
+  updatePage(page: any){
+    this.filterService.updatePagination(page);
   }
 }

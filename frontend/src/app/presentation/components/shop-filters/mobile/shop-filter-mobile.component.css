@@ -11,9 +11,8 @@
   padding-block-start: 10px;
   overflow-y: auto;
   pointer-events: auto;
-
-
 }
+
 .modal-filter > div {
   border-block-end: 1px solid rgba(0, 0, 0, 0.35);
   padding-inline: 15px;
@@ -49,6 +48,7 @@
   line-height: 1rem;
   align-self: center;
 }
+
 .modal-filter .filter-list > li span {
   font-size: 1.25rem;
   font-weight: 700;

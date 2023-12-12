@@ -26,7 +26,7 @@ button.default-button {
   margin-bottom: 6px;
   margin-inline: auto;
   transition-property: width, border-radius, max-width;
-  transition-duration: 0.3s;
+  transition-duration: 0.25s;
   transition-timing-function: ease-in;
 
   cursor: pointer;
@@ -43,7 +43,7 @@ button.default-button::after {
   line-height: 1rem;
 
   transition-property: visibility, opacity;
-  transition-duration: 0.2s;
+  transition-duration: 0.15s;
 }
 
 button.default-button::before {
@@ -58,13 +58,13 @@ button.default-button::before {
 
   transition-property: opacity, font-size, animation;
   transition-timing-function: linear;
-  transition-duration: 0.3s;
+  transition-duration: 0.25s;
 }
 
 button.default-button:is(:hover, :focus, :active)::after {
   opacity: 0;
   visibility: hidden;
-  transition-duration: 0.3s;
+  transition-duration: 0.25s;
 }
 
 button.default-button:is(:hover, :focus, :active)::before {
@@ -73,16 +73,16 @@ button.default-button:is(:hover, :focus, :active)::before {
 
   opacity: 1;
   animation-name: slide-bottom;
-  animation-duration: 0.25s;
+  animation-duration: 0.2s;
   animation-delay: .15s;
   animation-timing-function: ease;
   animation-play-state: running;
   animation-fill-mode: both;
-  transition-duration: 0.3s;
+  transition-duration: 0.25s;
 }
 
 button.default-button:is(:hover, :focus, :active) {
-  transition-duration: .3s;
+  transition-duration: .25s;
   border-radius: 0.9375rem;
 
   width: 180px;

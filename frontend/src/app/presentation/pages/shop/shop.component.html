@@ -15,11 +15,11 @@
       }
 
       <button
-        class="text-[#069150] flex gap-x-1"
+        class="text-[#069150] flex gap-x-1 me-8"
         type="button"
         id="openMobileFilters"
         #openMobileFilters
-        (click)="openMobileFilter=!openMobileFilter"
+        (click)="openMobileFilter = !openMobileFilter"
       >
         Filters
         <picture class="w-full">
@@ -47,19 +47,13 @@
       }
     </div>
 
-    <shop-filters
-      class="w-full hidden min-[975px]:flex"
-      (filterProps)="updateList($event)"
-      [initialGenreFilter]="initGenre"
-    ></shop-filters>
+    <shop-filters class="w-full hidden min-[975px]:flex"></shop-filters>
 
-    @defer(on interaction(openMobileFilters)){
-      @if(openMobileFilter){
-        <shop-filter-mobile
-          class="block w-full min-[975px]:hidden"
-        ></shop-filter-mobile>
-      }
-    }
+    @defer{ @if(openMobileFilter){
+    <shop-filter-mobile
+      class="block w-full min-[975px]:hidden"
+    ></shop-filter-mobile>
+    } }
   </section>
   <section class="result-container">
     <div class="result-header">
@@ -69,9 +63,9 @@
         <div class="flex justify-around">
           <p>Sort by</p>
           <sort-box
-            [options]="SORT"
-            [selectedOption]="SORT[0]"
-            (sort)="applySort($event)"
+            [options]="filterService.SORT"
+            [selectedOption]="filterService.SORT[0]"
+            (sort)="filterService.updateSort($event)"
           ></sort-box>
         </div>
       </div>
@@ -79,19 +73,38 @@
 
     @if ( !this.loading() ){
     <div class="result-list">
-      @for(book of getBooks(); track book.id){
+      @for(book of getBooks() | paginate: { id: 'books-pagination-ctr',
+      itemsPerPage: filterService.props.size,
+      currentPage: filterService.props.page+1,
+      totalItems: books().totalElements }; track
+      book.id){
       <card-book [book]="book"></card-book>
-      <app-card-book-horizontal [book]="book"> </app-card-book-horizontal>
+      <app-card-book-horizontal [book]="book" class="mr-12">
+      </app-card-book-horizontal>
       }
     </div>
+<div class="w-full mb-8 flex justify-center items-center">
+      <pagination-controls
+      class="book-pagination"
+      id="books-pagination-ctr"
+      (pageChange)="updatePage($event)"
+      [maxSize]="300"
+      [responsive]="true"
+      [autoHide]="true"
+      previousLabel="Previous"
+      nextLabel="Next"
+    ></pagination-controls>
+</div>
     } @else {
     <div class="spinner grid grid-cols-3 w-full gap-x-8 justify-center">
       <dot-spinner></dot-spinner>
     </div>
-
     }
   </section>
 </main>
 
-<overlay [ngClass]="{ hidden: !openMobileFilter }" (click)="openMobileFilter=!openMobileFilter"></overlay>
+<overlay
+  [ngClass]="{ hidden: !openMobileFilter }"
+  (click)="openMobileFilter = !openMobileFilter"
+></overlay>
 <app-footer></app-footer>

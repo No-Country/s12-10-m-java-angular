@@ -1,40 +1,19 @@
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  inject,
-} from '@angular/core';
-import {
-  BookFilterProps,
-  GENRES,
-  Genre,
-  LANGUAGES,
-  Language,
-} from 'app/data/models/book';
-import { DefaultButtonComponent } from '../default-button/default-button.component';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { ChangeDetectionStrategy, Component, inject, type OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Genre, Language } from 'app/data/models/book';
 import { FilterService } from 'app/data/services/shop/filter.service';
 
 @Component({
+  selector: 'shop-filter-mobile',
   standalone: true,
-  imports: [CommonModule, DefaultButtonComponent, ReactiveFormsModule],
-  selector: 'shop-filters',
-  templateUrl: './shop-filters.component.html',
-  styleUrls: ['./shop-filters.component.css'],
+  imports: [CommonModule, ReactiveFormsModule],
+  templateUrl: './shop-filter-mobile.component.html',
+  styleUrl: './shop-filter-mobile.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ShopFiltersComponent implements OnInit {
+export class ShopFilterMobileComponent implements OnInit {
   public filterService: FilterService = inject(FilterService);
-
   protected filterForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {
@@ -45,8 +24,7 @@ export class ShopFiltersComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   applyGenre(genre: Genre) {
     this.filterService.updateGenre(genre);
@@ -70,5 +48,14 @@ export class ShopFiltersComponent implements OnInit {
 
   applyOutOfStock() {
     this.filterService.updateOutOfStock();
+  }
+
+  clean(){
+    this.filterForm.reset();
+    this.filterService.cleanFilters();
+  }
+
+  test(){
+    alert("Probar test");
   }
 }

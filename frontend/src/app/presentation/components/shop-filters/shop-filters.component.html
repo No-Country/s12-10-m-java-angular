@@ -38,9 +38,9 @@
           <span class="text-center">-</span>
       </div>
       <form class="categories" role="list">
-        @for(genre of GENRES; track '1-'+genre){
-          <label for="1-{{genre.valueOf()}}" role="checkbox" [class.active]="genresApplied.includes(genre)" [attr.aria-label]="'Fillter by '+genre.valueOf()" [attr.aria-cheked]="genresApplied.includes(genre)">
-              <input type="checkbox" id="1-{{genre}}" name="1-{{genre.valueOf()}}" [checked]="genresApplied.includes(genre)" (change)="applyGenre(genre)">
+        @for(genre of filterService.GENRES; track '1-'+genre){
+          <label for="1-{{genre.valueOf()}}" role="checkbox" [class.active]="filterService.genreApplied.includes(genre)" [attr.aria-label]="'Fillter by '+genre.valueOf()" [attr.aria-cheked]="filterService.genreApplied.includes(genre)">
+              <input type="checkbox" id="1-{{genre}}" name="1-{{genre.valueOf()}}" [checked]="filterService.genreApplied.includes(genre)" (change)="applyGenre(genre)">
               {{ genre.valueOf() }}
           </label>
         }
@@ -52,8 +52,8 @@
           <span class="text-center">-</span>
       </div>
       <form class="flex flex-col mt-3 gap-y-2 languages">
-          @for(language of LANGUAGES; track language){
-            <label for="1-{{language}}" role="checkbox" [attr.aria-cheked]="languageApplied.includes(language)">
+          @for(language of filterService.LANGUAGES; track language){
+            <label for="1-{{language}}" role="checkbox" [attr.aria-cheked]="filterService.languageApplied.includes(language)">
               <input type="checkbox" id="1-{{language}}" name="1-{{language}}" (change)="applyLanguage(language)">
               {{ language.valueOf() }}
             </label>
