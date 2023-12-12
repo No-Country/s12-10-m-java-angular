@@ -42,6 +42,9 @@ button.default-button::after {
   font-size: 3rem;
   line-height: 1rem;
 
+
+
+
   transition-property: visibility, opacity;
   transition-duration: 0.15s;
 }
@@ -60,11 +63,21 @@ button.default-button::before {
   transition-timing-function: linear;
   transition-duration: 0.25s;
 }
-
+button.default-button:not(:hover, :focus, :active)::after{
+  animation-name: slide-bottom;
+  animation-duration: 0.2s;
+  animation-delay: .1s;
+  animation-timing-function: ease;
+  animation-play-state: running;
+  animation-fill-mode: both;
+}
 button.default-button:is(:hover, :focus, :active)::after {
   opacity: 0;
   visibility: hidden;
   transition-duration: 0.25s;
+  transition-property: animation, visibility, opacity;
+
+
 }
 
 button.default-button:is(:hover, :focus, :active)::before {
@@ -72,7 +85,7 @@ button.default-button:is(:hover, :focus, :active)::before {
   letter-spacing: 3%;
 
   opacity: 1;
-  animation-name: slide-bottom;
+  animation-name: slide-top;
   animation-duration: 0.2s;
   animation-delay: .15s;
   animation-timing-function: ease;
