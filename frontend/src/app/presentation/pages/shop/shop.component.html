@@ -74,27 +74,26 @@
     @if ( !this.loading() ){
     <div class="result-list">
       @for(book of getBooks() | paginate: { id: 'books-pagination-ctr',
-      itemsPerPage: filterService.props.size,
-      currentPage: filterService.props.page+1,
-      totalItems: books().totalElements }; track
+      itemsPerPage: filterService.props.size, currentPage:
+      filterService.props.page+1, totalItems: books().totalElements }; track
       book.id){
       <card-book [book]="book"></card-book>
       <app-card-book-horizontal [book]="book" class="mr-12">
       </app-card-book-horizontal>
       }
     </div>
-<div class="w-full mb-8 flex justify-center items-center">
+    <div class="w-full mb-8 flex justify-center items-center">
       <pagination-controls
-      class="book-pagination"
-      id="books-pagination-ctr"
-      (pageChange)="updatePage($event)"
-      [maxSize]="300"
-      [responsive]="true"
-      [autoHide]="true"
-      previousLabel="Previous"
-      nextLabel="Next"
-    ></pagination-controls>
-</div>
+        class="book-pagination"
+        id="books-pagination-ctr"
+        (pageChange)="updatePage($event)"
+        [maxSize]="300"
+        [responsive]="true"
+        [autoHide]="true"
+        previousLabel="Previous"
+        nextLabel="Next"
+      ></pagination-controls>
+    </div>
     } @else {
     <div class="spinner grid grid-cols-3 w-full gap-x-8 justify-center">
       <dot-spinner></dot-spinner>

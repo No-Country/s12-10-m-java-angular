@@ -129,5 +129,6 @@ export class ShopComponent implements OnInit, OnDestroy {
 
   updatePage(page: any){
     this.filterService.updatePagination(page);
+    window.scroll({top: 0});
   }
 }
