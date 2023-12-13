@@ -1,6 +1,7 @@
 package com.noCountry.library.controller;
 
 import com.noCountry.library.dto.Book.*;
+import com.noCountry.library.dto.Comment.CommentDto;
 import com.noCountry.library.exception.BadRequestException;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,7 +39,7 @@ public class BookController {
     public ResponseEntity<?> getAllBooks(@RequestParam(defaultValue = "0") int page,
                                          @RequestParam(defaultValue = "5") int size) {
         try {
-            PaginatedBookResponseDTO<BookResponse> books = bookService.getAllBooks(page, size);
+            PaginatedResponseDTO<BookResponse> books = bookService.getAllBooks(page, size);
             return new ResponseEntity<>(books, HttpStatus.OK);
         } catch (BadRequestException e){
             throw new BadRequestException(e.getMessage());
@@ -59,7 +60,7 @@ public class BookController {
     public ResponseEntity<?> getAllBooksToCard(@RequestParam(defaultValue = "0") int page,
                                                @RequestParam(defaultValue = "5") int size) {
         try {
-            PaginatedBookResponseDTO<BookCardResponse> books = bookService.getAllBooksForCard(page, size);
+            PaginatedResponseDTO<BookCardResponse> books = bookService.getAllBooksForCard(page, size);
             return new ResponseEntity<>(books, HttpStatus.OK);
         } catch (BadRequestException e){
             throw new BadRequestException(e.getMessage());
@@ -80,7 +81,7 @@ public class BookController {
     public ResponseEntity<?> getAllBooksToCardDescription(@RequestParam(defaultValue = "0") int page,
                                                           @RequestParam(defaultValue = "5") int size) {
         try {
-            PaginatedBookResponseDTO<BookCardDescription> books =
+            PaginatedResponseDTO<BookCardDescription> books =
                     bookService.getAllBooksForCardDescription(page, size);
             return new ResponseEntity<>(books, HttpStatus.OK);
         } catch (BadRequestException e){
@@ -101,7 +102,7 @@ public class BookController {
                                                 @RequestParam(required = false) String orderBy,
                                                 @RequestParam(required = false) String ascOrDesc) {
         try {
-            PaginatedBookResponseDTO<BookToSearch> books =
+            PaginatedResponseDTO<BookToSearch> books =
                     bookService.getBooksByCriteria(page, size,minPrice, maxPrice, minPages,
                                                 genre, language, searchText, searchEvenNotAvailable,
                                                 orderBy, ascOrDesc);
@@ -111,12 +112,27 @@ public class BookController {
         }
     }
 
+    @GetMapping(path = "/searchText/{text}")
+    public ResponseEntity<?> getBookByText(@PathVariable String text,
+                                           @RequestParam(defaultValue = "0") int page,
+                                           @RequestParam(defaultValue = "5") int size,
+                                           @RequestParam(required = false) String orderBy,
+                                           @RequestParam(required = false) String ascOrDesc) {
+        try {
+            PaginatedResponseDTO<BookToSearch> book = bookService.searchByText(text, page, size, orderBy, ascOrDesc);
+            return new ResponseEntity<>(book, HttpStatus.OK);
+        } catch (BadRequestException e){
+            throw new BadRequestException(e.getMessage());
+        }
+    }
+
+
     @GetMapping(path = "/searchGenre/{genre}")
     public ResponseEntity<?> getBookByGenre(@PathVariable String genre,
                                             @RequestParam(defaultValue = "0") int page,
                                             @RequestParam(defaultValue = "5") int size) {
         try {
-            PaginatedBookResponseDTO<BookToSearch> book = bookService.searchByGenre(genre, page, size);
+            PaginatedResponseDTO<BookToSearch> book = bookService.searchByGenre(genre, page, size);
             return new ResponseEntity<>(book, HttpStatus.OK);
         } catch (BadRequestException e){
             throw new BadRequestException(e.getMessage());
@@ -128,7 +144,7 @@ public class BookController {
                                             @RequestParam(defaultValue = "0") int page,
                                             @RequestParam(defaultValue = "5") int size) {
         try {
-            PaginatedBookResponseDTO<BookToSearch> book = bookService.searchByTitle(title, page, size);
+            PaginatedResponseDTO<BookToSearch> book = bookService.searchByTitle(title, page, size);
             return new ResponseEntity<>(book, HttpStatus.OK);
         } catch (BadRequestException e){
             throw new BadRequestException(e.getMessage());
@@ -139,7 +155,7 @@ public class BookController {
     public ResponseEntity<?> getBookLatestAdded(@RequestParam(defaultValue = "0") int page,
                                                 @RequestParam(defaultValue = "5") int size) throws Exception {
         try {
-            PaginatedBookResponseDTO<BookToSearch> book = bookService.searchLatestAdded(page, size);
+            PaginatedResponseDTO<BookToSearch> book = bookService.searchLatestAdded(page, size);
             return new ResponseEntity<>(book, HttpStatus.OK);
         } catch (BadRequestException e){
             throw new BadRequestException(e.getMessage());
@@ -150,7 +166,7 @@ public class BookController {
     public ResponseEntity<?> searchByHighestRating(@RequestParam(defaultValue = "0") int page,
                                                    @RequestParam(defaultValue = "5") int size) {
         try {
-            PaginatedBookResponseDTO<BookToSearch> book = bookService.searchByHighestRating(page, size);
+            PaginatedResponseDTO<BookToSearch> book = bookService.searchByHighestRating(page, size);
             return new ResponseEntity<>(book, HttpStatus.OK);
         } catch (BadRequestException e){
             throw new BadRequestException(e.getMessage());
@@ -162,7 +178,7 @@ public class BookController {
                                         @RequestParam(defaultValue = "0") int page,
                                         @RequestParam(defaultValue = "5") int size) {
         try {
-            PaginatedBookResponseDTO<CommentsDto> bookComments = bookService.getCommentsByBookId(bookId, page, size);
+            PaginatedResponseDTO<CommentDto> bookComments = bookService.getCommentsByBookId(bookId, page, size);
             return new ResponseEntity<>(bookComments, HttpStatus.OK);
         } catch (BadRequestException e){
             throw new BadRequestException(e.getMessage());
@@ -233,7 +249,7 @@ public class BookController {
     }
 
     @PutMapping(path = "/addComment")
-    public ResponseEntity<?> addComment(@RequestBody CommentsDto comments) {
+    public ResponseEntity<?> addComment(@RequestBody CommentDto comments) {
         try {
             BookResponse book = bookService.addComment(comments);
             return new ResponseEntity<>(book, HttpStatus.CREATED);

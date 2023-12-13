@@ -35,6 +35,7 @@ public class AuthorServiceImpl implements AuthorService {
 		Author author = mapperAuthor.authorDtoToAuthor(authorDto);
 		author.setCreationDate(LocalDate.now());
 		author.setModificationDate(LocalDate.now());
+		author.setFullName(author.getName() + " " + author.getLastName());
 
 		authorRepository.save(author);
 
@@ -57,6 +58,7 @@ public class AuthorServiceImpl implements AuthorService {
 				Author author = authorOptional.get();
 				author.setName(authorDto.getName());
 				author.setLastName(authorDto.getLastName());
+				author.setFullName(authorDto.getName() + " " + authorDto.getLastName());
 				author.setBirthday(authorDto.getBirthday());
 				author.setNationality(authorDto.getNationality());
 				author.setBiography(authorDto.getBiography());
@@ -95,5 +97,6 @@ public class AuthorServiceImpl implements AuthorService {
 		}
 		return response;
 	}
-	
+
+
 }

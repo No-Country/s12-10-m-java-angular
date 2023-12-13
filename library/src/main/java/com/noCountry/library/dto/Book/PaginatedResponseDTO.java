@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class PaginatedBookResponseDTO<T> {
+public class PaginatedResponseDTO<T> {
 
     private List<T> content;
     private Integer totalPages;

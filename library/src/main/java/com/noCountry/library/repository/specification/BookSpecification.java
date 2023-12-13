@@ -1,8 +1,12 @@
 package com.noCountry.library.repository.specification;
 
+import com.noCountry.library.entities.Author;
 import com.noCountry.library.entities.Book;
+import com.noCountry.library.entities.Editorial;
 import com.noCountry.library.entities.enums.Genre;
 import com.noCountry.library.entities.enums.Language;
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.JoinType;
 import org.springframework.data.jpa.domain.Specification;
 
 import jakarta.persistence.criteria.Predicate;
@@ -23,6 +27,10 @@ public class BookSpecification {
 
             // Almaceno condiciones
             List<Predicate> predicates = new ArrayList<>();
+
+            String searchTextLowerCase = searchText.toLowerCase();
+            Join<Book, Author> authorJoin = root.join("author", JoinType.INNER);
+            Join<Book, Editorial> editorialJoin = root.join("editorial", JoinType.INNER);
 
             if (minPrice != null) {
                 predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("price"), minPrice));
@@ -54,10 +62,42 @@ public class BookSpecification {
                 predicates.add(criteriaBuilder.greaterThan(root.get("quantityAvailable"), 0));
             }
 
+            predicates.add(criteriaBuilder.or(
+                    criteriaBuilder.like(criteriaBuilder.lower(root.get("title")), "%" + searchTextLowerCase + "%"),
+                    criteriaBuilder.like(criteriaBuilder.lower(root.get("description")), "%" + searchTextLowerCase + "%"),
+                    criteriaBuilder.like(criteriaBuilder.lower(authorJoin.get("name")), "%" + searchTextLowerCase + "%"),
+                    criteriaBuilder.like(criteriaBuilder.lower(authorJoin.get("lastName")), "%" + searchTextLowerCase + "%"),
+                    criteriaBuilder.like(criteriaBuilder.lower(authorJoin.get("fullName")), "%" + searchTextLowerCase + "%"),
+                    criteriaBuilder.like(criteriaBuilder.lower(editorialJoin.get("name")), "%" + searchTextLowerCase + "%")
+            ));
+
             // Añadir la condición de estado solo si hay otros criterios de filtro presentes
             Predicate statusPredicate = criteriaBuilder.isTrue(root.get("status"));
 
             return criteriaBuilder.and(statusPredicate, criteriaBuilder.and(predicates.toArray(new Predicate[0])));
+        };
+    }
+
+    public static Specification<Book> filterByText(String searchText) {
+        return (root, query, criteriaBuilder) -> {
+            List<Predicate> predicates = new ArrayList<>();
+
+            if (searchText != null && !searchText.isEmpty()) {
+                String searchTextLowerCase = searchText.toLowerCase();
+                Join<Book, Author> authorJoin = root.join("author", JoinType.INNER);
+                Join<Book, Editorial> editorialJoin = root.join("editorial", JoinType.INNER);
+
+                predicates.add(criteriaBuilder.or(
+                        criteriaBuilder.like(criteriaBuilder.lower(root.get("title")), "%" + searchTextLowerCase + "%"),
+                        criteriaBuilder.like(criteriaBuilder.lower(root.get("description")), "%" + searchTextLowerCase + "%"),
+                        criteriaBuilder.like(criteriaBuilder.lower(authorJoin.get("name")), "%" + searchTextLowerCase + "%"),
+                        criteriaBuilder.like(criteriaBuilder.lower(authorJoin.get("lastName")), "%" + searchTextLowerCase + "%"),
+                        criteriaBuilder.like(criteriaBuilder.lower(authorJoin.get("fullName")), "%" + searchTextLowerCase + "%"),
+                        criteriaBuilder.like(criteriaBuilder.lower(editorialJoin.get("name")), "%" + searchTextLowerCase + "%")
+                ));
+            }
+
+            return criteriaBuilder.or(predicates.toArray(new Predicate[0]));
         };
     }
 
