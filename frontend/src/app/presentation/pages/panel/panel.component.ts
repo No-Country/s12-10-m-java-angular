@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, type OnInit } from '@angular/core';
 import { DashboardComponent } from './layouts/dashboard/dashboard.component';
 import { AdminBooksComponent } from './layouts/admin-books/admin-books.component';
 import { RouterOutlet } from '@angular/router';
+import { SideBarComponent } from '@presentation/components/admin/side-bar/side-bar.component';
 
 @Component({
   selector: 'app-admin-panel',
@@ -12,6 +13,7 @@ import { RouterOutlet } from '@angular/router';
     RouterOutlet,
     DashboardComponent,
     AdminBooksComponent,
+    SideBarComponent,
   ],
   templateUrl: './panel.component.html',
   styleUrl: './panel.component.css',

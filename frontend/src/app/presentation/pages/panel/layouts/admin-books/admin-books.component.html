@@ -1,1 +1,23 @@
-<p>admin-books works!</p>,
+
+<div class="w-full">
+  <admin-page-tab route="admin-book"></admin-page-tab>
+
+<h2 class="title">
+  Book Management
+</h2>
+
+<section>
+  <div class="header-table">
+    <input type="search" placeholder="Search Books..." [(ngModel)]="search">
+    <app-button className="w-full max-w-[140px] min-w-[120px]">
+      Add book
+    </app-button>
+  </div>
+
+  <admin-card titleCard="Book Table">
+    <div class="mt-6">
+      <book-admin-table [bookDataSource]="bookDataSource" [columns]="bookColumns" [searchTerm]="search"></book-admin-table>
+    </div>
+  </admin-card>
+</section>
+</div>

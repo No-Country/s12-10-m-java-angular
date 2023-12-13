@@ -1,5 +1,5 @@
 export interface Book {
-    idBook: number;
+    idBook: number | string;
     title: string;
     price: number;
     pages: number;
@@ -30,6 +30,7 @@ export interface BookFilterProps {
   page: number;
   size: number;
 
+  searchText?: string;
   minPrice?: number;
   maxPrice?: number;
 

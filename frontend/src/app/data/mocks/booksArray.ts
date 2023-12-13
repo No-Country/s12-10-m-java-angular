@@ -141,48 +141,6 @@ export const booksArray: Book[]=[
       description: "a",
       price: 7000
     },
-    // {
-    //   ID: 10,
-    //   img: "../../assets/booksImages/1.jpg",
-    //   name: "Memoir of Vincent Van gogh",
-    //   author: "genre 6",
-    //   price: 500
-    // },
-    // {
-    //   ID: 20,
-    //   img: "../../assets/booksImages/2.jpg",
-    //   name: "Helvetica",
-    //   author: "genre 6",
-    //   price: 500
-    // },
-    // {
-    //   ID: 30,
-    //   img: "../../assets/booksImages/3.jpg",
-    //   name: "Scheveningnen",
-    //   author: "genre 6",
-    //   price: 1000
-    // },
-    // {
-    //   ID: 40,
-    //   img: "../../assets/booksImages/4.jpg",
-    //   name: "The graphic design",
-    //   author: "genre 6",
-    //   price: 7000
-    // },
-    // {
-    //   ID: 50,
-    //   img: "../../assets/booksImages/5.jpg",
-    //   name: "The graphic design",
-    //   author: "genre 6",
-    //   price: 7000
-    // },
-    // {
-    //   ID: 60,
-    //   img: "../../assets/booksImages/6.jpg",
-    //   name: "The graphic design",
-    //   author: "genre 6",
-    //   price: 7000
-    // },
     {
       id: "9",
       image: "../../assets/booksImages/book_1.webp",
