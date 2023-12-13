@@ -8,7 +8,7 @@
     </div>
 
     <error-message [showError]="loginForm.get('email')?.touched && (loginForm.get('email')?.hasError('pattern') || loginForm.get('email')?.hasError('required'))"
-    errorMessage="Write a valid email address" errorClass="text-red-500" />
+    errorMessage="Write a valid email address" errorClass="text-red-500" tooltipMessage="The email is mandatory and must have an @ and a .something."/>
   </div>
 
   <div class="w-full max-w-[366px] h-[97px]">
@@ -20,7 +20,7 @@
     </div>
 
     <error-message [showError]="loginForm.get('password')?.touched && (loginForm.get('password')?.hasError('pattern') || loginForm.get('password')?.hasError('required'))"
-    errorMessage="Write a valid password" errorClass="text-red-500" />
+    errorMessage="Write a valid password" errorClass="text-red-500" [tooltipMessage]="'The password is mandatory, it must have:\n- At least 8 characters.\n- At least one uppercase and one lowercase.\n- At least one number.'" />
 
     <app-link class="w-full flex justify-start" path="/forgot-password" textLink="¿Forgot your password?" className="mt-2 mr-auto justify-start text-left text-[#069150] hover:text-[#15AD67]"></app-link>
   </div>

@@ -25,6 +25,9 @@ import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
         </svg>
       </div>
       {{ errorMessage }}
+      @if(tooltipMessage !== ''){
+      <div class="tooltiptext">{{ tooltipMessage }}</div>
+      }
     </span>
     }
   `,
@@ -33,7 +36,7 @@ import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
       span {
         display: flex;
         align-items: center;
-
+        position: relative;
         margin-block-start: 0.3rem;
         font-size: 0.75rem;
         line-height: 1rem;
@@ -41,6 +44,7 @@ import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 
         word-spacing: 1px;
         letter-spacing: 0.5px;
+        z-index: 999;
       }
 
       .vibrate {
@@ -53,6 +57,33 @@ import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
       }
       .vibrate.active {
         animation-play-state: running;
+      }
+
+      span:hover .tooltiptext {
+        visibility: visible;
+        opacity: 1;
+      }
+
+      .tooltiptext {
+        animation: none;
+        visibility: hidden;
+        width: fit-content;
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        border-radius: 5px;
+        padding: 10px;
+        position: absolute;
+        z-index: 50;
+        top: 125%;
+        left: 0%;
+        opacity: 0;
+        transition-property: opacity, visibility;
+        transition-duration: 0.3s;
+        transition-timing-function: ease;
+        white-space: pre-line;
+        text-align: left;
+        text-wrap: pretty;
       }
 
       @keyframes vibrate-animation {
@@ -82,6 +113,7 @@ import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 export class ErrorMessageComponent implements OnInit {
   @Input({ required: true }) public errorMessage: string = '';
   @Input({ required: true }) public showError: any = false;
+  @Input() public tooltipMessage: string = '';
   @Input() public errorClass: string = '';
 
   constructor() {}
