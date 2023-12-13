@@ -12,7 +12,6 @@ section{
     padding-left: 2%;
     padding-right: 2%;
     margin-bottom: .3%;
-    cursor: pointer;
 }
 .nav-1{
     color:#242221 ;
@@ -102,4 +101,5 @@ td {
     padding: 10px;
     border-radius: 15px;
     display: inline-block;
+    z-index: 100;
   }
