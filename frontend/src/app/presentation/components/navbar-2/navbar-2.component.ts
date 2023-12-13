@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MobileDropdownNavComponent } from "../mobile-dropdown-nav/mobile-dropdown-nav.component";
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-navbar-2',
     standalone: true,
     templateUrl: './navbar-2.component.html',
     styleUrl: './navbar-2.component.css',
-    imports: [CommonModule, RouterLink, MobileDropdownNavComponent],
+    imports: [CommonModule, RouterLink, MobileDropdownNavComponent, FormsModule],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Navbar2Component implements OnInit {
