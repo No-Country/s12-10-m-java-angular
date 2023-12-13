@@ -28,7 +28,7 @@
 
 .dropdown-nav-list-item a:hover{
     color: #33B672;
-    font-weight: bold;
+    font-weight: 600;
     transition-timing-function: ease-in;
 }
 
@@ -40,7 +40,7 @@
 .dropdown-nav-container {
     display: block;
 }
-  
+
 .dropdown-nav-content {
     margin: 25px;
     background-color: #fff;
@@ -59,7 +59,12 @@
     color: #33B672;
     transition-timing-function: ease-in;
 }
-  
+
 .dropdown-nav-list-item:hover .dropdown-content {
     display: block;
+}
+
+ul.dropdown-nav-list li.dropdown-nav-list-item a.active {
+  color: #33B672 !important;
+  font-weight: 600 !important;
 }

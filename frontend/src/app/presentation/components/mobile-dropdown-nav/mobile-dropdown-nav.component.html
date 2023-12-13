@@ -1,7 +1,9 @@
 <div class="dropdown-nav">
   <ul class="dropdown-nav-list">
-    <li class="dropdown-nav-list-item"><a routerLink="">History</a></li>
-    <li class="dropdown-nav-list-item"><a routerLink="">Shop</a></li>
+    <li class="dropdown-nav-list-item"><a routerLink="/" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:
+true}">Home</a></li>
+    <li class="dropdown-nav-list-item"><a routerLink="/shop" [queryParams]="{ search: 'All' }" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:
+true}">Shop</a></li>
     <li class="dropdown-nav-list-item dropdown-nav-container">
       <a (click)="showDropdownList()"> Categories
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -11,16 +13,16 @@
       </a>
       <div class="dropdown-nav-content" *ngIf="showDropdown">
         <!-- Contenido del dropdown -->
-        <a id="categories" routerLink="">Self Help</a>
-        <a id="categories" routerLink="">Comedy</a>
-        <a id="categories" routerLink="">Fantasy</a>
-        <a id="categories" routerLink="">Fiction</a>
-        <a id="categories" routerLink="">History</a>
-        <a id="categories" routerLink="">Horror</a>
-        <a id="categories" routerLink="">Poetry</a>
-        <a id="categories" routerLink="">Police</a>
-        <a id="categories" routerLink="">Romance</a>
-        <a id="categories" routerLink="">Drama</a>
+        <a id="categories" routerLink="/shop" [queryParams]="{ search: 'All', genre: 'Self Help' }">Self Help</a>
+        <a id="categories" routerLink="/shop" [queryParams]="{ search: 'All', genre: 'Comedy' }">Comedy</a>
+        <a id="categories" routerLink="/shop" [queryParams]="{ search: 'All', genre: 'Fantasy' }">Fantasy</a>
+        <a id="categories" routerLink="/shop" [queryParams]="{ search: 'All', genre: 'Fiction' }">Fiction</a>
+        <a id="categories" routerLink="/shop" [queryParams]="{ search: 'All', genre: 'History' }">History</a>
+        <a id="categories" routerLink="/shop" [queryParams]="{ search: 'All', genre: 'Horror' }">Horror</a>
+        <a id="categories" routerLink="/shop" [queryParams]="{ search: 'All', genre: 'Poetry' }">Poetry</a>
+        <a id="categories" routerLink="/shop" [queryParams]="{ search: 'All', genre: 'Police' }">Police</a>
+        <a id="categories" routerLink="/shop" [queryParams]="{ search: 'All', genre: 'Romance' }">Romance</a>
+        <a id="categories" routerLink="/shop" [queryParams]="{ search: 'All', genre: 'Drama' }">Drama</a>
       </div>
     </li>
   </ul>
