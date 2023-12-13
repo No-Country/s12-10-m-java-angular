@@ -2,7 +2,7 @@
     <div class="max-w-8xl px-6  mx-auto  md:px-8">
         <div class="flex flex-wrap -mx-4">
             <div class="w-full mb-8 md:w-1/2 md:mb-2 flex space-x-10">
-                <app-image-responsive [book]="book"></app-image-responsive>
+                <app-image-responsive></app-image-responsive>
                 <div class="hidden md:flex flex-col w-1/8 flex-shrink-0">
                     <div class="p-2 sm:w-4/4 mb-2 bg-[#0000000D] rounded-md">
                         <ng-container *ngFor="let imageUrl of book.urlImages; let i = index">
@@ -12,7 +12,7 @@
                         </ng-container>
                     </div>
                 </div>
-                <div class="sticky w-[75%] top-0 z-50 overflow-hidden bg-[#0000000D] rounded-md mx-auto flex-shrink-0">
+                <div class="sticky w-[80%] top-0 z-50 overflow-hidden bg-[#0000000D] rounded-md mx-auto flex-shrink-0">
                     <div class="relative mb-6 lg:mb-10 lg:h-4/4 bg-[#FFFFFF] rounded-md my-auto flex items-center justify-center h-full w-[60%] mx-auto">
                         <ng-container *ngFor="let imageUrl of book.urlImages; let i = index">
                             <img [src]="selectedImageUrl || imageUrl" alt="" class="object-cover w-full h-auto max-w-[15vw]">

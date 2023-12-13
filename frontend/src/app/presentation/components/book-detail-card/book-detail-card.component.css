@@ -13,15 +13,6 @@
     .hidden, .sticky{
         display: none;
     }
-    .sticky{
-        margin-bottom:3%;
-        width: 90%;
-        margin-right: 0;
-    }
-
-    img{
-        max-width: 35vw;
-    }
 
     .card{
         border: none;
@@ -54,6 +45,6 @@ section{
     cursor: pointer;
 }
 
-img{
+.sticky img{
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15), 0px 8px 12px 6px rgba(0, 0, 0, 0.30);
 }
