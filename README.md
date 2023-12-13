@@ -39,25 +39,18 @@ URL: [Link a books-leaks.netlify.app](https://books-leaks.netlify.app/)
 
 
 ## Construido con 🛠️
-![Javascript](https://img.shields.io/badge/Javascript-F0DB4F?style=for-the-badge&labelColor=black&logo=javascript&logoColor=F0DB4F)
-![Typescript](https://img.shields.io/badge/Typescript-007acc?style=for-the-badge&labelColor=black&logo=typescript&logoColor=007acc)
-![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
-![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
-![VSCode](https://img.shields.io/badge/Visual_Studio-0078d7?style=for-the-badge&logo=visual%20studio&logoColor=white)
-![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
-
-* [Maven](https://maven.apache.org/) - Manejador de dependencias
-
-
+Java [![My Skills](https://skillicons.dev/icons?i=java)](https://skillicons.dev)
+Maven [![My Skills](https://skillicons.dev/icons?i=maven)](https://skillicons.dev)
+Spring boot [![My Skills](https://skillicons.dev/icons?i=spring)](https://skillicons.dev)
+Angular [![My Skills](https://skillicons.dev/icons?i=angular)](https://skillicons.dev)
+HTML [![My Skills](https://skillicons.dev/icons?i=html)](https://skillicons.dev)
+CSS [![My Skills](https://skillicons.dev/icons?i=css)](https://skillicons.dev)
+JavaScript [![My Skills](https://skillicons.dev/icons?i=js)](https://skillicons.dev)
+GitHub [![My Skills](https://skillicons.dev/icons?i=github)](https://skillicons.dev)
 
 ## Comenzando 🚀
 
 _Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
-
-
-
-
 
 **Pre-requisitos 📋**
 
@@ -90,52 +83,31 @@ _Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para 
 
 
 
-Clone the project
 
-```bash
-  git clone https://github.com/No-Country/s12-10-m-java-angular.git
-```
-
-Go to the project directory
-
-```bash
-  cd my-project
-```
-
-Install dependencies
-
-```bash
-  npm install
-```
-
-Start the server
-
-```bash
-  npm run start
-```
 ## Despliegue 📦
+* Front NetLiFy
+* Back Fly.io
+* Base de datos: railway 
 
-_Agrega notas adicionales sobre como hacer deploy_
-
-
-* [ROME](https://rometools.github.io/rome/) - Usado para generar RSS
-
-* ## Versionado 📌
-
-Usamos [SemVer](http://semver.org/) para el versionado... 
-
-   
-## Roadmap
-
-- Additional browser support
-
-- Add more integrations
+ 📌
+  
+## Diagrama UML 
 
 
 
 ## Autores ✒️
+### Back End
+| <img src="https://avatars.githubusercontent.com/u/87383576?v=4" width=50>| <img src="https://avatars.githubusercontent.com/u/127455847?v=4" width=50>| <img src="https://tinyurl.com/marcoslopez2" width=50>  | <img src="https://avatars.githubusercontent.com/u/115900906?v=4" width=50>  |   
+:-:|:-:|:-:|:-:|
+| **Agustín Gómez**  | **Melisa Yunis**  | **Marcos Lopez**  | **Matías Figueroa**  | 
+| <a href="https://github.com/Agustingomez98"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href=""><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a>| <a href="https://github.com/Melisayunis"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="http://www.linkedin.com/in/melisa-yunis"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a>| <a href="https://github.com/marcossic"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/marcos-lopez-dev"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a>| <a href="https://github.com/matifigueroa98"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/matias-nicolas-figueroa/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> |
 
-## 🔗 Links
+
+ 
+
+
+
+🔗 Links
 
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/)
 
