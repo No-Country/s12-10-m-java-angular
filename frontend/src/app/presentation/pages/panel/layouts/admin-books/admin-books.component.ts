@@ -1,10 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, type OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { AdminCardComponent } from '@presentation/components/admin/admin-card/admin-card.component';
-import { AdminTableComponent } from '@presentation/components/admin/admin-table/admin-table.component';
+import { BookAdminTableComponent } from '@presentation/components/admin/book-admin-table/book-admin-table.component';
 import { PageTabComponent } from '@presentation/components/admin/page-tab/page-tab.component';
+import { SideBarComponent } from '@presentation/components/admin/side-bar/side-bar.component';
 import { DefaultButtonComponent } from '@presentation/components/default-button/default-button.component';
-import { AdminTable, BOOK_COLUMN, BOOK_DATA_SOURCE, TableBody, TableColumns } from 'app/data/models/Admin';
+import {  BOOK_COLUMN, BOOK_DATA_SOURCE, TableColumns } from 'app/data/models/Admin';
 import { Book } from 'app/data/models/book';
 
 @Component({
@@ -18,14 +20,14 @@ import { Book } from 'app/data/models/book';
     AdminCardComponent,
     PageTabComponent,
     DefaultButtonComponent,
-    AdminTableComponent,
+    BookAdminTableComponent,
+    FormsModule
   ],
 })
 export class AdminBooksComponent implements OnInit {
   protected bookDataSource: Book[] = BOOK_DATA_SOURCE;
   protected bookColumns: TableColumns[] = BOOK_COLUMN;
-
-  constructor() {
-  }
+  public search: string = '';
+  constructor() {}
   ngOnInit(): void {}
 }

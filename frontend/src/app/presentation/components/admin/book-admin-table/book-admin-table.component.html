@@ -7,9 +7,9 @@
     </tr>
   </thead>
   <tbody>
-    @for(book of bookDataSource | paginate: {
+    @for(book of bookDataSource | filter: this.searchTerm | paginate: {
       id: 'admin-books-pagination',
-      itemsPerPage: 5,
+      itemsPerPage: 7,
       currentPage: currentPage,
       totalItems: bookDataSource.length
     }; track book.idBook){
@@ -45,7 +45,7 @@
     }
   </tbody>
 </table>
-<div class="w-full mb-8 flex justify-end items-center">
+<div class="w-full mt-3 flex justify-end items-center">
       <pagination-controls
       class="book-pagination"
       id="admin-books-pagination"

@@ -1,28 +1,31 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, type OnInit } from '@angular/core';
-import { AdminTable, TableBody, TableColumns } from 'app/data/models/Admin';
+import { FormsModule } from '@angular/forms';
+import { TableColumns } from 'app/data/models/Admin';
 import { Book } from 'app/data/models/book';
+import { FilterPipe } from 'app/data/pipes/filter.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
-  selector: 'admin-table',
+  selector: 'book-admin-table',
   standalone: true,
-  imports: [CommonModule, NgxPaginationModule],
-  templateUrl: './admin-table.component.html',
-  styleUrl: './admin-table.component.css',
+  imports: [CommonModule, NgxPaginationModule, FilterPipe],
+  templateUrl: './book-admin-table.component.html',
+  styleUrl: './book-admin-table.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AdminTableComponent implements OnInit {
+export class BookAdminTableComponent implements OnInit {
   @Input({ required: true }) public columns: TableColumns[] = [
     {},
   ] as TableColumns[];
 
   @Input({ required: true }) public bookDataSource: Book[] = [] as Book[];
+  @Input() public searchTerm: string = '';
   public currentPage: number = 1;
 
   ngOnInit(): void {}
 
-  updatePage(updatePage: number){
+  updatePage(updatePage: number) {
     this.currentPage = updatePage;
   }
 }

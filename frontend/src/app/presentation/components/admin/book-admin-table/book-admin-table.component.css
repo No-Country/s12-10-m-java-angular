@@ -24,11 +24,6 @@ table thead > tr th {
   padding-block: 0.25rem;
 }
 
-table tbody {
-  overflow-y: scroll;
-  height: 400px;
-}
-
 table tbody > tr {
   width: 100%;
   color: #747474;
