@@ -1,4 +1,4 @@
-<h1 align = "center"><img align="center" src="/frontend/src/favicon.ico"> Book Leaks </h1>
+<h1 align = "center"><img align="center" src="https://github.com/No-Country/s12-10-m-java-angular/assets/127913044/a6e06399-b907-4d14-87e6-d8b2ad4a2e18"> Book Leaks </h1>
 
  <h4 align="center">
 🚧 Proyecto en construcción 🚧
@@ -27,28 +27,27 @@ La aplicación está diseñada para ofrecer una experiencia completa y amigable 
 - Establecimiento de Precios: Fijar valores a los libros y mantener un listado claro de precios.
 - Gestión de Ventas: Emitir recibos electrónicos y realizar ajustes en el stock después de cada venta.
 - Análisis de Ventas: Visualización de reportes detallados sobre las ventas por periodos.
-
-### Demo
-(acá va el video o el link a la demo que tenemos que hacer) 
-
-### Acceso al proyecto
-URL: [Link a books-leaks.netlify.app](https://books-leaks.netlify.app/)
-
- ![image](https://github.com/No-Country/s12-10-m-java-angular/assets/127913044/5aa07def-9fbe-4710-9b75-229ac04a04b4)
-
-
-
-## Construido con 🛠️
+### Construido con 🛠️
 Java [![My Skills](https://skillicons.dev/icons?i=java)](https://skillicons.dev)
 Maven [![My Skills](https://skillicons.dev/icons?i=maven)](https://skillicons.dev)
 Spring boot [![My Skills](https://skillicons.dev/icons?i=spring)](https://skillicons.dev)
 Angular [![My Skills](https://skillicons.dev/icons?i=angular)](https://skillicons.dev)
+
 HTML [![My Skills](https://skillicons.dev/icons?i=html)](https://skillicons.dev)
 CSS [![My Skills](https://skillicons.dev/icons?i=css)](https://skillicons.dev)
 JavaScript [![My Skills](https://skillicons.dev/icons?i=js)](https://skillicons.dev)
 GitHub [![My Skills](https://skillicons.dev/icons?i=github)](https://skillicons.dev)
 
-## Comenzando 🚀
+### Demo
+(acá va el video o el link a la demo que tenemos que hacer) 
+
+### Acceso al proyecto
+🔗 Link [books-leaks.netlify.app](https://books-leaks.netlify.app/)
+
+<img align="center" src="https://github.com/No-Country/s12-10-m-java-angular/assets/127913044/5aa07def-9fbe-4710-9b75-229ac04a04b4" width=500> 
+
+
+### Comenzando🚀
 
 _Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
 
@@ -78,38 +77,42 @@ hasta finalizar
 
 _Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo_
 
-
-## Run Locally ![image](https://github.com/No-Country/s12-10-m-java-angular/assets/127913044/465dde77-9134-4d64-a67b-d2ce86ad0393)
-
-
-
-
-## Despliegue 📦
+### Despliegue 📦
 * Front NetLiFy
 * Back Fly.io
 * Base de datos: railway 
 
- 📌
-  
-## Diagrama UML 
+### Autores ✒️
+**📌Back End**
+| <img src="https://avatars.githubusercontent.com/u/87383576?v=4" width=50>| <img src="https://avatars.githubusercontent.com/u/127455847?v=4" width=50>| <img src="https://avatars.githubusercontent.com/u/115900906?v=4" width=50>  |   
+:-:|:-:|:-:|
+| **Agustín Gómez**  | **Melisa Yunis**  | **Matías Figueroa**  | 
+| <a href="https://github.com/Agustingomez98"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href=""><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a>| <a href="https://github.com/Melisayunis"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="http://www.linkedin.com/in/melisa-yunis"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a>| <a href="https://github.com/matifigueroa98"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/matias-nicolas-figueroa/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> |
 
-
-
-## Autores ✒️
-### Back End
-| <img src="https://avatars.githubusercontent.com/u/87383576?v=4" width=50>| <img src="https://avatars.githubusercontent.com/u/127455847?v=4" width=50>| <img src="https://tinyurl.com/marcoslopez2" width=50>  | <img src="https://avatars.githubusercontent.com/u/115900906?v=4" width=50>  |   
+**📌Front End**
+| <img src="https://tinyurl.com/marcoslopez2" width=50>  | <img src="https://avatars.githubusercontent.com/u/122225722?v=4" width=50>| <img src="https://avatars.githubusercontent.com/u/121519705?v=4" width=50>| <img src="https://avatars.githubusercontent.com/u/123486251?v=4" width=50>  |   
 :-:|:-:|:-:|:-:|
-| **Agustín Gómez**  | **Melisa Yunis**  | **Marcos Lopez**  | **Matías Figueroa**  | 
-| <a href="https://github.com/Agustingomez98"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href=""><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a>| <a href="https://github.com/Melisayunis"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="http://www.linkedin.com/in/melisa-yunis"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a>| <a href="https://github.com/marcossic"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/marcos-lopez-dev"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a>| <a href="https://github.com/matifigueroa98"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/matias-nicolas-figueroa/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> |
+| **Marcos López**  | **Agustín Ríos**  | **Lucas Fair**  | **Pablo Gutierrez**  | 
+| <a href="https://github.com/marcossic"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/marcos-lopez-dev"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a>| <a href="https://github.com/AgustinNRios"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/riosagustindev528/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a>| <a href="https://github.com/LucasEsca"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/lucasivanfair/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a>| <a href="https://github.com/Pablo2311"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/pablo-ra%C3%BAl-guti%C3%A9rrez/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> |
+
+**📌Project Manager**
+
+| <img src="https://avatars.githubusercontent.com/u/127913044?v=4" width=50>  |
+:-:|
+| <a href="https://github.com/Ceci-Alsina"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/cecilia-alsina-3670aa207/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a>|
+
+
+
+
+
+
 
 
  
 
 
 
-🔗 Links
 
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/)
 
 
 
