@@ -41,4 +41,10 @@ export class Navbar2Component implements OnInit {
   showDropdown() {
     this.dropdownMenu = !this.dropdownMenu;
   }
+
+  redirectToGenre(genreParam: string) {
+    this.router.navigate(['shop'], {
+      queryParams: { search: genreParam },
+    });
+  }
 }
