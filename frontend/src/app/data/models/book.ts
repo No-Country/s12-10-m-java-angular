@@ -30,6 +30,7 @@ export interface BookFilterProps {
   page: number;
   size: number;
 
+  searchText?: string;
   minPrice?: number;
   maxPrice?: number;
 

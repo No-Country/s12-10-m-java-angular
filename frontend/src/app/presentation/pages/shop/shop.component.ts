@@ -80,10 +80,12 @@ export class ShopComponent implements OnInit, OnDestroy {
 
     this.router.queryParams.subscribe((params) => {
       this.searchTerm = params['search'] as string;
-
       this.filterService.verifySorting(params['sort'] as string);
       this.filterService.verifyGenre(params['genre'] as string);
-      this.filterService.initFilterProps();
+
+      this.filterService.initFilterProps(
+        (this.searchTerm !== undefined && this.searchTerm !== 'All') ? this.searchTerm : ''
+      );
     });
 
     this.destroy$ = new Subject();

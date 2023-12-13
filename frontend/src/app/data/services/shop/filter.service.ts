@@ -34,10 +34,11 @@ export class FilterService {
     this.updateResultList.next(this.props);
   }
 
-  public initFilterProps(): void {
+  public initFilterProps(searchText: string): void {
     const initProps = {
       page: 0,
       size: 9,
+      searchText: searchText,
       orderBy: this.SORT[0].code.startsWith('alpha')
         ? 'alphabetically'
         : this.SORT[0].code,
@@ -57,7 +58,13 @@ export class FilterService {
     this.sortApplied = this.SORT[0];
     this.props = initProps;
 
-    this.updateResultList = new BehaviorSubject<BookFilterProps>(this.props);
+
+
+    if(this.updateResultList !== undefined && this.updateResultList !== null){
+      this.updateResultList.next(this.props);
+    } else {
+      this.updateResultList = new BehaviorSubject<BookFilterProps>(this.props);
+    }
   }
 
   public deleteCacheProps() {
