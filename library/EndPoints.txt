@@ -173,6 +173,13 @@ Response:
 
 
 
+GET     /book/getComments/{bookId}
+Response:
+    PaginatedBookResponseDTO<CommentsDto>
+200 OK
+
+
+
 POST	/book/createBook
 Request:
   BookRequest
@@ -198,6 +205,22 @@ Response:
 	BookResponse
 201 CREATED
 
+
+
+PUT     /book/{id}/vote/{vote}
+Response:
+    BookResponse
+201 CREATED
+
+
+
+
+PUT     /book/addComment
+Request:
+    CommentsDto
+Response:
+    ¿?
+201 CREATED
 
 
 

@@ -1,6 +1,7 @@
 package com.noCountry.library.service.impl;
 
 import com.noCountry.library.dto.Book.*;
+import com.noCountry.library.dto.Comment.CommentDto;
 import com.noCountry.library.entities.Author;
 import com.noCountry.library.entities.Book;
 import com.noCountry.library.entities.Editorial;
@@ -71,7 +72,7 @@ public class BookServiceImpl implements BookService {
         Book book = mapperBooks.bookRequestToBook(bookRequest);
 
         book.setSalesAmount(0);
-        book.setRating(0);
+        book.setRating(0.0);
         book.getUrlImages().add(bookRequest.getInitialImage());
 
         book.setCreationDate(LocalDate.now());
@@ -186,7 +187,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public PaginatedBookResponseDTO<BookResponse> getAllBooks(Integer pageNumber, Integer sizeElement) {
+    public PaginatedResponseDTO<BookResponse> getAllBooks(Integer pageNumber, Integer sizeElement) {
         Pageable page = PageRequest.of(pageNumber, sizeElement);
         Page<Book> pagesBook = bookRepository.findAll(page);
 
@@ -202,7 +203,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public PaginatedBookResponseDTO<BookCardResponse> getAllBooksForCard(Integer pageNumber, Integer sizeElement) {
+    public PaginatedResponseDTO<BookCardResponse> getAllBooksForCard(Integer pageNumber, Integer sizeElement) {
         Pageable page = PageRequest.of(pageNumber, sizeElement);
         Page<Book> pagesBook = bookRepository.findAll(page);
 
@@ -218,7 +219,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public PaginatedBookResponseDTO<BookCardDescription> getAllBooksForCardDescription(Integer pageNumber, Integer sizeElement) {
+    public PaginatedResponseDTO<BookCardDescription> getAllBooksForCardDescription(Integer pageNumber, Integer sizeElement) {
         Pageable page = PageRequest.of(pageNumber, sizeElement);
         Page<Book> pagesBook = bookRepository.findAll(page);
 
@@ -226,10 +227,10 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public PaginatedBookResponseDTO<BookToSearch> getBooksByCriteria(Integer pageNumber, Integer sizeElement,
-                                                                     Double minPrice, Double maxPrice, Integer minPages,
-                                                                     List<String> genres, List<String> languages, String searchText,
-                                                                     Integer searchEvenNotAvailable, String orderBy, String ascOrDesc) {
+    public PaginatedResponseDTO<BookToSearch> getBooksByCriteria(Integer pageNumber, Integer sizeElement,
+                                                                 Double minPrice, Double maxPrice, Integer minPages,
+                                                                 List<String> genres, List<String> languages, String searchText,
+                                                                 Integer searchEvenNotAvailable, String orderBy, String ascOrDesc) {
         List<Genre> genreList = searchListGenres(genres);
         List<Language> languageList = searchListLanguage(languages);
 
@@ -237,6 +238,19 @@ public class BookServiceImpl implements BookService {
                 genreList, languageList, searchText, searchEvenNotAvailable);
 
         Sort sort = getSortFromOrderBy(orderBy, ascOrDesc);
+        Pageable pageable = PageRequest.of(pageNumber, sizeElement, sort);
+        Page<Book> page = bookRepository.findAll(spec, pageable);
+
+        return pagesBookToPagination(page, mapperBooks::listBookToListBookToSearch);
+    }
+
+    @Override
+    public PaginatedResponseDTO<BookToSearch> searchByText(String searchText, Integer pageNumber, Integer sizeElement,
+                                                            String orderBy, String ascOrDesc) {
+
+        Specification<Book> spec = BookSpecification.filterByText(searchText);
+        Sort sort = getSortFromOrderBy(orderBy, ascOrDesc);
+
         Pageable pageable = PageRequest.of(pageNumber, sizeElement, sort);
         Page<Book> page = bookRepository.findAll(spec, pageable);
 
@@ -315,31 +329,42 @@ public class BookServiceImpl implements BookService {
         return mapperBooks.bookToBookResponse(book);
     }
 
+    @Transactional
     @Override
     public BookResponse addVote(String id, Integer vote) {
 
         if (vote <= 0 || vote > 5) {
-            throw new BadRequestException("El voto no puede ser menor a 1 ni amyor a 5.");
+            throw new BadRequestException("El voto no puede ser menor a 1 ni mayor a 5.");
         }
 
         Optional<Book> auxBook = bookRepository.findById(id);
         isEmptyObject(auxBook);
 
         Book book = auxBook.get();
+        bookRepository.asignarRatingABook(id, Double.valueOf(vote));
 
-        /*
-        Consultar cual de las 2 formas vistas para almacenar un rating
-        consideran mejor para que se implemente..
-        1) nuevos atributos
-        1) nueva clase
-         */
+        book.getVoteList().add(vote);
+        book.setRating(averageCalculation(book.getVoteList()));
+        book.setModificationDate(LocalDate.now());
+
+        bookRepository.save(book);
+
+        System.out.println("El voto fue: " + vote);
+        System.out.println("El promedio es: " + book.getRating());
 
         return mapperBooks.bookToBookResponse(book);
     }
 
+    @Override
+    public BookResponse addComment(CommentDto comments) {
+        return null;
+    }
+
+
+
 
     @Override
-    public PaginatedBookResponseDTO<BookToSearch> searchByGenre(String genre, Integer pageNumber, Integer sizeElement) {
+    public PaginatedResponseDTO<BookToSearch> searchByGenre(String genre, Integer pageNumber, Integer sizeElement) {
         Genre genreElement = searchGenre(genre);
 
         if (genreElement == null) {
@@ -357,7 +382,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public PaginatedBookResponseDTO<BookToSearch> searchByTitle(String title, Integer pageNumber, Integer sizeElement) {
+    public PaginatedResponseDTO<BookToSearch> searchByTitle(String title, Integer pageNumber, Integer sizeElement) {
         Pageable page = PageRequest.of(pageNumber, sizeElement);
         Page<Book> pagesBook = bookRepository.findByTitleContaining(title, page);
 
@@ -369,7 +394,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public PaginatedBookResponseDTO<BookToSearch> searchLatestAdded(Integer pageNumber, Integer sizeElement) {
+    public PaginatedResponseDTO<BookToSearch> searchLatestAdded(Integer pageNumber, Integer sizeElement) {
         Pageable page = PageRequest.of(pageNumber, sizeElement);
         Page<Book> pagesBook = bookRepository.findAllByOrderByCreationDateDesc(page);
 
@@ -377,7 +402,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public PaginatedBookResponseDTO<BookToSearch> searchByHighestRating(Integer pageNumber, Integer sizeElement) {
+    public PaginatedResponseDTO<BookToSearch> searchByHighestRating(Integer pageNumber, Integer sizeElement) {
         Pageable page = PageRequest.of(pageNumber, sizeElement);
         Page<Book> pagesBook = bookRepository.findAllByOrderByRatingDesc(page);
 
@@ -385,12 +410,12 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public PaginatedBookResponseDTO<BookToSearch> searchDeletedBooks(Integer pageNumber, Integer sizeElement) {
-        Pageable page = PageRequest.of(pageNumber, sizeElement);
-        Page<Book> pagesBook = bookRepository.findByStatusFalse(page);
-
-        return pagesBookToPagination(pagesBook, mapperBooks::listBookToListBookToSearch);
+    public PaginatedResponseDTO<CommentDto> getCommentsByBookId(String bookId, Integer pageNumber, Integer sizeElement) {
+        return null;
     }
+
+
+
 
 
     private Genre searchGenre(String genre) {
@@ -450,8 +475,8 @@ public class BookServiceImpl implements BookService {
     }
 
 
-    private <T> PaginatedBookResponseDTO<T> pagesBookToPagination(Page<Book> pagesBook, Function<List<Book>, List<T>> mapper) {
-        PaginatedBookResponseDTO<T> bookResponseDTO = new PaginatedBookResponseDTO<>();
+    private <T> PaginatedResponseDTO<T> pagesBookToPagination(Page<Book> pagesBook, Function<List<Book>, List<T>> mapper) {
+        PaginatedResponseDTO<T> bookResponseDTO = new PaginatedResponseDTO<>();
 
         List<Book> bookList = pagesBook.getContent();
 
@@ -485,5 +510,19 @@ public class BookServiceImpl implements BookService {
             return Sort.by(primaryOrder).ascending();
         }
     }
+
+    private Double averageCalculation(List<Integer> voteList) {
+        if (voteList.isEmpty()) {
+            throw new BadRequestException("No hay votos cargados en el libro.");
+        }
+
+        double addition = 0;
+        for (Integer number : voteList) {
+            addition += number;
+        }
+
+        return (addition / voteList.size());
+    }
+
 
 }

@@ -20,6 +20,7 @@ public class Author extends PersistenceObject {
 
 	private String name;
 	private String lastName;
+	private String fullName;
 	private LocalDate birthday;
 	private String nationality;
     private String biography;
