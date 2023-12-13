@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Book, BookDetail } from '../../../data/models/book';
 import { Router, RouterLink } from '@angular/router';
@@ -11,6 +11,7 @@ import { CartService } from 'app/data/services/cart/cart.service';
   selector: 'card-book',
   templateUrl: './card-book.component.html',
   styleUrl: './card-book.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardBookComponent implements OnInit {
   @Input({ required: true }) public book: BookDetail;
@@ -19,8 +20,7 @@ export class CardBookComponent implements OnInit {
   constructor(public cartService: CartService) {
     this.book = {} as BookDetail;
   }
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   addOrRemove() {
     this.onCart

@@ -6,6 +6,7 @@ import { ShopService } from './data/services/shop/shop.service';
 import { BookDetailComponent } from '@presentation/pages/book-detail/book-detail.component';
 import { BooksService } from './data/services/books/books.service';
 import { bookDetailResolver } from './data/guards/BookDetail.resolver';
+import { FilterService } from './data/services/shop/filter.service';
 
 
 export const routes: Routes = [
@@ -42,7 +43,7 @@ export const routes: Routes = [
       import('@presentation/pages/shop/shop.component').then(
         (c) => c.ShopComponent
       ),
-    providers: [ShopService],
+    providers: [ShopService, FilterService],
     data: { preload: true },
   },
   {
@@ -74,6 +75,33 @@ export const routes: Routes = [
     resolve: {
       book: bookDetailResolver,
     },
+  },
+  {
+    path: 'admin',
+    loadComponent: () => import('@presentation/pages/panel/panel.component').then(
+      (c) => c.PanelComponent
+    ),
+    children: [
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+      },
+      {
+        path: 'dashboard',
+        title: 'Books Leaks - Dashboard',
+        loadComponent: () => import('@presentation/pages/panel/layouts/dashboard/dashboard.component').then(
+          (c)=> c.DashboardComponent
+        )
+      },
+      {
+        path: 'books',
+        title: 'Books Leaks - Admin books',
+        loadComponent: () => import('@presentation/pages/panel/layouts/admin-books/admin-books.component').then(
+          (c)=> c.AdminBooksComponent
+        )
+      }
+    ]
   },
   {
     path: '404',

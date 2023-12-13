@@ -14,7 +14,7 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
     role: 'button',
     dir: 'ltr',
   },
-  styleUrl: './default-button.component.css',
+  styles: '',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DefaultButtonComponent implements OnInit {

@@ -3,12 +3,12 @@
   flex-direction: column;
   max-width: 100dvw;
   height: auto;
-  margin-block-start: .2rem;
+  margin-block-start: 0.2rem;
 }
 
 .filter-container {
   width: 100%;
-  border-block-start: 1px solid rgba(0,0,0, .5);
+  border-block-start: 1px solid rgba(0, 0, 0, 0.5);
   padding-block: 0.95rem;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
@@ -76,6 +76,11 @@
   color: #242221;
   font-weight: 500;
 }
+
+.book-pagination ::ng-deep .ngx-pagination .current {
+  background: #33b672;
+}
+
 card-book {
   display: none;
 }

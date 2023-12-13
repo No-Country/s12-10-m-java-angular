@@ -1,10 +1,10 @@
 <section class="modal-filter">
-  <div class="flex justify-between">
+  <div class="flex justify-between relative overflow-hidden">
     <h3>Filter by</h3>
 
-    <button>Clean Filter</button>
+    <button (click)="clean()">Clean Filter</button>
   </div>
-  <ul class="filter-list">
+  <ul class="filter-list overflow-y-auto">
     <li>
       <div class="order-by">
         <div>
@@ -15,13 +15,14 @@
       </div>
 
       <form class="filter-form">
-        @for(sorting of SORTING; track sorting.code){
+        @for(sorting of filterService.SORT; track '2-'+sorting.code){
         <label
           class="custom-radio"
           role="radiogroup"
           aria-label="Radio button to sort the books"
+          for="{{sorting.code}}"
         >
-          <input type="radio" name="orderBy" value="{{ sorting.code }}" />
+          <input type="radio" id="{{sorting.code}}" name="orderBy" value="{{ sorting.code }}" [checked]="filterService.sortApplied.code === sorting.code" (change)="filterService.updateSort(sorting)" />
           <span class="checkmark"></span>
           {{ sorting.field }}
         </label>
@@ -36,17 +37,19 @@
       </div>
 
       <form class="filter-form" role="list">
-        @for(genre of GENRES; track '1-'+genre){
+        @for(genre of filterService.GENRES; track '1-'+genre){
         <label
           class="custom-checkbox"
           for="3-{{ genre.valueOf() }}"
           role="checkbox"
-          [attr.aria-label]="'Fillter by ' + genre.valueOf()"
+          [class.active]="filterService.genreApplied.includes(genre)" [attr.aria-label]="'Fillter by '+genre.valueOf()" [attr.aria-cheked]="filterService.genreApplied.includes(genre)"
         >
           <input
             type="checkbox"
             id="3-{{ genre }}"
             name="3-{{ genre.valueOf() }}"
+            (change)="applyGenre(genre)"
+            [checked]="filterService.genreApplied.includes(genre)"
           />
           <span class="checkmark"></span>
           {{ genre.valueOf() }}
@@ -57,18 +60,19 @@
 
     <li>
       <div class="flex justify-between">
-        <h4>Price</h4>
+        <h4>Prices</h4>
         <span>-</span>
       </div>
 
       <form
         class="filter-form max-w-[410px] !flex-row items-center justify-around gap-x-2 mx-2"
+        [formGroup]="filterForm"
       >
         <div class="input-group">
           <input
             type="number"
             id="mobile-min-price"
-            formControlName="min-price"
+            formControlName="minPrice"
             for="mobile-min-price"
             autocomplete="off"
             name="mobile-min-price"
@@ -77,6 +81,7 @@
             aria-label="Min price"
             autocapitalize="none"
             dir="ltr"
+            (keydown.enter)="applyPrice()"
           />
           <label for="mobile-min-price" class="form-label">Min price</label>
         </div>
@@ -85,7 +90,7 @@
           <input
             type="number"
             id="mobile-max-price"
-            formControlName="max-price"
+            formControlName="maxPrice"
             for="mobile-max-price"
             autocomplete="off"
             name="mobile-max-price"
@@ -94,6 +99,7 @@
             aria-label="Min price"
             autocapitalize="none"
             dir="ltr"
+            (keydown.enter)="applyPrice()"
           />
           <label for="mobile-max-price" class="form-label">Max price</label>
         </div>
@@ -102,11 +108,41 @@
 
     <li>
       <div class="flex justify-between">
-        <h4>Languages</h4>
+        <h4>Pages</h4>
         <span>-</span>
       </div>
-      <form class="filter-form" role="list">
-        @for(language of LANGUAGES; track '2-'+language){
+
+      <form
+        class="filter-form max-w-[410px] !flex-row items-center justify-around gap-x-2 mx-2"
+        [formGroup]="filterForm"
+      >
+        <div class="input-group !aspect-[9/2]">
+          <input
+            type="number"
+            id="mobile-min-page"
+            formControlName="minPage"
+            for="mobile-min-page"
+            autocomplete="off"
+            name="mobile-min-page"
+            class="form-input !max-w-[255px] !ml-5 !py-2"
+            aria-disabled="false"
+            aria-label="Min page"
+            autocapitalize="none"
+            dir="ltr"
+            (keydown.enter)="applyPageNumber()"
+          />
+          <label for="mobile-min-page" class="form-label top-[.7rem] max-[400px]:!top-[-.45rem] max-[490px]:!left-[1.95rem]">Min page number</label>
+        </div>
+      </form>
+    </li>
+
+    <li>
+      <div class="flex justify-between">
+        <h4>Select languages</h4>
+        <span>-</span>
+      </div>
+      <form class="filter-form" role="list" >
+        @for(language of filterService.LANGUAGES; track '2-'+language){
         <label
           class="custom-checkbox"
           for="2-{{ language.valueOf() }}"
@@ -117,6 +153,8 @@
             type="checkbox"
             id="2-{{ language }}"
             name="2-{{ language.valueOf() }}"
+            [attr.aria-cheked]="filterService.languageApplied.includes(language)"
+            (change)="applyLanguage(language)"
           />
           <span class="checkmark"></span>
           {{ language.valueOf() }}
@@ -136,12 +174,13 @@
           class="custom-checkbox"
           for="mobile-out-of-stock"
           role="checkbox"
-          aria-label="Fillter by include out of stock"
+          aria-label="When selecting, out-of-stock books were added"
         >
           <input
             type="checkbox"
             id="mobile-out-of-stock"
             name="mobile-out-of-stock"
+            (change)="applyOutOfStock()"
           />
           <span class="checkmark"></span>
           Include out of stock
