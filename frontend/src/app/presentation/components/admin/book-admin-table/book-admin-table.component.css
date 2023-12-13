@@ -32,7 +32,7 @@ table tbody > tr {
   border-bottom: 1px solid #e9edf7;
 }
 
-table tbody > tr:mot(.empty):hover {
+table tbody > tr:not(.empty):hover {
   background-color: #f1f1f1;
 }
 table tbody > tr td {
@@ -92,9 +92,4 @@ table tbody .empty::after {
   100% {
     transform: scale(1);
   }
-}
-
-
-tbody tr.empty + d {
-
 }
