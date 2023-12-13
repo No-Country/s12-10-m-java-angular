@@ -464,4 +464,8 @@ export const BOOK_COLUMN: TableColumns[] = [
     column: 'quantity',
     id: 'admin-bookheader-9',
   },
+  {
+    column: 'actions',
+    id: 'admin-bookheader-10'
+  }
 ];
