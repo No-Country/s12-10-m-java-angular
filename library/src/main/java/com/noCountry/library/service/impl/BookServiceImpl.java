@@ -301,9 +301,8 @@ public class BookServiceImpl implements BookService {
         return mapperBooks.bookToBookResponse(book);
     }
 
-    @Transactional
     @Override
-    public BookResponse subtractAmount(String id, Integer amount) {
+    public BookResponse subtractAmount(String id, Integer amount) throws BadRequestException {
         Optional<Book> auxBook = bookRepository.findById(id);
         isEmptyObject(auxBook);
 

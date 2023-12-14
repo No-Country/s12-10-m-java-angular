@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import com.noCountry.library.dto.Bill.BillResponseDto;
 import com.noCountry.library.entities.BillItem;
 import com.noCountry.library.entities.Book;
+import com.noCountry.library.entities.enums.PaymentMethods;
 import com.noCountry.library.repository.BookRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import com.noCountry.library.exception.BadRequestException;
 import com.noCountry.library.repository.BillRepository;
 import com.noCountry.library.repository.UserRepository;
 import com.noCountry.library.service.BillService;
+import org.springframework.web.client.HttpServerErrorException;
 
 @Service
 public class BillServiceImpl implements BillService {
@@ -60,24 +62,43 @@ public class BillServiceImpl implements BillService {
         try {
             if (userOptional.isPresent()) {
                 Bill bill = new Bill();
-
                 bill.setStatus(Boolean.TRUE);
                 bill.setDateBill(LocalDate.now());
+                PaymentMethods pay = getPaymentMethod(billRequestDto.getPaymentMethods());
+                bill.setPaymentMethods(pay);
+
+                if (billRequestDto.getDelivery()) {
+                    bill.setDelivery(Boolean.TRUE);
+                    bill.setAddress(billRequestDto.getAddress());
+                } else {
+                    bill.setDelivery(Boolean.FALSE);
+                }
+
                 bill.setUser(userOptional.get());
                 bill.setBillItems(getBillItems(billRequestDto.getBookQuantities()));
-
-				double totalPrice = addingPrices(bill.getBillItems());
+                double totalPrice = addingPrices(bill.getBillItems());
                 bill.setTotalPrice(totalPrice);
 
                 // Actualizar la cantidad de libros vendidos
                 sellBooks(bill.getBillItems());
+                System.out.println(" Despues de llamar a books..");
+
+                System.out.println("Bill TO STRING deberia de venir ahora... ");
+                System.out.println("Bill: " + bill.toString());
+                System.out.println("Despues de imprimir el bill TO STRING");
+
+                System.out.println("Bill deberia de venir ahora... ");
+                System.out.println(bill);
+                System.out.println("Despues de imprimir el bill");
 
                 billRepository.save(bill);
-
+                System.out.println("Despues de guardar en el repo");
                 sendEmailBill(bill);
-
+                System.out.println("despues de enviar el email");
                 response = ResponseEntity.ok("Bill added successfully");
             }
+        } catch (BadRequestException e) {
+            throw new BadRequestException(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
             response = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to add bill");
@@ -113,6 +134,15 @@ public class BillServiceImpl implements BillService {
         return response;
     }
 
+
+    private PaymentMethods getPaymentMethod(String payment) {
+        for (PaymentMethods element: PaymentMethods.values()) {
+            if (element.name().equalsIgnoreCase(payment)) {
+                return element;
+            }
+        }
+        throw new BadRequestException("No existe el emtodo de pago:  " + payment);
+    }
 
 	private List<BillItem> getBillItems(Map<String, Integer> billItems) {
         List<BillItem> listBooks = new ArrayList<>();
@@ -168,8 +198,17 @@ public class BillServiceImpl implements BillService {
         templateModel.put("paymentDate", bill.getDateBill());
         templateModel.put("invoiceNumber", bill.getId());
         templateModel.put("subTotal", bill.getTotalPrice());
-        templateModel.put("items", new ArrayList<Map<String, Object>>());
+        templateModel.put("delivery", bill.getDelivery());
+        templateModel.put("paymentMethods", bill.getPaymentMethods().name());
 
+        if (bill.getAddress() == null) {
+            // retiro en local, enviamos direccion de la libreria
+            templateModel.put("address", "Av Book 123");
+        } else {
+            templateModel.put("address", bill.getAddress());
+        }
+
+        templateModel.put("items", new ArrayList<Map<String, Object>>());
         List<Map<String, Object>> items = (List<Map<String, Object>>) templateModel.get("items");
 
         for (BillItem item: bill.getBillItems()) {
@@ -187,4 +226,5 @@ public class BillServiceImpl implements BillService {
         String subject = "Thanks for your purchase!";
         emailService.sendSaleEmailWithPDFBill(bill.getUser().getEmail(), subject, templateModel);
     }
+
 }
