@@ -48,3 +48,28 @@ section{
 .sticky img{
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15), 0px 8px 12px 6px rgba(0, 0, 0, 0.30);
 }
+
+button.up-button.take-out {
+    border-width: 1px;
+    border-color: #DFDFDF;
+    border-style: double;
+    cursor: default;
+    background-color: #DFDFDF;
+    color: #fff;
+    box-shadow: none;
+    outline: none;
+  }
+  
+  button.up-button.take-out:hover, button.up-button.take-out:hover {
+    box-shadow: none;
+  }
+  
+  .up-button.activate svg {
+    transition-property: scale;
+    transition-duration: 400ms;
+    transition-timing-function: ease;
+  }
+  
+  .up-button.activate:hover svg{
+    scale: 1.175;
+  }

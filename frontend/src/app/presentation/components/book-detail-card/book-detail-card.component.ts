@@ -4,6 +4,7 @@ import { DefaultButtonComponent } from '../default-button/default-button.compone
 import { Book } from 'app/data/models/book';
 import { ImageResponsiveComponent } from './image-responsive/image-responsive.component';
 import { Router } from '@angular/router';
+import { CartService } from 'app/data/services/cart/cart.service';
 
 @Component({
   selector: 'app-detail-card',
@@ -21,9 +22,26 @@ import { Router } from '@angular/router';
 export class BookDetailCardComponent {
   selectedImageUrl: string = '';
   @Input() public book: Book;
+  @Input() public onCart: boolean = false;
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+    private cartService: CartService) {
     this.book = {} as Book;
+  }
+
+  addOrRemove() {
+    const bookToAdd = {
+      id: this.book.idBook,
+      name: this.book.title,
+      image: this.book.urlImages[0],
+      author: this.book.author,
+      price: this.book.price,
+      description: this.book.description
+    };
+    this.onCart
+      ? this.cartService.deleteBookToCart(bookToAdd)
+      : this.cartService.addBookToCart(bookToAdd);
+    this.onCart = !this.onCart;
   }
 
   isNumberId(ID: string | number) {

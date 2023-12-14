@@ -2,7 +2,7 @@
     <div class="max-w-8xl px-6  mx-auto  md:px-8">
         <div class="flex flex-wrap -mx-4">
             <div class="w-full mb-8 md:w-1/2 md:mb-2 flex space-x-10">
-                <app-image-responsive></app-image-responsive>
+                <app-image-responsive [book]="book"></app-image-responsive>
                 <div class="hidden md:flex flex-col w-1/8 flex-shrink-0">
                     <div class="p-2 sm:w-4/4 mb-2 bg-[#0000000D] rounded-md">
                         <ng-container *ngFor="let imageUrl of book.urlImages; let i = index">
@@ -61,7 +61,8 @@
                         Buy Now
                     </button>
                         <button
-                            class="flex items-center p-2 justify-center w-full lg:w-2/5 mb-3 font-bold rounded-[15px] bg-[#33B67233] text-[#33B672B2] border border-[#33B672B2] hover:border-[#242221]  hover:text-[#242221]">
+                            class="up-button flex items-center p-2 justify-center w-full lg:w-2/5 mb-3 font-bold rounded-[15px] bg-[#33B67233] text-[#33B672B2] border border-[#33B672B2] hover:border-[#242221]  hover:text-[#242221]"
+                            (click)="addOrRemove()" [ngClass]="{'take-out': onCart===true, 'activate': onCart===false}">
                             Add to cart
                         </button>
                     </div>
