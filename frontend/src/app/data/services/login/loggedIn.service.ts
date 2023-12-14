@@ -9,29 +9,30 @@ export class LoggedInService extends SignalsStoreService<AuthResponse> {
 
     effect(() => {
       const state = this.state.asReadonly();
-      (state().id !== undefined && state().id !== null)
-        ? localStorage.setItem('id', state().id)
-        : localStorage.removeItem('id');
+      console.log("Is enter ?");
+      state().id !== undefined && state().id !== null
+        ? sessionStorage.setItem('id', state().id)
+        : sessionStorage.removeItem('id');
 
       (state().name !== undefined)
-        ? localStorage.setItem('name', state().name)
-        : localStorage.removeItem('name');
+        ? sessionStorage.setItem('name', state().name)
+        : sessionStorage.removeItem('name');
 
-      (state().lastName !== undefined)
-        ? localStorage.setItem('lastName', state().lastName)
-        : localStorage.removeItem('lastName');
+      state().lastName !== undefined
+        ? sessionStorage.setItem('lastName', state().lastName)
+        : sessionStorage.removeItem('lastName');
 
-      (state().email !== undefined)
-        ? localStorage.setItem('email', state().email)
-        : localStorage.removeItem('email');
+      state().email !== undefined
+        ? sessionStorage.setItem('email', state().email)
+        : sessionStorage.removeItem('email');
 
-      (state().role !== undefined)
-        ? localStorage.setItem('role', state().role)
-        : localStorage.removeItem('role');
+      state().role !== undefined
+        ? sessionStorage.setItem('role', state().role)
+        : sessionStorage.removeItem('role');
 
-      (state().jwt !== undefined)
-        ? localStorage.setItem('jwt', state().jwt)
-        : localStorage.removeItem('jwt');
+      state().jwt !== undefined
+        ? localStorage.setItem('token', state().jwt)
+        : localStorage.removeItem('token');
     });
   }
 
@@ -40,11 +41,11 @@ export class LoggedInService extends SignalsStoreService<AuthResponse> {
   }
   // <<
   public verifyLogin() {
-    const id = localStorage.getItem('id');
-    const name = localStorage.getItem('name');
-    const lastName = localStorage.getItem('lastName');
-    const email = localStorage.getItem('email');
-    const role = localStorage.getItem('role');
+    const id = sessionStorage.getItem('id');
+    const name = sessionStorage.getItem('name');
+    const lastName = sessionStorage.getItem('lastName');
+    const email = sessionStorage.getItem('email');
+    const role = sessionStorage.getItem('role');
     const token = localStorage.getItem('token');
 
     this.setState({
