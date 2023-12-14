@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ChangeDetectorRef  } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Book, BookDetail } from '../../../data/models/book';
 import { RouterLink } from '@angular/router';
@@ -30,9 +30,11 @@ export class CartCardComponent {
     quantity: number;
   }>();
   $Event: any;
+  oldQuantity!: number;
 
-  constructor(public cartService: CartService) {
+  constructor(public cartService: CartService, private cdRef: ChangeDetectorRef) {
     this.bookOfCard = {} as { book: BookDetail; quantity: number };
+    this.oldQuantity = this.bookOfCard.quantity
   }
 
   isNumberId(ID: string | number) {
@@ -40,7 +42,9 @@ export class CartCardComponent {
   }
 
   decreaseQuantity() {
-    this.bookOfCard.quantity = this.bookOfCard.quantity - 1;
+    if(this.bookOfCard.quantity > 1){
+      this.bookOfCard.quantity = this.bookOfCard.quantity - 1;
+    }
   }
 
   increaseQuantity() {
@@ -48,8 +52,21 @@ export class CartCardComponent {
   }
 
   onNumeroChange(bookOfCard: { book: BookDetail; quantity: number }) {
-    this.cartService.changeQuantityTo(bookOfCard);
-    console.log(bookOfCard.book.name, bookOfCard.quantity);
-    this.bookWithNewQuantity.emit(bookOfCard);
+
+    if(bookOfCard.quantity>0 && Number.isInteger(bookOfCard.quantity) ){
+      this.cartService.changeQuantityTo(bookOfCard);
+      console.log(bookOfCard.book.name, bookOfCard.quantity);
+      this.bookWithNewQuantity.emit(bookOfCard);
+      this.oldQuantity=this.bookOfCard.quantity;
+      console.log('oldq',this.oldQuantity)
+    }
+    else{
+    }
+
+  }
+
+  onBlur(){
+    this.bookOfCard.quantity=this.oldQuantity;
+    this.cdRef.detectChanges();
   }
 }

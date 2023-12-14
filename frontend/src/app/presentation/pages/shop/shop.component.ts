@@ -39,6 +39,7 @@ import { ShopFilterMobileComponent } from '@presentation/components/shop-filters
 import { FilterService } from 'app/data/services/shop/filter.service';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { CartService } from 'app/data/services/cart/cart.service';
 
 @Component({
   standalone: true,
@@ -75,7 +76,9 @@ export class ShopComponent implements OnInit, OnDestroy {
 
   protected openMobileFilter: boolean = false;
 
-  constructor(private injector: Injector) {
+  protected booksWithOnCart: (BookDetail & { onCart: boolean })[]=[];
+
+  constructor(private injector: Injector, private cartService: CartService) {
     this.loading = signal(false);
 
     this.router.queryParams.subscribe((params) => {
@@ -89,6 +92,9 @@ export class ShopComponent implements OnInit, OnDestroy {
     });
 
     this.destroy$ = new Subject();
+
+
+    
   }
 
   ngOnDestroy(): void {
@@ -121,6 +127,17 @@ export class ShopComponent implements OnInit, OnDestroy {
             },
           });
       });
+
+      effect(() => {
+        const booksState = this.books().content;
+        const BooksOnCart: BookDetail[]=this.cartService.bringCartOfService();
+        if(booksState !== undefined){
+          this.booksWithOnCart = booksState.map(book => {
+            let onCart = BooksOnCart.some(cartBook => cartBook.id === book.id);
+            return { ...book, onCart };
+          });
+        }
+      },{injector: this.injector});
   }
 
   getBooks() {

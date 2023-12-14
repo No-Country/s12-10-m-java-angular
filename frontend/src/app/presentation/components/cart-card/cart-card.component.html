@@ -39,7 +39,7 @@
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M0.5 2C0.5 1.60218 0.658036 1.22064 0.93934 0.93934C1.22064 0.658036 1.60218 0.5 2 0.5H14C14.3978 0.5 14.7794 0.658036 15.0607 0.93934C15.342 1.22064 15.5 1.60218 15.5 2C15.5 2.39782 15.342 2.77936 15.0607 3.06066C14.7794 3.34196 14.3978 3.5 14 3.5H2C1.60218 3.5 1.22064 3.34196 0.93934 3.06066C0.658036 2.77936 0.5 2.39782 0.5 2Z" fill="#222324"/>
                     </svg>
                 </button>
-                <input [(ngModel)]="bookOfCard.quantity" (ngModelChange)="onNumeroChange(this.bookOfCard)" class="outline-[#33B672] text-center text-3xl font-bold font mx-1 rounded-[5px] w-[90px] h-[30px]" type="number">
+                <input [(ngModel)]="bookOfCard.quantity" (ngModelChange)="onNumeroChange(this.bookOfCard)" (blur)="onBlur()" class="outline-[#33B672] text-center text-3xl font-bold font mx-1 rounded-[5px] w-[90px] h-[30px]" type="number">
                 <button (click)="increaseQuantity()" (click)="onNumeroChange(this.bookOfCard)" class="bg-[#33B672] w-[30px] rounded-[5px] h-[30px] flex justify-center items-center">
 
                     <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
