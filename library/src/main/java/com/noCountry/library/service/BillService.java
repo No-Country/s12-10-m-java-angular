@@ -2,15 +2,17 @@ package com.noCountry.library.service;
 
 import java.util.List;
 
+import com.noCountry.library.dto.Bill.BillResponseDto;
 import org.springframework.http.ResponseEntity;
 
-import com.noCountry.library.dto.Bill.BillDto;
+import com.noCountry.library.dto.Bill.BillRequestDto;
 
 public interface BillService {
 
-	ResponseEntity<String> generateBill(BillDto billDto);
+	ResponseEntity<String> generateBill(BillRequestDto billRequestDto);
 
-	ResponseEntity<String> logicalDeletionBill(String id);
+	ResponseEntity<String> logicalDeletionBill(Long id);
 
-	List<BillDto> getAll();
+	List<BillResponseDto> getAll();
+
 }
