@@ -2,17 +2,13 @@ package com.noCountry.library.controller;
 
 import java.util.List;
 
+import com.noCountry.library.dto.Bill.BillResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.noCountry.library.dto.Bill.BillDto;
+import com.noCountry.library.dto.Bill.BillRequestDto;
 import com.noCountry.library.service.impl.BillServiceImpl;
 
 @RestController
@@ -21,18 +17,20 @@ public class BillController {
 	@Autowired
 	private BillServiceImpl service;
 
-	@PostMapping("/save")
-	public ResponseEntity<String> save(@RequestBody BillDto bill) {
+	@PostMapping(path = "/save")
+	public ResponseEntity<String> save(@RequestBody BillRequestDto bill) {
+
 		return service.generateBill(bill);
 	}
 	
 	@GetMapping("/list")
-	public List<BillDto> getAll() {
+	public List<BillResponseDto> getAll() {
 		return service.getAll();
 	}
 
 	@PutMapping("/delete/{id}")
-	public ResponseEntity<String> delete(@PathVariable String id) {
+	public ResponseEntity<String> delete(@PathVariable Long id) {
 		return service.logicalDeletionBill(id);
 	}
+
 }
