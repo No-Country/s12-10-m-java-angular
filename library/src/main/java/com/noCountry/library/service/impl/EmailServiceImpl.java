@@ -108,7 +108,7 @@ public class EmailServiceImpl implements EmailService {
             messageHelper.setSubject(subject);
 
             // Procesar la plantilla Thymeleaf
-            String emailBody = processTemplate("bill-template.html", templateModel);
+            String emailBody = processTemplate("invoice-template.html", templateModel);
             messageHelper.setText(emailBody, true);
 
             // Generar el PDF a partir de la plantilla HTML
