@@ -6,56 +6,27 @@ import { AuthResponse } from 'app/data/models/AuthResponse';
 export class LoggedInService extends SignalsStoreService<AuthResponse> {
   constructor() {
     super({} as AuthResponse);
-
-    effect(() => {
-      const state = this.state.asReadonly();
-      console.log("Is enter ?");
-      state().id !== undefined && state().id !== null
-        ? sessionStorage.setItem('id', state().id)
-        : sessionStorage.removeItem('id');
-
-      (state().name !== undefined)
-        ? sessionStorage.setItem('name', state().name)
-        : sessionStorage.removeItem('name');
-
-      state().lastName !== undefined
-        ? sessionStorage.setItem('lastName', state().lastName)
-        : sessionStorage.removeItem('lastName');
-
-      state().email !== undefined
-        ? sessionStorage.setItem('email', state().email)
-        : sessionStorage.removeItem('email');
-
-      state().role !== undefined
-        ? sessionStorage.setItem('role', state().role)
-        : sessionStorage.removeItem('role');
-
-      state().jwt !== undefined
-        ? localStorage.setItem('token', state().jwt)
-        : localStorage.removeItem('token');
-    });
   }
 
   public setLogin(values: AuthResponse) {
-    this.setState(values);
+    sessionStorage.setItem("id", values.id);
+    sessionStorage.setItem('name', values.name);
+    sessionStorage.setItem('lastName', values.lastName);
+    sessionStorage.setItem('email', values.email);
+    sessionStorage.setItem('role', values.role);
+    localStorage.setItem('token', values.jwt);
   }
+
   // <<
   public verifyLogin() {
-    const id = sessionStorage.getItem('id');
-    const name = sessionStorage.getItem('name');
-    const lastName = sessionStorage.getItem('lastName');
-    const email = sessionStorage.getItem('email');
-    const role = sessionStorage.getItem('role');
+    const { id, name, lastName, email, role } = sessionStorage;
     const token = localStorage.getItem('token');
 
-    this.setState({
-      id: id as string,
-      name: name as string,
-      lastName: lastName as string,
-      email: email as string,
-      role: role as string,
-      jwt: token as string,
-    } as AuthResponse);
+    if (token && id && name && lastName && email && role) {
+      // . . . Verificar Login
+
+      //. . . Renovar Login o redirijir a Login
+    }
   }
 
   public updateId(updatedId: string) {
@@ -63,7 +34,13 @@ export class LoggedInService extends SignalsStoreService<AuthResponse> {
   }
 
   public logOut() {
-    this.setState({});
-    location.reload();
+    sessionStorage.removeItem('id');
+    sessionStorage.removeItem('name');
+    sessionStorage.removeItem('lastName');
+    sessionStorage.removeItem('email');
+    sessionStorage.removeItem('role');
+    localStorage.removeItem('token');
+
+    setTimeout(()=> location.reload(), 200);
   }
 }

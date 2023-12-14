@@ -1,6 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, type OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  type OnInit,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Genre, Language } from 'app/data/models/book';
 import { FilterService } from 'app/data/services/shop/filter.service';
 
@@ -24,7 +34,36 @@ export class ShopFilterMobileComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.filterForm.valueChanges.subscribe((values) => {
+      if (
+        values.minPrice === null &&
+        this.filterService.props.minPrice !== undefined &&
+        this.filterService.props.minPrice !== null &&
+        this.filterService.props.minPrice !== 0
+      ) {
+        this.filterService.updatePrices(undefined, values.maxPrice);
+      }
+
+      if (
+        values.maxPrice === null &&
+        this.filterService.props.maxPrice !== undefined &&
+        this.filterService.props.maxPrice !== null &&
+        this.filterService.props.minPrice !== 0
+      ) {
+        this.filterService.updatePrices(values.minPrice, undefined);
+      }
+
+      if (
+        values.minPage === null &&
+        this.filterService.props.minPage !== undefined &&
+        this.filterService.props.minPage !== null &&
+        this.filterService.props.minPage !== 0
+      ) {
+        this.filterService.updateMinPageNumber(0);
+      }
+    });
+  }
 
   applyGenre(genre: Genre) {
     this.filterService.updateGenre(genre);
@@ -50,12 +89,12 @@ export class ShopFilterMobileComponent implements OnInit {
     this.filterService.updateOutOfStock();
   }
 
-  clean(){
+  clean() {
     this.filterForm.reset();
     this.filterService.cleanFilters();
   }
 
-  test(){
-    alert("Probar test");
+  test() {
+    alert('Probar test');
   }
 }
