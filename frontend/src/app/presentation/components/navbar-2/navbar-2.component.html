@@ -100,17 +100,16 @@
           </svg>
         </a>
         <div class="dropdown-content">
-          <!-- Contenido del dropdown -->
-          <a (click)="redirectToGenre('Self Help')">Self Help</a>
-          <a (click)="redirectToGenre('Comedy')">Comedy</a>
-          <a (click)="redirectToGenre('Fantasy')">Fantasy</a>
-          <a (click)="redirectToGenre('Fiction')">Fiction</a>
-          <a (click)="redirectToGenre('History')">History</a>
-          <a (click)="redirectToGenre('Horror')">Horror</a>
-          <a (click)="redirectToGenre('Poetry')">Poetry</a>
-          <a (click)="redirectToGenre('Police')">Police</a>
-          <a (click)="redirectToGenre('Romance')">Romance</a>
-          <a (click)="redirectToGenre('Drama')">Drama</a>
+        <a id="categories" routerLink="/shop" [queryParams]="{ search: 'All', genre: 'Self Help' }">Self Help</a>
+        <a id="categories" routerLink="/shop" [queryParams]="{ search: 'All', genre: 'Comedy' }">Comedy</a>
+        <a id="categories" routerLink="/shop" [queryParams]="{ search: 'All', genre: 'Fantasy' }">Fantasy</a>
+        <a id="categories" routerLink="/shop" [queryParams]="{ search: 'All', genre: 'Fiction' }">Fiction</a>
+        <a id="categories" routerLink="/shop" [queryParams]="{ search: 'All', genre: 'History' }">History</a>
+        <a id="categories" routerLink="/shop" [queryParams]="{ search: 'All', genre: 'Horror' }">Horror</a>
+        <a id="categories" routerLink="/shop" [queryParams]="{ search: 'All', genre: 'Poetry' }">Poetry</a>
+        <a id="categories" routerLink="/shop" [queryParams]="{ search: 'All', genre: 'Police' }">Police</a>
+        <a id="categories" routerLink="/shop" [queryParams]="{ search: 'All', genre: 'Romance' }">Romance</a>
+        <a id="categories" routerLink="/shop" [queryParams]="{ search: 'All', genre: 'Drama' }">Drama</a>
         </div>
       </li>
       <li class="navbar-w-list-item"><a routerLink="">History</a></li>
