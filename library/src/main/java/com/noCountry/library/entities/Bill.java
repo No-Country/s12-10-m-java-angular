@@ -4,13 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,13 +17,18 @@ import lombok.NoArgsConstructor;
 public class Bill {
 
 	@Id
-	private String id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	private Boolean status;
+	private Double totalPrice;
+	private LocalDate dateBill;
+
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<Book> books = new ArrayList<>();
-	private Double totalPrice;
-	private LocalDate dateBill;
+
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "bill_id", referencedColumnName = "id")
+	private List<BillItem> billItems = new ArrayList<>();
+
 }

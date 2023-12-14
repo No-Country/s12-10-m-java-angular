@@ -141,11 +141,18 @@ Response:
 
 
 
-GET 	/book/searchGenre/{genre}?page=0&size=5
+GET 	/book/searchGenre/{genre}?page=0&size=5&orderBy={}&ascOrDesc={}
 Response:
 	PaginatedBookResponseDTO<BookToSearch>
 200 OK
 
+
+
+
+GET 	/book/searchText/{text}?page=0&size=5
+Response:
+	PaginatedBookResponseDTO<BookToSearch>
+200 OK
 
 
 
@@ -217,7 +224,7 @@ Response:
 
 PUT     /book/addComment
 Request:
-    CommentsDto
+    CommentDto
 Response:
     ¿?
 201 CREATED
@@ -323,5 +330,58 @@ DELETE	/editorial/{id}
 200 OK
 
 
+        Author
+
+
+
+
+        Bill
+
+POST        /bill/save
+Request:
+    BillRequestDto
+Response:
+    String (mensajito de todo ok)
+201 CREATED
+
+
+
+GET         /bill/list
+Response:
+    List<BillResponseDto>
+200 OK
+
+
+
+DELETE      /bill/delete/{id}
+Response:
+    200 OK
+
+
+
+
+BillRequestDto {
+    String                  userId;
+    Map<String, Integer>    bookQuantities;
+    // <IdBook, Quantities>
+}
+Ejemplo:
+{
+  "userId": "usuario123",
+  "bookQuantities": {
+    "libroId1": 5,
+    "libroId2": 1,
+    "libroId3": 3
+  }
+}
+
+
+BillResponseDto {
+     Long id;
+     Double totalPrice;
+     LocalDate dateBill;
+     String userId;
+     Map<String, Integer> billItems;
+}
 
 
