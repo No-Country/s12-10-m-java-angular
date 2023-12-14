@@ -13,6 +13,9 @@ import java.util.Map;
 
 @Component
 public class MapperBill {
+
+
+
 	
 	public BillResponseDto billToBillResponseDto(Bill bill) {
 		String userId = bill.getUser().getId();
@@ -21,6 +24,9 @@ public class MapperBill {
 		billDto.setId(bill.getId());
 		billDto.setTotalPrice(bill.getTotalPrice());
 		billDto.setDateBill(bill.getDateBill());
+		billDto.setPaymentMethods(bill.getPaymentMethods().name());
+		billDto.setAddress(bill.getAddress());
+		billDto.setDelivery(bill.getDelivery());
 		billDto.setUserId(userId);
 		billDto.setBillItems(billItemsToMap(bill.getBillItems()));
 

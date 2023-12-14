@@ -361,13 +361,19 @@ Response:
 
 
 BillRequestDto {
-    String                  userId;
+    String          userId;
+    Boolean         delivery;            -> true si es envio a domicilio
+    String          paymentMethods;      -> CASH, DEBIT, CREDIT
+    String          address;             -> si no es envio a domicilio, se envia null
     Map<String, Integer>    bookQuantities;
     // <IdBook, Quantities>
 }
 Ejemplo:
 {
   "userId": "usuario123",
+  "delivery": true,
+  "paymentMethods": "debit",
+  "address": "Av siempreviva 123",
   "bookQuantities": {
     "libroId1": 5,
     "libroId2": 1,
@@ -380,6 +386,9 @@ BillResponseDto {
      Long id;
      Double totalPrice;
      LocalDate dateBill;
+     String paymentMethods;
+     String address;
+     Boolean delivery;
      String userId;
      Map<String, Integer> billItems;
 }
