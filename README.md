@@ -80,7 +80,7 @@ _Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para 
 ### Despliegue 📦
 <img src=https://github.com/No-Country/s12-10-m-java-angular/assets/127913044/4ed308b4-2add-4402-8b4d-7d89f53a7e41 width=150> <img src=https://www.vectorlogo.zone/logos/flyio/flyio-ar21.svg width=100> <img src=https://railway.app/brand/logotype-light.png width=150>
 
-## Equipo S10-14-FT-Java-Angular
+## Equipo S12-10-m-Java-Angular
 ### Integrantes
 **📌Back End**
 | <img src="https://avatars.githubusercontent.com/u/87383576?v=4" width=50>| <img src="https://avatars.githubusercontent.com/u/127455847?v=4" width=50>| <img src="https://avatars.githubusercontent.com/u/115900906?v=4" width=50>  |   
