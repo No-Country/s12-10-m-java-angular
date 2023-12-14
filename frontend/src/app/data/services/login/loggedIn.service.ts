@@ -3,9 +3,8 @@ import { SignalsStoreService } from '../store/StoreSignals.service';
 import { AuthResponse } from 'app/data/models/AuthResponse';
 
 @Injectable({ providedIn: 'root' })
-export class LoggedInService extends SignalsStoreService<AuthResponse> {
+export class LoggedInService {
   constructor() {
-    super({} as AuthResponse);
   }
 
   public setLogin(values: AuthResponse) {
@@ -30,7 +29,7 @@ export class LoggedInService extends SignalsStoreService<AuthResponse> {
   }
 
   public updateId(updatedId: string) {
-    this.set('id', updatedId);
+    sessionStorage.setItem('id', updatedId);
   }
 
   public logOut() {

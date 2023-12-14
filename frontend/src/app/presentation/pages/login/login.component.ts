@@ -48,7 +48,6 @@ export class LoginComponent implements OnInit, OnDestroy  {
     const loginObserver = {
       response: {} as AuthResponse,
       next(loginResponse: AuthResponse): void {
-        loginResponse.isActive = true;
         loggedInState.setLogin(loginResponse);
         this.response = loginResponse;
         toast.success("Success", "Logging in.", 5);
