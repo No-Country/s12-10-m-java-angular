@@ -1,0 +1,92 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  display: flex;
+  flex-direction: column; /* Añadido para organizar verticalmente */
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  min-width: 23vw;
+  aspect-ratio: 1.8/1;
+}
+
+.title {
+  margin-bottom: 2%; 
+}
+
+label{
+  display: flex;
+}
+input{
+  color: #585858;
+}
+label p{
+  color: #585858;
+}
+.envio{
+  margin-bottom: 3%;
+}
+.input-domicilio{
+  margin: 3%;
+  align-items: center;
+}
+
+.input-domicilio input{
+  border: solid 2px #585858;
+  border-radius: 15px;
+  padding-left: 2%;
+}
+.input-domicilio input:focus{
+  border: solid 2px #33B672;
+  border-radius: 15px;
+}
+.form-group{
+  padding-top: 2vh;
+  display: flex;
+  justify-content:center;
+}
+button{
+  background-color: #33B672;
+  color: #fff;
+  min-width: 12vw;
+  border-radius: 15px;
+  padding: 2%;
+}
+
+button:hover{
+  background-color: #33B672;
+  color: #000000;
+}
+
+.title{
+  font-size: 4vh;
+  font-weight: 500;
+}
+
+input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #33B672;
+  outline: none;
+  margin-right: 5px;
+}
+
+input[type="radio"]:checked {
+  background-color: #33B672;
+  border-color: #000; 
+}

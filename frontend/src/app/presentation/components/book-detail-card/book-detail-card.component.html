@@ -12,7 +12,7 @@
                         </ng-container>
                     </div>
                 </div>
-                <div class="sticky w-[80%] top-0 z-50 overflow-hidden bg-[#0000000D] rounded-md mx-auto flex-shrink-0">
+                <div class="sticky w-[80%] top-0 overflow-hidden bg-[#0000000D] rounded-md mx-auto flex-shrink-0">
                     <div class="relative mb-6 lg:mb-10 lg:h-4/4 bg-[#FFFFFF] rounded-md my-auto flex items-center justify-center h-full w-[60%] mx-auto">
                         <ng-container *ngFor="let imageUrl of book.urlImages; let i = index">
                             <img [src]="selectedImageUrl || imageUrl" alt="" class="object-cover w-full h-auto max-w-[15vw]">
@@ -57,7 +57,8 @@
                     </div>
                     <div class="flex flex-wrap items-center gap-4">
                         <button
-                        class="w-full p-2 lg:w-2/5 mb-3 font-bold rounded-[15px] bg-[#33B672] text-[#FFFFFF] border hover:border-[#242221] hover:text-[#242221]">
+                        class="w-full p-2 lg:w-2/5 mb-3 font-bold rounded-[15px] bg-[#33B672] text-[#FFFFFF] border hover:border-[#242221] hover:text-[#242221]"
+                        (click)="abrirModal()">
                         Buy Now
                     </button>
                         <button
@@ -71,3 +72,8 @@
         </div>
     </div>
 </section>
+
+<modal-buy *ngIf="modalAbierto"></modal-buy>
+<button class="close-button" *ngIf="modalAbierto" (click)="cerrarModal()"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23" fill="none">
+    <path d="M23 2.31643L20.6836 0L11.5 9.18357L2.31643 0L0 2.31643L9.18357 11.5L0 20.6836L2.31643 23L11.5 13.8164L20.6836 23L23 20.6836L13.8164 11.5L23 2.31643Z" fill="black"/>
+  </svg></button>

@@ -1,0 +1,37 @@
+<div class="modal-overlay">
+    <div class="modal">
+      <div class="title">
+        <h2>Formulario de Compra</h2>
+      </div>
+      <form>
+        <div class="envio">
+          <label>
+            <input type="radio" name="opcion" value="retiro" (change)="mostrarInputDomicilio = false"> <p>Retiro en local</p>
+          </label>
+          <label>
+            <input type="radio" name="opcion" value="envio" (change)="mostrarInputDomicilio = true"> <p>Envío a domicilio</p>
+          </label>
+        </div>
+        <div class="input-domicilio">
+          <label *ngIf="mostrarInputDomicilio">
+            <p>Domicilio:</p>
+            <input type="text" name="domicilio">
+          </label>
+        </div>
+        <div class="pago">
+          <label>
+            <input type="radio" name="metodoPago" value="efectivo"> <p>Efectivo</p>
+          </label>
+          <label>
+            <input type="radio" name="metodoPago" value="credito"> <p>Crédito</p>
+          </label>
+          <label>
+            <input type="radio" name="metodoPago" value="debito"> <p>Débito</p>
+          </label>
+        </div>
+        <div class="form-group">
+          <button (click)="guardar()">Confirmar Compra</button>
+        </div>
+      </form>
+    </div>
+  </div>

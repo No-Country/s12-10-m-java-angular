@@ -5,6 +5,7 @@ import { Book } from 'app/data/models/book';
 import { ImageResponsiveComponent } from './image-responsive/image-responsive.component';
 import { Router } from '@angular/router';
 import { CartService } from 'app/data/services/cart/cart.service';
+import { ModalBuyComponent } from '../modal-buy/modal-buy.component';
 
 @Component({
   selector: 'app-detail-card',
@@ -14,6 +15,7 @@ import { CartService } from 'app/data/services/cart/cart.service';
     DefaultButtonComponent,
     NgOptimizedImage,
     ImageResponsiveComponent,
+    ModalBuyComponent
   ],
   templateUrl: './book-detail-card.component.html',
   styleUrl: './book-detail-card.component.css',
@@ -23,6 +25,7 @@ export class BookDetailCardComponent {
   selectedImageUrl: string = '';
   @Input() public book: Book;
   @Input() public onCart: boolean = false;
+  modalAbierto: boolean = false;
 
   constructor(private router: Router,
     private cartService: CartService) {
@@ -63,5 +66,13 @@ export class BookDetailCardComponent {
     this.router.navigate(['shop'], {
       queryParams: { search: this.book.author },
     });
+  }
+
+  abrirModal() {
+    this.modalAbierto = true;
+  }
+
+  cerrarModal() {
+    this.modalAbierto = false;
   }
 }
