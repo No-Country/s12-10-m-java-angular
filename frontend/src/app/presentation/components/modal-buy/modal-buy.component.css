@@ -21,18 +21,18 @@
   aspect-ratio: 1.8/1;
 }
 
-.title {
-  margin-bottom: 2%; 
-}
-
-label{
+label,
+.envio,
+.pago{
   display: flex;
+  justify-content: space-around;
 }
 input{
   color: #585858;
 }
 label p{
   color: #585858;
+  padding-bottom: 1%;
 }
 .envio{
   margin-bottom: 3%;
@@ -72,6 +72,7 @@ button:hover{
 .title{
   font-size: 4vh;
   font-weight: 500;
+  margin-bottom: 2%; 
 }
 
 input[type="radio"] {
@@ -89,4 +90,15 @@ input[type="radio"] {
 input[type="radio"]:checked {
   background-color: #33B672;
   border-color: #000; 
+}
+h3{
+  padding-bottom: 2%;
+  font-size: 2vh;
+  font-weight: 400;
+}
+
+.bottom-text{
+  font-size: 1.2vh;
+  color: #33B672;
+  margin-top: 3%;
 }

@@ -6,6 +6,7 @@ import { ImageResponsiveComponent } from './image-responsive/image-responsive.co
 import { Router } from '@angular/router';
 import { CartService } from 'app/data/services/cart/cart.service';
 import { ModalBuyComponent } from '../modal-buy/modal-buy.component';
+import { LoggedInService } from 'app/data/services/login/loggedIn.service';
 
 @Component({
   selector: 'app-detail-card',
@@ -28,23 +29,28 @@ export class BookDetailCardComponent {
   modalAbierto: boolean = false;
 
   constructor(private router: Router,
-    private cartService: CartService) {
+    private cartService: CartService,
+    private loggedInService: LoggedInService) {
     this.book = {} as Book;
   }
 
   addOrRemove() {
-    const bookToAdd = {
-      id: this.book.idBook,
-      name: this.book.title,
-      image: this.book.urlImages[0],
-      author: this.book.author,
-      price: this.book.price,
-      description: this.book.description
-    };
-    this.onCart
-      ? this.cartService.deleteBookToCart(bookToAdd)
-      : this.cartService.addBookToCart(bookToAdd);
-    this.onCart = !this.onCart;
+    if (this.loggedInService.isLoggedIn()) {
+      const bookToAdd = {
+        id: this.book.idBook,
+        name: this.book.title,
+        image: this.book.urlImages[0],
+        author: this.book.author,
+        price: this.book.price,
+        description: this.book.description
+      };
+      this.onCart
+        ? this.cartService.deleteBookToCart(bookToAdd)
+        : this.cartService.addBookToCart(bookToAdd);
+      this.onCart = !this.onCart;
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 
   isNumberId(ID: string | number) {
@@ -69,7 +75,11 @@ export class BookDetailCardComponent {
   }
 
   abrirModal() {
-    this.modalAbierto = true;
+    if (this.loggedInService.isLoggedIn()) {
+      this.modalAbierto = true;
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 
   cerrarModal() {

@@ -65,4 +65,9 @@ export class LoggedInService extends SignalsStoreService<AuthResponse> {
     this.setState({});
     location.reload();
   }
+
+  public isLoggedIn(): boolean {
+    const state = this.state.asReadonly();
+    return state().id !== undefined && state().id !== null;
+  }
 }
