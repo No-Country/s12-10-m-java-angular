@@ -1,24 +1,24 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BillRequestDto, BillResponseDto } from 'app/data/models/Bills';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BillsService {
-  private baseUrl = 'https://librarync1.fly.dev/api/v1/api/bill';
+  private Url = 'https://librarync1.fly.dev/api/v1';
 
   constructor(private http: HttpClient) {}
 
-  saveBill(billRequest: BillRequestDto): Observable<string> {
-    return this.http.post<string>(`${this.baseUrl}/save`, billRequest);
+  public saveBill(billRequest: BillRequestDto): Observable<any>{
+    return this.http.post<any>(`${this.Url}/bill/save`, billRequest);
   }
 
-  getBillList(): Observable<BillResponseDto[]> {
-    return this.http.get<BillResponseDto[]>(`${this.baseUrl}/list`);
+  getBills(): Observable<BillResponseDto[]> {
+    return this.http.get<BillResponseDto[]>(`${this.Url}/bill/list`);
   }
-
   deleteBill(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/delete/${id}`);
+    return this.http.delete<void>(`${this.Url}/bill/delete/${id}`);
   }
 }

@@ -26,7 +26,7 @@ export class BookDetailCardComponent {
   selectedImageUrl: string = '';
   @Input() public book: Book;
   @Input() public onCart: boolean = false;
-  modalAbierto: boolean = false;
+  
 
   constructor(private router: Router,
     private cartService: CartService,
@@ -74,15 +74,24 @@ export class BookDetailCardComponent {
     });
   }
 
-  abrirModal() {
+  Buy() {
     if (this.loggedInService.isLoggedIn()) {
-      this.modalAbierto = true;
+      const bookToAdd = {
+        id: this.book.idBook,
+        name: this.book.title,
+        image: this.book.urlImages[0],
+        author: this.book.author,
+        price: this.book.price,
+        description: this.book.description
+      };
+      this.onCart
+        ? this.cartService.deleteBookToCart(bookToAdd)
+        : this.cartService.addBookToCart(bookToAdd);
+      this.onCart = !this.onCart;
+      this.router.navigate(['/cart']);
     } else {
       this.router.navigate(['/login']);
     }
   }
 
-  cerrarModal() {
-    this.modalAbierto = false;
-  }
 }

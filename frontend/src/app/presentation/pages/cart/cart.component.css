@@ -73,3 +73,17 @@
         justify-items: center;
     }
 }
+
+
+.close-button {
+  position: fixed;
+  z-index: 201;
+  top: 10px;
+  right: 10px;
+  background-color: #fff;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px 10px;
+}

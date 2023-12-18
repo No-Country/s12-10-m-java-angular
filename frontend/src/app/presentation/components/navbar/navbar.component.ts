@@ -12,11 +12,17 @@ import { LoggedInService } from 'app/data/services/login/loggedIn.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarComponent implements OnInit {
-  private readonly loggedInState: LoggedInService = inject(LoggedInService);
-  protected readonly token = this.loggedInState.select('jwt');
-  protected readonly name = this.loggedInState.select('name');
+  protected readonly loggedInState: LoggedInService = inject(LoggedInService);
+  protected token: string = '';
+  protected name: string = '';
 
-  constructor(protected loggeIn: LoggedInService) {}
+  constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const token = localStorage.getItem("token");
+    const name = sessionStorage.getItem('name');
+    this.token = token !== null ? token : '';
+    this.name = name !== null ? name : '';
+}
+
 }

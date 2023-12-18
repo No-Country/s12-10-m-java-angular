@@ -3,71 +3,50 @@ import { SignalsStoreService } from '../store/StoreSignals.service';
 import { AuthResponse } from 'app/data/models/AuthResponse';
 
 @Injectable({ providedIn: 'root' })
-export class LoggedInService extends SignalsStoreService<AuthResponse> {
+export class LoggedInService {
   constructor() {
-    super({} as AuthResponse);
-
-    effect(() => {
-      const state = this.state.asReadonly();
-      (state().id !== undefined && state().id !== null)
-        ? localStorage.setItem('id', state().id)
-        : localStorage.removeItem('id');
-
-      (state().name !== undefined)
-        ? localStorage.setItem('name', state().name)
-        : localStorage.removeItem('name');
-
-      (state().lastName !== undefined)
-        ? localStorage.setItem('lastName', state().lastName)
-        : localStorage.removeItem('lastName');
-
-      (state().email !== undefined)
-        ? localStorage.setItem('email', state().email)
-        : localStorage.removeItem('email');
-
-      (state().role !== undefined)
-        ? localStorage.setItem('role', state().role)
-        : localStorage.removeItem('role');
-
-      (state().jwt !== undefined)
-        ? localStorage.setItem('jwt', state().jwt)
-        : localStorage.removeItem('jwt');
-    });
   }
 
   public setLogin(values: AuthResponse) {
-    this.setState(values);
+    sessionStorage.setItem("id", values.id);
+    sessionStorage.setItem('name', values.name);
+    sessionStorage.setItem('lastName', values.lastName);
+    sessionStorage.setItem('email', values.email);
+    sessionStorage.setItem('role', values.role);
+    localStorage.setItem('token', values.jwt);
   }
-  // <<
+
+  // 
   public verifyLogin() {
-    const id = localStorage.getItem('id');
-    const name = localStorage.getItem('name');
-    const lastName = localStorage.getItem('lastName');
-    const email = localStorage.getItem('email');
-    const role = localStorage.getItem('role');
+    const { id, name, lastName, email, role } = sessionStorage;
     const token = localStorage.getItem('token');
 
-    this.setState({
-      id: id as string,
-      name: name as string,
-      lastName: lastName as string,
-      email: email as string,
-      role: role as string,
-      jwt: token as string,
-    } as AuthResponse);
+    if (token && id && name && lastName && email && role) {
+      // . . . Verificar Login
+
+      //. . . Renovar Login o redirijir a Login
+    }
   }
 
   public updateId(updatedId: string) {
-    this.set('id', updatedId);
+    sessionStorage.setItem('id', updatedId);
   }
 
   public logOut() {
-    this.setState({});
-    location.reload();
+    sessionStorage.removeItem('id');
+    sessionStorage.removeItem('name');
+    sessionStorage.removeItem('lastName');
+    sessionStorage.removeItem('email');
+    sessionStorage.removeItem('role');
+    localStorage.removeItem('token');
+
+    setTimeout(()=> location.reload(), 200);
   }
 
   public isLoggedIn(): boolean {
-    const state = this.state.asReadonly();
-    return state().id !== undefined && state().id !== null;
+    const id = sessionStorage.getItem('id');
+    return id !== null && id !== undefined;
   }
+  
+  
 }
