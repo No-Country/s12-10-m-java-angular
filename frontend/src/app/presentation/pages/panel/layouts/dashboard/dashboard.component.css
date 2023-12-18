@@ -1,0 +1,46 @@
+.dashboard {
+    padding: 20px;
+}
+
+.dashboard-title {
+    margin-top: 10px;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.dashboard-cards {
+    margin: 25px 0 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.dashboard-cards ::ng-deep .admin-card h3 {
+    font-size: 23px !important;
+}
+
+.dashboard-cards-titles {
+    font-size: 22px;
+    margin-bottom: 2px;
+}
+
+.dashboard-cards-subtitles {
+    font-size: 12px;
+}
+
+.dashboard-cards-container {
+    width: 275px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dashboard-cards-container-button {
+    height: 45px;
+    width: 60px;
+    border-radius: 5px;
+    background-color: rgba(51, 182, 114, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
