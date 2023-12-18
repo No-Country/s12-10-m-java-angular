@@ -1,41 +1,45 @@
-import { Injectable } from '@angular/core';
+import { Injectable, effect } from '@angular/core';
 import { SignalsStoreService } from '../store/StoreSignals.service';
 import { AuthResponse } from 'app/data/models/AuthResponse';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class LoggedInService extends SignalsStoreService<AuthResponse>{
-
-  constructor() { 
-    super({} as AuthResponse);
+@Injectable({ providedIn: 'root' })
+export class LoggedInService {
+  constructor() {
   }
 
-  public setLogin(values: AuthResponse){
-    localStorage.setItem("id", !values.id ? "" : values.id);
-    localStorage.setItem("name", values.name);
-    localStorage.setItem("lastName", values.lastName);
-    localStorage.setItem("email", values.email);
-    localStorage.setItem("role", values.role);
-    localStorage.setItem("token", values.jwt);
-
-    this.setState(values);
+  public setLogin(values: AuthResponse) {
+    sessionStorage.setItem("id", values.id);
+    sessionStorage.setItem('name', values.name);
+    sessionStorage.setItem('lastName', values.lastName);
+    sessionStorage.setItem('email', values.email);
+    sessionStorage.setItem('role', values.role);
+    localStorage.setItem('token', values.jwt);
   }
 
-  public updateId(updatedId: string){
-    this.set("id", updatedId);
+  // <<
+  public verifyLogin() {
+    const { id, name, lastName, email, role } = sessionStorage;
+    const token = localStorage.getItem('token');
+
+    if (token && id && name && lastName && email && role) {
+      // . . . Verificar Login
+
+      //. . . Renovar Login o redirijir a Login
+    }
   }
 
-  public logOut(){
-    localStorage.removeItem("id");
-    localStorage.removeItem("name");
-    localStorage.removeItem("lastName");
-    localStorage.removeItem("email");
-    localStorage.removeItem("role");
-    localStorage.removeItem("token");
-
-    this.setState({} as AuthResponse);
+  public updateId(updatedId: string) {
+    sessionStorage.setItem('id', updatedId);
   }
 
+  public logOut() {
+    sessionStorage.removeItem('id');
+    sessionStorage.removeItem('name');
+    sessionStorage.removeItem('lastName');
+    sessionStorage.removeItem('email');
+    sessionStorage.removeItem('role');
+    localStorage.removeItem('token');
 
+    setTimeout(()=> location.reload(), 200);
+  }
 }

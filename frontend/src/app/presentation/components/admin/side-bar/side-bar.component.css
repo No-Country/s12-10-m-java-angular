@@ -1,0 +1,79 @@
+aside {
+  display: block;
+  min-height: 100vh;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+aside > div {
+  @apply fixed top-0 left-0 h-full overflow-x-hidden overflow-y-auto md:translate-x-0;
+
+  transition-property: opacity, box-shadow, transform, translate, width;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  transform-origin: left;
+  background: linear-gradient(180deg, #18b66c 41.76%, #0b8648 99.85%);
+  padding-inline: 1.4rem;
+}
+
+aside header {
+  margin-block-start: 2rem;
+  margin-block-end: 3rem;
+}
+
+header a.logo {
+  color: #fff;
+  font-weight: 700;
+  font-size: 2.15rem;
+}
+
+nav.main-bar {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.5rem;
+}
+
+nav.main-bar a {
+  @apply text-white font-medium text-base bg-transparent box-border flex gap-x-6 items-center justify-start;
+  border-radius: 0.9375rem;
+  padding-block: 10px;
+  padding-inline: 14px;
+  opacity: 0.85;
+
+  transition-property: opacity, color, background;
+  transition-duration: .2s;
+  transition-timing-function: ease-in;
+}
+
+nav.main-bar a svg {
+  fill-opacity: 0.85;
+  fill: #fff;
+
+  transition-property: fill-opacity;
+  transition-duration: .2s;
+  transition-timing-function: ease;
+}
+
+nav.main-bar a:hover {
+  background: #ffffff2e;
+  opacity: 1;
+}
+nav.main-bar a:hover svg {
+  fill-opacity: 1;
+}
+
+nav.main-bar a.active {
+  color: #201f1f;
+  font-weight: 600;
+  background-color: #fff;
+  opacity: 1;
+  fill: #18b66c;
+}
+
+nav.main-bar a.active svg {
+  fill: #18b66c;
+  fill-opacity: 1;
+}

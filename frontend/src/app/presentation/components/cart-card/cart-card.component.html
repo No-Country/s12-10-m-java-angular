@@ -1,0 +1,57 @@
+<article #cardBook class="card-book" [id]="bookOfCard.book.id" >
+
+    <button (click)="deleteBook.emit(bookOfCard.book)" class="absolute top-2 end-2 ">
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 50 50" fill="none">
+            <path d="M49 25C49 38.2548 38.2548 49 25 49C11.7452 49 1 38.2548 1 25C1 11.7452 11.7452 1 25 1C38.2548 1 49 11.7452 49 25Z" fill="white"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M0 25C0 11.1975 11.1975 0 25 0C38.8025 0 50 11.1975 50 25C50 38.8025 38.8025 50 25 50C11.1975 50 0 38.8025 0 25ZM25 3.84615C13.3217 3.84615 3.84615 13.3217 3.84615 25C3.84615 36.6783 13.3217 46.1538 25 46.1538C36.6783 46.1538 46.1538 36.6783 46.1538 25C46.1538 13.3217 36.6783 3.84615 25 3.84615Z" fill="#FF4F4F"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M16.5272 16.5272C17.2302 15.8243 18.3698 15.8243 19.0728 16.5272L25 22.4544L30.9272 16.5272C31.6302 15.8243 32.7698 15.8243 33.4728 16.5272C34.1757 17.2302 34.1757 18.3698 33.4728 19.0728L27.5456 25L33.4728 30.9272C34.1757 31.6302 34.1757 32.7698 33.4728 33.4728C32.7698 34.1757 31.6302 34.1757 30.9272 33.4728L25 27.5456L19.0728 33.4728C18.3698 34.1757 17.2302 34.1757 16.5272 33.4728C15.8243 32.7698 15.8243 31.6302 16.5272 30.9272L22.4544 25L16.5272 19.0728C15.8243 18.3698 15.8243 17.2302 16.5272 16.5272Z" fill="#FF4F4F"/>
+        </svg>
+    </button>
+
+
+    <section class="img-wrapper" routerLink="/" >
+        <a class="img-container"><!--[ngClass]="{'blur-md': isNumberId(bookOfCard.book.id)}"-->
+            <img [ngSrc]="bookOfCard.book.image" fill priority alt="Front of men&#039;s Basic Tee in black.">
+        </a>
+    </section>
+
+
+    <section class="content-info">
+        <h2 [title]="bookOfCard.book.name">
+            <a class="" routerLink="/">
+                {{ bookOfCard.book.name }}
+            </a>
+        </h2>
+
+        <p>{{ bookOfCard.book.author }}</p>
+
+        <div class="w-full flex justify-between items-center">
+            <p class="mt-2 price text-[#242221] cursor-pointer">
+                <a class="" routerLink="/" >
+                    ${{ bookOfCard.book.price }}
+                </a>
+            </p>
+
+            <div class="flex my-3 min-[554px]:justify-center items-center">
+                <button (click)="decreaseQuantity()" (click)="onNumeroChange(this.bookOfCard)" class="bg-[#ffffff] rounded-[5px] w-[30px] h-[30px] flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="4" viewBox="0 0 16 4" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M0.5 2C0.5 1.60218 0.658036 1.22064 0.93934 0.93934C1.22064 0.658036 1.60218 0.5 2 0.5H14C14.3978 0.5 14.7794 0.658036 15.0607 0.93934C15.342 1.22064 15.5 1.60218 15.5 2C15.5 2.39782 15.342 2.77936 15.0607 3.06066C14.7794 3.34196 14.3978 3.5 14 3.5H2C1.60218 3.5 1.22064 3.34196 0.93934 3.06066C0.658036 2.77936 0.5 2.39782 0.5 2Z" fill="#222324"/>
+                    </svg>
+                </button>
+                <input [(ngModel)]="bookOfCard.quantity" (ngModelChange)="onNumeroChange(this.bookOfCard)" (blur)="onBlur()" class="outline-[#33B672] text-center text-3xl font-bold font mx-1 rounded-[5px] w-[90px] h-[30px]" type="number">
+                <button (click)="increaseQuantity()" (click)="onNumeroChange(this.bookOfCard)" class="bg-[#33B672] w-[30px] rounded-[5px] h-[30px] flex justify-center items-center">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                        <path d="M6.97801 15.8263V0.550049H10.0175V15.8263H6.97801ZM0.865234 9.70227V6.66283H16.1415V9.70227H0.865234Z" fill="white"/>
+                    </svg>
+                </button>
+            </div>
+
+        </div>
+
+
+
+    </section>
+</article>
+

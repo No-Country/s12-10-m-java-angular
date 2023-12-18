@@ -3,7 +3,7 @@
     height: 170px;
     aspect-ratio: 2/1;
     position: relative;
-    z-index: 20;
+    z-index: 10;
     box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.12);
     border-bottom-left-radius: 0.9375rem;
     border-bottom-right-radius: 0.9375rem;
@@ -73,7 +73,7 @@
     transition-timing-function: ease;
     transition-property: color;
 
-    font-size: 1rem;  
+    font-size: 1rem;
     cursor: pointer;
 
     min-height: 20px;
@@ -115,6 +115,32 @@
     color: oklch(57.71% 0.144 154.06);
 }
 
+
+button.up-button.take-out {
+  border-width: 1px;
+  border-color: #DFDFDF;
+  border-style: double;
+  cursor: default;
+  background-color: #DFDFDF;
+  color: #fff;
+  box-shadow: none;
+  outline: none;
+}
+
+button.up-button.take-out:hover, button.up-button.take-out:hover {
+  box-shadow: none;
+}
+
+.up-button.activate svg {
+  transition-property: scale;
+  transition-duration: 400ms;
+  transition-timing-function: ease;
+}
+
+.up-button.activate:hover svg{
+  scale: 1.175;
+}
+
 @media only screen and (min-width: 450px) {
     .card-book {
         width: 130px;
@@ -124,7 +150,7 @@
 
     .card-book .img-wrapper .img-container {
         width: 80px;
-       
+
     }
 
     .card-book .img-wrapper  {
@@ -138,7 +164,7 @@
     }
 
     .card-book .content-info h2 {
-        font-size: 2.7dvw;  
+        font-size: 2.7dvw;
     }
 
     .card-book .content-info p {
@@ -183,7 +209,7 @@
     }
     .card-book .content-info h2 {
         font-size: 1.25rem;
- 
+
     }
     .card-book .content-info p {
         margin-block-start: .25rem;

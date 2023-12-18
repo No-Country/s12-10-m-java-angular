@@ -1,0 +1,25 @@
+section{
+  width: 100%;
+  margin-block-start: 2rem;
+  font-family: Roboto, arial, sans-serif;
+}
+
+.header-table {
+  @apply w-full flex justify-between mb-2 gap-x-3;
+
+}
+
+.header-table input {
+  @apply focus:outline-none;
+  /*
+  border-radius: 0.9375rem;
+  border: 2px solid rgba(0, 0, 0, .20);*/
+  background: transparent;
+  border-bottom: 2px solid rgba(0, 0, 0, .20);
+  padding-inline:  8px;
+  padding-block: 5px;
+  caret-color: #000;
+  margin-inline-start: .5rem;
+}
+
+

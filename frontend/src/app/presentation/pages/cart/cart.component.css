@@ -1,0 +1,75 @@
+.arribal-container {
+    margin-inline: 1rem;
+    padding-block: 1rem;
+    margin-bottom: 5%;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .total {
+    padding: 10px 15px;
+    margin: 18px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-color: #33B672;
+    border-width: 4px;
+    border-radius: 15px;
+    color: #33B672;
+    font-size: 34px;
+    font-style: normal;
+    font-weight: 700;
+    max-width: 370px; /* Ancho máximo */
+    width: 100%; /* Ancho del 100% para ocupar el espacio disponible */
+  }
+  
+  .buy-button {
+    background-color: #33B672;
+    margin: 18px auto;
+    border-radius: 15px;
+    height: 78px;
+    width: 100%; /* Ancho del 100% para ocupar el espacio disponible */
+    max-width: 370px; /* Ancho máximo */
+    color: #ffffff;
+    font-size: 34px;
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  .cart-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .cart-tittle {
+    display: block;
+    font-size: 1.875rem;
+    line-height: 2rem;
+    color: #242221;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .cart-icon {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+@media only screen and (min-width: 554px) {
+    .arribal-container .book-list {
+        margin-block-start: 2.5rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(245px, 1fr));
+        justify-content: center;
+        column-gap: 2rem;
+        row-gap: 2.5rem;
+        justify-content: center;
+        place-content: center;
+        justify-items: center;
+    }
+}

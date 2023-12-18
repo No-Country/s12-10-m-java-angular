@@ -1,0 +1,176 @@
+.card-book {
+    margin: 20px 0px;
+    width: 90vw;
+    aspect-ratio: 6/2;
+    display: flex;
+    position: relative;
+    z-index: 20;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.12);
+    border-radius: 5vw;
+    overflow: hidden;
+}
+
+.card-book .img-wrapper:hover .img-container {
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+.card-book .img-wrapper{
+    border-radius: 0.9375rem 0.9375rem 0rem 0rem;
+
+    background: linear-gradient(90deg, #EEE 0%, #DFDFDF 50%, #FFF 100%);    ; ;
+    aspect-ratio: 2/2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    outline: none;
+
+}
+
+.card-book .img-wrapper .img-container {
+    overflow: hidden;
+    position: relative;
+    height: 80%;
+
+    aspect-ratio: 1/1;
+    opacity: .9;
+    transition-duration: 250ms;
+    transition-timing-function: ease-out;
+    transition-property: opacity, transform;
+    border-radius: .6rem;
+    margin: auto 0px;
+}
+
+.card-book .img-wrapper .img-container img{
+    object-fit: scale-down;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15), 0px 8px 12px 6px rgba(0, 0, 0, 0.30);
+}
+
+
+.card-book .content-info{
+    background: transparent;
+    flex-direction: column;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 1;
+    border-radius: 0rem 0rem 0.9375rem 0.9375rem;
+
+
+    padding-inline: 10px;
+
+    min-height: 65px;
+    max-height: 65px;
+}
+
+.card-book .content-info h2 {
+    font-weight: 600;
+
+    margin-top: 15px;
+    font-size: 25px;
+    width: 80%;
+    margin-left: 0px;
+
+    color: #242221;
+
+    line-height: normal;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    transition-duration: 100ms;
+    transition-timing-function: ease;
+    transition-property: color;
+
+    font-size: 1rem;  
+    cursor: pointer;
+
+    min-height: 20px;
+    overflow: hidden;
+}
+
+
+.card-book .content-info p {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: left;
+    vertical-align: text-top;
+    direction: ltr;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    color: #242221;
+
+    font-weight: 500;
+
+    font-size: .65rem;
+    line-height: .875rem;
+
+    height: 19px;
+    min-height: 19px;
+    max-height: 20px;
+}
+
+.card-book .content-info p.price {
+    margin-top: 5px;
+    font-size: 20px;
+}
+
+.card-book .content-info h2:hover {
+    color: oklch(57.71% 0.144 154.06);
+}
+
+  @media only screen and (min-width: 554px) {
+    .card-book {
+        width: 250px;
+        aspect-ratio: 1/1.77;
+        display:block;
+        height: auto;
+        border-radius:0%;
+        border-bottom-left-radius: 0.9375rem;
+        border-bottom-right-radius: 0.9375rem;
+    }
+
+    .card-book .img-wrapper .img-container {
+        width: 155px;
+    }
+
+    .card-book .img-wrapper  {
+        aspect-ratio: 2/2;
+        background: linear-gradient(180deg, #EEE 0%, #DFDFDF 50%, #FFF 100%);
+        width: 100%;
+    }
+
+    .card-book .img-wrapper .img-container img{
+        box-shadow: none;
+    }
+
+    .card-book .content-info{
+        min-height: 51px;
+        max-height: none;
+        padding: 10px;
+    }
+    .card-book .content-info h2 {
+        font-size: 1.25rem;
+ 
+    }
+    .card-book .content-info p {
+        margin-block-start: .25rem;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+
+        height: 40px;
+        max-height: 40px;
+
+        white-space: pre-line;
+    }
+
+    .card-book .content-info p.price{
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+  }

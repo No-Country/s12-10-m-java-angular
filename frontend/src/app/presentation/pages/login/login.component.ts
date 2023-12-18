@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit, OnDestroy  {
 
   private destroy$: Subject<void>;
 
-  constructor(private readonly injector: Injector) { 
+  constructor(private readonly injector: Injector) {
     this.destroy$ = new Subject<void>();
   }
 
@@ -48,18 +48,22 @@ export class LoginComponent implements OnInit, OnDestroy  {
     const loginObserver = {
       response: {} as AuthResponse,
       next(loginResponse: AuthResponse): void {
-        loginResponse.isActive = true;
         loggedInState.setLogin(loginResponse);
         this.response = loginResponse;
         toast.success("Success", "Logging in.", 5);
       },
-      error(err: any): void{
-        toast.error("Error", "An unexpected error has occurred with the server", 5);
+      error(response: any): void{
+        let message = 'An unexpected error has occurred with the server';
+
+        if (response.error.backendMessage.startsWith('Bad'))     message = 'Your password is not correct';
+        if (response.error.backendMessage.startsWith('Usuario')) message = 'The email is not registered';
+
+
+        toast.error('Oops...', message, 5);
       },
       complete(): void {
-        console.log(this.response.role);
         if(this.response.role === "USER")
-          setTimeout(()=>router.navigate(["/"]), 700);
+          setTimeout(()=>router.navigate(["/"]), 500);
       }
     };
 
@@ -68,5 +72,5 @@ export class LoginComponent implements OnInit, OnDestroy  {
     .pipe(takeUntil(this.destroy$))
     .subscribe(loginObserver);
   }
-  
+
 }

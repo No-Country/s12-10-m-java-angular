@@ -1,0 +1,76 @@
+<ul role="list" class="filters">
+  <li role="listitem" aria-label="Filter by price" class="filter-item">
+      <div class="w-full flex justify-between items-center">
+          <h3>Prices</h3>
+          <span class="text-center">-</span>
+      </div>
+      <form class="flex items-center mt-3 gap-x-3" [formGroup]="filterForm">
+          <input type="number" formControlName="minPrice" id="min-price-filter" name="min-price-filter" class="max-w-[80px]" placeholder="Min" dir="ltr" aria-label="Enter the minimum price you want to filter with" autocomplete="off" autocapitalize="none" aria-disabled="false">
+          <input type="number" formControlName="maxPrice" id="max-price-filter" name="max-price-filter" class="max-w-[100px]" placeholder="Max" dir="ltr" aria-label="Enter the maximum price you want to filter with" autocomplete="off" autocapitalize="none" aria-disabled="false">
+
+          <app-button type="submit" title="Apply price filter"
+          [ngClass]="{'!visible !opacity-100': filterForm.get('minPrice')?.value >= 1 || filterForm.get('maxPrice')?.value >= 1}" class="app-button" className="w-full min-w-[60px] max-h-[1.75rem] text-[0.945rem]" (click)="applyPrice()">
+              Apply
+          </app-button>
+      </form>
+  </li>
+
+  <li  role="listitem" aria-label="Filter by number of page" class="filter-item">
+      <div class="w-full flex justify-between items-center">
+          <h3>Pages</h3>
+          <span class="text-center">-</span>
+      </div>
+      <form class="flex justify-between items-center mt-3 gap-x-3" [formGroup]="filterForm">
+          <input type="number" formControlName="minPage" id="pages-filter" name="pages-filter" class="max-w-[80px]" placeholder="Min Number of pages" dir="ltr" aria-label="Enter the minimum number of pages" autocomplete="off" autocapitalize="none" aria-disabled="false">
+
+          <app-button type="submit" title="Apply price filter"
+          class="app-button"
+          [ngClass]="{'!visible !opacity-100': filterForm.get('minPage')?.value >= 1}"
+          className="w-full min-w-[60px] max-h-[1.75rem] text-[0.945rem]" (click)="applyPageNumber()">
+              Apply
+          </app-button>
+      </form>
+  </li>
+
+  <li role="listitem" aria-label="Filter by Book Category/Genre" class="filter-item">
+      <div class="w-full flex justify-between items-center ">
+          <h3>Categories</h3>
+          <span class="text-center">-</span>
+      </div>
+      <form class="categories" role="list">
+        @for(genre of filterService.GENRES; track '1-'+genre){
+          <label for="1-{{genre.valueOf()}}" role="checkbox" [class.active]="filterService.genreApplied.includes(genre)" [attr.aria-label]="'Fillter by '+genre.valueOf()" [attr.aria-cheked]="filterService.genreApplied.includes(genre)">
+              <input type="checkbox" id="1-{{genre}}" name="1-{{genre.valueOf()}}" [checked]="filterService.genreApplied.includes(genre)" (change)="applyGenre(genre)">
+              {{ genre.valueOf() }}
+          </label>
+        }
+      </form>
+  </li>
+  <li role="listitem" aria-label="Filter by Languages" class="filter-item">
+      <div class="w-full flex justify-between items-center">
+          <h3>Languages</h3>
+          <span class="text-center">-</span>
+      </div>
+      <form class="flex flex-col mt-3 gap-y-2 languages">
+          @for(language of filterService.LANGUAGES; track language){
+            <label for="1-{{language}}" role="checkbox" [attr.aria-cheked]="filterService.languageApplied.includes(language)">
+              <input type="checkbox" id="1-{{language}}" name="1-{{language}}" (change)="applyLanguage(language)">
+              {{ language.valueOf() }}
+            </label>
+          }
+      </form>
+  </li>
+
+  <li role="listitem" aria-label="Filter by include out of stock" class="filter-item">
+      <div class="w-full flex justify-between items-center">
+          <h3>Availability</h3>
+          <span class="text-center">-</span>
+      </div>
+      <form class="flex flex-col mt-3 gap-y-2 languages">
+          <label for="include-out-of-stock" name="include-out-of-stock" role="checkbox" aria-label="When selecting, out-of-stock books were added">
+              <input type="checkbox" id="include-out-of-stock" name="include-out-of-stock" (change)="applyOutOfStock()">
+              Include out of stock
+            </label>
+      </form>
+  </li>
+</ul>

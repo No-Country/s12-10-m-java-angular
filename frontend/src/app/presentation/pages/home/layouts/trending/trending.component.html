@@ -2,17 +2,17 @@
 <div class="container">
 
   <div class="image-list" #bookList (scroll)="onScroll()">
-    @for (book of booksArray; track book.ID) {
-      <!--   -->
-      @if (screenWidth > 617) {
-        <card-book [book]="book" [className]="classOfCard"></card-book>
-      }
-      @else{
-        <app-card-book-horizontal [book]="book" [className]="classOfCard" style="width: 90vw; margin: 0 5vw;"></app-card-book-horizontal>
-      }
-      
+    @for (book of booksWithOnCart; track book.id) {
+      <card-book [book]="book" [onCart]="book.onCart" [className]="classOfCard"></card-book>
+
+      <app-card-book-horizontal  [book]="book" [onCart]="book.onCart" [className]="classOfCard" style="width: 90vw; margin: 0 5vw;"></app-card-book-horizontal>
   } @empty {
-      <span>No hay libros</span>
+      @for(book of [1,2,3,4,5,6,7,8]; track book){
+        <card-book [className]="classOfCard" [book]="{id: book, name:'Loading...', description: 'Loading...', author: 'loading...', price: 0, image: '../../../../assets/imgs/book-placeholder.webp'}"></card-book>
+
+        <app-card-book-horizontal  [book]="{id: book, name:'Loading...', description: 'Loading...', author: 'loading...', price: 0, image: '../../../../assets/imgs/book-placeholder.webp'}"  [className]="classOfCard" style="width: 90vw; margin: 0 5vw;"></app-card-book-horizontal>
+
+      }
   }
   </div>
   <button (click)="moveCarrusel('left')" id="bookList" class="absolute p-0 opacity-50 rounded-[25%] r top-[40%] left-4 z-50 justify-center items-center bg-[#BFBFBF] hover:bg-[#888888]">
@@ -26,4 +26,6 @@
     </svg>
   </button>
 </div>
-<!-- <app-button routerLink="/login" class="mb-6 w-full" className="mx-auto min-w-[120px]  w-full max-w-[140px] min-[905px]:max-w-[12dvw] mt-[15px]">Shop</app-button> -->
+
+<button class="default-button" type="button" title="See all trending books" aria-label="View more trending books" role="button" dir="ltr" routerLink="shop" [queryParams]="{ search: 'All', sort: 'price' }">
+</button>

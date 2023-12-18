@@ -1,6 +1,5 @@
 export interface AuthResponse {
-    id?: string;
-    list?: string[];
+    id: string;
     name: string;
     lastName: string;
     email: string;
