@@ -11,10 +11,7 @@ public class BookRequest {
     @NotBlank(message = "Este campo es obligatorio")
     private String idBook;
 
-    @NotBlank (message = "Este campo es obligatorio")
-    private String ISBN;
-
-    @NotBlank (message = "Este campo es obligatorio")
+    @NotBlank(message = "Este campo es obligatorio")
     private String title;
 
     @NotBlank (message = "Este campo es obligatorio")
@@ -46,7 +43,6 @@ public class BookRequest {
     @NotBlank (message = "Este campo es obligatorio")
     private String idEditorial;
 
-    @NotBlank (message = "Este campo es obligatorio")
     private String initialImage;
 
 }

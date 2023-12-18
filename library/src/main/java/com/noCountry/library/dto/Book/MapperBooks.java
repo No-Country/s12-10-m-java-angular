@@ -14,8 +14,6 @@ public class MapperBooks {
         Book book = new Book();
 
         book.setId(bookRequest.getIdBook());
-        book.setISBN(bookRequest.getISBN());
-        book.setTitle(bookRequest.getTitle());
         book.setPrice(bookRequest.getPrice());
         book.setPages(bookRequest.getPages());
 

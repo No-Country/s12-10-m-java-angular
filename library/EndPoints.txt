@@ -189,9 +189,23 @@ Response:
 
 POST	/book/createBook
 Request:
-  BookRequest
+    CreateBookRequest
+{
+    String	idBook;
+    String 	ISBN;
+    String 	title;
+}
 Response:
-	BookResponse 
+201 CREATED
+
+
+
+
+POST	/book/addInfoBook
+Request:
+    BookRequest
+Response:
+	BookResponse
 201 CREATED
 
 
@@ -200,6 +214,7 @@ Response:
 POST	/book/addImage/{id}
 Request:
   String image;
+  Boolean isBookCover; // es true si es la imagen de la portada
 201 CREATED
 
 
@@ -236,6 +251,10 @@ DELETE	/book/{id}
 
 
 
+
+
+
+
 BookRequest
 {
     String 	idBook;
@@ -254,11 +273,12 @@ BookRequest
     String 	initialImage;
 }
 
+
+
+
 BookResponse
 {
     String	idBook;
-    String 	ISBN;
-    String 	title;
     Double	price;
     Integer 	pages;
     LocalDate 	publicationDate;

@@ -51,14 +51,9 @@ public class BookServiceImpl implements BookService {
 
     @Transactional
     @Override
-    public BookResponse createdBook(BookRequest bookRequest) throws BadRequestException {
-        bookRepository.findById(bookRequest.getIdBook()).ifPresent(object -> {
-            throw new BadRequestException("El ID del libro ya se encuentra registrado.");
-        });
-
-        bookRepository.findByISBN(bookRequest.getISBN()).ifPresent(object -> {
-            throw new BadRequestException("El ISBN del libro ya se encuentra registrado.");
-        });
+    public BookResponse addInformationBook(BookRequest bookRequest) throws BadRequestException {
+        Optional<Book> bookAux = bookRepository.findById(bookRequest.getIdBook());
+        isEmptyObject(bookAux);
 
         Optional<Author> author = authorRepository.findById(bookRequest.getIdAuthor());
         isEmptyObject(author);
@@ -69,24 +64,65 @@ public class BookServiceImpl implements BookService {
         Genre genre = searchGenre(bookRequest.getGenre());
         Language language = searchLanguage(bookRequest.getLanguage());
 
-        Book book = mapperBooks.bookRequestToBook(bookRequest);
+        // Book book = mapperBooks.bookRequestToBook(bookRequest);
+
+        Book book = bookAux.get();
+
+        book.setPrice(bookRequest.getPrice());
+        book.setPages(bookRequest.getPages());
+        book.setPublicationDate(bookRequest.getPublicationDate());
+        book.setQuantityAvailable(bookRequest.getQuantityAvailable());
+        book.setDescription(bookRequest.getDescription());
 
         book.setSalesAmount(0);
         book.setRating(0.0);
-        book.getUrlImages().add(bookRequest.getInitialImage());
 
-        book.setCreationDate(LocalDate.now());
-        book.setModificationDate(LocalDate.now());
-
-        book.setAuthor(author.get());
-        book.setEditorial(editorial.get());
         book.setGenre(genre);
         book.setLanguage(language);
+        book.setAuthor(author.get());
+        book.setEditorial(editorial.get());
+
+        book.setModificationDate(LocalDate.now());
+        book.setStatus(Boolean.TRUE);
+
+        if (bookRequest.getCollection() != null) {
+            book.setCollection(bookRequest.getCollection());
+        }
+
+        if (bookRequest.getInitialImage().isEmpty()) {
+            book.setInitialImage(bookRequest.getInitialImage());
+            book.getUrlImages().add(bookRequest.getInitialImage());
+        }
 
         bookRepository.save(book);
 
         return mapperBooks.bookToBookResponse(book);
     }
+
+    @Transactional
+    @Override
+    public void createBook(CreateBookRequest book) {
+        bookRepository.findById(book.getIdBook()).ifPresent(object -> {
+            throw new BadRequestException("El ID del libro ya se encuentra registrado.");
+        });
+
+        bookRepository.findByISBN(book.getISBN()).ifPresent(object -> {
+            throw new BadRequestException("El ISBN del libro ya se encuentra registrado.");
+        });
+
+        Book newBook = new Book();
+
+        newBook.setId(book.getIdBook());
+        newBook.setISBN(book.getISBN());
+        newBook.setTitle(book.getTitle());
+
+        newBook.setStatus(Boolean.FALSE);
+        newBook.setCreationDate(LocalDate.now());
+        newBook.setModificationDate(LocalDate.now());
+
+        bookRepository.save(newBook);
+    }
+
 
     @Transactional
     @Override
@@ -260,7 +296,7 @@ public class BookServiceImpl implements BookService {
 
     @Transactional
     @Override
-    public void addImagesBook(String id, String img) {
+    public void addImagesBook(String id, UrlImage image) {
         Optional<Book> auxBook = bookRepository.findById(id);
         isEmptyObject(auxBook);
 
@@ -270,11 +306,15 @@ public class BookServiceImpl implements BookService {
             book.setUrlImages(new ArrayList<>());
         }
 
-        if (img == null || img.isEmpty()) {
+        if (image.getImage() == null || image.getImage().isEmpty()) {
             throw new BadRequestException("La imagen a almacenar esta vacia");
         }
 
-        book.getUrlImages().add(img);
+        if (image.getIsBookCover()) {
+            book.setInitialImage(image.getImage());
+        }
+
+        book.getUrlImages().add(image.getImage());
         book.setModificationDate(LocalDate.now());
 
         bookRepository.save(book);
