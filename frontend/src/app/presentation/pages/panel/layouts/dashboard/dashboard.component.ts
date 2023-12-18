@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, type OnInit } from '@angular/core';
 import { PageTabComponent } from "../../../../components/admin/page-tab/page-tab.component";
-import { AdminCardComponent } from "../../../../components/admin/admin-card/admin-card.component";
+import { DashCardComponent } from '@presentation/components/admin/dash-card/dash-card.component';
+
 
 @Component({
     selector: 'app-dashboard',
@@ -12,7 +13,7 @@ import { AdminCardComponent } from "../../../../components/admin/admin-card/admi
     imports: [
         CommonModule,
         PageTabComponent,
-        AdminCardComponent
+        DashCardComponent
     ]
 })
 export class DashboardComponent implements OnInit {
