@@ -1,4 +1,4 @@
-<div class="modal-overlay">
+<div *ngIf="!errorOnConfirm; else errorSection" class="modal-overlay">
   <div class="modal">
     <div class="title">
       <h2>Formulario de Compra</h2>
@@ -38,9 +38,23 @@
       </div>
       <p class="bottom-text" *ngIf="mostrarInputDomicilio && pago">
         Si usted eligió efectivo deberá pagar al delivery cuando reciba el pedido</p>
+        <div *ngIf="seeSuccessMessage" class="success-overlay">
+          <div class="success-message">
+            <p>{{ successMessage }}</p>
+          </div>
+        </div>
       <div class="form-group">
-        <button type="submit" >Confirmar Compra</button>
+        <button type="submit" [disabled]="!isFormValid()">Confirmar Compra</button>
       </div>
     </form>
   </div>
 </div>
+
+<ng-template #errorSection>
+  <div class="error-overlay">
+    <div class="error-message">
+      <svg [ngClass]="{'warning-animation': errorOnConfirm}" xmlns="http://www.w3.org/2000/svg"viewBox="0 0 512 512"><path fill="#ff0000" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-384c13.3 0 24 10.7 24 24V264c0 13.3-10.7 24-24 24s-24-10.7-24-24V152c0-13.3 10.7-24 24-24zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/></svg>
+      <p>Se ha producido un error al intentar realizar la compra.</p>
+    </div>
+  </div>
+</ng-template>

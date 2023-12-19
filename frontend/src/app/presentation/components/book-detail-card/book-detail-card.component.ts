@@ -34,25 +34,6 @@ export class BookDetailCardComponent {
     this.book = {} as Book;
   }
 
-  addOrRemove() {
-    if (this.loggedInService.isLoggedIn()) {
-      const bookToAdd = {
-        id: this.book.idBook,
-        name: this.book.title,
-        image: this.book.urlImages[0],
-        author: this.book.author,
-        price: this.book.price,
-        description: this.book.description
-      };
-      this.onCart
-        ? this.cartService.deleteBookToCart(bookToAdd)
-        : this.cartService.addBookToCart(bookToAdd);
-      this.onCart = !this.onCart;
-    } else {
-      this.router.navigate(['/login']);
-    }
-  }
-
   isNumberId(ID: string | number) {
     return typeof ID === 'string';
   }
@@ -84,11 +65,31 @@ export class BookDetailCardComponent {
         price: this.book.price,
         description: this.book.description
       };
+  
+      if (!this.onCart) {
+        this.cartService.addBookToCart(bookToAdd);
+      }
+  
+      this.router.navigate(['/cart']);
+    } else {
+      this.router.navigate(['/login']);
+    }
+  }
+
+  addOrRemove() {
+    if (this.loggedInService.isLoggedIn()) {
+      const bookToAdd = {
+        id: this.book.idBook,
+        name: this.book.title,
+        image: this.book.urlImages[0],
+        author: this.book.author,
+        price: this.book.price,
+        description: this.book.description
+      };
       this.onCart
         ? this.cartService.deleteBookToCart(bookToAdd)
         : this.cartService.addBookToCart(bookToAdd);
       this.onCart = !this.onCart;
-      this.router.navigate(['/cart']);
     } else {
       this.router.navigate(['/login']);
     }
