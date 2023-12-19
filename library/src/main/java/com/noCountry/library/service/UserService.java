@@ -25,5 +25,7 @@ public interface UserService {
 
     void unsubscribeEmailUser(String email);
 
+    void subscribeEmailUser(String email);
+
 
 }

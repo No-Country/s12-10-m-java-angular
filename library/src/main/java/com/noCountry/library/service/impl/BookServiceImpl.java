@@ -467,14 +467,23 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public PaginatedResponseDTO<BookToSearch> searchByHighestRating(Integer pageNumber, Integer sizeElement) {
-
+    public PaginatedResponseDTO<BookToSearch> searchByHighestSales(Integer pageNumber, Integer sizeElement) {
         // By trending
         Pageable page = PageRequest.of(pageNumber, sizeElement);
         Page<Book> pagesBook = bookRepository.findAllByStatusTrueOrderBySalesAmountDesc(page);
 
         return pagesBookToPagination(pagesBook, mapperBooks::listBookToListBookToSearch);
     }
+
+    @Override
+    public PaginatedResponseDTO<BookToSearch> searchByHighestStars(Integer pageNumber, Integer sizeElement) {
+        // By votes
+        Pageable page = PageRequest.of(pageNumber, sizeElement);
+        Page<Book> pagesBook = bookRepository.findAllByStatusTrueOrderByRatingDesc(page);
+
+        return pagesBookToPagination(pagesBook, mapperBooks::listBookToListBookToSearch);
+    }
+
 
     @Override
     public PaginatedResponseDTO<CommentDto> getCommentsByBookId(String bookId, Integer pageNumber, Integer sizeElement) {

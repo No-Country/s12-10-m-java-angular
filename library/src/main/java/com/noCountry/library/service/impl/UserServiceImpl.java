@@ -5,6 +5,7 @@ import com.noCountry.library.dto.User.MappingUserDto;
 import com.noCountry.library.dto.User.UpdatePasswordDto;
 import com.noCountry.library.entities.User;
 import com.noCountry.library.entities.enums.Role;
+import com.noCountry.library.exception.BadRequestException;
 import com.noCountry.library.exception.InvalidPasswordException;
 import com.noCountry.library.exception.NotFoundException;
 import com.noCountry.library.repository.UserRepository;
@@ -137,6 +138,25 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
+    public void subscribeEmailUser(String email) {
+        Optional<User> auxUser = userRepository.findByEmail(email);
+        isEmptyUser(auxUser);
+
+        User user = auxUser.get();
+
+        if (!user.getStatus()) {
+            throw new BadRequestException("El usuario correspondiente al email ingresado, se encuentra eliminado.");
+        }
+
+        user.setIsSubscribed(Boolean.TRUE);
+        user.setModificationDate(LocalDate.now());
+
+        userRepository.save(user);
+        sendEmailSub(user.getEmail(), true);
+    }
+
+    @Transactional
+    @Override
     public void unsubscribeEmailUser(String email) {
         Optional<User> auxUser = userRepository.findByEmail(email);
         isEmptyUser(auxUser);
@@ -144,11 +164,12 @@ public class UserServiceImpl implements UserService {
         User user = auxUser.get();
 
         if (user.getIsSubscribed()) {
-            user.setIsSubscribed(false);
+            user.setIsSubscribed(Boolean.FALSE);
             user.setModificationDate(LocalDate.now());
         }
 
         userRepository.save(user);
+        sendEmailSub(user.getEmail(), false);
     }
 
     private void validatePassword(RegisterRequest newUser) {
@@ -170,6 +191,18 @@ public class UserServiceImpl implements UserService {
         emailService.sendWelcomeEmail(email,
                 "Bienvenido a la librería BookLeaks!",
                 "welcome.html", templateModel);
+    }
+
+    private void sendEmailSub(String email, boolean subs) {
+        if (subs) {
+            emailService.sendSimpleEmail(email,
+                    "Suscripción existosa.",
+                    "Se ha suscripto exitosamente al newsletter de BooksLeaks! Bienvenido! ");
+        } else {
+            emailService.sendSimpleEmail(email,
+                    "Desuscripción exitosa.",
+                    "Se ha eliminado su suscripción del newsletter de BooksLeaks. Hasta pronto!");
+        }
     }
 
 

@@ -54,7 +54,9 @@ public interface BookService {
 
     PaginatedResponseDTO<BookToSearch> searchLatestAdded(Integer pageNumber, Integer sizeElement);
 
-    PaginatedResponseDTO<BookToSearch> searchByHighestRating(Integer pageNumber, Integer sizeElement);
+    PaginatedResponseDTO<BookToSearch> searchByHighestSales(Integer pageNumber, Integer sizeElement);
+
+    PaginatedResponseDTO<BookToSearch> searchByHighestStars(Integer pageNumber, Integer sizeElement);
 
     PaginatedResponseDTO<CommentDto> getCommentsByBookId(String bookId, Integer pageNumber, Integer sizeElement);
 

@@ -166,12 +166,25 @@ public class BookController {
     public ResponseEntity<?> searchByHighestRating(@RequestParam(defaultValue = "0") int page,
                                                    @RequestParam(defaultValue = "10") int size) {
         try {
-            PaginatedResponseDTO<BookToSearch> book = bookService.searchByHighestRating(page, size);
+            PaginatedResponseDTO<BookToSearch> book = bookService.searchByHighestSales(page, size);
             return new ResponseEntity<>(book, HttpStatus.OK);
         } catch (BadRequestException e){
             throw new BadRequestException(e.getMessage());
         }
     }
+
+
+    @GetMapping(path = "/searchByStars")
+    public ResponseEntity<?> searchByStars(@RequestParam(defaultValue = "0") int page,
+                                                   @RequestParam(defaultValue = "10") int size) {
+        try {
+            PaginatedResponseDTO<BookToSearch> book = bookService.searchByHighestSales(page, size);
+            return new ResponseEntity<>(book, HttpStatus.OK);
+        } catch (BadRequestException e){
+            throw new BadRequestException(e.getMessage());
+        }
+    }
+
 
     @GetMapping(path = "/getComments/{bookId}")
     public ResponseEntity<?> addComment(@PathVariable String bookId,
@@ -268,6 +281,7 @@ public class BookController {
             throw new BadRequestException(e.getMessage());
         }
     }
+
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<?> deleteBook(@PathVariable String id) {
