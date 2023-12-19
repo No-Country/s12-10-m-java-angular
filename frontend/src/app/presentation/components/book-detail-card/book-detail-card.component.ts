@@ -26,7 +26,7 @@ export class BookDetailCardComponent implements OnInit{
   selectedImageUrl: string = '';
   @Input() public book: Book;
   @Input() public onCart: boolean = false;
-  
+
 
   constructor(private router: Router,
     private cartService: CartService,
@@ -34,7 +34,7 @@ export class BookDetailCardComponent implements OnInit{
     this.book = {} as Book;
   }
   ngOnInit(): void {
-    this.onCart = this.cartService.isInTheCart(this.book.idBook)
+    this.onCart = this.cartService.isInTheCart(this.book.idBook);
   }
 
   isNumberId(ID: string | number) {
@@ -48,7 +48,7 @@ export class BookDetailCardComponent implements OnInit{
   scrollToPayment(): void {
     const paymentSection = document.getElementById('payment');
     if (paymentSection) {
-      paymentSection.scrollIntoView({ behavior: 'smooth' });
+      paymentSection.scrollIntoView();
     }
   }
 
@@ -68,11 +68,11 @@ export class BookDetailCardComponent implements OnInit{
         price: this.book.price,
         description: this.book.description
       };
-  
+
       if (!this.onCart) {
         this.cartService.addBookToCart(bookToAdd);
       }
-  
+
       this.router.navigate(['/cart']);
     } else {
       this.router.navigate(['/login']);

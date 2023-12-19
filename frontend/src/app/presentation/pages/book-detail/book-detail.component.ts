@@ -5,7 +5,7 @@ import { Navbar2Component } from '@presentation/components/navbar-2/navbar-2.com
 import { NavbarComponent } from '@presentation/components/navbar/navbar.component';
 import { FooterComponent } from '@presentation/components/footer/footer.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Book } from 'app/data/models/book';
+import { Book, GENRES, Genre } from 'app/data/models/book';
 
 @Component({
   selector: 'app-book-detail',
@@ -20,7 +20,7 @@ import { Book } from 'app/data/models/book';
 })
 export class BookDetailComponent implements OnInit {
   public book: Book;
-  mostrarMensaje = false;
+  public mostrarMensaje = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,6 +34,7 @@ export class BookDetailComponent implements OnInit {
     window.scroll({ top: 0 });
     this.route.data.subscribe((data) => {
       this.book = data['book'];
+      this.book.genre = Genre[this.book.genre as keyof typeof Genre].valueOf();
     });
   }
 
