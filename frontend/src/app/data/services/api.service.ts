@@ -13,13 +13,6 @@ export class ApiService {
 
   constructor(private injector: Injector) {}
 
-  /*
-
-  Trending
-  /book/searchByCriteria?page={page}&size={size}&minPrice={minPrice}&maxPrice={maxPrice}&minPages={minPages}&genre={genre}&language={language}&searchEvenNotAvailable={searchEvenNotAvailable}&orderBy={}&secondOrderBy={}&ascOrDesc={}
-
-
-  */
   private createHeaders(isNedAuth: boolean): HttpHeaders {
     let headers = {} as HttpHeaders;
     if (isNedAuth) {

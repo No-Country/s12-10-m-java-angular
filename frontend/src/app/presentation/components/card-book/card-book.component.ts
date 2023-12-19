@@ -16,14 +16,16 @@ import { LoggedInService } from 'app/data/services/login/loggedIn.service';
 })
 export class CardBookComponent implements OnInit {
   @Input({ required: true }) public book: BookDetail;
-  @Input() public onCart: boolean = false;
+  public onCart: boolean = false;
 
   constructor(private router: Router,
     private cartService: CartService,
     private loggedInService: LoggedInService) {
     this.book = {} as BookDetail;
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.onCart = this.cartService.isInTheCart(this.book.id)
+  }
 
   addOrRemove() {
     if (this.loggedInService.isLoggedIn()) {

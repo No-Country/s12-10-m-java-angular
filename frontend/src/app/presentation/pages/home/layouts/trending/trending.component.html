@@ -1,13 +1,13 @@
 <h2 class="title mx-[7.5dvw] mb-[48px]"> Trending <strong class="text-[#33B672] font-medium">Books</strong></h2>
 <div class="container">
 
-  <div class="image-list" #bookList (scroll)="onScroll()">
-    @for (book of booksWithOnCart; track book.id) {
-      <card-book [book]="book" [onCart]="book.onCart" [className]="classOfCard"></card-book>
+  <div class="image-list" #bookList>
+    @for (book of booksArray; track book.id) {
+      <card-book [book]="book" [className]="classOfCard"></card-book>
 
-      <app-card-book-horizontal  [book]="book" [onCart]="book.onCart" [className]="classOfCard" style="width: 90vw; margin: 0 5vw;"></app-card-book-horizontal>
+      <app-card-book-horizontal  [book]="book" [className]="classOfCard" style="width: 90vw; margin: 0 5vw;"></app-card-book-horizontal>
   } @empty {
-      @for(book of [1,2,3,4,5,6,7,8]; track book){
+      @for(book of [1,2,3,4,5]; track book){
         <card-book [className]="classOfCard" [book]="{id: book, name:'Loading...', description: 'Loading...', author: 'loading...', price: 0, image: '../../../../assets/imgs/book-placeholder.webp'}"></card-book>
 
         <app-card-book-horizontal  [book]="{id: book, name:'Loading...', description: 'Loading...', author: 'loading...', price: 0, image: '../../../../assets/imgs/book-placeholder.webp'}"  [className]="classOfCard" style="width: 90vw; margin: 0 5vw;"></app-card-book-horizontal>

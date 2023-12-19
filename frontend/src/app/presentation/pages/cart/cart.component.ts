@@ -37,9 +37,10 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  discardBook(bookToRemove: BookDetail){
-    this.booksWQ = this.booksWQ.filter(bookWithQuantity => bookWithQuantity.book.id !== bookToRemove.id);
-    this.cartService.deleteBookToCart(bookToRemove)
+  discardBook(bookToRemove: { book: BookDetail, quantity: number }){
+    this.booksWQ = this.booksWQ.filter(bookWithQuantity => bookWithQuantity.book.id !== bookToRemove.book.id);
+    this.cartService.deleteBookToCart(bookToRemove.book)
+    this.total=this.total-bookToRemove.book.price*bookToRemove.quantity;
   }
 
   editquantityOf(bookToEditQuantity: { book: BookDetail, quantity: number }){

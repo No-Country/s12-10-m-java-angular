@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { DefaultButtonComponent } from '../default-button/default-button.component';
 import { Book } from 'app/data/models/book';
@@ -22,7 +22,7 @@ import { LoggedInService } from 'app/data/services/login/loggedIn.service';
   styleUrl: './book-detail-card.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BookDetailCardComponent {
+export class BookDetailCardComponent implements OnInit{
   selectedImageUrl: string = '';
   @Input() public book: Book;
   @Input() public onCart: boolean = false;
@@ -32,6 +32,9 @@ export class BookDetailCardComponent {
     private cartService: CartService,
     private loggedInService: LoggedInService) {
     this.book = {} as Book;
+  }
+  ngOnInit(): void {
+    this.onCart = this.cartService.isInTheCart(this.book.idBook)
   }
 
   isNumberId(ID: string | number) {
