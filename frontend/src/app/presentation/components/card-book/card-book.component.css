@@ -1,229 +1,333 @@
 .card-book {
-    width: 110px;
-    height: 170px;
-    aspect-ratio: 2/1;
-    position: relative;
-    z-index: 10;
-    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.12);
-    border-bottom-left-radius: 0.9375rem;
-    border-bottom-right-radius: 0.9375rem;
+  width: 110px;
+  height: 170px;
+  aspect-ratio: 2/1;
+  position: relative;
+  z-index: 10;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.12);
+  border-bottom-left-radius: 0.9375rem;
+  border-bottom-right-radius: 0.9375rem;
 }
 
 .card-book .img-wrapper:hover .img-container {
-    transform: scale(1.1);
-    opacity: 1;
+  transform: scale(1.1);
+  opacity: 1;
 }
 
-.card-book .img-wrapper{
-    border-radius: 0.9375rem 0.9375rem 0rem 0rem;
-    background: linear-gradient(180deg, #EEE 0%, #DFDFDF 50%, #FFF 100%);    ;
-    width: 100%;
-    aspect-ratio: 10/9;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    outline: none;
-
-}
-
-.card-book .img-wrapper .img-container {
-    overflow: hidden;
-    position: relative;
-    width: 70px;
-    aspect-ratio: 1/1;
-    opacity: .9;
-    transition-duration: 250ms;
-    transition-timing-function: ease-out;
-    transition-property: opacity, transform;
-    border-radius: .6rem;
-}
-
-.card-book .img-wrapper .img-container img{
-    object-fit: scale-down;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15), 0px 8px 12px 6px rgba(0, 0, 0, 0.30);
-}
-
-
-.card-book .content-info{
-    background: transparent;
-    flex-direction: column;
-    box-sizing: border-box;
-
-    display: flex;
-    flex-grow: 1;
-    flex-shrink: 1;
-    border-radius: 0rem 0rem 0.9375rem 0.9375rem;
-
-
-    padding-inline: 10px;
-
-    min-height: 65px;
-    max-height: 65px;
-}
-
-.card-book .content-info h2 {
-    font-weight: 600;
-    color: #242221;
-
-    line-height: normal;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    transition-duration: 100ms;
-    transition-timing-function: ease;
-    transition-property: color;
-
-    font-size: 1rem;
-    cursor: pointer;
-
-    min-height: 20px;
-    overflow: hidden;
-    outline: none;
-}
-
-.card-book .content-info p {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    text-align: left;
-    vertical-align: text-top;
-    direction: ltr;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-
-    color: #242221;
-
-    font-weight: 500;
-
-    font-size: .65rem;
-    line-height: .875rem;
-
-    height: 19px;
-    min-height: 19px;
-    max-height: 20px;
-}
-
-.card-book .content-info p.price {
-    font-size: .9rem;
-    min-height: 23px;
-    max-height: 23px;
-    margin-top: 0px;
-}
-
-.card-book .content-info h2:hover, .card-book .content-info h2:focus {
-    color: oklch(57.71% 0.144 154.06);
-}
-
-
-button.up-button.take-out {
-  border-width: 1px;
-  border-color: #DFDFDF;
-  border-style: double;
-  cursor: default;
-  background-color: #DFDFDF;
-  color: #fff;
-  box-shadow: none;
+.card-book .img-wrapper {
+  border-radius: 0.9375rem 0.9375rem 0rem 0rem;
+  background: linear-gradient(180deg, #eee 0%, #dfdfdf 50%, #fff 100%);
+  width: 100%;
+  aspect-ratio: 10/9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
   outline: none;
 }
 
-button.up-button.take-out:hover, button.up-button.take-out:hover {
+.card-book .img-wrapper .img-container {
+  overflow: hidden;
+  position: relative;
+  width: 70px;
+  aspect-ratio: 1/1;
+  opacity: 0.9;
+  transition-duration: 250ms;
+  transition-timing-function: ease-out;
+  transition-property: opacity, transform;
+  border-radius: 0.6rem;
+}
+
+.card-book .img-wrapper .img-container img {
+  object-fit: scale-down;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15),
+    0px 8px 12px 6px rgba(0, 0, 0, 0.3);
+}
+
+.card-book .content-info {
+  background: transparent;
+  flex-direction: column;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
+  border-radius: 0rem 0rem 0.9375rem 0.9375rem;
+
+  padding-inline: 10px;
+
+  min-height: 65px;
+  max-height: 65px;
+}
+
+.card-book .content-info h2 {
+  font-weight: 600;
+  color: #242221;
+
+  line-height: normal;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  transition-duration: 100ms;
+  transition-timing-function: ease;
+  transition-property: color;
+
+  font-size: 1rem;
+  cursor: pointer;
+
+  min-height: 20px;
+  overflow: hidden;
+  outline: none;
+}
+
+.card-book .content-info p {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: left;
+  vertical-align: text-top;
+  direction: ltr;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  color: #242221;
+
+  font-weight: 500;
+
+  font-size: 0.65rem;
+  line-height: 0.875rem;
+
+  height: 19px;
+  min-height: 19px;
+  max-height: 20px;
+}
+
+.card-book .content-info p.price {
+  font-size: 0.9rem;
+  min-height: 23px;
+  max-height: 23px;
+  margin-top: 0px;
+}
+
+.card-book .content-info h2:hover,
+.card-book .content-info h2:focus {
+  color: oklch(57.71% 0.144 154.06);
+}
+
+button.default-button.up-button.activate {
+  transition: none;
+  background: rgb(51 204 125 / 40%);
+  height: 2.15rem;
+  width: min-content;
+  padding-block: 0.5rem;
+  color: oklch(0.68 0.16 155.51);
+  background-blend-mode: difference;
+  padding-inline: 0.85rem;
+  scale: 1.01;
+
+  transition-property: background, color, scale, box-shadow, outline,
+    stroke-width;
+  transition-duration: 0.17s;
+  transition-timing-function: ease;
   box-shadow: none;
 }
 
-.up-button.activate svg {
-  transition-property: scale;
-  transition-duration: 400ms;
-  transition-timing-function: ease;
+button.default-button.activate:hover,
+button.default-button.take-out:hover {
+  box-shadow: none;
 }
 
-.up-button.activate:hover svg{
-  scale: 1.175;
+button.default-button.activate:hover {
+  background: rgb(51 204 125 / 40%);
+}
+
+button.default-button.take-out:hover {
+  background: rgb(39 191 113);
+}
+
+button.default-button.take-out {
+  transition: none;
+
+  padding-inline: 0.85rem;
+  padding-block: 0.5rem;
+  width: min-content;
+  height: 2.15rem;
+  cursor: pointer;
+  color: #ffffff;
+
+  outline: none;
+  background: rgb(39 191 113);
+
+  transition-property: background, color, scale, box-shadow, outline,
+    stroke-width;
+  transition-duration: 0.17s;
+  transition-timing-function: ease;
+  box-shadow: none;
+}
+
+button.default-button .svg-celebrate-icon {
+  position: absolute;
+  display: none;
+  stroke: #ffffff;
+  fill: #ffffff;
+  stroke-width: 2.5px;
+}
+
+button.default-button.take-out .svg-celebrate-icon {
+  animation: svg-celebrate 0.4s;
+  animation-fill-mode: forwards;
+  display: block;
+}
+
+button.default-button.activate:hover .cart {
+  scale: 1.1;
+}
+button.default-button.take-out:hover .cart {
+  scale: 0.95;
+}
+
+button.up-button.activate .cart path {
+  stroke-width: 40px;
+}
+
+button.up-button.take-out .cart {
+  animation: icon-up-scale 0.5s;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+button.up-button.activate .cart {
+  animation: icon-down-scale 0.5s;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+button.up-button.take-out .cart path {
+  stroke-width: 43.5px;
 }
 
 @media only screen and (min-width: 450px) {
-    .card-book {
-        width: 130px;
-        aspect-ratio: 2/1;
-        height: 190px;
-    }
+  .card-book {
+    width: 130px;
+    aspect-ratio: 2/1;
+    height: 190px;
+  }
 
-    .card-book .img-wrapper .img-container {
-        width: 80px;
+  .card-book .img-wrapper .img-container {
+    width: 80px;
+  }
 
-    }
+  .card-book .img-wrapper {
+    aspect-ratio: 10/9;
+  }
 
-    .card-book .img-wrapper  {
-        aspect-ratio: 10/9;
-    }
+  .card-book .content-info {
+    min-height: 65px;
+    padding-inline: 10px;
+    max-height: 65px;
+  }
 
-    .card-book .content-info{
-        min-height: 65px;
-        padding-inline: 10px;
-        max-height: 65px;
-    }
+  .card-book .content-info h2 {
+    font-size: 2.7dvw;
+  }
 
-    .card-book .content-info h2 {
-        font-size: 2.7dvw;
-    }
+  .card-book .content-info p {
+    font-size: 1.6dvw;
+    line-height: 1rem;
+    height: 19px;
+    min-height: 19px;
+    max-height: 20px;
+  }
 
-    .card-book .content-info p {
-        font-size: 1.6dvw;
-        line-height: 1rem;
-        height: 19px;
-        min-height: 19px;
-        max-height: 20px;
-    }
-
-    .card-book .content-info p.price {
-        font-size: 2.5dvw;
-        min-height: 23px;
-        max-height: 23px;
-        margin-top: 0px;
-    }
+  .card-book .content-info p.price {
+    font-size: 2.5dvw;
+    min-height: 23px;
+    max-height: 23px;
+    margin-top: 0px;
+  }
 }
 
-  @media only screen and (min-width: 705px) {
-    .card-book {
-        width: 250px;
-        aspect-ratio: 2/1;
-        height: auto;
-    }
-
-    .card-book .img-wrapper .img-container {
-        width: 155px;
-    }
-
-    .card-book .img-wrapper  {
-        aspect-ratio: 2/2;
-    }
-
-    .card-book .img-wrapper .img-container img{
-        box-shadow: none;
-    }
-
-    .card-book .content-info{
-        min-height: 51px;
-        max-height: none;
-        padding: 10px;
-    }
-    .card-book .content-info h2 {
-        font-size: 1.25rem;
-
-    }
-    .card-book .content-info p {
-        margin-block-start: .25rem;
-        font-size: 0.875rem;
-        line-height: 1.25rem;
-
-        height: 40px;
-        max-height: 40px;
-
-        white-space: pre-line;
-    }
-
-    .card-book .content-info p.price{
-        font-size: 1.5rem;
-        line-height: 2rem;
-    }
+@media only screen and (min-width: 705px) {
+  .card-book {
+    width: 250px;
+    aspect-ratio: 2/1;
+    height: auto;
   }
+
+  .card-book .img-wrapper .img-container {
+    width: 155px;
+  }
+
+  .card-book .img-wrapper {
+    aspect-ratio: 2/2;
+  }
+
+  .card-book .img-wrapper .img-container img {
+    box-shadow: none;
+  }
+
+  .card-book .content-info {
+    min-height: 51px;
+    max-height: none;
+    padding: 10px;
+  }
+  .card-book .content-info h2 {
+    font-size: 1.25rem;
+  }
+  .card-book .content-info p {
+    margin-block-start: 0.25rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+
+    height: 40px;
+    max-height: 40px;
+
+    white-space: pre-line;
+  }
+
+  .card-book .content-info p.price {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+}
+
+@keyframes icon-up-scale {
+  from {
+    scale: 0.25;
+  }
+  25% {
+    scale: 1.2;
+  }
+  50% {
+    scale: 1.02;
+  }
+}
+
+@keyframes icon-down-scale {
+  from {
+    scale: 1.22;
+  }
+  25% {
+    scale: 0.97;
+  }
+  50% {
+    scale: 1.01;
+  }
+}
+
+@keyframes svg-celebrate {
+  0% {
+    scale: 0;
+  }
+
+  50% {
+    opacity: 1;
+    filter: brightness(1.5);
+  }
+
+  100% {
+    scale: .55;
+    opacity: 0;
+    display: none;
+  }
+}
