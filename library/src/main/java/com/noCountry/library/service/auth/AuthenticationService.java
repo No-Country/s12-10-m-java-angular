@@ -32,7 +32,7 @@ public class AuthenticationService {
 		User user = userService.registeUser(newUser);
 		String jwt = jwtService.generateToken(user, generateExtraClaims(user));
 
-		UserDetailsDTO userDetailsDTO = UserDetailsDTO.builder().name(user.getName()).lastName(user.getLastName())
+		UserDetailsDTO userDetailsDTO = UserDetailsDTO.builder().id(user.getId()).name(user.getName()).lastName(user.getLastName())
 				.email(user.getEmail()).jwt(jwt).role(user.getRole().name())
 				.list(user.getAuthorities().stream().toList()).build();
 
@@ -56,11 +56,12 @@ public class AuthenticationService {
 
 		User userDetails = userService.findByEmail(login.getEmail()).get();
 		String jwt = jwtService.generateToken(userDetails, generateExtraClaims(userDetails));
-		UserDetailsDTO userDetailsDTO = UserDetailsDTO.builder().name(userDetails.getName())
+
+		UserDetailsDTO userDetailsDTO = UserDetailsDTO.builder().id(userDetails.getId()).name(userDetails.getName())
 				.lastName(userDetails.getLastName()).email(userDetails.getEmail()).jwt(jwt)
 				.role(userDetails.getRole().name()).list(userDetails.getAuthorities().stream().toList()).build();
-		return userDetailsDTO;
 
+		return userDetailsDTO;
 	}
 
 	public User findLoggedInUser() {

@@ -164,7 +164,7 @@ public class BookController {
 
     @GetMapping(path = "/searchHighestRating")
     public ResponseEntity<?> searchByHighestRating(@RequestParam(defaultValue = "0") int page,
-                                                   @RequestParam(defaultValue = "5") int size) {
+                                                   @RequestParam(defaultValue = "10") int size) {
         try {
             PaginatedResponseDTO<BookToSearch> book = bookService.searchByHighestRating(page, size);
             return new ResponseEntity<>(book, HttpStatus.OK);
@@ -187,19 +187,30 @@ public class BookController {
 
 
     @PostMapping(path = "/createBook")
-    public ResponseEntity<?> createBook(@RequestBody @Valid BookRequest bookRequest) {
+    public ResponseEntity<?> createBook(@RequestBody @Valid CreateBookRequest bookRequest) {
         try {
-            BookResponse bookResponse = bookService.createdBook(bookRequest);
+            bookService.createBook(bookRequest);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (BadRequestException e){
+            throw new BadRequestException(e.getMessage());
+        }
+    }
+
+    @PostMapping(path = "/addInfoBook")
+    public ResponseEntity<?> addInformationBook(@RequestBody @Valid BookRequest bookRequest) {
+        try {
+            BookResponse bookResponse = bookService.addInformationBook(bookRequest);
             return new ResponseEntity<>(bookResponse, HttpStatus.CREATED);
         } catch (BadRequestException e){
             throw new BadRequestException(e.getMessage());
         }
     }
 
+
     @PostMapping(path = "/addImage/{id}")
     public ResponseEntity<?> addImageAtBook(@RequestBody @Valid UrlImage image, @PathVariable String id) {
         try {
-            bookService.addImagesBook(id, image.getImage());
+            bookService.addImagesBook(id, image);
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (BadRequestException e){
             throw new BadRequestException(e.getMessage());

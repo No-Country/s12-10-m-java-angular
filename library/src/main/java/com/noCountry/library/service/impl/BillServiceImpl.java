@@ -96,6 +96,8 @@ public class BillServiceImpl implements BillService {
                 sendEmailBill(bill);
                 System.out.println("despues de enviar el email");
                 response = ResponseEntity.ok("Bill added successfully");
+            } else {
+                throw new BadRequestException("El id del usuario ingresado no existe.");
             }
         } catch (BadRequestException e) {
             throw new BadRequestException(e.getMessage());

@@ -7,7 +7,10 @@ import java.util.List;
 
 public interface BookService {
 
-    BookResponse createdBook(BookRequest book) throws Exception;
+    BookResponse addInformationBook(BookRequest book) throws Exception;
+
+    void createBook(CreateBookRequest book);
+
 
     void deleteBook(String id);
 
@@ -30,7 +33,7 @@ public interface BookService {
                                                           List<String> genres, List<String> languages, String searchText,
                                                           Integer searchEvenNotAvailable, String orderBy, String ascOrDesc);
 
-    void addImagesBook(String id, String img);
+    void addImagesBook(String id, UrlImage image);
 
 
     BookResponse addQuantityAvailable(String id, Integer amount);

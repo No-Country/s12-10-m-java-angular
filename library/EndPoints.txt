@@ -14,12 +14,12 @@ RegisterRequest
 }
 RegisterResponse
 {
-String 	name;
-String	lastName;
-String 	email;
-String 	role;
-List<?> 	list;
-String 	jwt;
+    String 	name;
+    String	lastName;
+    String 	email;
+    String 	role;
+    List<?> 	list;
+    String 	jwt;
 }
 201 CREATED
 
@@ -28,12 +28,18 @@ String 	jwt;
 POST	/authenticate/login
 LoginRequest
 {
-String	email;
-String 	password;
+    String	email;
+    String 	password;
 }
-LoginResponse
+UserDetailsDTO
 {
-String	 jwt;
+         String id;
+         String name;
+         String lastName;
+         String email;
+         String role;
+         List<?> list;
+         String jwt;
 }
 200 OK
 
@@ -47,9 +53,9 @@ GET	/user/{email}
 Response: 
 UserDto
 {
-String 	name;
-String    lastName;
-String 	email;
+    String 	name;
+    String  lastName;
+    String 	email;
 }
 200 OK
 
@@ -104,11 +110,11 @@ GET	/book/toCardDescription/{id}
 Response:
     BookCardDescription
 {
-String 	title;
-Double 	price;
-String 	author;
-String	initialImage;
-String	description;
+    String 	title;
+    Double 	price;
+    String 	author;
+    String	initialImage;
+    String	description;
 }
 200 OK
 
@@ -172,7 +178,7 @@ Response:
 
 
 
-GET 	/book/searchHighestRating?page=0&size=5
+GET 	/book/searchHighestRating?page=0&size=10
 Response:
 	PaginatedBookResponseDTO<BookToSearch>
 200 OK
@@ -189,9 +195,23 @@ Response:
 
 POST	/book/createBook
 Request:
-  BookRequest
+    CreateBookRequest
+{
+    String	idBook;
+    String 	ISBN;
+    String 	title;
+}
 Response:
-	BookResponse 
+201 CREATED
+
+
+
+
+POST	/book/addInfoBook
+Request:
+    BookRequest
+Response:
+	BookResponse
 201 CREATED
 
 
@@ -200,6 +220,7 @@ Response:
 POST	/book/addImage/{id}
 Request:
   String image;
+  Boolean isBookCover; // es true si es la imagen de la portada
 201 CREATED
 
 
@@ -236,6 +257,10 @@ DELETE	/book/{id}
 
 
 
+
+
+
+
 BookRequest
 {
     String 	idBook;
@@ -254,11 +279,12 @@ BookRequest
     String 	initialImage;
 }
 
+
+
+
 BookResponse
 {
     String	idBook;
-    String 	ISBN;
-    String 	title;
     Double	price;
     Integer 	pages;
     LocalDate 	publicationDate;
