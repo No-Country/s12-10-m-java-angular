@@ -92,7 +92,7 @@ export class ModalBuyComponent implements OnInit{
         this.cdr.detectChanges();
         setTimeout(() => {
           this.router.navigate(['']); 
-        }, 2500);
+        }, 1800);
       },
       (error) => {
         console.error('Error al realizar la compra', error);

@@ -8,7 +8,6 @@ import { ApiService } from '../api.service';
   providedIn: 'root'
 })
 export class BillsService {
-  private Url = 'https://librarync1.fly.dev/api/v1';
   private api: ApiService = this.injector.get(ApiService);
 
 
