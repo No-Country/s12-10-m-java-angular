@@ -1,17 +1,19 @@
 import { Injectable, Injector } from '@angular/core';
-import { Book, BookDetail, BookPagination } from 'app/data/models/book';
+import { Book, BookCreation, BookDetail, BookPagination } from 'app/data/models/book';
 import { Observable, Observer, first, map, of, take, takeUntil, tap } from 'rxjs';
 import { ApiService } from '../api.service';
 
 @Injectable()
 export class BooksService {
   private latestBooks: BookDetail[];
-
   private api: ApiService = this.injector.get(ApiService);
+
+  public createdBook: BookCreation;
 
   constructor(private injector: Injector) {
     const books = sessionStorage.getItem('latestBooks');
 
+    this.createdBook = {} as BookCreation;
     try {
       this.latestBooks =
         books !== null && books !== undefined

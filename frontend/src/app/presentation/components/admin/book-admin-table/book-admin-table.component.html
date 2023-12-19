@@ -1,18 +1,18 @@
-<table>
-  <thead>
+<admin-table class="admin-table">
+<thead class="t-head">
     <tr>
       @for(item of columns; track item.id){
       <th scope="col" rowspan="1">{{ item.column }}</th>
       }
     </tr>
   </thead>
-  <tbody>
+  <tbody class="t-body">
     @for(book of bookDataSource | filter: this.searchTerm | paginate: { id:
     'admin-books-pagination', itemsPerPage: 7, currentPage: currentPage,
     totalItems: bookDataSource.length }; track book.idBook){
       <tr>
         <td>
-          {{ $index + 1 }}
+          {{ bookDataSource.indexOf(book)+1 }}
         </td>
         <td>
           {{ book.title }}
@@ -47,7 +47,8 @@
       </tr>
     }
   </tbody>
-</table>
+</admin-table>
+
 <div class="w-full mt-3 flex justify-end items-center"
 [ngClass]="{'hidden': (bookDataSource | filter: this.searchTerm).length <= 0}">
   <pagination-controls

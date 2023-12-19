@@ -1,0 +1,95 @@
+.modal ::ng-deep .admin-card {
+  width: 725px;
+  position: relative;
+}
+
+textarea {
+  outline: none;
+  width: 100%;
+  border-radius: 1.25rem;
+  color: #000;
+  resize: none;
+  padding: 1rem;
+  position: relative;
+  caret-color: #c88d65;
+}
+
+.custom-select {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  row-gap: 1rem;
+  margin-block: 1rem;
+}
+.custom-select label {
+  position: relative;
+}
+.custom-select label div.button {
+    color: #fff;
+    background-color: #5c5c5c79;
+    border-radius: 100%;
+    z-index: 999;
+    -webkit-user-select: none;
+    user-select: none;
+    width: 20px;
+    aspect-ratio: 1/1;
+    display: inline-flex;
+    text-align: center;
+    justify-content: center;
+}
+
+.custom-select label div.button:hover + .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.tooltiptext {
+  animation: none;
+  visibility: hidden;
+  width: fit-content;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 10px;
+  position: absolute;
+  z-index: 50;
+  top: 125%;
+  left: 0%;
+  opacity: 0;
+  transition-property: opacity, visibility;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+  white-space: pre-line;
+  text-align: left;
+  text-wrap: pretty;
+}
+
+.custom-select ul {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1 1;
+  column-gap: 0.6rem;
+  row-gap: 1rem;
+}
+
+.custom-select ul li {
+  border: 2.2px solid #c8c8c8;
+  border-radius: 1.25rem;
+  color: #7c7c7c;
+  padding-inline: 0.7rem;
+  padding-block: 0.45rem;
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+}
+.custom-select ul li span {
+  font-size: 1.175rem;
+  font-weight: 700;
+}
+.custom-select ul li.active {
+  border: 2.2px solid lch(57 48.08 154.05);
+}
+.custom-select ul li.active {
+  color: lch(57 48.08 154.05);
+}

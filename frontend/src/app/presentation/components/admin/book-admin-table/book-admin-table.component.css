@@ -1,61 +1,8 @@
-table {
-  width: 100%;
-  padding-inline: 10px;
-  padding-block: 10px;
-  overflow: hidden;
-  max-height: 375px;
-  position: relative;
-}
-
-thead,
-tbody {
-  width: 100%;
-}
-
-table thead > tr {
-  width: 100%;
-  color: rgb(167, 173, 190);
-  text-transform: uppercase;
-  font-weight: 500;
-  line-height: 1.5rem;
-  letter-spacing: 0.2px;
-  border-bottom: 1px solid #e9edf7;
-}
-table thead > tr th {
-  padding-block: 0.25rem;
-}
-
-table tbody > tr {
-  width: 100%;
-  color: #747474;
-  font-weight: 500;
-  border-bottom: 1px solid #e9edf7;
-  font-size: .95rem;
-}
-table tbody > tr td:last-child {
-  letter-spacing: 2px;
-  font-weight: bold;
-  color: #000;
-  cursor: pointer;
-}
-
-table tbody > tr:not(.empty):hover {
-  background-color: #f1f1f1;
-}
-table tbody > tr td {
-  padding-block: 0.75rem;
-  text-align: center;
-}
-
-table tbody > tr:last-child {
-  border-bottom: none;
-}
-
 .book-pagination ::ng-deep .ngx-pagination .current {
   background: #33b672;
 }
 
-table tbody .empty {
+ tbody .empty {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -63,7 +10,7 @@ table tbody .empty {
   height: 190px;
 }
 
-table tbody .empty::before {
+tbody .empty::before {
   content: ".";
   animation: scale-up-center 0.35s;
   color: transparent;
@@ -77,7 +24,7 @@ table tbody .empty::before {
   height: 140px;
 }
 
-table tbody .empty::after {
+ tbody .empty::after {
   content: "No books founds";
   animation: scale-up-center 0.4s;
   color: #838383;

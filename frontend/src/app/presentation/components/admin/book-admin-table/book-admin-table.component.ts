@@ -5,11 +5,12 @@ import { TableColumns } from 'app/data/models/Admin';
 import { Book } from 'app/data/models/book';
 import { FilterPipe } from 'app/data/pipes/filter.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { AdminTableComponent } from '../admin-table/admin-table.component';
 
 @Component({
   selector: 'book-admin-table',
   standalone: true,
-  imports: [CommonModule, NgxPaginationModule, FilterPipe],
+  imports: [CommonModule, AdminTableComponent, NgxPaginationModule, FilterPipe],
   templateUrl: './book-admin-table.component.html',
   styleUrl: './book-admin-table.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

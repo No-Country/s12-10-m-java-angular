@@ -1,0 +1,19 @@
+.modal ::ng-deep .admin-card {
+  position: relative;
+  margin: auto;
+  width: 650px;
+  padding: 3rem;
+}
+
+.road {
+  position: absolute;
+
+  width: 5rem;
+  aspect-ratio: 1/1;
+  border-radius: 100%;
+  background: #fffcfc;
+
+  outline: 25px solid #33b672;
+  top: -5%;
+  right: -5%;
+}

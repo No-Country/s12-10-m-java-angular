@@ -1,0 +1,238 @@
+<div class="modal absolute z-100 inset-0">
+  <admin-card titleCard="Complete Book Info" class="flex h-full absolute inset-0 overflow-y-scroll">
+    <form [formGroup]="completeForm" class="mt-7">
+      <div class="flex justify-center items-center w-full gap-x-7">
+        <div class="w-full h-[80px]">
+          <div class="input-group w-full">
+            <input
+              type="text"
+              id="author-book"
+              formControlName="author"
+              for="author-book"
+              autocomplete="off"
+              name="author-book"
+              class="form-input"
+              aria-label="Name of the book author"
+              autocapitalize="none"
+              autofocus="true"
+              required
+            />
+            <label
+              for="author-book"
+              class="form-label translate-top-label"
+              style="--label-bg: #fff;"
+              >Author <span class="text-red-600">*</span></label
+            >
+          </div>
+
+          <error-message
+            [showError]="false"
+            errorMessage="Author name is required"
+            errorClass="text-red-500"
+          />
+        </div>
+
+        <div class="w-full h-[80px]">
+          <div class="input-group w-full">
+            <input
+              type="text"
+              id="editorial-book"
+              formControlName="editorial"
+              for="editorial-book"
+              autocomplete="off"
+              name="editorial-book"
+              class="form-input"
+              aria-label="Name of the book editorial"
+              autocapitalize="none"
+              required
+            />
+            <label
+              for="editorial-book"
+              class="form-label translate-top-label"
+              style="--label-bg: #fff;"
+              >Editorial <span class="text-red-600">*</span></label
+            >
+          </div>
+
+          <error-message
+            [showError]="false"
+            errorMessage="Editorial name is required"
+            errorClass="text-red-500"
+          />
+        </div>
+      </div>
+
+      <div class="flex justify-between items-center w-full mt-4">
+        <div class="w-full max-w-[175px] h-[80px]">
+          <div class="input-group w-full">
+            <input
+              type="number"
+              id="pages-book"
+              formControlName="pages"
+              for="pages-bookn"
+              autocomplete="off"
+              name="pages-book"
+              class="form-input max-w-[175px]"
+              aria-disabled="false"
+              aria-label="Page number of book"
+              autocapitalize="none"
+              required
+            />
+            <label
+              for="pages-book"
+              class="form-label translate-top-label"
+              style="--label-bg: #fff;"
+              >Pages <span class="text-red-600">*</span></label
+            >
+          </div>
+
+          <error-message
+            [showError]="false"
+            errorMessage="Write a valid page number"
+            errorClass="text-red-500"
+          />
+        </div>
+
+        <div class="w-full max-w-[175px] h-[80px]">
+          <div class="input-group w-full">
+            <input
+              type="number"
+              id="price-book"
+              formControlName="price"
+              for="price-book"
+              autocomplete="off"
+              name="price-book"
+              class="form-input max-w-[175px]"
+              aria-disabled="false"
+              aria-label="Price of the book"
+              autocapitalize="none"
+              dir="ltr"
+              required
+            />
+            <label
+              for="price-book"
+              class="form-label translate-top-label"
+              style="--label-bg: #fff"
+              >Price <span class="text-red-600">*</span></label
+            >
+          </div>
+
+          <error-message
+            [showError]="false"
+            errorMessage="Write a valida page number"
+            errorClass="text-red-500"
+          />
+        </div>
+
+        <div class="w-full max-w-[175px] h-[80px]">
+          <div class="input-group w-full">
+            <input
+              type="number"
+              id="quantity-book"
+              formControlName="quantity"
+              for="quantity-book"
+              autocomplete="off"
+              name="quantity-book"
+              class="form-input max-w-[175px]"
+              aria-disabled="false"
+              aria-label="Number of books in stock"
+              autocapitalize="none"
+              dir="ltr"
+              required
+            />
+            <label
+              for="quantity-book"
+              class="form-label translate-top-label"
+              style="--label-bg: #fff"
+              >Quantity <span class="text-red-600">*</span></label
+            >
+          </div>
+
+          <error-message
+            [showError]="false"
+            errorMessage="Write a valid quantity."
+            errorClass="text-red-500"
+          />
+        </div>
+      </div>
+
+      <div class="input-group w-full">
+        <textarea
+          name="description-book"
+          placeholder="Write book description"
+          id="description-book"
+          wrap="hard"
+          cols="70"
+          rows="5"
+          formControlName="description"
+          autocomplete="off"
+          autocapitalize="off"
+          autocorrect="on"
+          maxlength="255"
+        ></textarea>
+
+        <label
+          for="description-book"
+          class="form-label translate-top-label"
+          style="--label-bg: #fff"
+          >Descripcion book <span class="text-red-600">*</span></label
+        >
+      </div>
+
+      <div class="custom-select">
+        <label>
+          Select Genres
+          <div class="button">?</div>
+
+          <div class="tooltiptext">
+            Select at least one genre for the book.
+          </div>
+        </label>
+
+        <ul aria-label="Combo-box options list">
+          @for(genre of GENRES; track '4-'+genre){
+          <li
+            role="checkbox"
+            (click)="applyGenre(genre)"
+            [ngClass]="{ active: genreApplied.includes(genre) }"
+          >
+            <span>+</span> {{ genre.valueOf() }}
+          </li>
+          }
+        </ul>
+      </div>
+
+      <div class="custom-select">
+        <label>
+          Select Language
+          <div class="button">?</div>
+
+          <div class="tooltiptext">
+            Select at least one language in which the book is available.
+          </div>
+        </label>
+
+        <ul aria-label="Combo-box options list">
+          @for(language of LANGUAGES; track '4-'+language){
+          <li
+            role="checkbox"
+            (click)="applyLanguage(language)"
+            [ngClass]="{ active: languagesApplied.includes(language) }"
+          >
+            <span>+</span> {{ language.valueOf() }}
+          </li>
+          }
+        </ul>
+      </div>
+
+      <app-button
+        type="submit"
+        class="w-full flex cursor-default justify-center items-center"
+        className="w-full min-w-[155px] max-w-[175px]"
+        title="Send complete infor for book"
+      >
+        Complete book
+      </app-button>
+    </form>
+  </admin-card>
+</div>

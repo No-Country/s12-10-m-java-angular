@@ -7,7 +7,7 @@ import { ChangeDetectionStrategy, Component, Input, type OnInit } from '@angular
   imports: [],
   template: `
   <section class="admin-card">
-    <div>
+    <div class="title">
       <h3>
         {{ titleCard }}
       </h3>
@@ -21,6 +21,7 @@ import { ChangeDetectionStrategy, Component, Input, type OnInit } from '@angular
       box-shadow: 0px 0px 12px 0px rgba(43, 0, 0, 0.10);
       padding-inline: 20px;
       padding-block: 10px;
+      overflow: hidden;
     }
     .admin-card h3 {
       color: #313131;
