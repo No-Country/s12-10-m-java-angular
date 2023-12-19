@@ -80,61 +80,135 @@
     color: #069150;
 }
 
-.default-button{
-    text-overflow: ellipsis;
-      border-radius: 3.125rem;
-      padding-inline: 0.25rem;
-      padding-block: 0.6rem;
-      font-size: .875rem;
-      font-weight: 500;
-      transition: background .19s linear, box-shadow .17s cubic-bezier(0.65, 0.05, 0.36, 1);
-  }
+button.default-button.up-button.activate {
+  transition: none;
+  background: rgb(51 204 125 / 40%);
+  height: 2.15rem;
+  width: min-content;
+  padding-block: 0.5rem;
+  color: oklch(0.68 0.16 155.51);
+  background-blend-mode: difference;
+  padding-inline: 0.85rem;
+  scale: 1.01;
 
-  .default-button:hover{
-      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.30);
-  }
-
-  .card-book.near-center-effect {
-    /* Estilos especiales para las tarjetas cerca del centro */
-    /* Puedes ajustar estos estilos según tus necesidades */
-    transform: scale(1.2);
-    transition: transform 0.3s ease-in-out;
-  }
-
-  .green-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-overflow: ellipsis;
-    border-radius: 0.9375rem;
-    font-size: .875rem;
-    font-weight: 500;
-    background-color: #15AD67;
-    color: #FFFFFF;
-    height: 2.55rem;
-    outline: none;
-  }
-
-  .default-button:hover,  .default-button:focus {
-      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.30);
-      background-color: #069150;
-  }
-
-
-  .green-button.take-out {
-    background-color: #D9D9D9;
-    color: #FFFFFF;
-    height: 2.55rem;
-    outline: none;
-  }
-
-.up-button.activate svg {
-  transition-property: scale;
-  transition-duration: 400ms;
+  transition-property: background, color, scale, box-shadow, outline,
+    stroke-width;
+  transition-duration: 0.17s;
   transition-timing-function: ease;
+  box-shadow: none;
 }
 
-.up-button.activate:hover svg{
-  scale: 1.175;
+button.default-button.activate:hover,
+button.default-button.take-out:hover {
+  box-shadow: none;
 }
 
+button.default-button.activate:hover {
+  background: rgb(51 204 125 / 40%);
+}
+
+button.default-button.take-out:hover {
+  background: rgb(39 191 113);
+}
+
+button.default-button.take-out {
+  transition: none;
+
+  padding-inline: 0.85rem;
+  padding-block: 0.5rem;
+  width: min-content;
+  height: 2.15rem;
+  cursor: pointer;
+  color: #ffffff;
+
+  outline: none;
+  background: rgb(39 191 113);
+
+  transition-property: background, color, scale, box-shadow, outline,
+    stroke-width;
+  transition-duration: 0.17s;
+  transition-timing-function: ease;
+  box-shadow: none;
+}
+
+button.default-button .svg-celebrate-icon {
+  position: absolute;
+  display: none;
+  stroke: #ffffff;
+  fill: #ffffff;
+  stroke-width: 2.5px;
+}
+
+button.default-button.take-out .svg-celebrate-icon {
+  animation: svg-celebrate 0.4s;
+  animation-fill-mode: forwards;
+  display: block;
+}
+
+button.up-button.take-out .cart {
+  animation: icon-up-scale 0.5s;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+button.up-button.activate .cart {
+  animation: icon-down-scale 0.5s;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+button.default-button.activate:hover .cart {
+  scale: 1.1;
+}
+button.default-button.take-out:hover .cart {
+  scale: 0.95;
+}
+
+button.up-button.activate .cart path {
+  stroke-width: 40px;
+}
+
+button.up-button.take-out .cart path {
+  stroke-width: 43.5px;
+}
+
+@keyframes icon-up-scale {
+  from {
+    scale: 0.25;
+  }
+  25% {
+    scale: 1.2;
+  }
+  50% {
+    scale: 1.02;
+  }
+}
+
+@keyframes icon-down-scale {
+  from {
+    scale: 1.22;
+  }
+  25% {
+    scale: 0.97;
+  }
+  50% {
+    scale: 1.01;
+  }
+}
+
+@keyframes svg-celebrate {
+  0% {
+    scale: 0;
+  }
+
+  50% {
+    opacity: 1;
+    filter: brightness(1.5);
+  }
+
+  100% {
+    scale: .55;
+    opacity: 0;
+    display: none;
+  }
+}

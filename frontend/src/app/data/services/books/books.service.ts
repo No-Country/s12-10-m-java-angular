@@ -90,7 +90,7 @@ export class BooksService {
 
   public completeBook() {
     //const book =
-    return this.api.httpPost('book/addInfoBook', this.createdBook, true);
+    return this.api.httpPost('book/addInfoBook', this.createdBook.book, true);
   }
 
   public update(id: number, book: BookDetail): Observable<any> {

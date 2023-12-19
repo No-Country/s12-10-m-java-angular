@@ -179,17 +179,6 @@ button.default-button.take-out .svg-celebrate-icon {
   display: block;
 }
 
-button.default-button.activate:hover .cart {
-  scale: 1.1;
-}
-button.default-button.take-out:hover .cart {
-  scale: 0.95;
-}
-
-button.up-button.activate .cart path {
-  stroke-width: 40px;
-}
-
 button.up-button.take-out .cart {
   animation: icon-up-scale 0.5s;
   animation-fill-mode: forwards;
@@ -200,6 +189,17 @@ button.up-button.activate .cart {
   animation: icon-down-scale 0.5s;
   animation-fill-mode: forwards;
   animation-play-state: running;
+}
+
+button.default-button.activate:hover .cart {
+  scale: 1.1;
+}
+button.default-button.take-out:hover .cart {
+  scale: 0.95;
+}
+
+button.up-button.activate .cart path {
+  stroke-width: 40px;
 }
 
 button.up-button.take-out .cart path {

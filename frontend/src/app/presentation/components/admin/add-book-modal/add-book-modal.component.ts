@@ -75,10 +75,14 @@ export class AddBookModalComponent implements OnInit, OnDestroy {
 
     if (event && modal === 1) this.toast.success(
       'Book has been created',
-      'Now complete the information of the book',
+      'Now complete the info of the book.',
       5
     );
-    if (event && modal === 2) this.toast.success('Information has been saved', '', 5);
-    if (event && modal === 3) this.toast.success('Saved successfully', 'Now add image to your book!', 5);
+    if (event && modal === 2) this.toast.success('Info has been saved', 'Now add image to your book!', 5);
+    if (event && modal === 3) this.toast.success(
+      'Saved successfully',
+      'Book has been completely created.',
+      5
+    );
   }
 }

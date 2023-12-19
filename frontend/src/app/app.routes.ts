@@ -48,7 +48,7 @@ export const routes: Routes = [
       ),
     providers: [ShopService, FilterService],
     data: { preload: true },
-    canActivate: [AuthGuard]
+    canActivate: []
   },
   {
     path: 'cart',

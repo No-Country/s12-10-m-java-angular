@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { LoggedInService } from '../services/login/loggedIn.service';
 
@@ -8,15 +8,14 @@ import { LoggedInService } from '../services/login/loggedIn.service';
 })
 export class cartGuard {
 
-  constructor(private loggedInService: LoggedInService){}
+  constructor(private loggedInService: LoggedInService, private router: Router){}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    const usuarioAutorizado = this.loggedInService.isLoggedIn();
-
-    if (usuarioAutorizado) {
+    if (this.loggedInService.isLoggedIn()) {
       return true;
     } else {
+      this.router.navigate(['/login']);
       return false;
     }
   }

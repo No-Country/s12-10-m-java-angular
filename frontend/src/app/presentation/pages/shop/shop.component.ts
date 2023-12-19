@@ -106,7 +106,7 @@ export class ShopComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const loading = this.loading;
     const shopService = this.shopService;
-
+    window.scroll({top: 0})
     this.filterService.updateResultList
       .asObservable()
       .pipe(takeUntil(this.destroy$))
