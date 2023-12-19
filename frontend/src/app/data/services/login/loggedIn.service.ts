@@ -42,4 +42,18 @@ export class LoggedInService {
 
     setTimeout(()=> location.reload(), 200);
   }
+
+  public isLogged(): boolean {
+    const { id, name, lastName, email, role } = sessionStorage;
+    const token = localStorage.getItem('token');
+
+    if (token && id && name && lastName && email && role) {
+      console.log('esta logueado')
+      return true
+    }
+    else{
+      console.log('no esta logueado')
+      return false
+    }
+  }
 }
