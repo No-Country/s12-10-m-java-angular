@@ -16,7 +16,6 @@ export class LoggedInService {
     localStorage.setItem('token', values.jwt);
   }
 
-  // 
   public verifyLogin() {
     const { id, name, lastName, email, role } = sessionStorage;
     const token = localStorage.getItem('token');
@@ -47,6 +46,4 @@ export class LoggedInService {
     const id = sessionStorage.getItem('id');
     return id !== null && id !== undefined;
   }
-  
-  
 }

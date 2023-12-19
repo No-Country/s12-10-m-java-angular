@@ -19,7 +19,7 @@ import { PanelComponent } from '@presentation/pages/panel/panel.component';
   standalone: true,
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  providers: [ToastService, LoggedInService],
+  providers: [ToastService],
   imports: [
     CommonModule,
     RouterOutlet,

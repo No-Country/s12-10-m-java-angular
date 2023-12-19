@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Book, BookDetail } from '../../../data/models/book';
 import { Router, RouterLink } from '@angular/router';
@@ -16,15 +16,19 @@ import { LoggedInService } from 'app/data/services/login/loggedIn.service';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CardBookHorizontalComponent {
+export class CardBookHorizontalComponent implements OnInit{
   @Input() public book: BookDetail;
   @Input() public className: string = '';
-  @Input() public onCart: boolean = false;
+  public onCart: boolean = false;
 
   constructor(public cartService: CartService,
     private router: Router,
     private loggedInService: LoggedInService) {
     this.book = {} as BookDetail;
+  }
+
+  ngOnInit(): void {
+    this.onCart = this.cartService.isInTheCart(this.book.id)
   }
 
   addOrRemove() {

@@ -5,7 +5,8 @@ import { ChangeDetectionStrategy, Component, Input, type OnInit } from '@angular
   selector: 'admin-card',
   standalone: true,
   imports: [],
-  template: ` <section class="admin-card">
+  template: `
+  <section class="admin-card">
     <div>
       <h3>
         {{ titleCard }}

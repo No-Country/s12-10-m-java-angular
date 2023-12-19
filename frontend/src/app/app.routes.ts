@@ -7,7 +7,8 @@ import { BookDetailComponent } from '@presentation/pages/book-detail/book-detail
 import { BooksService } from './data/services/books/books.service';
 import { bookDetailResolver } from './data/guards/BookDetail.resolver';
 import { FilterService } from './data/services/shop/filter.service';
-import { AuthGuard } from './data/guards/Auth.guard';
+import { cartGuard } from './data/guards/cart.guard';
+
 
 
 export const routes: Routes = [
@@ -55,6 +56,7 @@ export const routes: Routes = [
       import('@presentation/pages/cart/cart.component').then(
         (c) => c.CartComponent
       ),
+    canActivate: [cartGuard],
   },
   {
     path: 'forgot-password',

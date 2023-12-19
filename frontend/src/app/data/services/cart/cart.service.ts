@@ -77,4 +77,9 @@ export class CartService {
     this.booksOnCart = [];
     this.updateLocalStorage(this.booksOnCart);
   }
+
+  isInTheCart(id:string | number):boolean{
+    return this.booksOnCart.some((bookOfCart) => bookOfCart.book.id == id);
+  }
+
 }

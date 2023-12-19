@@ -4,13 +4,11 @@ import { ApiService } from '../api.service';
 import {  Observable, Observer, Subject, firstValueFrom, takeUntil } from 'rxjs';
 import { AuthResponse } from 'app/data/models/AuthResponse';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class LoginService  {
   private api: ApiService = this.injector.get(ApiService);
 
-  constructor(private injector: Injector) { 
+  constructor(private injector: Injector) {
   }
 
   public login(loginSubmitted: UserLoginState): Observable<any>  {
