@@ -10,44 +10,63 @@ import { DefaultButtonComponent } from '../default-button/default-button.compone
 
 @Component({
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ErrorMessageComponent, LinkComponent, DefaultButtonComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    ErrorMessageComponent,
+    LinkComponent,
+    DefaultButtonComponent,
+  ],
   selector: 'login-form',
   templateUrl: './login-form.component.html',
-  styleUrls: ['./login-form.component.css'],
+  styleUrls: ['./login-form.component.css', '../../shared/form.style.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginFormComponent implements OnInit, OnDestroy {
   @Output() loginFormSubmitted: EventEmitter<UserLoginState>;
   protected loginForm!: FormGroup;
   protected viewPassword = false;
-  
+
   protected formBuilder: FormBuilder = inject(FormBuilder);
   protected renderer: Renderer2 = inject(Renderer2);
-  
-  
-  constructor() { 
-    this.loginFormSubmitted = new EventEmitter()
+
+  constructor() {
+    this.loginFormSubmitted = new EventEmitter();
     this.loginForm = this.createLoginForm();
   }
   ngOnDestroy(): void {
     this.loginForm.reset();
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  private createLoginForm(): FormGroup{
+  private createLoginForm(): FormGroup {
     return this.formBuilder.group({
-      email:    ['', [Validators.pattern(
-        /^\s*(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\s*$/,
-      ), Validators.required]],
-      password: ['', [Validators.required, Validators.pattern("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,32}$")]]
+      email: [
+        '',
+        [
+          Validators.pattern(
+            /^\s*(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\s*$/
+          ),
+          Validators.required,
+        ],
+      ],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,32}$'),
+        ],
+      ],
     });
   }
 
-  protected onSubmit(){
-    if(this.loginForm.valid)
-      this.loginFormSubmitted.emit({email: this.loginForm.value.email, password: this.loginForm.value.password} as UserLoginState);
+  protected onSubmit() {
+    if (this.loginForm.valid)
+      this.loginFormSubmitted.emit({
+        email: this.loginForm.value.email,
+        password: this.loginForm.value.password,
+      } as UserLoginState);
   }
 
   protected toogleViewPassword(event: any): void {
@@ -55,8 +74,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
 
     const target = event.currentTarget as HTMLElement;
 
-    this.viewPassword   && this.renderer.addClass(target, 'active');
+    this.viewPassword && this.renderer.addClass(target, 'active');
     !this.viewPassword && this.renderer.removeClass(target, 'active');
   }
-
 }

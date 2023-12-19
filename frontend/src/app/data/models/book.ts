@@ -1,3 +1,5 @@
+import { AddModal, AddState } from "./Admin";
+
 export interface Book {
     idBook: number | string;
     title: string;
@@ -79,6 +81,13 @@ export enum Language {
     FRENCH = "French",
     ITALIAN = "Italian",
 };
+
+export interface BookCreation {
+  book: Book;
+  stateCreate: AddModal;
+  stateComplete: AddModal;
+  stateAddImg: AddModal;
+}
 
 export const GENRES: Genre[] = [
   Genre.HORROR,

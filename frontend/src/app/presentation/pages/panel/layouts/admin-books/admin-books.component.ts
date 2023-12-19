@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, type OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { AddBookModalComponent } from '@presentation/components/admin/add-book-modal/add-book-modal.component';
 import { AdminCardComponent } from '@presentation/components/admin/admin-card/admin-card.component';
 import { BookAdminTableComponent } from '@presentation/components/admin/book-admin-table/book-admin-table.component';
 import { PageTabComponent } from '@presentation/components/admin/page-tab/page-tab.component';
@@ -21,13 +22,16 @@ import { Book } from 'app/data/models/book';
     PageTabComponent,
     DefaultButtonComponent,
     BookAdminTableComponent,
-    FormsModule
+    FormsModule,
+    AddBookModalComponent,
   ],
 })
 export class AdminBooksComponent implements OnInit {
   protected bookDataSource: Book[] = BOOK_DATA_SOURCE;
   protected bookColumns: TableColumns[] = BOOK_COLUMN;
   public search: string = '';
+
+  public viewAddBook: boolean = false;
   constructor() {}
   ngOnInit(): void {}
 }

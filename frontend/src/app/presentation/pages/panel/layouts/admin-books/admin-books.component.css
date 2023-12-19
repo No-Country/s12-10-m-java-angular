@@ -23,3 +23,9 @@ section{
 }
 
 
+.header-table ::ng-deep button svg {
+  width: 1.75rem;
+  height: 1.75rem;
+  margin-inline-end: .5rem;
+}
+

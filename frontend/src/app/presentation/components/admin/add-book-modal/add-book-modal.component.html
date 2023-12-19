@@ -1,0 +1,51 @@
+<div class="modal fixed z-50 inset-0">
+  @if(mainModal){
+  <admin-card
+    titleCard="Fill in the details to add the book"
+    class="flex h-full"
+  >
+    <div class="flex flex-col justify-center items-center gap-y-10 mt-8">
+      <step-add
+        class="w-full"
+        urlImg="../../../../../assets/icons/book-open-icon.svg"
+        stepTitle="Create Book"
+        stepText="Add book title and ISBN"
+        button="Create"
+        [isActive]="bookService.createdBook.stateCreate.state === 0"
+        (openModel)="togleModal(1)"
+      ></step-add>
+
+      <step-add
+        class="w-full"
+        urlImg="../../../../../assets/icons/book-complete-icon.svg"
+        stepTitle="Complete Book"
+        stepText="Tell us more about the book"
+        button="Complete"
+        [isActive]="bookService.createdBook.stateCreate.state === 2 && bookService.createdBook.stateComplete.state !== 2"
+        (openModel)="togleModal(2)"
+      ></step-add>
+
+      <step-add
+        class="w-full"
+        urlImg="../../../../../assets/icons/book-gallery-icon.svg"
+        stepTitle="Add book images"
+        stepText="Add images from the book"
+        [isActive]="bookService.createdBook.stateComplete.state === 2"
+        button="Add"
+        (openModel)="togleModal(3)"
+      ></step-add>
+
+      <div class="road"></div>
+    </div>
+  </admin-card>
+  }
+
+  @if( bookService.createdBook.stateCreate.open ){
+    <create-book-modal (closeModal)="closeModal($event, 1)"></create-book-modal>
+  }
+
+  @if( bookService.createdBook.stateComplete.open ){
+    <comple-book-modal (closeModal)="closeModal($event, 2)"></comple-book-modal>
+  }
+  <app-toast></app-toast>
+</div>

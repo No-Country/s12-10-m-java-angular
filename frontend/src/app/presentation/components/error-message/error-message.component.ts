@@ -67,7 +67,7 @@ import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
       .tooltiptext {
         animation: none;
         visibility: hidden;
-        width: fit-content;
+        width: max-content;
         background-color: #333;
         color: #fff;
         text-align: center;

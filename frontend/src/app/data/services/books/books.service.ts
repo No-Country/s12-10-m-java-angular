@@ -1,17 +1,34 @@
 import { Injectable, Injector } from '@angular/core';
-import { Book, BookDetail, BookPagination } from 'app/data/models/book';
-import { Observable, Observer, first, map, of, take, takeUntil, tap } from 'rxjs';
+import {
+  Book,
+  BookCreation,
+  BookDetail,
+  BookPagination,
+} from 'app/data/models/book';
+import {
+  Observable,
+  Observer,
+  first,
+  map,
+  of,
+  take,
+  takeUntil,
+  tap,
+} from 'rxjs';
 import { ApiService } from '../api.service';
+import { AddModal, AddState } from 'app/data/models/Admin';
 
 @Injectable()
 export class BooksService {
   private latestBooks: BookDetail[];
-
   private api: ApiService = this.injector.get(ApiService);
+
+  public createdBook: BookCreation;
 
   constructor(private injector: Injector) {
     const books = sessionStorage.getItem('latestBooks');
 
+    this.createdBook = {} as BookCreation;
     try {
       this.latestBooks =
         books !== null && books !== undefined
@@ -47,12 +64,33 @@ export class BooksService {
     }
   }
 
+  public resetState(): void {
+    this.createdBook.book = {} as Book;
+    this.createdBook.stateCreate = {
+      open: false,
+      state: AddState.WAITING,
+    } as AddModal;
+    this.createdBook.stateComplete = {
+      open: false,
+      state: AddState.WAITING,
+    } as AddModal;
+    this.createdBook.stateAddImg = {
+      open: false,
+      state: AddState.WAITING,
+    } as AddModal;
+  }
+
   public detail(id: string): Observable<Book> {
     return this.api.httpGet(`book/${id}`, false);
   }
 
-  public save(book: BookDetail): Observable<any> {
-    return this.api.httpPost('book/createBookRequest', book);
+  public save(ID: string, title: string, isbn: string): Observable<any> {
+    return this.api.httpPost('book/createBook', { idBook: ID, title, isbn }, true);
+  }
+
+  public completeBook() {
+    //const book =
+    return this.api.httpPost('book/addInfoBook', this.createdBook, true);
   }
 
   public update(id: number, book: BookDetail): Observable<any> {

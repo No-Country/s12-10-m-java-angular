@@ -27,6 +27,15 @@ export interface TableColumns {
   id: string;
 };
 
+export enum AddState {
+  WAITING=0, SENDING=1, COMPLETE=2
+}
+
+export interface AddModal {
+  state: AddState;
+  open: boolean;
+}
+
 export const BOOK_DATA_SOURCE: Book[] = [
   {
     idBook: 'book-admin-id-1',
