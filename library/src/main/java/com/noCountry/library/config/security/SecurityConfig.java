@@ -48,6 +48,7 @@ public class SecurityConfig {
                    authRequestConfig.requestMatchers(HttpMethod.GET,"/authenticate/hello").permitAll();
                    authRequestConfig.requestMatchers(HttpMethod.GET,"/book/**").permitAll();
                    authRequestConfig.requestMatchers("/author/**").permitAll();
+                   authRequestConfig.requestMatchers("/swagger-ui/**", "/v2/api-docs").permitAll();
                    authRequestConfig.anyRequest().authenticated();
                })
                .build();

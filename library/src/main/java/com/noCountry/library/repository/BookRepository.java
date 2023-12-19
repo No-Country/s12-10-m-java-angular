@@ -17,15 +17,19 @@ import java.util.Optional;
 @Repository
 public interface BookRepository extends JpaRepository<Book, String>, JpaSpecificationExecutor<Book> {
 
+    Page<Book> findAllByStatusTrue(Pageable pageable);
+
     Optional<Book> findByISBN(String isbn);
 
     Page<Book> findByGenreAndStatusTrue(Genre genre, Pageable pageable);
 
-    Page<Book> findByTitleContaining(String partialTitle, Pageable pageable);
+    Page<Book> findByTitleContainingAndStatusTrue(String partialTitle, Pageable pageable);
 
-    Page<Book> findAllByOrderByCreationDateDesc(Pageable pageable);
+    Page<Book> findAllByStatusTrueOrderByCreationDateDesc(Pageable pageable);
 
-    Page<Book> findAllByOrderByRatingDesc(Pageable pageable);
+    Page<Book> findAllByStatusTrueOrderByRatingDesc(Pageable pageable);
+
+    Page<Book> findAllByStatusTrueOrderBySalesAmountDesc(Pageable pageable);
 
     @Modifying
     @Transactional
