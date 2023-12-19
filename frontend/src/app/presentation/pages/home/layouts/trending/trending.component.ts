@@ -29,16 +29,16 @@ export class TrendingComponent implements AfterViewInit, OnInit{
   protected filterProps: BookFilterProps={
     page: 1,
     size: 12,
-  
+
     minPrice: 0,
     maxPrice: 9999999,
-  
+
     minPage: 9999999,
     genre: GENRES,
-  
+
     language: LANGUAGES,
     searchEvenNotAvailable: 1,
-  
+
     orderBy: 'salesAmount',
     ascOrDesc: 'asc',
   };
@@ -57,7 +57,7 @@ export class TrendingComponent implements AfterViewInit, OnInit{
         console.error('Error al obtener los libros:', error);
       }
     );
-    console.log(this.loggedInService.isLogged())
+    console.log(this.loggedInService.isLoggedIn());
   }
 
   @ViewChild('bookList') bookList!: ElementRef;

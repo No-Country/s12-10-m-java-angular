@@ -12,10 +12,10 @@ export class cartGuard {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    const usuarioAutorizado = this.loggedInService.isLogged();
+    const usuarioAutorizado = this.loggedInService.isLoggedIn();
 
     if (usuarioAutorizado) {
-      return true; 
+      return true;
     } else {
       return false;
     }

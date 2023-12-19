@@ -8,6 +8,7 @@ import { BooksService } from './data/services/books/books.service';
 import { bookDetailResolver } from './data/guards/BookDetail.resolver';
 import { FilterService } from './data/services/shop/filter.service';
 import { cartGuard } from './data/guards/cart.guard';
+import { AuthGuard } from './data/guards/Auth.guard';
 
 
 
@@ -47,7 +48,7 @@ export const routes: Routes = [
       ),
     providers: [ShopService, FilterService],
     data: { preload: true },
-    canActivate: [AuthGuard] 
+    canActivate: [AuthGuard]
   },
   {
     path: 'cart',
