@@ -21,7 +21,7 @@
         stepTitle="Complete Book"
         stepText="Tell us more about the book"
         button="Complete"
-        [isActive]="bookService.createdBook.stateCreate.state === 2"
+        [isActive]="bookService.createdBook.stateCreate.state === 2 && bookService.createdBook.stateComplete.state !== 2"
         (openModel)="togleModal(2)"
       ></step-add>
 
@@ -41,10 +41,11 @@
   }
 
   @if( bookService.createdBook.stateCreate.open ){
-    <create-book-modal (closeModal)="togleModal(1)"></create-book-modal>
+    <create-book-modal (closeModal)="closeModal($event, 1)"></create-book-modal>
   }
 
   @if( bookService.createdBook.stateComplete.open ){
-    <comple-book-modal></comple-book-modal>
+    <comple-book-modal (closeModal)="closeModal($event, 2)"></comple-book-modal>
   }
+  <app-toast></app-toast>
 </div>

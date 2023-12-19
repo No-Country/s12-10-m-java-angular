@@ -3,6 +3,25 @@
   position: relative;
 }
 
+.modal ::ng-deep .admin-card .title {
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 50%;
+}
+
+.modal .close {
+  display: inline-flex;
+  width: 50%;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.modal .close svg {
+  cursor: pointer;
+  user-select: none;
+}
+
 textarea {
   outline: none;
   width: 100%;
@@ -92,4 +111,9 @@ textarea {
 }
 .custom-select ul li.active {
   color: lch(57 48.08 154.05);
+}
+
+form ::ng-deep button[type='submit']:disabled {
+    cursor: not-allowed;
+    background-color: oklch(0.74 0.14 156.42);
 }

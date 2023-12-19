@@ -1,6 +1,25 @@
 <div class="modal absolute z-100 inset-0">
-  <admin-card titleCard="Complete Book Info" class="flex h-full absolute inset-0 overflow-y-scroll">
-    <form [formGroup]="completeForm" class="mt-7">
+  <admin-card
+    titleCard="Complete Book Info"
+    class="flex h-full absolute inset-0 overflow-y-scroll"
+  >
+    @if( !sending ){
+    <div class="close">
+      <svg
+        (click)="closeModal.emit(false)"
+        xmlns="http://www.w3.org/2000/svg"
+        width="23"
+        height="23"
+        viewBox="0 0 23 23"
+        fill="none"
+      >
+        <path
+          d="M23 2.31643L20.6836 0L11.5 9.18357L2.31643 0L0 2.31643L9.18357 11.5L0 20.6836L2.31643 23L11.5 13.8164L20.6836 23L23 20.6836L13.8164 11.5L23 2.31643Z"
+          fill="black"
+        />
+      </svg>
+    </div>
+    <form [formGroup]="completeForm" (submit)="onSubmit()" class="mt-7">
       <div class="flex justify-center items-center w-full gap-x-7">
         <div class="w-full h-[80px]">
           <div class="input-group w-full">
@@ -20,13 +39,13 @@
             <label
               for="author-book"
               class="form-label translate-top-label"
-              style="--label-bg: #fff;"
+              style="--label-bg: #fff"
               >Author <span class="text-red-600">*</span></label
             >
           </div>
 
           <error-message
-            [showError]="false"
+            [showError]="(author.dirty && author.touched) && author.invalid"
             errorMessage="Author name is required"
             errorClass="text-red-500"
           />
@@ -49,13 +68,13 @@
             <label
               for="editorial-book"
               class="form-label translate-top-label"
-              style="--label-bg: #fff;"
+              style="--label-bg: #fff"
               >Editorial <span class="text-red-600">*</span></label
             >
           </div>
 
           <error-message
-            [showError]="false"
+            [showError]="(editorial.dirty && editorial.touched) && editorial.invalid"
             errorMessage="Editorial name is required"
             errorClass="text-red-500"
           />
@@ -81,13 +100,13 @@
             <label
               for="pages-book"
               class="form-label translate-top-label"
-              style="--label-bg: #fff;"
+              style="--label-bg: #fff"
               >Pages <span class="text-red-600">*</span></label
             >
           </div>
 
           <error-message
-            [showError]="false"
+            [showError]="(pages.dirty && pages.touched) && pages.invalid"
             errorMessage="Write a valid page number"
             errorClass="text-red-500"
           />
@@ -118,7 +137,7 @@
           </div>
 
           <error-message
-            [showError]="false"
+            [showError]="(price.dirty && price.touched) && price.invalid"
             errorMessage="Write a valida page number"
             errorClass="text-red-500"
           />
@@ -149,7 +168,7 @@
           </div>
 
           <error-message
-            [showError]="false"
+            [showError]=" (quantity.dirty && quantity.touched) && quantity.invalid "
             errorMessage="Write a valid quantity."
             errorClass="text-red-500"
           />
@@ -169,6 +188,8 @@
           autocapitalize="off"
           autocorrect="on"
           maxlength="255"
+          minlength="10"
+          required
         ></textarea>
 
         <label
@@ -184,17 +205,15 @@
           Select Genres
           <div class="button">?</div>
 
-          <div class="tooltiptext">
-            Select at least one genre for the book.
-          </div>
+          <div class="tooltiptext">Select at least one genre for the book.</div>
         </label>
 
         <ul aria-label="Combo-box options list">
           @for(genre of GENRES; track '4-'+genre){
           <li
             role="checkbox"
-            (click)="applyGenre(genre)"
-            [ngClass]="{ active: genreApplied.includes(genre) }"
+            (click)="genreApplied = genre"
+            [ngClass]="{ active: genreApplied === genre }"
           >
             <span>+</span> {{ genre.valueOf() }}
           </li>
@@ -216,8 +235,8 @@
           @for(language of LANGUAGES; track '4-'+language){
           <li
             role="checkbox"
-            (click)="applyLanguage(language)"
-            [ngClass]="{ active: languagesApplied.includes(language) }"
+            (click)="languageApplied = language"
+            [ngClass]="{ active: languageApplied === language }"
           >
             <span>+</span> {{ language.valueOf() }}
           </li>
@@ -230,9 +249,17 @@
         class="w-full flex cursor-default justify-center items-center"
         className="w-full min-w-[155px] max-w-[175px]"
         title="Send complete infor for book"
+        [isDisable]=" completeForm.invalid  ||  genreApplied === ''  ||  languageApplied === '' "
       >
         Complete book
       </app-button>
     </form>
+    } @else {
+    <div class="w-full flex justify-center items-center p-20">
+      <dot-spinner class="m-auto"></dot-spinner>
+    </div>
+    }
   </admin-card>
 </div>
+
+<app-toast></app-toast>

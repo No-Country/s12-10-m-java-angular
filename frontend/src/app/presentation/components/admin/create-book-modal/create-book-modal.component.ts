@@ -6,6 +6,7 @@ import {
   type OnInit,
   EventEmitter,
   OnDestroy,
+  inject,
 } from '@angular/core';
 import { AdminCardComponent } from '../admin-card/admin-card.component';
 import { ErrorMessageComponent } from '@presentation/components/error-message/error-message.component';
@@ -17,9 +18,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { BooksService } from 'app/data/services/books/books.service';
-import { Subject, delay, of, takeUntil, tap } from 'rxjs';
+import { Subject, catchError, delay, of, takeUntil, tap } from 'rxjs';
 import { DefaultButtonComponent } from '@presentation/components/default-button/default-button.component';
 import { AddState } from 'app/data/models/Admin';
+import { ToastComponent } from '@presentation/components/toast/toast.component';
+import { ToastService } from 'app/data/services/toast/Toast.service';
 
 @Component({
   selector: 'create-book-modal',
@@ -31,13 +34,18 @@ import { AddState } from 'app/data/models/Admin';
     SpinnerComponent,
     ReactiveFormsModule,
     DefaultButtonComponent,
+    ToastComponent,
   ],
   templateUrl: './create-book-modal.component.html',
-  styleUrls: ['./create-book-modal.component.css', '../../../shared/form.style.css'],
+  styleUrls: [
+    './create-book-modal.component.css',
+    '../../../shared/form.style.css',
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateBookModalComponent implements OnInit, OnDestroy {
   @Output() public closeModal: EventEmitter<boolean> = new EventEmitter();
+  private readonly toast = inject(ToastService);
 
   protected createBookForm: FormGroup;
   public sending: boolean = false;
@@ -76,30 +84,49 @@ export class CreateBookModalComponent implements OnInit, OnDestroy {
 
   private createForm() {
     return this.builder.group({
-      title: ['', Validators.required],
-      isbn: ['', Validators.required],
+      title: ['', [Validators.required]],
+      isbn: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^[0-9]+$/),
+          Validators.maxLength(13),
+          Validators.minLength(10),
+        ],
+      ],
     });
   }
 
   onSubmit() {
-    const { title, ISBN } = this.createBookForm.value;
-    this.sending = true;
+    let sending = this.sending;
+    let isbnNotUK = this.isbnNotUK;
+    const { title, isbn } = this.createBookForm.value;
+    const ID = crypto.randomUUID();
+    this.bookService.createdBook.book.idBook = ID;
+
+    sending = !sending;
     this.bookService.createdBook.stateCreate.state = AddState.SENDING;
-    of(true)
-      .pipe(delay(1000))
-      .subscribe(
-          ()=>{
-            this.sending = false;
-            this.bookService.createdBook.stateCreate.state = AddState.COMPLETE;
-            this.bookService.createdBook.book.idBook = crypto.randomUUID();
-            this.bookService.createdBook.book.title = title;
-            this.bookService.createdBook.book.isbn = ISBN;
 
-            this.lastISBN = ISBN;
-            this.lastTitle = title;
+    this.bookService.save(ID, title, isbn).subscribe({
+      next: (res: any) => {
+        sending = !sending;
+        this.bookService.createdBook.stateCreate.state = AddState.COMPLETE;
+        this.bookService.createdBook.book.title = title;
+        this.bookService.createdBook.book.isbn = isbn;
+        this.closeModal.emit(true);
+      },
+      error: (err: any) => {
+        this.lastISBN = isbn;
+        this.lastTitle = title;
+        sending = !sending;
+        this.bookService.createdBook.stateCreate.state = AddState.WAITING;
+        isbnNotUK = true;
+        this.toast.error('Opss', 'Ha ocurrido un error en el servidor', 5);
+      },
+    });
+  }
 
-            this.closeModal.emit(true);
-          }
-      );
+  public get isbn() {
+    return this.createBookForm.get('isbn')!;
   }
 }
