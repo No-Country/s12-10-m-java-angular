@@ -1,14 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, ViewChild, AfterViewInit, HostListener, OnInit, ChangeDetectorRef } from '@angular/core';
-import { BookDetail, BookFilterProps, BookPagination, GENRES, LANGUAGES } from 'app/data/models/book';
+import { ChangeDetectionStrategy, Component, ElementRef, Renderer2, ViewChild, AfterViewInit, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { BOOK_DETAIL_MOOK } from 'app/data/mocks/booksArray';
+import { BookDetail } from 'app/data/models/book';
 import { CardBookComponent } from "../../../../components/card-book/card-book.component";
 import { DefaultButtonComponent } from '@presentation/components/default-button/default-button.component';
 import { CardBookHorizontalComponent } from '@presentation/components/card-book-horizontal/card-book-horizontal.component';
 import { CartService } from 'app/data/services/cart/cart.service';
 import { RouterLink } from '@angular/router';
-import { TrendingServiceService } from 'app/data/services/trending/trending-service.service';
-import { LoginService } from 'app/data/services/login/login.service';
-import { LoggedInService } from 'app/data/services/login/loggedIn.service';
 
 @Component({
     standalone: true,
@@ -20,44 +18,23 @@ import { LoggedInService } from 'app/data/services/login/loggedIn.service';
 })
 export class TrendingComponent implements AfterViewInit, OnInit{
 
-  public booksArray!: BookDetail[];
+  protected booksArray: BookDetail[];
   protected classOfCard: string = "";
   protected scrollAmount: number = 279;
   protected screenWidth: number = window.innerWidth;
+  protected booksWithOnCart: (BookDetail & { onCart: boolean })[]=[];
   protected BooksOnCart: BookDetail[]=[]; //servicio booksOnCart
 
-  protected filterProps: BookFilterProps={
-    page: 1,
-    size: 12,
-  
-    minPrice: 0,
-    maxPrice: 9999999,
-  
-    minPage: 9999999,
-    genre: GENRES,
-  
-    language: LANGUAGES,
-    searchEvenNotAvailable: 1,
-  
-    orderBy: 'salesAmount',
-    ascOrDesc: 'asc',
-  };
-
-  constructor(private trendingService: TrendingServiceService, private cdr: ChangeDetectorRef, private loggedInService: LoggedInService ) {
+  constructor(private cartService: CartService) {
+    this.booksArray = BOOK_DETAIL_MOOK; this.BooksOnCart = cartService.bringCartOfService();
   }
 
   ngOnInit(){
-    this.trendingService.getHighestRatedBooks().subscribe(
-      arrayOfBooks => {
-        console.log('Array de libros:', arrayOfBooks);
-        this.booksArray = arrayOfBooks;
-        this.cdr.detectChanges();
-      },
-      error => {
-        console.error('Error al obtener los libros:', error);
-      }
-    );
-    console.log(this.loggedInService.isLogged())
+    console.log(this.BooksOnCart)
+    this.booksWithOnCart = this.booksArray.map(book => {
+      let onCart = this.BooksOnCart.some(cartBook => cartBook.id === book.id);
+      return { ...book, onCart };
+    });
   }
 
   @ViewChild('bookList') bookList!: ElementRef;
@@ -91,6 +68,43 @@ export class TrendingComponent implements AfterViewInit, OnInit{
       }
     }
 
+  }
+
+
+
+  onScroll(): void {/*
+    if (this.bookList) {
+      const list = this.bookList.nativeElement;
+
+      // Obtén la posición del centro de la pantalla
+      const centerPosition = window.innerWidth / 2;
+
+      // Itera sobre las tarjetas y aplica efectos según su distancia al centro
+      const cards = list.querySelectorAll('.card-book'); // Ajusta el selector según tu implementación
+      cards.forEach((card: HTMLElement) => {
+        const cardPosition = card.getBoundingClientRect().left + card.offsetWidth / 2;
+        console.log(card.getBoundingClientRect().left + card.offsetWidth / 2)
+        console.log('center position',centerPosition)
+        console.log('resta',centerPosition - cardPosition)
+
+        // Calcula la distancia al centro
+        const distanceToCenter = Math.abs(centerPosition - cardPosition);
+
+        // Aplica efectos según la distancia
+        // Puedes ajustar estos valores según tus necesidades
+        if (distanceToCenter < 800) {
+          // La tarjeta está cerca del centro
+          // Aplica un efecto especial
+          //card.classList.add('near-center-effect');
+          this.classOfCard='near-center-effect'
+        } else {
+          // La tarjeta no está cerca del centro
+          // Elimina el efecto especial si estaba aplicado
+          //card.classList.remove('near-center-effect');
+          //this.classOfCard='near-center-effect'
+        }
+      });
+    }*/
   }
 
 }

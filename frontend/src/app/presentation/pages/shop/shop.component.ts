@@ -94,7 +94,7 @@ export class ShopComponent implements OnInit, OnDestroy {
     this.destroy$ = new Subject();
 
 
-
+    
   }
 
   ngOnDestroy(): void {
@@ -128,7 +128,7 @@ export class ShopComponent implements OnInit, OnDestroy {
           });
       });
 
-      /*effect(() => {
+      effect(() => {
         const booksState = this.books().content;
         const BooksOnCart: BookDetail[]=this.cartService.bringCartOfService();
         if(booksState !== undefined){
@@ -137,7 +137,7 @@ export class ShopComponent implements OnInit, OnDestroy {
             return { ...book, onCart };
           });
         }
-      },{injector: this.injector});*/
+      },{injector: this.injector});
   }
 
   getBooks() {

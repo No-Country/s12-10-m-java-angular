@@ -73,13 +73,13 @@
 
     @if ( !this.loading() ){
     <div class="result-list">
-      @for(book of getBooks() | paginate: { id: 'books-pagination-ctr',
+      @for(book of booksWithOnCart | paginate: { id: 'books-pagination-ctr',
       itemsPerPage: filterService.props.size,
       currentPage: filterService.props.page+1,
       totalItems: books().totalElements }; track
       book.id){
-      <card-book [book]="book" ></card-book>
-      <app-card-book-horizontal [book]="book" class="mr-12" >
+      <card-book [book]="book" [onCart]="book.onCart"></card-book>
+      <app-card-book-horizontal [book]="book" class="mr-12" [onCart]="book.onCart">
       </app-card-book-horizontal>
       }
     </div>

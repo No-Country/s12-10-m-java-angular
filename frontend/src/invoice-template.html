@@ -1,27 +1,22 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
+<head>
     <style>
-      body {
+body {
         width: 100%;
-        min-height: 60dvw;
+        min-height: 100dvw;
         background: #fffffc;
-        overflow-x: hidden;
       }
-      main {
-        padding-inline: 2rem;
+       header {
+        background: #33B672;
       }
-      header {
-        background: #33b672;
-      }
-      h1 {
+       h1 {
         text-align: center;
         font-size: 2.5rem;
         padding-block-start: 1rem;
         color: #fffffc;
-        margin: 0;
       }
-      h2 {
+       h2 {
         text-align: center;
         color: #fffffc;
         font-weight: 500;
@@ -29,175 +24,132 @@
         padding-block-end: 1rem;
       }
       section {
+        display: flex;
+        justify-content: space-between;
         padding-inline: 2rem;
-        display: block;
-        height: 160px;
       }
       section h3 {
         font-weight: 600;
         font-size: 1.2rem;
-        padding-top: 0.5rem;
       }
       section p {
         font-size: 1rem;
         color: #242221;
       }
       section.payment-zone {
-        margin-top: 2rem;
+        margin-block-start: 2rem;
         border-radius: 0.9375rem;
-        background: rgba(228, 228, 228, 0.4);
-        display: block;
-        height: auto;
+        background: rgba(228, 228, 228, 0.40);
+        display: flex;
+        flex-direction: column;
       }
-
-      section.payment-zone table {
+      section.payment-zone > div {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: .2fr 1fr;
+        width: 100%;
         margin-block-end: 1rem;
       }
-      .payment-zone table tr td p {
-        margin-inline: 3rem;
+      .payment-zone div.head, .payment-zone div.body div  {
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
       }
       .payment-zone .total {
         border-top: 1px solid #000;
-        padding-top: 0.5rem;
-        display: block;
+        padding-block-start: .5rem;
+        display: flex;
+        flex-direction: column;
       }
-
+      .payment-zone .total div {
+                display: flex;
+        justify-content: space-between;
+      }
       footer {
         width: 100%;
-        display: block;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         margin-block-end: 2rem;
       }
       footer h2 {
         color: #242221;
       }
-      footer a {
-        text-decoration: none;
-        line-height: inherit;
-        outline: none;
-        overflow: hidden;
-        background: #33b672;
-        color: #fffffc;
-        padding: 10px;
-        border-radius: 0.9375rem;
-        text-align: center;
-        max-width: 200px;
-        max-height: 60px;
-        cursor: pointer;
-        user-select: none;
+   footer a {
+      text-decoration: none;
+          line-height: inherit;
+      outline: none;
+      overflow: hidden;
+      background: #33B672;
+      color: #fffffc;
+      padding: 10px;
+      border-radius: 0.9375rem;
+      text-align: center;
+      max-width: 200px;
+      cursor: pointer;
+      user-select: none;
       }
-      footer a:is(:focus, :hover, :active, :link) {
-        outline: none;
-        color: #fffffc;
-        text-decoration: none;
-        overflow: hidden;
-      }
-
-      .text-start {
-        text-align: start;
-      }
-      .text-end {
-        text-align: end;
-      }
-    </style>
-  </head>
-  <body>
-    <header>
-      <h1>Books Leaks</h1>
-      <h2>Thanks for your purchase :D</h2>
-    </header>
-    <main>
-      <section>
-        <table align="left">
-          <thead>
-            <tr>
-              <th class="text-start">
-                <h3>Billed to</h3>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="text-start">
-                <p>[User name]</p>
-              </td>
-            </tr>
-            <tr>
-              <td class="text-start">
-                <p>[Shipping Address]</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <table align="right">
-          <thead>
-            <tr>
-              <th class="text-end">
-                <h3>Payment Date</h3>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="text-end">
-                <p>[Payment-date]</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-
-      <section class="payment-zone">
-        <h3>Buys</h3>
-        <table align="center">
-          <thead>
-            <tr>
-              <th scope="col">
-                <h4>Product</h4>
-              </th>
-              <th><h4>Quantity</h4></th>
-              <th><h4>Price</h4></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td scope="row"><p>[book-name]</p></td>
-              <td scope="row"><p>[book-quantity]</p></td>
-              <td scope="row"><p>[book-price]</p></td>
-            </tr>
-          </tbody>
-        </table>
-        <section class="total">
-          <table align="left">
-            <tr>
-              <td class="text-start"><h3>Amount Paid</h3></td>
-            </tr>
-            <tr>
-              <td class="text-start"><h3>Invoice number</h3></td>
-            </tr>
-          </table>
-          <table align="right">
-            <tr>
-              <td class="text-end"><p>[number]</p></td>
-            </tr>
-            <tr>
-              <td class="text-end"><p>[Sub-total]</p></td>
-            </tr>
-          </table>
-        </section>
-      </section>
-    </main>
-    <footer>
-      <center>
-        <h2>You can continue viewing products</h2>
-      <a
-        href="https://books-leaks.netlify.app/shop?search=All&amp;sort=price"
-        target="_blank"
-        role="link"
-        dir="ltr"
-        rel="noopener"
-        >Keep watching</a
-      >
-      </center>
-    </footer>
-  </body>
+      </style>
+</head>
+<body>
+  <header>
+  <h1>Books Leaks</h1>
+  <h2>Thanks for your purchase :D</h2>
+</header>
+<main>
+  <section>
+    <div>
+      <h3>Billed to</h3>
+      <p>[User name]</p>
+      <p>[Shipping Address]</p>
+    </div>
+    <div>
+      <h3>Payment Date</h3>
+      <p>[Payment-date]</p>
+    </div>
+  </section>
+  <section class="payment-zone">
+    <h3>Buys</h3>
+    <div>
+      <div class="head">
+        <h4>Product</h4>
+        <h4>Product</h4>
+        <h4>Product</h4>
+      </div>
+      <div class="body">
+        <div>
+          <p>[book-name]</p>
+          <p>[book-quantity]</p>
+          <p>[book-price]</p>
+        </div>
+        <div>
+          <p>[book-name]</p>
+          <p>[book-quantity]</p>
+          <p>[book-price]</p>
+        </div>
+        <div>
+          <p>[book-name]</p>
+          <p>[book-quantity]</p>
+          <p>[book-price]</p>
+        </div>
+      </div>
+    </div>
+    <div class="total">
+      <div>
+        <h3>Amount Paid</h3>
+        <p>[Sub-total]</p>
+      </div>
+      <div>
+        <h3>Invoice number</h3>
+        <p>[number]</p>
+      </div>
+    </div>
+  </section>
+</main>
+<footer>
+  <h2>You can continue viewing products</h2>
+ <a href="https://books-leaks.netlify.app/shop?search=All&amp;sort=price" target="_blank" role="link" dir="ltr" rel="noopener">Keep watching</a>
+</footer>
+</body>
 </html>

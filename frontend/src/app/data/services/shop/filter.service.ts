@@ -120,7 +120,8 @@ export class FilterService {
     else this.props.orderBy = sort.code;
 
     this.sortApplied = sort;
-    this.props.page = 0;
+    this.props.page = 9;
+    this.props.searchEvenNotAvailable = 0;
     this.updateCacheProps(this.props);
     this.updateResultList.next(this.props);
   }
@@ -136,8 +137,8 @@ export class FilterService {
     this.props.genre =
       this.genreApplied.length > 0 ? this.genreApplied : ([] as Genre[]);
 
-    this.props.page = 0;
-    this.props.size = 9;
+    this.props.page = 9;
+    this.props.searchEvenNotAvailable = 0;
     this.updateCacheProps(this.props);
     this.updateResultList.next(this.props);
   }
@@ -155,31 +156,30 @@ export class FilterService {
         ? this.languageApplied
         : ([] as Language[]);
 
-
-    this.props.page = 0;
-    this.props.size = 9;
+    this.props.page = 9;
+    this.props.searchEvenNotAvailable = 0;
     this.updateResultList.next(this.props);
   }
 
   public updateMinPageNumber(pageNumber: number): void {
     this.props.minPage = pageNumber;
-    this.props.page = 0;
+    this.props.page = 9;
     this.props.searchEvenNotAvailable = 0;
     this.updateCacheProps(this.props);
     this.updateResultList.next(this.props);
   }
 
-  public updatePrices(minPrice: number | undefined, maxPrice: number | undefined): void {
-    if(maxPrice !== undefined && maxPrice !== null){
-      this.props.maxPrice = maxPrice;
-    }
+  public updatePrices(minPrice: number, maxPrice: number): void {
+    maxPrice !== undefined &&
+      maxPrice !== null &&
+      (this.props.maxPrice = maxPrice);
 
-    if (minPrice !== undefined && minPrice !== null) {
-      this.props.minPrice = minPrice;
-    }
+    minPrice !== undefined &&
+      minPrice !== null &&
+      (this.props.minPrice = minPrice);
 
-    this.props.page = 0;
-    this.props.size = 9;
+    this.props.page = 9;
+    this.props.searchEvenNotAvailable = 0;
 
     this.updateCacheProps(this.props);
     this.updateResultList.next(this.props);
@@ -189,9 +189,8 @@ export class FilterService {
     this.props.searchEvenNotAvailable =
       this.props.searchEvenNotAvailable === 1 ? 0 : 1;
 
-
-    this.props.page = 0;
-    this.props.size = 9;
+    this.props.page = 9;
+    this.props.searchEvenNotAvailable = 0;
 
     this.updateCacheProps(this.props);
     this.updateResultList.next(this.props);
@@ -207,15 +206,13 @@ export class FilterService {
     this.props.minPrice = undefined;
     this.props.maxPrice = undefined;
 
-    this.props.page = 0;
+    this.props.page = 9;
     this.props.searchEvenNotAvailable = 0;
     this.props.orderBy = 'alphabetically';
 
     this.genreApplied = [];
     this.languageApplied = [];
     this.sortApplied = this.SORT[1];
-
-
 
     this.updateCacheProps(this.props);
     this.updateResultList.next(this.props);

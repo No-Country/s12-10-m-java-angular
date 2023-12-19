@@ -12,7 +12,7 @@
 
     <div class="book-list">
      @for(bookOfCart of booksWQ ; track bookOfCart.book.id){
-          <app-cart-card (deleteBook)="discardBook(bookOfCart)" (bookWithNewQuantity)="editquantityOf($event)" [bookOfCard]="bookOfCart"></app-cart-card>
+          <app-cart-card (deleteBook)="discardBook(bookOfCart.book)" (bookWithNewQuantity)="editquantityOf($event)" [bookOfCard]="bookOfCart"></app-cart-card>
       }
     </div>
 

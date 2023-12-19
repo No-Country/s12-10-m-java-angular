@@ -24,6 +24,7 @@ export class Navbar2Component implements OnInit {
   search(): void {
     if (this.searchTerm !== '') {
       const shopIsActive = this.activatedRoute.snapshot.routeConfig?.path;
+      console.log("is: ",shopIsActive);
       if (shopIsActive) {
         this.router.navigate([], {
           queryParams: { search: this.searchTerm },

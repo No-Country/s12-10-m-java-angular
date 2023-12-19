@@ -8,7 +8,13 @@ import {
   Output,
   inject,
 } from '@angular/core';
-import { Genre, Language } from 'app/data/models/book';
+import {
+  BookFilterProps,
+  GENRES,
+  Genre,
+  LANGUAGES,
+  Language,
+} from 'app/data/models/book';
 import { DefaultButtonComponent } from '../default-button/default-button.component';
 import {
   FormBuilder,
@@ -40,34 +46,6 @@ export class ShopFiltersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.filterForm.valueChanges.subscribe((values) => {
-      if (
-        values.minPrice === null &&
-        this.filterService.props.minPrice !== undefined &&
-        this.filterService.props.minPrice !== null &&
-        this.filterService.props.minPrice !== 0
-      ) {
-        this.filterService.updatePrices(undefined, values.maxPrice);
-      }
-
-      if (
-        values.maxPrice === null &&
-        (this.filterService.props.maxPrice !== undefined &&
-          this.filterService.props.maxPrice !== null &&
-          this.filterService.props.minPrice !== 0 )
-      ) {
-        this.filterService.updatePrices(values.minPrice, undefined);
-      }
-
-      if (
-        values.minPage === null &&
-        this.filterService.props.minPage !== undefined &&
-        this.filterService.props.minPage !== null &&
-        this.filterService.props.minPage !== 0
-      ) {
-        this.filterService.updateMinPageNumber(0);
-      }
-    });
   }
 
   applyGenre(genre: Genre) {
