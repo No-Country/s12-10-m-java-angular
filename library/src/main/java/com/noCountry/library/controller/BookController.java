@@ -164,7 +164,7 @@ public class BookController {
 
     @GetMapping(path = "/searchHighestRating")
     public ResponseEntity<?> searchByHighestRating(@RequestParam(defaultValue = "0") int page,
-                                                   @RequestParam(defaultValue = "5") int size) {
+                                                   @RequestParam(defaultValue = "10") int size) {
         try {
             PaginatedResponseDTO<BookToSearch> book = bookService.searchByHighestRating(page, size);
             return new ResponseEntity<>(book, HttpStatus.OK);
