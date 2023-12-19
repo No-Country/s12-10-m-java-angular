@@ -61,6 +61,11 @@ UserDto
 
 
 
+PUT     /user/subscribe/{email}
+200 OK
+
+
+
 DELETE	/user/{email}
 200 OK
 
@@ -182,6 +187,15 @@ GET 	/book/searchHighestRating?page=0&size=10
 Response:
 	PaginatedBookResponseDTO<BookToSearch>
 200 OK
+
+
+
+
+GET 	/book/searchByStars?page=0&size=10
+Response:
+	PaginatedBookResponseDTO<BookToSearch>
+200 OK
+
 
 
 

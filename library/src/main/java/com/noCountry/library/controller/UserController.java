@@ -45,6 +45,16 @@ public class UserController {
         }
     }
 
+    @PutMapping(path = "/subscribe/{email}")
+    public ResponseEntity<?> subscribeEmailUser(@PathVariable String email) throws Exception {
+        try {
+            userService.subscribeEmailUser(email);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
     @DeleteMapping(path = "/unsubscribe/{email}")
     public ResponseEntity<?> unsubscribeEmailUser(@PathVariable String email) throws Exception {
         try {
