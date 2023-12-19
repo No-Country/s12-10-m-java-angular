@@ -64,8 +64,6 @@ public class BookServiceImpl implements BookService {
         Genre genre = searchGenre(bookRequest.getGenre());
         Language language = searchLanguage(bookRequest.getLanguage());
 
-        // Book book = mapperBooks.bookRequestToBook(bookRequest);
-
         Book book = bookAux.get();
 
         book.setPrice(bookRequest.getPrice());
@@ -89,7 +87,7 @@ public class BookServiceImpl implements BookService {
             book.setCollection(bookRequest.getCollection());
         }
 
-        if (bookRequest.getInitialImage().isEmpty()) {
+        if (!bookRequest.getInitialImage().isEmpty()) {
             book.setInitialImage(bookRequest.getInitialImage());
             book.getUrlImages().add(bookRequest.getInitialImage());
         }
@@ -144,6 +142,9 @@ public class BookServiceImpl implements BookService {
 
         if (auxBook.isEmpty()) {
             throw new BadRequestException("El libro a actualizar no se encuentra registardo");
+        }
+        if (!auxBook.get().getStatus()) {
+            throw new BadRequestException("El libro solicitado se encuentra eliminado.");
         }
 
         Book updatedBook = auxBook.get();
@@ -219,13 +220,17 @@ public class BookServiceImpl implements BookService {
         Optional<Book> auxBook = bookRepository.findById(id);
         isEmptyObject(auxBook);
 
+        if (!auxBook.get().getStatus()) {
+            throw new BadRequestException("El libro solicitado se encuentra eliminado.");
+        }
+
         return mapperBooks.bookToBookResponse(auxBook.get());
     }
 
     @Override
     public PaginatedResponseDTO<BookResponse> getAllBooks(Integer pageNumber, Integer sizeElement) {
         Pageable page = PageRequest.of(pageNumber, sizeElement);
-        Page<Book> pagesBook = bookRepository.findAll(page);
+        Page<Book> pagesBook = bookRepository.findAllByStatusTrue(page);
 
         return pagesBookToPagination(pagesBook, mapperBooks::listBooksToListResponseBooks);
     }
@@ -235,13 +240,17 @@ public class BookServiceImpl implements BookService {
         Optional<Book> book = bookRepository.findById(id);
         isEmptyObject(book);
 
+        if (!book.get().getStatus()) {
+            throw new BadRequestException("El libro solicitado se encuentra eliminado.");
+        }
+
         return mapperBooks.bookToBookCardResponse(book.get());
     }
 
     @Override
     public PaginatedResponseDTO<BookCardResponse> getAllBooksForCard(Integer pageNumber, Integer sizeElement) {
         Pageable page = PageRequest.of(pageNumber, sizeElement);
-        Page<Book> pagesBook = bookRepository.findAll(page);
+        Page<Book> pagesBook = bookRepository.findAllByStatusTrue(page);
 
         return pagesBookToPagination(pagesBook, mapperBooks::listBooksToListCardBooks);
     }
@@ -251,13 +260,17 @@ public class BookServiceImpl implements BookService {
         Optional<Book> book = bookRepository.findById(id);
         isEmptyObject(book);
 
+        if (!book.get().getStatus()) {
+            throw new BadRequestException("El libro solicitado se encuentra eliminado.");
+        }
+
         return mapperBooks.bookToBookCardDescription(book.get());
     }
 
     @Override
     public PaginatedResponseDTO<BookCardDescription> getAllBooksForCardDescription(Integer pageNumber, Integer sizeElement) {
         Pageable page = PageRequest.of(pageNumber, sizeElement);
-        Page<Book> pagesBook = bookRepository.findAll(page);
+        Page<Book> pagesBook = bookRepository.findAllByStatusTrue(page);
 
         return pagesBookToPagination(pagesBook, mapperBooks::listBookToListBookCardDescription);
     }
@@ -328,8 +341,12 @@ public class BookServiceImpl implements BookService {
 
         Book book = auxBook.get();
 
-        if (amount < 0) {
-            throw new BadRequestException("La cantidad a agregar no puede ser 0 ni negativa.");
+        if (!book.getStatus()) {
+            throw new BadRequestException("El libro solicitado se encuentra eliminado.");
+        }
+
+        if (amount < 1) {
+            throw new BadRequestException("La cantidad a agregar no puede ser menor a 1.");
         }
 
         int quantity = book.getQuantityAvailable() + amount;
@@ -347,6 +364,10 @@ public class BookServiceImpl implements BookService {
         isEmptyObject(auxBook);
 
         Book book = auxBook.get();
+
+        if (!book.getStatus()) {
+            throw new BadRequestException("El libro solicitado se encuentra eliminado.");
+        }
 
         if (book.getQuantityAvailable() < amount) {
             throw new BadRequestException("No hay stock sufienciente.");
@@ -380,6 +401,11 @@ public class BookServiceImpl implements BookService {
         isEmptyObject(auxBook);
 
         Book book = auxBook.get();
+
+        if (!book.getStatus()) {
+            throw new BadRequestException("El libro solicitado se encuentra eliminado.");
+        }
+
         bookRepository.asignarRatingABook(id, Double.valueOf(vote));
 
         book.getVoteList().add(vote);
@@ -423,7 +449,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public PaginatedResponseDTO<BookToSearch> searchByTitle(String title, Integer pageNumber, Integer sizeElement) {
         Pageable page = PageRequest.of(pageNumber, sizeElement);
-        Page<Book> pagesBook = bookRepository.findByTitleContaining(title, page);
+        Page<Book> pagesBook = bookRepository.findByTitleContainingAndStatusTrue(title, page);
 
         if (pagesBook.isEmpty()) {
             throw new BadRequestException("No se encontraron libros con el texto ingresado ");
@@ -435,15 +461,17 @@ public class BookServiceImpl implements BookService {
     @Override
     public PaginatedResponseDTO<BookToSearch> searchLatestAdded(Integer pageNumber, Integer sizeElement) {
         Pageable page = PageRequest.of(pageNumber, sizeElement);
-        Page<Book> pagesBook = bookRepository.findAllByOrderByCreationDateDesc(page);
+        Page<Book> pagesBook = bookRepository.findAllByStatusTrueOrderByCreationDateDesc(page);
 
         return pagesBookToPagination(pagesBook, mapperBooks::listBookToListBookToSearch);
     }
 
     @Override
     public PaginatedResponseDTO<BookToSearch> searchByHighestRating(Integer pageNumber, Integer sizeElement) {
+
+        // By trending
         Pageable page = PageRequest.of(pageNumber, sizeElement);
-        Page<Book> pagesBook = bookRepository.findAllByOrderByRatingDesc(page);
+        Page<Book> pagesBook = bookRepository.findAllByStatusTrueOrderBySalesAmountDesc(page);
 
         return pagesBookToPagination(pagesBook, mapperBooks::listBookToListBookToSearch);
     }
