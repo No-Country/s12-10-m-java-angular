@@ -23,7 +23,6 @@ export class NavbarComponent implements OnInit {
     const name = sessionStorage.getItem('name');
     this.token = token !== null ? token : '';
     this.name = name !== null ? name : '';
+}
 
-
-  }
 }

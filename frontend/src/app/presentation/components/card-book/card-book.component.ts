@@ -4,6 +4,7 @@ import { Book, BookDetail } from '../../../data/models/book';
 import { Router, RouterLink } from '@angular/router';
 import { DefaultButtonComponent } from '../default-button/default-button.component';
 import { CartService } from 'app/data/services/cart/cart.service';
+import { LoggedInService } from 'app/data/services/login/loggedIn.service';
 
 @Component({
   standalone: true,
@@ -15,18 +16,26 @@ import { CartService } from 'app/data/services/cart/cart.service';
 })
 export class CardBookComponent implements OnInit {
   @Input({ required: true }) public book: BookDetail;
-  @Input() public onCart: boolean = false;
+  public onCart: boolean = false;
 
-  constructor(public cartService: CartService) {
+  constructor(private router: Router,
+    private cartService: CartService,
+    private loggedInService: LoggedInService) {
     this.book = {} as BookDetail;
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.onCart = this.cartService.isInTheCart(this.book.id)
+  }
 
   addOrRemove() {
-    this.onCart
+    if (this.loggedInService.isLoggedIn()) {
+      this.onCart
       ? this.cartService.deleteBookToCart(this.book)
       : this.cartService.addBookToCart(this.book);
     this.onCart = !this.onCart;
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 
   removeFromCart() {

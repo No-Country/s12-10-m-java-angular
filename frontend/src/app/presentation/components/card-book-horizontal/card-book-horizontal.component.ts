@@ -1,9 +1,10 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Book, BookDetail } from '../../../data/models/book';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { DefaultButtonComponent } from '../default-button/default-button.component';
 import { CartService } from 'app/data/services/cart/cart.service';
+import { LoggedInService } from 'app/data/services/login/loggedIn.service';
 
 @Component({
   selector: 'app-card-book-horizontal',
@@ -15,20 +16,30 @@ import { CartService } from 'app/data/services/cart/cart.service';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CardBookHorizontalComponent {
+export class CardBookHorizontalComponent implements OnInit{
   @Input() public book: BookDetail;
   @Input() public className: string = '';
-  @Input() public onCart: boolean = false;
+  public onCart: boolean = false;
 
-  constructor(public cartService: CartService) {
+  constructor(public cartService: CartService,
+    private router: Router,
+    private loggedInService: LoggedInService) {
     this.book = {} as BookDetail;
   }
 
+  ngOnInit(): void {
+    this.onCart = this.cartService.isInTheCart(this.book.id)
+  }
+
   addOrRemove() {
-    this.onCart
+    if (this.loggedInService.isLoggedIn()) {
+      this.onCart
       ? this.cartService.deleteBookToCart(this.book)
       : this.cartService.addBookToCart(this.book);
     this.onCart = !this.onCart;
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 
   removeFromCart() {
