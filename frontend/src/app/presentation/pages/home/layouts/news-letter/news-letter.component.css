@@ -46,6 +46,7 @@ section{
   h2, p {
     color: #EBEBEB ;
     margin: 5vh ;
+    text-align: left;
   }
 
   p{

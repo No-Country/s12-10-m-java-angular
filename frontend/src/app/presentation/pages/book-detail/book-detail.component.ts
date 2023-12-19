@@ -31,6 +31,7 @@ export class BookDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    window.scroll({ top: 0 });
     this.route.data.subscribe((data) => {
       this.book = data['book'];
     });

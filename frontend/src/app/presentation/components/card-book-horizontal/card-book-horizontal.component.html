@@ -1,5 +1,5 @@
 <article #cardBook class="card-book" [id]="'d' + book.id" [ngClass]="className">
-  <section class="img-wrapper" routerLink="">
+  <section class="img-wrapper" [routerLink]="['book/' + book.id]">
     <a class="img-container" [ngClass]="{ 'blur-md': !isStringId(book.id) }">
       <img
         [ngSrc]="book.image"
@@ -12,7 +12,7 @@
 
   <section class="content-info">
     <h2 [title]="book.name">
-      <a class="w-full" routerLink="">
+      <a class="w-full" [routerLink]="['book/' + book.id]">
         {{ book.name }}
       </a>
     </h2>
@@ -24,7 +24,7 @@
     <div class="w-full flex justify-between items-center">
       <p class="mt-2 text-2xl font-medium text-[#242221] cursor-pointer">
         $
-        <a class="w-full" routerLink="/login">
+        <a class="w-full" [routerLink]="['book/' + book.id]">
           {{ book.price }}
         </a>
       </p>
