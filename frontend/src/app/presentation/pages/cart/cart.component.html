@@ -18,7 +18,7 @@
 
   <section class="button-container">
     <div class="total">Sub Total:{{total}}$</div>
-    <button class="buy-button" (click)="abrirModal()">Buy</button>
+    <button class="buy-button" (click)="abrirModal()" [disabled]="isCartEmpty()">Buy</button>
   </section>
 
 </section>

@@ -72,4 +72,7 @@ export class CartComponent implements OnInit {
     this.modalAbierto = false;
   }
 
+  isCartEmpty(): boolean {
+    return this.booksWQ.length === 0;
+  }
 }

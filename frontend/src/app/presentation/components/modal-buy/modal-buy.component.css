@@ -43,19 +43,15 @@ label p{
   align-items: center;
 }
 
-.input-domicilio input{
-  border: solid 2px #585858;
-  border-radius: 15px;
-  padding-left: 2%;
-}
-.input-domicilio input:focus{
-  border: solid 2px #33B672;
-  border-radius: 15px;
-}
 .form-group{
   padding-top: 2vh;
   display: flex;
   justify-content:center;
+}
+.input-domicilio input {
+  border: 2px solid #0000000D;
+  border-radius: 15px;
+  padding-left: 2%;
 }
 button{
   background-color: #33B672;
@@ -90,7 +86,7 @@ input[type="radio"] {
 
 input[type="radio"]:checked {
   background-color: #33B672;
-  border-color: #000; 
+  border-color: none; 
 }
 h3{
   padding-bottom: 2%;
