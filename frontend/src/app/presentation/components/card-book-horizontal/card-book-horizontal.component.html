@@ -1,4 +1,4 @@
-<article #cardBook class="card-book" [id]="book.id" [ngClass]="className" >
+<article #cardBook class="card-book" [id]="'d'+book.id" [ngClass]="className" >
 
     <section class="img-wrapper" routerLink="" >
         <a class="img-container" [ngClass]="{'blur-md': !isStringId(book.id) }">

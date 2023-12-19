@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/internal/Observable';
 })
 export class TrendingServiceService {
 
-  private apiUrl = 'https://librarync1.fly.dev/api/v1/book/searchHighestRating?page=0&size=5';
+  private apiUrl = 'https://librarync1.fly.dev/api/v1/book/searchHighestRating?page=0&size=10';
 
   constructor(private http: HttpClient) {}
 
