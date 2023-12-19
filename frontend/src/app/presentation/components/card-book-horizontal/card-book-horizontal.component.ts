@@ -21,7 +21,9 @@ export class CardBookHorizontalComponent implements OnInit{
   @Input() public className: string = '';
   public onCart: boolean = false;
 
-  constructor(public cartService: CartService, private loggedIn: LoggedInService, private router: Router) {
+  constructor(public cartService: CartService,
+    private router: Router,
+    private loggedInService: LoggedInService) {
     this.book = {} as BookDetail;
   }
 
@@ -30,11 +32,11 @@ export class CardBookHorizontalComponent implements OnInit{
   }
 
   addOrRemove() {
-    if (this.loggedIn.isLogged()) {
+    if (this.loggedInService.isLoggedIn()) {
       this.onCart
       ? this.cartService.deleteBookToCart(this.book)
       : this.cartService.addBookToCart(this.book);
-      this.onCart = !this.onCart;
+    this.onCart = !this.onCart;
     } else {
       this.router.navigate(['/login']);
     }

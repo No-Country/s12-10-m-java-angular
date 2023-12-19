@@ -5,6 +5,8 @@ import { Book } from 'app/data/models/book';
 import { ImageResponsiveComponent } from './image-responsive/image-responsive.component';
 import { Router } from '@angular/router';
 import { CartService } from 'app/data/services/cart/cart.service';
+import { ModalBuyComponent } from '../modal-buy/modal-buy.component';
+import { LoggedInService } from 'app/data/services/login/loggedIn.service';
 
 @Component({
   selector: 'app-detail-card',
@@ -14,6 +16,7 @@ import { CartService } from 'app/data/services/cart/cart.service';
     DefaultButtonComponent,
     NgOptimizedImage,
     ImageResponsiveComponent,
+    ModalBuyComponent
   ],
   templateUrl: './book-detail-card.component.html',
   styleUrl: './book-detail-card.component.css',
@@ -22,29 +25,16 @@ import { CartService } from 'app/data/services/cart/cart.service';
 export class BookDetailCardComponent implements OnInit{
   selectedImageUrl: string = '';
   @Input() public book: Book;
-  public onCart: boolean = false;
+  @Input() public onCart: boolean = false;
+  
 
   constructor(private router: Router,
-    private cartService: CartService) {
+    private cartService: CartService,
+    private loggedInService: LoggedInService) {
     this.book = {} as Book;
   }
   ngOnInit(): void {
     this.onCart = this.cartService.isInTheCart(this.book.idBook)
-  }
-
-  addOrRemove() {
-    const bookToAdd = {
-      id: this.book.idBook,
-      name: this.book.title,
-      image: this.book.urlImages[0],
-      author: this.book.author,
-      price: this.book.price,
-      description: this.book.description
-    };
-    this.onCart
-      ? this.cartService.deleteBookToCart(bookToAdd)
-      : this.cartService.addBookToCart(bookToAdd);
-    this.onCart = !this.onCart;
   }
 
   isNumberId(ID: string | number) {
@@ -67,4 +57,45 @@ export class BookDetailCardComponent implements OnInit{
       queryParams: { search: this.book.author },
     });
   }
+
+  Buy() {
+    if (this.loggedInService.isLoggedIn()) {
+      const bookToAdd = {
+        id: this.book.idBook,
+        name: this.book.title,
+        image: this.book.urlImages[0],
+        author: this.book.author,
+        price: this.book.price,
+        description: this.book.description
+      };
+  
+      if (!this.onCart) {
+        this.cartService.addBookToCart(bookToAdd);
+      }
+  
+      this.router.navigate(['/cart']);
+    } else {
+      this.router.navigate(['/login']);
+    }
+  }
+
+  addOrRemove() {
+    if (this.loggedInService.isLoggedIn()) {
+      const bookToAdd = {
+        id: this.book.idBook,
+        name: this.book.title,
+        image: this.book.urlImages[0],
+        author: this.book.author,
+        price: this.book.price,
+        description: this.book.description
+      };
+      this.onCart
+        ? this.cartService.deleteBookToCart(bookToAdd)
+        : this.cartService.addBookToCart(bookToAdd);
+      this.onCart = !this.onCart;
+    } else {
+      this.router.navigate(['/login']);
+    }
+  }
+
 }

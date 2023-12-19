@@ -18,7 +18,9 @@ export class CardBookComponent implements OnInit {
   @Input({ required: true }) public book: BookDetail;
   public onCart: boolean = false;
 
-  constructor(public cartService: CartService, private loggedIn: LoggedInService, private router: Router) {
+  constructor(private router: Router,
+    private cartService: CartService,
+    private loggedInService: LoggedInService) {
     this.book = {} as BookDetail;
   }
   ngOnInit(): void {
@@ -26,11 +28,11 @@ export class CardBookComponent implements OnInit {
   }
 
   addOrRemove() {
-    if (this.loggedIn.isLogged()) {
+    if (this.loggedInService.isLoggedIn()) {
       this.onCart
       ? this.cartService.deleteBookToCart(this.book)
       : this.cartService.addBookToCart(this.book);
-      this.onCart = !this.onCart;
+    this.onCart = !this.onCart;
     } else {
       this.router.navigate(['/login']);
     }

@@ -8,11 +8,14 @@ import { Navbar2Component } from '@presentation/components/navbar-2/navbar-2.com
 import { NavbarComponent } from '@presentation/components/navbar/navbar.component';
 import { CartCardComponent } from '@presentation/components/cart-card/cart-card.component';
 import { CartService } from 'app/data/services/cart/cart.service';
+import { Router } from '@angular/router';
+import { LoggedInService } from 'app/data/services/login/loggedIn.service';
+import { ModalBuyComponent } from '@presentation/components/modal-buy/modal-buy.component';
 
 
 @Component({
   standalone: true,
-  imports: [CommonModule, NavbarComponent, Navbar2Component, FooterComponent, CardBookComponent, CartCardComponent],
+  imports: [CommonModule, NavbarComponent, Navbar2Component, FooterComponent, CardBookComponent, CartCardComponent, ModalBuyComponent],
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
@@ -21,8 +24,11 @@ import { CartService } from 'app/data/services/cart/cart.service';
 export class CartComponent implements OnInit {
   protected booksWQ: { book: BookDetail, quantity: number }[];
   public total: number = 0;
+  modalAbierto: boolean = false;
 
-  constructor(public cartService: CartService) {
+  constructor(public cartService: CartService,
+    private router: Router,
+    private loggedInService: LoggedInService) {
     this.booksWQ = cartService.bringCartOfServiceWithQuantity();
     this.total=this.booksWQ.reduce((total, bookToCalculate) => total + bookToCalculate.quantity*bookToCalculate.book.price, 0);
     console.log(this.booksWQ)
@@ -52,6 +58,19 @@ export class CartComponent implements OnInit {
     }
     )
     this.total=this.booksWQ.reduce((total, bookToCalculate) => total + bookToCalculate.quantity*bookToCalculate.book.price, 0);
+  }
+
+
+  abrirModal() {
+    if (this.loggedInService.isLoggedIn()) {
+      this.modalAbierto = true;
+    } else {
+      this.router.navigate(['/login']);
+    }
+  }
+
+  cerrarModal() {
+    this.modalAbierto = false;
   }
 
 }

@@ -73,6 +73,11 @@ export class CartService {
     localStorage.setItem('booksOnCart', JSON.stringify(booksOnCart));
   }
 
+  clearCart(): void {
+    this.booksOnCart = [];
+    this.updateLocalStorage(this.booksOnCart);
+  }
+
   isInTheCart(id:string | number):boolean{
     return this.booksOnCart.some((bookOfCart) => bookOfCart.book.id == id);
   }

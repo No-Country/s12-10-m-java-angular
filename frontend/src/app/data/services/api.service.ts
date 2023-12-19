@@ -19,7 +19,7 @@ export class ApiService {
       const token = localStorage.getItem('token');
       headers = new HttpHeaders({
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        'Authorization': `Bearer ${token}`,
       });
     } else {
       headers = new HttpHeaders({
@@ -70,4 +70,5 @@ export class ApiService {
       headers: this.createHeaders(isNedAuth),
     });
   }
+  
 }

@@ -10,6 +10,7 @@ import { FilterService } from './data/services/shop/filter.service';
 import { cartGuard } from './data/guards/cart.guard';
 
 
+
 export const routes: Routes = [
   {
     path: '',
@@ -46,6 +47,7 @@ export const routes: Routes = [
       ),
     providers: [ShopService, FilterService],
     data: { preload: true },
+    canActivate: [AuthGuard] 
   },
   {
     path: 'cart',
