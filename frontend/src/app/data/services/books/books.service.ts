@@ -8,6 +8,7 @@ import {
 import {
   Observable,
   Observer,
+  delay,
   first,
   map,
   of,
@@ -85,12 +86,20 @@ export class BooksService {
   }
 
   public save(ID: string, title: string, isbn: string): Observable<any> {
-    return this.api.httpPost('book/createBook', { idBook: ID, title, isbn }, true);
+    return this.api.httpPost(
+      'book/createBook',
+      { idBook: ID, title, isbn },
+      true
+    );
   }
 
-  public completeBook() {
+  public completeBook(): Observable<any> {
     //const book =
     return this.api.httpPost('book/addInfoBook', this.createdBook.book, true);
+  }
+
+  public updateImg(): Observable<any> {
+    return of(true).pipe(delay(900));
   }
 
   public update(id: number, book: BookDetail): Observable<any> {

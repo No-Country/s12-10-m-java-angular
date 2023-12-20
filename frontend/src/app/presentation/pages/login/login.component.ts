@@ -62,8 +62,9 @@ export class LoginComponent implements OnInit, OnDestroy  {
         toast.error('Oops...', message, 5);
       },
       complete(): void {
-        if(this.response.role === "USER")
-          setTimeout(()=>router.navigate(["/"]), 500);
+        if(this.response.role === "USER")  setTimeout(()=>router.navigate(["/"]), 500);
+
+        if (this.response.role === 'ADMIN') setTimeout(() => router.navigate(['/admin']), 500);
       }
     };
 

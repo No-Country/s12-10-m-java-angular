@@ -1,10 +1,12 @@
 import { Injectable, effect } from '@angular/core';
 import { SignalsStoreService } from '../store/StoreSignals.service';
 import { AuthResponse } from 'app/data/models/AuthResponse';
+import { ApiService } from '../api.service';
+import { first } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class LoggedInService {
-  constructor() {
+  constructor(private api: ApiService) {
   }
 
   public setLogin(values: AuthResponse) {
@@ -17,12 +19,18 @@ export class LoggedInService {
   }
 
   public verifyLogin() {
-    const { id, name, lastName, email, role } = sessionStorage;
+    const name = sessionStorage.getItem('name');
     const token = localStorage.getItem('token');
 
-    if (token && id && name && lastName && email && role) {
+    if (token && !name) {
       // . . . Verificar Login
-
+      this.api.httpGet('authenticate/profile', true).pipe(first()).subscribe((res: any)=>{
+            sessionStorage.setItem('id', res.id);
+            sessionStorage.setItem('name', res.name);
+            sessionStorage.setItem('lastName', res.lastName);
+            sessionStorage.setItem('email', res.email);
+            sessionStorage.setItem('role', res.role);
+      });
       //. . . Renovar Login o redirijir a Login
     }
   }

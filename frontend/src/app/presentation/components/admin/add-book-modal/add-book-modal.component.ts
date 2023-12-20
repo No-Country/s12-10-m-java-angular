@@ -15,6 +15,7 @@ import { Book } from 'app/data/models/book';
 import { CompleBookModalComponent } from '../comple-book-modal/comple-book-modal.component';
 import { ToastComponent } from '@presentation/components/toast/toast.component';
 import { ToastService } from 'app/data/services/toast/Toast.service';
+import { GalleryBookModalComponent } from '../gallery-book-modal/gallery-book-modal.component';
 
 @Component({
   selector: 'add-book-modal',
@@ -26,6 +27,7 @@ import { ToastService } from 'app/data/services/toast/Toast.service';
     CreateBookModalComponent,
     CompleBookModalComponent,
     ToastComponent,
+    GalleryBookModalComponent,
   ],
   templateUrl: './add-book-modal.component.html',
   styleUrl: './add-book-modal.component.css',
@@ -36,10 +38,6 @@ export class AddBookModalComponent implements OnInit, OnDestroy {
   public mainModal: boolean = true;
 
   constructor(public bookService: BooksService) {}
-
-  public createBook: AddModal = { state: AddState.WAITING, open: false };
-  public completeBook: AddModal = { state: AddState.WAITING, open: false };
-  public addImages: AddModal = { state: AddState.WAITING, open: false };
 
   ngOnInit(): void {
     this.bookService.resetState();
@@ -73,16 +71,23 @@ export class AddBookModalComponent implements OnInit, OnDestroy {
   protected closeModal(event: boolean, modal: number): void {
     this.togle(modal);
 
-    if (event && modal === 1) this.toast.success(
-      'Book has been created',
-      'Now complete the info of the book.',
-      5
-    );
-    if (event && modal === 2) this.toast.success('Info has been saved', 'Now add image to your book!', 5);
-    if (event && modal === 3) this.toast.success(
-      'Saved successfully',
-      'Book has been completely created.',
-      5
-    );
+    if (event && modal === 1)
+      this.toast.success(
+        'Book has been created',
+        'Now complete the info of the book.',
+        5
+      );
+    if (event && modal === 2)
+      this.toast.success(
+        'Info has been saved',
+        'Now add image to your book!',
+        5
+      );
+    if (event && modal === 3)
+      this.toast.success(
+        'Saved successfully',
+        'Book has been completely created.',
+        5
+      );
   }
 }

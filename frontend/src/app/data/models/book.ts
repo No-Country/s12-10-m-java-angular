@@ -89,6 +89,16 @@ export interface BookCreation {
   stateAddImg: AddModal;
 }
 
+export interface BookImage {
+  url: string;
+  id: string;
+};
+
+export interface BookImages {
+  frontPage: BookImage;
+  galleryImages: BookImage[];
+}
+
 export const GENRES: Genre[] = [
   Genre.HORROR,
   Genre.SCIENCE_FICTION,

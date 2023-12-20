@@ -30,7 +30,7 @@
         urlImg="../../../../../assets/icons/book-gallery-icon.svg"
         stepTitle="Add book images"
         stepText="Add images from the book"
-        [isActive]="bookService.createdBook.stateComplete.state === 2"
+        [isActive]="true"
         button="Add"
         (openModel)="togleModal(3)"
       ></step-add>
@@ -46,6 +46,10 @@
 
   @if( bookService.createdBook.stateComplete.open ){
     <comple-book-modal (closeModal)="closeModal($event, 2)"></comple-book-modal>
+  }
+
+  @if( bookService.createdBook.stateAddImg.open ){
+    <gallery-book-modal (closeModal)="closeModal($event, 3)"></gallery-book-modal>
   }
   <app-toast></app-toast>
 </div>
