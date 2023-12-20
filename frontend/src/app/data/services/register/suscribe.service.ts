@@ -12,8 +12,8 @@ export class SuscribeService {
 
   constructor(private injector: Injector) { }
 
-  public suscribe(auth: AuthResponse): Observable<any>{
-    return this.api.httpPost('user/subscribe/${email}', auth, true);
+  public suscribe(email: string, auth: AuthResponse): Observable<any>{
+    return this.api.httpPut(`user/subscribe/${email}` ,auth, true);
   }
 
 }
