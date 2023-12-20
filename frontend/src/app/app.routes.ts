@@ -110,6 +110,42 @@ export const routes: Routes = [
           ).then((c) => c.AdminBooksComponent),
         providers: [BooksService],
       },
+      {
+        path: 'authors',
+        title: 'Books Leaks - Admin authors',
+        loadComponent: () =>
+          import(
+            '@presentation/pages/panel/layouts/authors/authors.component'
+          ).then((c) => c.AuthorsComponent),
+        providers: [BooksService],
+      },
+      {
+        path: 'sales',
+        title: 'Books Leaks - Admin sales',
+        loadComponent: () =>
+          import(
+            '@presentation/pages/panel/layouts/sales/sales.component'
+          ).then((c) => c.SalesComponent),
+        providers: [BooksService],
+      },
+      {
+        path: 'users',
+        title: 'Books Leaks - Admin users',
+        loadComponent: () =>
+          import(
+            '@presentation/pages/panel/layouts/users/users.component'
+          ).then((c) => c.UsersComponent),
+        providers: [BooksService],
+      },
+      {
+        path: 'analityc',
+        title: 'Books Leaks - Admin analityc',
+        loadComponent: () =>
+          import(
+            '@presentation/pages/panel/layouts/analityc/analityc.component'
+          ).then((c) => c.AnalitycComponent),
+        providers: [BooksService],
+      },
     ],
   },
   {
