@@ -3,8 +3,8 @@
     min-height: 40px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    width: 90vw;
+    justify-content: flex-end;
+    width: 100%;
 }
 
 .navbar-logo {
@@ -42,11 +42,9 @@
 }
 
 .navbar-g-list {
-    margin-right: 5vw;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    width: 80%;
 }
 
 .navbar-g-list-item {
