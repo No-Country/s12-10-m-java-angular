@@ -7,7 +7,7 @@ export interface BillRequestDto {
 }
 
 export interface BillResponseDto {
-  id: number;
+  id: string;
   totalPrice: number;
   dateBill: string;
   paymentMethods: 'CASH' | 'DEBIT' | 'CREDIT';

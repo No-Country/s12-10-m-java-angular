@@ -1,8 +1,9 @@
 
 import { Injectable, Injector } from '@angular/core';
 import { BillRequestDto, BillResponseDto } from 'app/data/models/Bills';
-import { Observable } from 'rxjs';
+import { Observable, catchError, of } from 'rxjs';
 import { ApiService } from '../api.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,17 @@ export class BillsService {
   constructor(private injector: Injector) { 
   }
 
-  public saveBill(billRequest: BillRequestDto): Observable<any>{
-    return this.api.httpPost('bill/save', billRequest, true);
+  public saveBill(billRequest: BillRequestDto): Observable<any> {
+    return this.api.httpPost('bill/save', billRequest, true).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error instanceof HttpErrorResponse) {
+          if (error.status === 200 && error.error instanceof Object) {
+            return of(error.error);
+          }
+        }
+        throw error;
+      })
+    );
   }
 
   getBills(): Observable<BillResponseDto[]> {
