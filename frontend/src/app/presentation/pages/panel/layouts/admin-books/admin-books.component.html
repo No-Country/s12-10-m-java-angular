@@ -55,40 +55,37 @@
   </section>
 </div>
 
-<div class="modal fixed inset-0" [ngClass]="{
-      'hidden opacity-0':
-        !bookService.createdBook.stateAddImg.open &&
-        !bookService.createdBook.stateComplete.open &&
-        !bookService.createdBook.stateCreate.open &&
-        !viewAddBook
-    }">
+@if( bookService.createdBook.stateAddImg.open ||
+     bookService.createdBook.stateComplete.open ||
+     bookService.createdBook.stateCreate.open ||
+     viewAddBook
+){
+<div class="modal fixed inset-0">
   @if(viewAddBook){
-  <add-book-modal (openOrCloseModal)="togle($event)"></add-book-modal>
-  } @if( bookService.createdBook.stateCreate.open ){
-  <create-book-modal
-    class="relative z-[200]"
-    (closeModal)="closeBooksModal($event, 1)"
-  ></create-book-modal>
-  } @if( bookService.createdBook.stateComplete.open ){
-  <comple-book-modal
-    class="relative z-[200]"
-    (closeModal)="closeBooksModal($event, 2)"
-  ></comple-book-modal>
-  } @if( bookService.createdBook.stateAddImg.open ){
-  <gallery-book-modal
-    class="relative z-[200]"
-    (closeModal)="closeBooksModal($event, 3)"
-  ></gallery-book-modal>
+    <add-book-modal (openOrCloseModal)="togle($event)"></add-book-modal>
+  }
+
+  @if( bookService.createdBook.stateCreate.open ){
+    <create-book-modal
+      class="relative z-[200]"
+      (closeModal)="closeBooksModal($event, 1)"
+    ></create-book-modal>
+  }
+
+  @if( bookService.createdBook.stateComplete.open ){
+    <comple-book-modal
+      class="relative z-[200]"
+      (closeModal)="closeBooksModal($event, 2)"
+    ></comple-book-modal>
+  }
+
+  @if( bookService.createdBook.stateAddImg.open ){
+    <gallery-book-modal
+      class="relative z-[200]"
+      (closeModal)="closeBooksModal($event, 3)"
+    ></gallery-book-modal>
   }
   <app-toast></app-toast>
-  <overlay
-    (click)="closeAll()"
-    [ngClass]="{
-      'hidden opacity-0':
-        !bookService.createdBook.stateAddImg.open &&
-        !bookService.createdBook.stateComplete.open &&
-        !bookService.createdBook.stateCreate.open &&
-        !viewAddBook
-    }"
-  ></overlay>
+  <overlay (click)="closeAll()"></overlay>
 </div>
+}

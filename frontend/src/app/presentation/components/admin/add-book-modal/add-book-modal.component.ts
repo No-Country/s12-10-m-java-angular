@@ -33,8 +33,9 @@ export class AddBookModalComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.bookService.resetState();
   }
+
   ngOnDestroy(): void {
-    this.bookService.resetState();
+
   }
 
   protected togleModal(modal: number): void {

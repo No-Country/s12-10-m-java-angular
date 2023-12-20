@@ -64,6 +64,7 @@ export class AdminBooksComponent implements OnInit {
 
   constructor(public bookService: BooksService) {}
   ngOnInit(): void {
+    this.bookService.resetState();
     this.bookService.getAll().subscribe((books) => {
       this.allBooks.update((current) => books.content);
     });
@@ -83,19 +84,18 @@ export class AdminBooksComponent implements OnInit {
     if (modal === 1) {
       this.bookService.createdBook.stateCreate.open =
         !this.bookService.createdBook.stateCreate.open;
-
       this.viewAddBook = !this.viewAddBook;
     }
+
     if (modal === 2) {
       this.bookService.createdBook.stateComplete.open =
         !this.bookService.createdBook.stateComplete.open;
-
       this.viewAddBook = !this.viewAddBook;
     }
+
     if (modal === 3) {
       this.bookService.createdBook.stateAddImg.open =
         !this.bookService.createdBook.stateAddImg.open;
-
       this.viewAddBook = !this.viewAddBook;
     }
   }
@@ -108,28 +108,37 @@ export class AdminBooksComponent implements OnInit {
   }
 
   protected closeBooksModal(event: boolean, modal: number): void {
-    if (event && modal === 1)
-      this.toast.success(
-        'Book has been created',
-        'Now complete the info of the book.',
-        5
-      );
-    if (event && modal === 2)
-      this.toast.success(
-        'Info has been saved',
-        'Now add image to your book!',
-        5
-      );
-    if (event && modal === 3) {
-      this.toast.success(
-        'Saved successfully',
-        'Book has been completely created.',
-        5
-      );
+    if (event) {
+      if (modal === 1) {
+        this.toast.success(
+          'Book has been created',
+          'Now complete the info of the book.',
+          5
+        );
+      }
+      if (event && modal === 2) {
+        this.toast.success(
+          'Info has been saved',
+          'Now add image to your book!',
+          5
+        );
+      }
 
-      setTimeout(() => {
-        this.viewAddBook = false;
-      }, 800);
+      if (event && modal === 3) {
+        {
+          this.toast.success(
+            'Saved successfully',
+            'Book has been completely created.',
+            5
+          );
+
+          setTimeout(() => {
+            this.viewAddBook = false;
+          }, 800);
+        }
+      }
+    } else {
+      this.togle(modal);
     }
   }
 
