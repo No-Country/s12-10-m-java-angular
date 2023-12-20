@@ -382,7 +382,7 @@ Request:
     BillRequestDto
 Response:
     String (mensajito de todo ok)
-201 CREATED
+200 OK
 
 
 

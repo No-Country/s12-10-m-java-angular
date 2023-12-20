@@ -48,4 +48,11 @@ public class AuthenticateController {
 		return ResponseEntity.status(HttpStatus.OK).body(user);
 	}
 
+	@GetMapping("/user")
+	public ResponseEntity<UserDetailsDTO> findUser() {
+
+		UserDetailsDTO user = authenticationService.findUser();
+		return ResponseEntity.status(HttpStatus.OK).body(user);
+	}
+
 }
