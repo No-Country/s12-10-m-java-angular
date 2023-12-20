@@ -1,6 +1,5 @@
 .panel-container {
   background: linear-gradient(180deg, #f0f0f0 0%, rgba(240, 240, 240, 0) 100%);
-  min-height: 100dvw;
   display: flex;
 }
 main {

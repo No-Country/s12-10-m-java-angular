@@ -1,4 +1,4 @@
-.modal admin-card {
+admin-card {
   display: flex;
   height: fit-content;
   width: fit-content;
@@ -8,7 +8,7 @@
   z-index: 200;
   overflow-y: scroll;
 }
-.modal ::ng-deep .admin-card {
+admin-card ::ng-deep .admin-card {
   position: relative;
   margin: 0px;
   width: 650px;

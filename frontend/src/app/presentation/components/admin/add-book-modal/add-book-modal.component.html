@@ -1,5 +1,3 @@
-<div class="modal fixed  inset-0">
-  @if(mainModal){
   <admin-card
     titleCard="Fill in the details to add the book"
   >
@@ -37,21 +35,3 @@
       <div class="road"></div>
     </div>
   </admin-card>
-  }
-
-  @if( bookService.createdBook.stateCreate.open ){
-    <create-book-modal class="relative z-[200]" (closeModal)="closeModal($event, 1)"></create-book-modal>
-  }
-
-  @if( bookService.createdBook.stateComplete.open ){
-    <comple-book-modal class="relative z-[200]" (closeModal)="closeModal($event, 2)"></comple-book-modal>
-  }
-
-  @if( bookService.createdBook.stateAddImg.open ){
-    <gallery-book-modal class="relative z-[200]" (closeModal)="closeModal($event, 3)"></gallery-book-modal>
-  }
-  <app-toast></app-toast>
-  <overlay (click)="closeAll()"></overlay>
-</div>
-
-

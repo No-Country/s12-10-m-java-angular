@@ -1,4 +1,4 @@
-<div class="w-full">
+<div class="main w-full">
   <admin-page-tab route="admin-book"></admin-page-tab>
 
   <h2 class="title">Book Management</h2>
@@ -6,7 +6,10 @@
   <section>
     <div class="header-table">
       <input type="search" placeholder="Search Books..." [(ngModel)]="search" />
-      <app-button className="w-full px-2 max-w-[140px] min-w-[120px]" (click)="viewAddBook = !viewAddBook">
+      <app-button
+        className="w-full px-2 max-w-[140px] min-w-[120px]"
+        (click)="viewAddBook = !viewAddBook"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -36,7 +39,7 @@
 
     <admin-card titleCard="Book Table">
       @if( allBooks().length !== 0 ){
-        <div class="mt-6">
+      <div class="mt-6">
         <book-admin-table
           [bookDataSource]="allBooks()"
           [columns]="bookColumns"
@@ -44,16 +47,48 @@
         ></book-admin-table>
       </div>
       } @else {
-        <div class="mt-6 w-full h-[500px] flex justify-center items-start">
-          <dot-spinner></dot-spinner>
-        </div>
+      <div class="mt-6 w-full h-[300px] flex justify-center items-start">
+        <dot-spinner></dot-spinner>
+      </div>
       }
     </admin-card>
   </section>
 </div>
 
-@if(viewAddBook){
-<add-book-modal (closeMainModal)="closeModal($event)"></add-book-modal>
-
-}
-
+<div class="modal fixed inset-0" [ngClass]="{
+      'hidden opacity-0':
+        !bookService.createdBook.stateAddImg.open &&
+        !bookService.createdBook.stateComplete.open &&
+        !bookService.createdBook.stateCreate.open &&
+        !viewAddBook
+    }">
+  @if(viewAddBook){
+  <add-book-modal (openOrCloseModal)="togle($event)"></add-book-modal>
+  } @if( bookService.createdBook.stateCreate.open ){
+  <create-book-modal
+    class="relative z-[200]"
+    (closeModal)="closeBooksModal($event, 1)"
+  ></create-book-modal>
+  } @if( bookService.createdBook.stateComplete.open ){
+  <comple-book-modal
+    class="relative z-[200]"
+    (closeModal)="closeBooksModal($event, 2)"
+  ></comple-book-modal>
+  } @if( bookService.createdBook.stateAddImg.open ){
+  <gallery-book-modal
+    class="relative z-[200]"
+    (closeModal)="closeBooksModal($event, 3)"
+  ></gallery-book-modal>
+  }
+  <app-toast></app-toast>
+  <overlay
+    (click)="closeAll()"
+    [ngClass]="{
+      'hidden opacity-0':
+        !bookService.createdBook.stateAddImg.open &&
+        !bookService.createdBook.stateComplete.open &&
+        !bookService.createdBook.stateCreate.open &&
+        !viewAddBook
+    }"
+  ></overlay>
+</div>

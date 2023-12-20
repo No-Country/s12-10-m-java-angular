@@ -87,6 +87,7 @@ export interface BookCreation {
   stateCreate: AddModal;
   stateComplete: AddModal;
   stateAddImg: AddModal;
+  isUpdate?: boolean;
 }
 
 export interface BookImage {

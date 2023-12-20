@@ -10,15 +10,7 @@ import {
 } from '@angular/core';
 import { AdminCardComponent } from '../admin-card/admin-card.component';
 import { StepAddComponent } from '../step-add/step-add.component';
-import { AddModal, AddState } from 'app/data/models/Admin';
-import { CreateBookModalComponent } from '../create-book-modal/create-book-modal.component';
 import { BooksService } from 'app/data/services/books/books.service';
-import { Book } from 'app/data/models/book';
-import { CompleBookModalComponent } from '../comple-book-modal/comple-book-modal.component';
-import { ToastComponent } from '@presentation/components/toast/toast.component';
-import { ToastService } from 'app/data/services/toast/Toast.service';
-import { GalleryBookModalComponent } from '../gallery-book-modal/gallery-book-modal.component';
-import { OverlayComponent } from '@presentation/components/overlay/overlay.component';
 
 @Component({
   selector: 'add-book-modal',
@@ -27,20 +19,14 @@ import { OverlayComponent } from '@presentation/components/overlay/overlay.compo
     CommonModule,
     AdminCardComponent,
     StepAddComponent,
-    CreateBookModalComponent,
-    CompleBookModalComponent,
-    ToastComponent,
-    GalleryBookModalComponent,
-    OverlayComponent,
   ],
   templateUrl: './add-book-modal.component.html',
   styleUrl: './add-book-modal.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddBookModalComponent implements OnInit, OnDestroy {
-  @Output() public closeMainModal: EventEmitter<boolean> = new EventEmitter();
-  private readonly toast = inject(ToastService);
-  public mainModal: boolean = true;
+  @Output() public openOrCloseModal: EventEmitter<number> = new EventEmitter();
+
 
   constructor(public bookService: BooksService) {}
 
@@ -51,61 +37,7 @@ export class AddBookModalComponent implements OnInit, OnDestroy {
     this.bookService.resetState();
   }
 
-  private togle(modal: number): void {
-    if (modal === 1) {
-      this.bookService.createdBook.stateCreate.open =
-        !this.bookService.createdBook.stateCreate.open;
-      this.mainModal = !this.mainModal;
-    }
-    if (modal === 2) {
-      this.bookService.createdBook.stateComplete.open =
-        !this.bookService.createdBook.stateComplete.open;
-      this.mainModal = !this.mainModal;
-    }
-    if (modal === 3) {
-      this.bookService.createdBook.stateAddImg.open =
-        !this.bookService.createdBook.stateAddImg.open;
-      this.mainModal = !this.mainModal;
-    }
-  }
-
   protected togleModal(modal: number): void {
-    this.togle(modal);
-  }
-
-  protected closeModal(event: boolean, modal: number): void {
-    this.togle(modal);
-
-    if (event && modal === 1)
-      this.toast.success(
-        'Book has been created',
-        'Now complete the info of the book.',
-        5
-      );
-    if (event && modal === 2)
-      this.toast.success(
-        'Info has been saved',
-        'Now add image to your book!',
-        5
-      );
-    if (event && modal === 3){
-      this.toast.success(
-        'Saved successfully',
-        'Book has been completely created.',
-        5
-      );
-
-      setTimeout(() => {
-        this.closeMainModal.emit(true);
-      }, 800);
-    }
-
-  }
-
-  protected closeAll(): void {
-    this.bookService.createdBook.stateCreate.open = false;
-    this.bookService.createdBook.stateComplete.open = false;
-    this.bookService.createdBook.stateAddImg.open = false;
-    this.closeMainModal.emit(false);
+    this.openOrCloseModal.emit(modal);
   }
 }

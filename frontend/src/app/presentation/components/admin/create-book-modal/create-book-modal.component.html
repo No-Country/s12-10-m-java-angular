@@ -60,6 +60,7 @@
               autocapitalize="none"
               dir="ltr"
               required
+              [disabled]="bookService.createdBook.isUpdate !== undefined && bookService.createdBook.isUpdate"
             />
             <label for="isbn-book" class="form-label translate-top-label" style="--label-bg:#fff;">ISBN <span class="text-red-600">*</span></label>
           </div>

@@ -56,11 +56,16 @@ export class CreateBookModalComponent implements OnInit, OnDestroy {
 
   private destroy$: Subject<void> = new Subject<void>();
 
-  constructor(private builder: FormBuilder, private bookService: BooksService) {
+  constructor(private builder: FormBuilder, protected bookService: BooksService) {
     this.createBookForm = this.createForm();
   }
 
   ngOnInit(): void {
+    if(this.bookService.createdBook.isUpdate){
+      this.isbn.setValue(  this.bookService.createdBook.book.isbn  );
+      this.title.setValue( this.bookService.createdBook.book.title );
+    }
+
     this.createBookForm.valueChanges
       .pipe(takeUntil(this.destroy$))
       .subscribe((values) => {
@@ -128,5 +133,9 @@ export class CreateBookModalComponent implements OnInit, OnDestroy {
 
   public get isbn() {
     return this.createBookForm.get('isbn')!;
+  }
+
+  public get title() {
+    return this.createBookForm.get('title')!;
   }
 }

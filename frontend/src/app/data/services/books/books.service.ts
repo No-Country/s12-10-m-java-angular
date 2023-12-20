@@ -30,6 +30,7 @@ export class BooksService {
     const books = sessionStorage.getItem('latestBooks');
 
     this.createdBook = {} as BookCreation;
+    this.resetState();
     try {
       this.latestBooks =
         books !== null && books !== undefined
