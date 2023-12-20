@@ -5,7 +5,7 @@ https://librarync1.fly.dev/api/v1
 POST	/authenticate/register
 RegisterRequest
 {
-     String    id
+    String    id
 	String    name
 	String    lastName
 	String    email
@@ -45,7 +45,25 @@ UserDetailsDTO
 
 
 
+
 GET	/authenticate/profile
+
+
+
+
+GET	/authenticate/user          // enviar token en el header
+Response:
+UserDetailsDTO
+{
+         String id;
+         String name;
+         String lastName;
+         String email;
+         String role;
+         List<?> list;
+         String jwt;
+}
+
 
 
 
