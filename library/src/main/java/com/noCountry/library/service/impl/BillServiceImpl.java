@@ -81,20 +81,11 @@ public class BillServiceImpl implements BillService {
 
                 // Actualizar la cantidad de libros vendidos
                 sellBooks(bill.getBillItems());
-                System.out.println(" Despues de llamar a books..");
-
-                System.out.println("Bill TO STRING deberia de venir ahora... ");
-                System.out.println("Bill: " + bill.toString());
-                System.out.println("Despues de imprimir el bill TO STRING");
-
-                System.out.println("Bill deberia de venir ahora... ");
-                System.out.println(bill);
-                System.out.println("Despues de imprimir el bill");
 
                 billRepository.save(bill);
-                System.out.println("Despues de guardar en el repo");
+
                 sendEmailBill(bill);
-                System.out.println("despues de enviar el email");
+
                 response = ResponseEntity.ok("Bill added successfully");
             } else {
                 throw new BadRequestException("El id del usuario ingresado no existe.");
@@ -143,7 +134,7 @@ public class BillServiceImpl implements BillService {
                 return element;
             }
         }
-        throw new BadRequestException("No existe el emtodo de pago:  " + payment);
+        throw new BadRequestException("No existe el metodo de pago:  " + payment);
     }
 
 	private List<BillItem> getBillItems(Map<String, Integer> billItems) {

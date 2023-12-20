@@ -72,4 +72,24 @@ public class AuthenticationService {
 		return userService.findByEmail(username).orElseThrow(() -> new NotFoundException("User not found"));
 
 	}
+
+	public UserDetailsDTO findUser() {
+
+		Authentication auth = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext()
+				.getAuthentication();
+
+		String username = (String) auth.getPrincipal();
+		User userDetails = userService.findByEmail(username).get();
+
+		String jwt = jwtService.generateToken(userDetails, generateExtraClaims(userDetails));
+
+		UserDetailsDTO userDetailsDTO = UserDetailsDTO.builder().id(userDetails.getId()).name(userDetails.getName())
+				.lastName(userDetails.getLastName()).email(userDetails.getEmail()).jwt(jwt)
+				.role(userDetails.getRole().name()).list(userDetails.getAuthorities().stream().toList()).build();
+
+		return userDetailsDTO;
+
+	}
+
+
 }
