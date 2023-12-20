@@ -42,7 +42,7 @@ export class ModalBuyComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    const id = localStorage.getItem("id");
+    const id = sessionStorage.getItem("id");
     this.id = id !== null ? id : '';
     this.billRequest.userId = this.id;
   }
@@ -85,14 +85,14 @@ export class ModalBuyComponent implements OnInit{
   }
   confirmar() {
     this.billsService.saveBill(this.billRequest).subscribe(
-      (response) => {
+      (response: any) => {
         console.log('Compra realizada con éxito', response);
         this.cartService.clearCart();
         this.seeSuccessMessage = true;
         this.cdr.detectChanges();
         setTimeout(() => {
           this.router.navigate(['']); 
-        }, 2500);
+        }, 1800);
       },
       (error) => {
         console.error('Error al realizar la compra', error);
