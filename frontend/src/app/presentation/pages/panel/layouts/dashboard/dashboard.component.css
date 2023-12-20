@@ -45,6 +45,9 @@ app-dash-card{
     align-items: center;
 }
 
+img{
+    max-width: 32vw;
+}
 
 .device{
     margin-left: 4%;
