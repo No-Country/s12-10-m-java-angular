@@ -4,6 +4,7 @@ import { DashboardComponent } from './layouts/dashboard/dashboard.component';
 import { AdminBooksComponent } from './layouts/admin-books/admin-books.component';
 import { RouterOutlet } from '@angular/router';
 import { SideBarComponent } from '@presentation/components/admin/side-bar/side-bar.component';
+import { NavComponent } from '@presentation/components/admin/nav/nav.component';
 
 @Component({
   selector: 'app-admin-panel',
@@ -14,6 +15,7 @@ import { SideBarComponent } from '@presentation/components/admin/side-bar/side-b
     DashboardComponent,
     AdminBooksComponent,
     SideBarComponent,
+    NavComponent
   ],
   templateUrl: './panel.component.html',
   styleUrl: './panel.component.css',
