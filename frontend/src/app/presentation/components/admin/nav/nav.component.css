@@ -46,6 +46,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    width: 80%;
 }
 
 .navbar-g-list-item {
