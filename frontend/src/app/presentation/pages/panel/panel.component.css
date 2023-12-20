@@ -4,13 +4,12 @@
   display: flex;
 }
 main {
-  padding-left: 260px;
+  padding-left: 257px;
   width: 100%;
   margin-inline-end: 2rem;
   min-height: 100vh;
   transition: padding 0.3s;
 }
-
 .panel-container ::ng-deep h2.title {
   font-size: 1.5rem;
   line-height: 1rem;

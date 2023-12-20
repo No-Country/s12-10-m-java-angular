@@ -1,5 +1,8 @@
+.w-full{
+  padding-left: 10px;
+}
 section{
-  width: 100%;
+  width: 99%;
   margin-block-start: 2rem;
   font-family: Roboto, arial, sans-serif;
 }

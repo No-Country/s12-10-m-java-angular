@@ -57,6 +57,7 @@ nav.main-bar a svg {
   transition-timing-function: ease;
 }
 
+
 nav.main-bar a:hover {
   background: #ffffff2e;
   opacity: 1;
