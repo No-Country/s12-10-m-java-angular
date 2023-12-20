@@ -46,15 +46,15 @@ export class GalleryBookModalComponent implements OnInit {
 
   public sending: boolean = false;
 
-  public images: BookImage[] = [] as BookImage[];
   public frontPage: WritableSignal<BookImage> = signal({
     url: '../../../../../assets/imgs/book-placeholder.webp',
     id: 'front-nothig',
   });
+  public images: WritableSignal<BookImage[]> = signal([]);
 
   public loadImgs: boolean[] = [];
   private fireApp: any;
-
+  public download: any;
   constructor(public bookService: BooksService) {
     this.fireApp = initializeApp(environment.firebaseConfig);
   }
@@ -86,24 +86,20 @@ export class GalleryBookModalComponent implements OnInit {
         this.galleryError = !isFrontPage;
         return;
       }
-      const img = this.uploadFile(selectedFile, isFrontPage);
-      if (!isFrontPage) {
-        this.images.push(img);
-      } else {
-        this.frontPage.update((current) => ({...current, ...img}));
-      }
+      if (!isFrontPage) this.loadImgs.push(true);
+      this.uploadFile(selectedFile, isFrontPage);
+
     }
   }
 
-  private uploadFile(img: any, isFrontPage: boolean): BookImage {
+  private uploadFile(img: any, isFrontPage: boolean) {
     const storage = getStorage(this.fireApp);
     const ramdomRef = crypto.randomUUID();
     const imgRef = ref(storage, 'images/' + ramdomRef);
-    let url = '';
 
     const uploadTask = uploadBytesResumable(imgRef, img);
-    if(!isFrontPage) this.loadImgs.push(true);
 
+    let loadImgs = this.loadImgs;
     uploadTask.on(
       'state_changed',
       (snapshot) => {
@@ -115,22 +111,30 @@ export class GalleryBookModalComponent implements OnInit {
         console.log('File upload error:', error);
       },
       () => {
-        let download = '';
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           console.log('File available at', downloadURL);
-          download = downloadURL;
-        });
+          if(isFrontPage){
+            this.frontPage.update((current) => ({
+            ...current,
+            url: downloadURL,
+            id: ramdomRef
+          }));
+          } else {
+            loadImgs.pop();
 
-        url = download;
+            let actual = this.images();
+            actual.push({ url: downloadURL, id: ramdomRef });
+            this.images.update((current)=> (actual));
+          }
+        });
       }
     );
-      console.log(url);
-    return { url: url, id: ramdomRef };
   }
 
   public deleteFiles(deletedImg: BookImage, isFrontPage: boolean) {
     const storage = getStorage(this.fireApp);
     const desertRef = ref(storage, 'images/' + deletedImg.id);
+
     deleteObject(desertRef)
       .then(() => {
         console.log('Delete ref imge in firebase');
@@ -140,8 +144,10 @@ export class GalleryBookModalComponent implements OnInit {
       });
 
     if (!isFrontPage) {
-      let deleteIndex = this.images.indexOf(deletedImg);
-      this.images.splice(deleteIndex, 1);
+      let actual = this.images();
+      let deleteIndex = actual.indexOf(deletedImg);
+      actual.splice(deleteIndex, 1);
+      this.images.update((current) => actual);
     } else {
       this.frontPage.update((current) => ({
         url: '../../../../../assets/imgs/book-placeholder.webp',
@@ -158,10 +164,10 @@ export class GalleryBookModalComponent implements OnInit {
 
     this.bookService.createdBook.book.urlImages[0] = this.frontPage()
       ?.url as string;
-    this.images.forEach((img) => {
+    this.images().forEach((img) => {
       this.bookService.createdBook.book.urlImages.push(img.url);
     });
-
+    //Hay que conectar con el back la funcion updateImg
     this.bookService.updateImg().subscribe({
       next: (res: any) => {
         sending = !sending;

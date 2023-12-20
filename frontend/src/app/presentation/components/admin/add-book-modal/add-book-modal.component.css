@@ -1,6 +1,16 @@
+.modal admin-card {
+  display: flex;
+  height: fit-content;
+  width: fit-content;
+  position: absolute;
+  inset: 0;
+  transform: translateY(5%) translateX(50%);
+  z-index: 200;
+  overflow-y: scroll;
+}
 .modal ::ng-deep .admin-card {
   position: relative;
-  margin: auto;
+  margin: 0px;
   width: 650px;
   padding: 3rem;
 }

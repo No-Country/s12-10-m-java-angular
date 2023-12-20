@@ -64,7 +64,11 @@ export class LoginComponent implements OnInit, OnDestroy  {
       complete(): void {
         if(this.response.role === "USER")  setTimeout(()=>router.navigate(["/"]), 500);
 
-        if (this.response.role === 'ADMIN') setTimeout(() => router.navigate(['/admin']), 500);
+        if (
+          this.response.role === 'ADMIN' ||
+          this.response.role === 'ASSISTANT_ADMINISTRATOR'
+        )
+          setTimeout(() => router.navigate(['/admin']), 500);
       }
     };
 

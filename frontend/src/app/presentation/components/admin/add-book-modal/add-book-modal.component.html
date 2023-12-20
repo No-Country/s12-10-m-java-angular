@@ -1,8 +1,7 @@
-<div class="modal fixed z-50 inset-0">
+<div class="modal fixed  inset-0">
   @if(mainModal){
   <admin-card
     titleCard="Fill in the details to add the book"
-    class="flex h-full"
   >
     <div class="flex flex-col justify-center items-center gap-y-10 mt-8">
       <step-add
@@ -30,7 +29,7 @@
         urlImg="../../../../../assets/icons/book-gallery-icon.svg"
         stepTitle="Add book images"
         stepText="Add images from the book"
-        [isActive]="true"
+        [isActive]="bookService.createdBook.stateComplete.state === 2"
         button="Add"
         (openModel)="togleModal(3)"
       ></step-add>
@@ -41,15 +40,18 @@
   }
 
   @if( bookService.createdBook.stateCreate.open ){
-    <create-book-modal (closeModal)="closeModal($event, 1)"></create-book-modal>
+    <create-book-modal class="relative z-[200]" (closeModal)="closeModal($event, 1)"></create-book-modal>
   }
 
   @if( bookService.createdBook.stateComplete.open ){
-    <comple-book-modal (closeModal)="closeModal($event, 2)"></comple-book-modal>
+    <comple-book-modal class="relative z-[200]" (closeModal)="closeModal($event, 2)"></comple-book-modal>
   }
 
   @if( bookService.createdBook.stateAddImg.open ){
-    <gallery-book-modal (closeModal)="closeModal($event, 3)"></gallery-book-modal>
+    <gallery-book-modal class="relative z-[200]" (closeModal)="closeModal($event, 3)"></gallery-book-modal>
   }
   <app-toast></app-toast>
+  <overlay (click)="closeAll()"></overlay>
 </div>
+
+

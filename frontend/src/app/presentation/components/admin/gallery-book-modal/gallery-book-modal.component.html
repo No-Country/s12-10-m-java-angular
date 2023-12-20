@@ -1,20 +1,44 @@
-<div class="modal fixed z-100 inset-0">
-  <admin-card titleCard="Book Front Page" class="flex h-full">
+<div class="modal">
+  <admin-card titleCard="Book Front Page">
     @if( !sending ){
+    <div class="close">
+      <svg
+        (click)="closeModal.emit(false)"
+        xmlns="http://www.w3.org/2000/svg"
+        width="23"
+        height="23"
+        viewBox="0 0 23 23"
+        fill="none"
+      >
+        <path
+          d="M23 2.31643L20.6836 0L11.5 9.18357L2.31643 0L0 2.31643L9.18357 11.5L0 20.6836L2.31643 23L11.5 13.8164L20.6836 23L23 20.6836L13.8164 11.5L23 2.31643Z"
+          fill="black"
+        />
+      </svg>
+    </div>
     <div class="w-full flex justify-between gap-x-7 mt-4 mb-2">
       @if( frontPage() ){
-        <div
-          class="image front-page" [class.active]="frontPage().id !== 'front-nothig'"
-          (click)="deleteFiles(frontPage(), true)"
-        >''
-          <img src="{{ frontPage().url }}" [class.blur-sm]="frontPage().id === 'front-nothig'" alt="Image for front page book." />
-        </div>
+      <div
+        class="image front-page"
+        [class.active]="frontPage().id !== 'front-nothig'"
+        (click)="deleteFiles(frontPage(), true)"
+      >
+        ''
+        <img
+          src="{{ frontPage().url }}"
+          [class.blur-sm]="frontPage().id === 'front-nothig'"
+          alt="Image for front page book."
+        />
+      </div>
       }
 
       <label
         class="custum-file-upload"
         for="front-book-file"
-        [ngClass]="{ '!border-red-500': frontPageError, 'disabled': frontPage().id !== 'front-nothig' }"
+        [ngClass]="{
+          '!border-red-500': frontPageError,
+          disabled: frontPage().id !== 'front-nothig'
+        }"
       >
         <div class="icon">
           <svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 24 24">
@@ -59,7 +83,7 @@
       <h3>Book Gallery</h3>
 
       <div class="gallery">
-        @for(image of images; track image.id){
+        @for(image of images(); track image.id){
         <div class="image active" (click)="deleteFiles(image, false)">
           <img src="{{ image.url }}" alt="Image for book" />
         </div>
@@ -80,7 +104,7 @@
         name="gallery-file"
         [ngClass]="{
           '!border-red-500': galleryError,
-          'disabled': images.length === 5
+          disabled: images.length === 5
         }"
       >
         <div class="icon">
@@ -127,17 +151,17 @@
       </label>
     </div>
 
-      <app-button
-        type="button"
-        class="w-full flex justify-center items-center cursor-default mt-4"
-        className="min-w-[175px] px-11"
-      >
-        Save Images
-      </app-button>
+    <app-button
+      type="button"
+      class="w-full flex justify-center items-center cursor-default mt-4"
+      className="min-w-[175px] px-11"
+    >
+      Save Images
+    </app-button>
     } @else {
-      <div class="w-full flex justify-center items-center p-20">
-        <dot-spinner class="m-auto"></dot-spinner>
-      </div>
+    <div class="w-full flex justify-center items-center p-20">
+      <dot-spinner class="m-auto"></dot-spinner>
+    </div>
     }
   </admin-card>
 </div>

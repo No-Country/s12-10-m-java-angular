@@ -6,6 +6,7 @@ import { Book } from 'app/data/models/book';
 import { FilterPipe } from 'app/data/pipes/filter.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AdminTableComponent } from '../admin-table/admin-table.component';
+import { BooksService } from 'app/data/services/books/books.service';
 
 @Component({
   selector: 'book-admin-table',
@@ -24,7 +25,11 @@ export class BookAdminTableComponent implements OnInit {
   @Input() public searchTerm: string = '';
   public currentPage: number = 1;
 
-  ngOnInit(): void {}
+  constructor(private bookService: BooksService){ }
+  ngOnInit(): void {
+    
+
+  }
 
   updatePage(updatePage: number) {
     this.currentPage = updatePage;

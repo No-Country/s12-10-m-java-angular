@@ -94,16 +94,23 @@ export class BooksService {
   }
 
   public completeBook(): Observable<any> {
-    //const book =
+
     return this.api.httpPost('book/addInfoBook', this.createdBook.book, true);
   }
 
   public updateImg(): Observable<any> {
+    //Enviar todo el array al back
+    let images = this.createdBook.book.urlImages;
+
     return of(true).pipe(delay(900));
   }
-
+/*
   public update(id: number, book: BookDetail): Observable<any> {
     return this.api.httpPut(`book/addImage/${id}`, book);
+  }*/
+
+  public getAll(){
+    return this.api.httpGet('book/allBooks');
   }
 
   /* ELIMINAR LIBRO

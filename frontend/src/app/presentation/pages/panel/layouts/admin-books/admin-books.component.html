@@ -35,19 +35,25 @@
     </div>
 
     <admin-card titleCard="Book Table">
-      <div class="mt-6">
+      @if( allBooks().length !== 0 ){
+        <div class="mt-6">
         <book-admin-table
-          [bookDataSource]="bookDataSource"
+          [bookDataSource]="allBooks()"
           [columns]="bookColumns"
           [searchTerm]="search"
         ></book-admin-table>
       </div>
+      } @else {
+        <div class="mt-6 w-full h-[500px] flex justify-center items-start">
+          <dot-spinner></dot-spinner>
+        </div>
+      }
     </admin-card>
   </section>
 </div>
 
 @if(viewAddBook){
-<add-book-modal></add-book-modal>
+<add-book-modal (closeMainModal)="closeModal($event)"></add-book-modal>
 
 }
 

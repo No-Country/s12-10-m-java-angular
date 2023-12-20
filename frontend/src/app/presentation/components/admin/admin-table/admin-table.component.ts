@@ -45,7 +45,7 @@ import { ChangeDetectionStrategy, Component, type OnInit } from '@angular/core';
       color: #747474;
       font-weight: 500;
       border-bottom: 1px solid #e9edf7;
-      font-size: .95rem;
+      font-size: .9rem;
     }
     table ::ng-deep .t-body > tr td:last-child {
       letter-spacing: 2px;
@@ -55,7 +55,7 @@ import { ChangeDetectionStrategy, Component, type OnInit } from '@angular/core';
     }
 
     table ::ng-deep .t-body > tr:not(.empty):hover {
-      background-color: #f1f1f1;
+      background-color: #f1f1f199;
     }
     table ::ng-deep .t-body > tr td {
       padding-block: 0.75rem;

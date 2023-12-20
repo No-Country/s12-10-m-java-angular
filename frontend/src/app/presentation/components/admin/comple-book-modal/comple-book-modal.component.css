@@ -1,6 +1,18 @@
+.modal admin-card {
+  display: flex;
+  height: fit-content;
+  width: fit-content;
+  position: absolute;
+  inset: 0;
+  transform: translateY(5%) translateX(50%);
+  z-index: 200;
+  overflow-y: scroll;
+}
+
 .modal ::ng-deep .admin-card {
   width: 725px;
   position: relative;
+  margin: 0px;
 }
 
 .modal ::ng-deep .admin-card .title {
@@ -44,17 +56,17 @@ textarea {
   position: relative;
 }
 .custom-select label div.button {
-    color: #fff;
-    background-color: #5c5c5c79;
-    border-radius: 100%;
-    z-index: 999;
-    -webkit-user-select: none;
-    user-select: none;
-    width: 20px;
-    aspect-ratio: 1/1;
-    display: inline-flex;
-    text-align: center;
-    justify-content: center;
+  color: #fff;
+  background-color: #5c5c5c79;
+  border-radius: 100%;
+  z-index: 999;
+  -webkit-user-select: none;
+  user-select: none;
+  width: 20px;
+  aspect-ratio: 1/1;
+  display: inline-flex;
+  text-align: center;
+  justify-content: center;
 }
 
 .custom-select label div.button:hover + .tooltiptext {
@@ -113,7 +125,7 @@ textarea {
   color: lch(57 48.08 154.05);
 }
 
-form ::ng-deep button[type='submit']:disabled {
-    cursor: not-allowed;
-    background-color: oklch(0.74 0.14 156.42);
+form ::ng-deep button[type="submit"]:disabled {
+  cursor: not-allowed;
+  background-color: oklch(0.74 0.14 156.42);
 }

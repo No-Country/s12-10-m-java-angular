@@ -14,7 +14,11 @@
         <td>
           {{ bookDataSource.indexOf(book)+1 }}
         </td>
-        <td>
+        <td title="{{ book.title }}" class="max-w-[135px] max-h-[58px] text-ellipsis overflow-y-hidden" style="
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    padding-inline-start: .35rem;">
           {{ book.title }}
         </td>
         <td>
@@ -35,7 +39,7 @@
         <td>
           {{ book.price }}
         </td>
-        <td>
+        <td class="max-w-[60px] flex justify-center mx-auto">
           {{ book.quantityAvailable }}
         </td>
         <td>

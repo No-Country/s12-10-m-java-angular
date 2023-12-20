@@ -5,6 +5,8 @@ import {
   OnDestroy,
   inject,
   type OnInit,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 import { AdminCardComponent } from '../admin-card/admin-card.component';
 import { StepAddComponent } from '../step-add/step-add.component';
@@ -16,6 +18,7 @@ import { CompleBookModalComponent } from '../comple-book-modal/comple-book-modal
 import { ToastComponent } from '@presentation/components/toast/toast.component';
 import { ToastService } from 'app/data/services/toast/Toast.service';
 import { GalleryBookModalComponent } from '../gallery-book-modal/gallery-book-modal.component';
+import { OverlayComponent } from '@presentation/components/overlay/overlay.component';
 
 @Component({
   selector: 'add-book-modal',
@@ -28,12 +31,14 @@ import { GalleryBookModalComponent } from '../gallery-book-modal/gallery-book-mo
     CompleBookModalComponent,
     ToastComponent,
     GalleryBookModalComponent,
+    OverlayComponent,
   ],
   templateUrl: './add-book-modal.component.html',
   styleUrl: './add-book-modal.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddBookModalComponent implements OnInit, OnDestroy {
+  @Output() public closeMainModal: EventEmitter<boolean> = new EventEmitter();
   private readonly toast = inject(ToastService);
   public mainModal: boolean = true;
 
@@ -83,11 +88,24 @@ export class AddBookModalComponent implements OnInit, OnDestroy {
         'Now add image to your book!',
         5
       );
-    if (event && modal === 3)
+    if (event && modal === 3){
       this.toast.success(
         'Saved successfully',
         'Book has been completely created.',
         5
       );
+
+      setTimeout(() => {
+        this.closeMainModal.emit(true);
+      }, 800);
+    }
+
+  }
+
+  protected closeAll(): void {
+    this.bookService.createdBook.stateCreate.open = false;
+    this.bookService.createdBook.stateComplete.open = false;
+    this.bookService.createdBook.stateAddImg.open = false;
+    this.closeMainModal.emit(false);
   }
 }

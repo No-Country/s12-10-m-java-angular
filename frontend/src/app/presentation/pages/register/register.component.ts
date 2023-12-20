@@ -68,7 +68,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
       error(response: any): void {
         let message = 'An unexpected error has occurred with the server';
 
-        if (response.error.backendMessage.includes('Duplicate')) message = 'Sorry, this email is already registered';
+        if (response.error.backendMessage.includes('Duplicate'))
+          message = 'Sorry, this email is already registered';
 
         toast.error('Oops...', message, 5);
       },
@@ -76,9 +77,14 @@ export class RegisterComponent implements OnInit, OnDestroy {
         if (this.register.id !== registerSubmitted.id)
           loggedInState.updateId(this.register.id as string);
 
-        if (this.register.role === 'USER') setTimeout(() => router.navigate(['/']), 500);
+        if (this.register.role === 'USER')
+          setTimeout(() => router.navigate(['/']), 500);
 
-        if (this.register.role === 'ADMIN') setTimeout(() => router.navigate(['/admin']), 500);
+        if (
+          this.register.role === 'ADMIN' ||
+          this.register.role === 'ASSISTANT_ADMINISTRATOR'
+        )
+          setTimeout(() => router.navigate(['/admin']), 500);
       },
     };
 
