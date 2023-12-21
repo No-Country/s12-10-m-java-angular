@@ -1,22 +1,31 @@
 <h2 class="title mx-[7.5dvw] mb-[48px]"> Trending <strong class="text-[#33B672] font-medium">Books</strong></h2>
 <div class="container">
 
-  <ul class="image-list" #bookList>
-    @for (book of booksArray; track book.ID) {
-      <card-book [book]="book"></card-book> 
+  <div class="image-list" #bookList>
+    @for (book of booksArray; track book.id) {
+      <card-book [book]="book" [className]="classOfCard"></card-book>
+
+      <app-card-book-horizontal  [book]="book" [className]="classOfCard" style="width: 90vw; margin: 0 5vw;"></app-card-book-horizontal>
   } @empty {
-      <span>No hay libros</span>
+      @for(book of [1,2,3,4,5]; track book){
+        <card-book [className]="classOfCard" [book]="{id: book, name:'Loading...', description: 'Loading...', author: 'loading...', price: 0, image: '../../../../assets/imgs/book-placeholder.webp'}"></card-book>
+
+        <app-card-book-horizontal  [book]="{id: book, name:'Loading...', description: 'Loading...', author: 'loading...', price: 0, image: '../../../../assets/imgs/book-placeholder.webp'}"  [className]="classOfCard" style="width: 90vw; margin: 0 5vw;"></app-card-book-horizontal>
+
+      }
   }
-  </ul>
-  <button (click)="moveCarrusel('left')" id="bookList" class="absolute w-[56px] h-[56px] opacity-50 rounded-[50%] p-2 r top-[40%] left-4 z-50 flex items-center justify-center bg-[#33B672] hover:bg-[#15AD67]">
-    <svg xmlns="http://www.w3.org/2000/svg" class="" width="80" height="80" viewBox="0 0 80 96" fill="none" class="w-8 h-8 text-white">
-      <path d="M52.3504 29.64L47.6504 24L27.6504 48L47.6504 72L52.3504 66.36L37.0837 48L52.3504 29.64Z" fill="currentColor"/>
+  </div>
+  <button (click)="moveCarrusel('left')" id="bookList" class="absolute p-0 opacity-50 rounded-[25%] r top-[40%] left-4 z-50 justify-center items-center bg-[#BFBFBF] hover:bg-[#888888]">
+    <svg xmlns="http://www.w3.org/2000/svg" class="" width="50" height="50" viewBox="0 0 80 96" fill="none">
+      <path d="M52.3504 29.64L47.6504 24L27.6504 48L47.6504 72L52.3504 66.36L37.0837 48L52.3504 29.64Z" fill="#ffffff"/>
     </svg>
   </button>
-  
-<button (click)="moveCarrusel('right')" id="bookListr" class="absolute w-[56px] h-[56px] opacity-50 rounded-[50%] p-2 r top-[40%] right-4 z-50 flex items-center justify-center bg-[#33B672] hover:bg-[#15AD67]">
-    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 96" fill="none" class="w-8 h-8 text-white">
-      <path d="M32.3504 23.9507L27.6504 29.5791L42.9171 47.9013L27.6504 66.2235L32.3504 71.8519L52.3504 47.9013L32.3504 23.9507Z" fill="currentColor"/>
+  <button (click)="moveCarrusel('right')" id="bookListr" class="absolute opacity-50 rounded-[25%] r top-[40%] right-4 z-50 justify-center items-center bg-[#BFBFBF] hover:bg-[#888888]">
+    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 80 96" fill="none">
+      <path d="M32.3504 23.9507L27.6504 29.5791L42.9171 47.9013L27.6504 66.2235L32.3504 71.8519L52.3504 47.9013L32.3504 23.9507Z" fill="#ffffff"/>
     </svg>
   </button>
 </div>
+
+<button class="default-button" type="button" title="See all trending books" aria-label="View more trending books" role="button" dir="ltr" routerLink="shop" [queryParams]="{ search: 'All', sort: 'price' }">
+</button>

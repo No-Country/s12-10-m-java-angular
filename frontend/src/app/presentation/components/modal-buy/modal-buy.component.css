@@ -1,0 +1,198 @@
+.modal-overlay {
+  position: fixed;
+  z-index: 200;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  min-width: 23vw;
+  aspect-ratio: 1.8/1;
+}
+
+label,
+.envio,
+.pago{
+  display: flex;
+  justify-content: space-around;
+}
+input{
+  color: #585858;
+}
+label p{
+  color: #585858;
+  padding-bottom: 1%;
+}
+.envio{
+  margin-bottom: 3%;
+}
+.input-domicilio{
+  margin: 3%;
+  align-items: center;
+}
+
+.input-domicilio input{
+  border: solid 2px #0000000D;
+  border-radius: 15px;
+  padding-left: 2%;
+}
+
+.form-group{
+  padding-top: 2vh;
+  display: flex;
+  justify-content:center;
+}
+button{
+  background-color: #33B672;
+  color: #fff;
+  min-width: 12vw;
+  border-radius: 15px;
+  padding: 2%;
+}
+
+button:hover{
+  background-color: #33B672;
+  color: #000000;
+}
+
+.title{
+  font-size: 4vh;
+  font-weight: 500;
+  margin-bottom: 2%; 
+}
+
+input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #33B672;
+  outline: none;
+  margin-right: 5px;
+}
+
+input[type="radio"]:checked {
+  background-color: #33B672;
+  border-color: none; 
+}
+h3{
+  padding-bottom: 2%;
+  font-size: 2vh;
+  font-weight: 400;
+}
+
+.bottom-text{
+  font-size: 1.2vh;
+  color: #33B672;
+  margin-top: 3%;
+}
+
+.success-overlay {
+  position: fixed;
+  z-index: 205;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #33B672;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.success-message {
+  z-index: 206;
+  text-align: center;
+  color: white;
+  font-size: 7vh;
+  font-weight: bold;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.success-message p {
+  animation-duration: 1s;
+  animation-name: rotating-text-1;
+}
+
+@keyframes rotating-text-1 {
+  0% {
+    transform: translateY(200%);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+.error-overlay {
+  position: fixed;
+  z-index: 200;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-message {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  min-width: 23vw;
+  aspect-ratio: 1.8/1;
+  color: red;
+  font-weight: 700;
+  font-size: 3vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-message svg {
+  width: 8vh;
+  height: 8vh;
+  margin-bottom: 15%;
+}
+
+.warning-animation {
+  animation-duration: 0.5s;
+  animation-name: warning-shake;
+}
+
+@keyframes warning-shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25%, 75% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+}

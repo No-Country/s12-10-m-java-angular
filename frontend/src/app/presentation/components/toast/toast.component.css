@@ -32,7 +32,7 @@
     overflow:  hidden auto;
 	box-sizing: border-box;
 	position: fixed;
-	z-index: 20;
+	z-index: 999;
 
     display: flex;
     flex-grow: 1;
@@ -96,7 +96,7 @@
     background-color: #3C58BA;
 }
 .toast div.bar.success-bar {
-    background-color: #069150;
+    background-color: oklch(57.71% 0.144 154.06);
 }
 .toast div.bar.warning-bar{
     background-color: #BA703C;
@@ -124,7 +124,7 @@
     grid-area: 1 / 3 / 2 / 4;
     text-overflow: ellipsis;
     white-space: nowrap;
-    
+
     max-height: 30px;
     color: #0D0C0C;
     font-size: 1.2rem;
@@ -189,7 +189,7 @@
       opacity: 0;
     }
   }
-  
+
 
   @keyframes fade-in {
     from {
@@ -199,7 +199,7 @@
       opacity: 1;
     }
   }
-  
+
 
   .animate-enter{
     animation: fade-in 0.35s ease-in;

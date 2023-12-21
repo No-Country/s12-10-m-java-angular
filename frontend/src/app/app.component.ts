@@ -11,33 +11,31 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ShopComponent } from '@presentation/pages/shop/shop.component';
 import { CartComponent } from '@presentation/pages/cart/cart.component';
 import { LoggedInService } from './data/services/login/loggedIn.service';
+import { OverlayComponent } from '@presentation/components/overlay/overlay.component';
+import { PanelComponent } from '@presentation/pages/panel/panel.component';
 
 @Component({
-    selector: 'app-root',
-    standalone: true,
-    templateUrl: './app.component.html',
-    styleUrl: './app.component.css',
-    providers: [ToastService, LoggedInService],
-    imports: [
-        CommonModule,
-        RouterOutlet,
-        RegisterComponent,
-        LoginComponent,
-        NgxPaginationModule,
-        FooterComponent,
-        ShopComponent,
-        CartComponent
-    ]
+  selector: 'app-root',
+  standalone: true,
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+  providers: [ToastService],
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    RegisterComponent,
+    LoginComponent,
+    NgxPaginationModule,
+    FooterComponent,
+    ShopComponent,
+    CartComponent,
+    PanelComponent,
+  ],
 })
 export class AppComponent implements OnInit {
-  
-  
-  constructor() {
-    
-  }
+  constructor(private loggedIn: LoggedInService) {}
 
   ngOnInit(): void {
-
+    this.loggedIn.verifyLogin();
   }
-  
 }

@@ -31,13 +31,13 @@ section{
       }
       input{
         min-width: 70vw;
-        height: 4.3vh;
+        aspect-ratio: 1/.18;
       }
      #pc{
       display: none;
      }
 }
-@media only screen and (min-width: 851px)  {
+@media only screen and (min-width: 850px)  {
   #movil{
     display: none;
   }
@@ -46,6 +46,7 @@ section{
   h2, p {
     color: #EBEBEB ;
     margin: 5vh ;
+    text-align: left;
   }
 
   p{
@@ -54,11 +55,14 @@ section{
   }
 
   input{
-    border-radius: 50px;
-    border: 2px solid rgba(0, 0, 0, 0.20);
+    padding-block: 1.25rem;
+    padding-inline-end: 1rem;
+    border-radius: 0.9375rem;
+    border: 3px solid rgba(0, 0, 0, 0.20);
     background: #FFFFFC;
     width: 28vw;
-    aspect-ratio: 1/.11;
+    aspect-ratio: 1/.09;
+    min-height: 4.7vh;
     flex-shrink: 0;
     margin: 5vh ;
     outline: none;
@@ -73,9 +77,12 @@ section{
   }
 
   input:focus {
-    border-radius: 50px;
-    border: 4px solid #C88D65;
+    border-radius: 0.9375rem;
+    border: 3px solid #C88D65;
     background: #FFF;
 }
 
-  
+app-button{
+  margin-left: 2vh;
+}
+

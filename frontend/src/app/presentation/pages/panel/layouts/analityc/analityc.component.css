@@ -1,0 +1,19 @@
+h2{
+    font-size: 5vh;
+    font-weight: 700;
+    color: #18B66C;
+    text-align: center;
+    margin-top: 3%;
+}
+
+.img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1%;
+}
+img{
+    margin: 5%;
+    max-height: 90vh;
+    max-width: 80vw;
+}

@@ -1,0 +1,53 @@
+.w-full{
+  padding-left: 10px;
+}
+section{
+  width: 99%;
+  margin-block-start: 2rem;
+  font-family: Roboto, arial, sans-serif;
+}
+.main ::ng-deep .admin-card {
+  overflow: visible;
+}
+
+.modal ::ng-deep admin-card {
+  display: flex;
+  height: fit-content;
+  width: fit-content;
+  position: absolute;
+  inset: 0;
+  transform: translateY(5%) translateX(50%);
+  z-index: 200;
+}
+.modal ::ng-deep .admin-card {
+  position: relative;
+  margin: 0px;
+  width: 650px;
+  padding: 3rem;
+}
+
+.header-table {
+  @apply w-full flex justify-between mb-2 gap-x-3;
+
+}
+
+.header-table input {
+  @apply focus:outline-none;
+  /*
+  border-radius: 0.9375rem;
+  border: 2px solid rgba(0, 0, 0, .20);*/
+  background: transparent;
+  border-bottom: 2px solid rgba(0, 0, 0, .20);
+  padding-inline:  8px;
+  padding-block: 5px;
+  caret-color: #000;
+  margin-inline-start: .5rem;
+}
+
+
+.header-table ::ng-deep button svg {
+  width: 1.75rem;
+  height: 1.75rem;
+  margin-inline-end: .5rem;
+}
+

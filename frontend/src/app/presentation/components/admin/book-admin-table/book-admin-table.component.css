@@ -1,0 +1,150 @@
+.book-pagination ::ng-deep .ngx-pagination .current {
+  background: #33b672;
+}
+
+.admin-table ::ng-deep table {
+  overflow: visible;
+}
+
+tbody .empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  content: ".";
+  height: 190px;
+}
+
+tbody .empty::before {
+  content: ".";
+  animation: scale-up-center 0.35s;
+  color: transparent;
+  background-image: url(../../../../../assets/imgs/not-found-2.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  top: 23%;
+  right: 42%;
+  width: 225px;
+  height: 140px;
+}
+
+tbody .empty::after {
+  content: "No books founds";
+  animation: scale-up-center 0.4s;
+  color: #838383;
+  font-weight: 500;
+  letter-spacing: 1px;
+  word-spacing: 1px;
+  font-size: 1.25rem;
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  top: 88%;
+  left: -1%;
+}
+
+.actions,
+.actions span {
+  position: relative;
+}
+.actions span {
+  opacity: 0.8;
+  color: #1d1d1df8;
+  transition-property: color, opacity;
+  transition-duration: 0.1s;
+  transition-timing-function: ease;
+  user-select: none;
+}
+.actions span::before {
+  background-color: transparent;
+  border-radius: 100%;
+  position: absolute;
+  content: " ";
+  width: 0px;
+  aspect-ratio: 1/1;
+  left: -31%;
+
+  transition-property: color, opacity;
+  transition-duration: 0.1s;
+  transition-timing-function: ease;
+}
+
+.actions span:hover,
+.actions span.active {
+  color: #000;
+  opacity: 1;
+}
+
+.actions span:hover::before,
+.actions span.active:before {
+  background-color: #33333347;
+  width: 25px;
+  aspect-ratio: 1/1;
+  left: -32%;
+}
+.menu-options.active {
+  width: max-content;
+  height: fit-content;
+  opacity: 1;
+  visibility: visible;
+  font-size: 0.75rem;
+  z-index: 10;
+}
+.menu-options {
+  position: absolute;
+  top: 85%;
+  left: -7dvw;
+  opacity: 0;
+  visibility: hidden;
+  background-color: #333;
+  color: #fff;
+  text-align: left;
+  border-radius: 0.75rem;
+  box-shadow: 1px 2px 10px 2px rgb(52 47 47 / 20%);
+}
+
+.menu-options ul {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.menu-options ul li {
+  letter-spacing: 1px;
+  word-spacing: 0.5px;
+  font-weight: 600;
+  color: #fff;
+  font-size: 0.8rem;
+  width: 100%;
+  user-select: none;
+  transition: background-color 0.15s ease;
+}
+
+.menu-options ul :first-child {
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
+}
+.menu-options ul :last-child {
+  border-bottom-left-radius: 0.75rem;
+  border-bottom-right-radius: 0.75rem;
+}
+
+.menu-options ul li:hover {
+  background-color: #444141;
+}
+
+.menu-options ul li p {
+  padding-inline: 0.75rem;
+  padding-block: 1rem;
+}
+
+@keyframes scale-up-center {
+  0% {
+    transform: scale(0.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

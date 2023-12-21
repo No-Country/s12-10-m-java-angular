@@ -1,0 +1,69 @@
+.custom-select{
+    position: relative;
+    display: block;
+}
+
+.custom-select::after{
+    content: ' ';
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #333;
+}
+
+.custom-select .sort-by {
+    margin-inline-start: .5rem;
+    outline: none;
+    cursor: pointer;
+    user-select: none;
+
+    border-radius: 0.9375rem;
+    background: #FFF;
+    box-shadow: 0px 2px 6px 2px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.30);
+
+    padding-block: .45rem;
+    padding-inline-start: .45rem;
+    padding-inline-end: 1.65rem;
+}
+
+.custom-select .sort-options{
+    position: absolute;
+    margin-block-start: .75rem;
+    outline: none;
+    cursor: pointer;
+    border-radius: 0.9375rem;
+    background: #FFF;
+    z-index: 99;
+    min-width: 163px;
+}
+
+.custom-select .sort-options li{
+    padding-block: .5rem;
+    padding-inline: 1rem;
+    user-select: none;
+}
+
+.custom-select .sort-options li.activate {
+    background-color: #33B672;
+    color: #fff;
+}
+
+.custom-select .sort-options li:first-child {
+    border-top-right-radius: 0.9375rem;
+    border-top-left-radius: 0.9375rem;
+}
+
+.custom-select .sort-options li:last-child{
+    border-bottom-left-radius:  0.9375rem;
+    border-bottom-right-radius: 0.9375rem;
+}
+
+.custom-select .sort-options li:hover {
+    background-color: #33B672;
+    color: #fff;
+}

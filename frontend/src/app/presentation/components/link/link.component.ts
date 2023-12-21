@@ -13,7 +13,7 @@ import { RouterLink } from '@angular/router';
       </a>
     </div>
   `,
-  styleUrls: ['./link.component.css'],
+  styles: '',
   host: {
     role: 'link',
   },
@@ -23,7 +23,7 @@ export class LinkComponent implements OnInit {
   @Input({required: true}) path: string = "";
   @Input({required: true}) textLink: string = "";
   @Input({required: true}) className: string = "";
-  
+
   //
   constructor() { }
 

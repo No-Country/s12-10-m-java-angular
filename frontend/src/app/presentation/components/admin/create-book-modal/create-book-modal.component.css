@@ -1,0 +1,60 @@
+
+.modal ::ng-deep .admin-card {
+  position: relative;
+  margin: 0px;
+}
+
+.input-group label.form-label {
+  position: absolute;
+  transform: scale(0.75) translateY(-39px);
+  margin: 0em;
+  margin-left: 1.3em;
+  padding: 0.4em;
+  top: 1rem;
+  pointer-events: none;
+
+  background: #fff;
+  color: #49454f;
+
+  direction: ltr;
+  box-sizing: border-box;
+
+  width: auto;
+  z-index: 1;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+  font-size: 1rem;
+}
+
+form {
+  margin-block-start: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+
+form ::ng-deep button[type="submit"]:disabled {
+  cursor: not-allowed;
+  background-color: oklch(0.74 0.14 156.42);
+}
+
+.modal ::ng-deep .admin-card .title {
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 50%;
+}
+
+.modal .close {
+  display: inline-flex;
+  width: 50%;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.modal .close svg {
+  cursor: pointer;
+  user-select: none;
+}

@@ -7,11 +7,24 @@
 }
 
 .navbar-logo {
-    margin-left: 2vw;
-    margin-right: auto;
+    margin-inline-start: 5vw;
+    margin-inline-end: 1dvw;
     font-size: 32px;
     font-weight: bold;
     text-wrap: nowrap;
+    color: oklch(68.96% 0.15 155.76);
+}
+
+.hamburguer-button {
+    margin-left: 1vw;
+}
+
+.cross-logo {
+    margin-left: 1.5vw;
+}
+
+.shop-button {
+    margin-right: 2vw;
 }
 
 .search-bar {
@@ -47,6 +60,7 @@
     flex-shrink: 1;
     padding-inline-start: 15px;
     outline: none;
+    color: #1d1d1d;
 }
 
 .search-bar-input:focus {
@@ -54,7 +68,9 @@
     border: 2px solid #C88D65;
     background: #FFF;
 }
-
+.search-bar-input ~ svg{
+  cursor: pointer;
+}
 .search-bar :is(input:focus) ~ .search-bar-icon path {
     fill: #C88D65;
     fill-opacity: 100%;
@@ -98,19 +114,25 @@
 .navbar-w-list-item {
     position: relative;
   }
-  
+
 .dropdown-content {
     display: none;
     position: absolute;
     top: 100%;
     left: 0;
     background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 5vw;
-    height: 8vh;
-    overflow-y: scroll;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1), -5px 5px 10px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.1);
+    width: 8vw;
+    min-height: 30vh;
+    z-index: 100;
+    border-radius: 15px;
 }
-  
+
+.dropdown-content a{
+    padding: 3%;
+    cursor: pointer;
+}
+
 .navbar-w-list-item:hover .dropdown-content {
     display: block;
 }

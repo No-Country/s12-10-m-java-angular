@@ -1,4 +1,110 @@
-<section>
+<header>
+  <app-navbar></app-navbar>
+  <app-navbar-2></app-navbar-2>
+</header>
 
-  
-</section>
+<main class="shop-container">
+  <section class="filter-container">
+    <div
+      class="w-full flex justify-between ml-4 mr-8 items-center min-[975px]:hidden"
+    >
+      @if( !this.loading() ){
+      <span>{{ books().totalElements }} found books</span>
+      } @else {
+      <span>Looking for books...</span>
+      }
+
+      <button
+        class="text-[#069150] flex gap-x-1 me-8"
+        type="button"
+        id="openMobileFilters"
+        #openMobileFilters
+        (click)="openMobileFilter = !openMobileFilter"
+      >
+        Filters
+        <picture class="w-full">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M7 10L12 15L17 10H7Z" fill="#069150" />
+          </svg>
+        </picture>
+      </button>
+    </div>
+
+    <div class="hidden w-full min-[975px]:block">
+      <p class="search-term">
+        {{ searchTerm }}
+      </p>
+      @if( !this.loading() ){
+      <span>{{ books().totalElements }} found books</span>
+      } @else {
+      <span>Looking for books...</span>
+      }
+    </div>
+
+    <shop-filters class="w-full hidden min-[975px]:flex"></shop-filters>
+
+    @defer{ @if(openMobileFilter){
+    <shop-filter-mobile
+      class="block w-full min-[975px]:hidden"
+    ></shop-filter-mobile>
+    } }
+  </section>
+  <section class="result-container">
+    <div class="result-header">
+      <h2 class="title">Results</h2>
+
+      <div class="select">
+        <div class="flex justify-around">
+          <p>Sort by</p>
+          <sort-box
+            [options]="filterService.SORT"
+            [selectedOption]="filterService.SORT[0]"
+            (sort)="filterService.updateSort($event)"
+          ></sort-box>
+        </div>
+      </div>
+    </div>
+
+    @if ( !this.loading() ){
+    <div class="result-list">
+      @for(book of getBooks() | paginate: { id: 'books-pagination-ctr',
+      itemsPerPage: filterService.props.size,
+      currentPage: filterService.props.page+1,
+      totalItems: books().totalElements }; track
+      book.id){
+      <card-book [book]="book" ></card-book>
+      <app-card-book-horizontal [book]="book" class="mr-12" >
+      </app-card-book-horizontal>
+      }
+    </div>
+    <div class="w-full mb-8 flex justify-center items-center">
+      <pagination-controls
+        class="book-pagination"
+        id="books-pagination-ctr"
+        (pageChange)="updatePage($event)"
+        [maxSize]="300"
+        [responsive]="true"
+        [autoHide]="true"
+        previousLabel="Previous"
+        nextLabel="Next"
+      ></pagination-controls>
+    </div>
+    } @else {
+    <div class="spinner grid grid-cols-3 w-full gap-x-8 justify-center">
+      <dot-spinner></dot-spinner>
+    </div>
+    }
+  </section>
+</main>
+
+<overlay
+  [ngClass]="{ hidden: !openMobileFilter }"
+  (click)="openMobileFilter = !openMobileFilter"
+></overlay>
+<app-footer></app-footer>

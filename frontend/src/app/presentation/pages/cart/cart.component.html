@@ -1,3 +1,30 @@
-<p>
-  cart works!
-</p>
+<app-navbar></app-navbar>
+<app-navbar-2></app-navbar-2>
+<section #arribal class="arribal-container mx-14 my-10">
+
+  <div class="cart-header">
+    <svg class="cart-icon" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
+      <path d="M33.334 22.9167V14.5833C33.334 12.3732 32.456 10.2536 30.8932 8.69078C29.3304 7.12797 27.2108 6.25 25.0007 6.25C22.7905 6.25 20.6709 7.12797 19.1081 8.69078C17.5453 10.2536 16.6673 12.3732 16.6673 14.5833V22.9167M10.4173 18.75H39.584L41.6673 43.75H8.33398L10.4173 18.75Z" stroke="#222324" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <h2 class="cart-tittle"><strong class="text-[#33B672] font-medium"></strong> Cart</h2>
+  </div>
+
+
+    <div class="book-list">
+     @for(bookOfCart of booksWQ ; track bookOfCart.book.id){
+          <app-cart-card (deleteBook)="discardBook(bookOfCart)" (bookWithNewQuantity)="editquantityOf($event)" [bookOfCard]="bookOfCart"></app-cart-card>
+      }
+    </div>
+
+  <section class="button-container">
+    <div class="total">Sub Total:{{total}}$</div>
+    <button class="buy-button" (click)="abrirModal()">Buy</button>
+  </section>
+
+</section>
+<app-footer></app-footer>
+
+<modal-buy *ngIf="modalAbierto"></modal-buy>
+<button class="close-button" *ngIf="modalAbierto" (click)="cerrarModal()"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23" fill="none">
+    <path d="M23 2.31643L20.6836 0L11.5 9.18357L2.31643 0L0 2.31643L9.18357 11.5L0 20.6836L2.31643 23L11.5 13.8164L20.6836 23L23 20.6836L13.8164 11.5L23 2.31643Z" fill="black"/>
+  </svg></button>

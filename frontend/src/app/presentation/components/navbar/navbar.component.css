@@ -1,5 +1,5 @@
 .navbar-g {
-    background-color: oklch(68.98% 0.15 155.68);
+    background-color: oklch(68.96% 0.15 155.76);
     min-height: 40px;
     display: flex;
     align-items: center;
@@ -27,12 +27,12 @@
     margin-right: 0.5vw;
     opacity: .85;
     font-weight: 500;
-    transition-timing-function: ease-out;
-    transition-duration: 90ms;
+    transition-timing-function: ease-in-out;
+    transition-duration: 100ms;
     transition-property: color, opacity;
 }
 .navbar-g-links a:hover {
-    color: #0B733D;
+    color: #043f20;
     transition-timing-function: ease-in;
     opacity: 1;
 }

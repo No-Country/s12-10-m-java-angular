@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { CategoryArray } from 'app/data/mocks/categoriesArray';
 import { Categories } from 'app/data/models/categories';
 import { ResizeService } from 'app/data/services/pagination/pagination.service';
@@ -7,7 +8,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, NgxPaginationModule],
+  imports: [CommonModule, NgxPaginationModule, RouterLink],
   selector: 'bowser-categories-layout',
   templateUrl: './bowser-categories.component.html',
   styleUrls: ['./bowser-categories.component.css'],
@@ -25,7 +26,7 @@ export class BowserCategoriesComponent implements OnInit {
   constructor(
     private _service: CategoryArray,
     private resizeService: ResizeService
-  ) { 
+  ) {
     this.pageSize = this.calculatePageSize(window.innerWidth);
   }
 
@@ -47,7 +48,7 @@ export class BowserCategoriesComponent implements OnInit {
       return 5;
     }
   }
-  
+
   data = [];
   selectedItem = null;
 
