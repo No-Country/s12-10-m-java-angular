@@ -34,6 +34,7 @@ Se completó la primer etapa del proyecto. Estamos trabajando en la segunda etap
 [![My Skills](https://skillicons.dev/icons?i=css)](https://skillicons.dev)
 [![My Skills](https://skillicons.dev/icons?i=ts)](https://skillicons.dev)
 [![My Skills](https://skillicons.dev/icons?i=rxjs)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=tailwind)](https://skillicons.dev)
 
 ### Demo
 🔗 Link https://youtu.be/TEtph4m8olk 
