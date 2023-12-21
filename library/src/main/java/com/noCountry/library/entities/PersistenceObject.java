@@ -15,7 +15,7 @@ import java.time.LocalDate;
 public abstract class PersistenceObject {
         @Id
         private String id;
-        private Boolean status = true;
+        private Boolean status = Boolean.TRUE;
         private LocalDate creationDate;
         private LocalDate modificationDate;
 }

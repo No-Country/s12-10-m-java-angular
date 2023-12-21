@@ -1,6 +1,7 @@
 package com.noCountry.library.entities;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -17,10 +18,8 @@ import lombok.NoArgsConstructor;
 public class Editorial extends PersistenceObject {
 
 	private String name;
-	private String email;
-
+	private String url;
 	@OneToMany(mappedBy = "editorial")
-	private ArrayList<Book> books;
-
+	private List<Book> books = new ArrayList<>();
 
 }

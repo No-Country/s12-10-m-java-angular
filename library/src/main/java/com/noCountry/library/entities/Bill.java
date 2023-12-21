@@ -1,41 +1,43 @@
 package com.noCountry.library.entities;
-/*
+
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import com.noCountry.library.entities.enums.PaymentMethods;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Table(name = "tbl_bill")
 public class Bill {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private Boolean status;
+	private Double totalPrice;
+	private LocalDate dateBill;
 
-    // La factura si deberia de tener un id autoincremental normal.
-    // para facilitar el registro de las compras
-    // y no haria falta q tenga el registro de las 2 fechas (creacion y modificacion)
-    // porq el de creacion ya se realiza y se detalla en la factura.
-    // porq me parece q en una factura no se puede modificar, ne caso de ser erronea, solo se anula y se genera otra
+	@Enumerated(EnumType.STRING)
+	private PaymentMethods paymentMethods;
+	private String address;
+	private Boolean delivery; // true si es entrega en domicilio, false para retiro en el local
 
-    @Id
-    private Long id;
-
-    private Boolean status;
-
-
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
 
-	@Column(length = 2048)
-	private ArrayList<Book> books = new ArrayList<>();
+	@ToString.Exclude
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "bill_id", referencedColumnName = "id")
+	private List<BillItem> billItems = new ArrayList<>();
 
-	private Double totalPrice;
-
-	private LocalDate dateBill;
 }
-*/

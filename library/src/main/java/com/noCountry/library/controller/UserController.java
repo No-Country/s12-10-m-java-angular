@@ -1,9 +1,7 @@
 package com.noCountry.library.controller;
 
-import com.noCountry.library.dto.User.ResponseUserDto;
 import com.noCountry.library.dto.User.UpdatePasswordDto;
 import com.noCountry.library.dto.User.UserDto;
-import com.noCountry.library.entities.User;
 import com.noCountry.library.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
+@CrossOrigin(origins = "${ALLOWED_ORIGINS}")
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/user")
 public class UserController {
 
 
@@ -24,10 +24,10 @@ public class UserController {
     }
 
 
-    @GetMapping(path = "/user/{id}")
-    public ResponseEntity<?> getUserById(@PathVariable String id) throws Exception {
+    @GetMapping(path = "/{email}")
+    public ResponseEntity<?> getUserByEmail(@PathVariable String email) throws Exception {
         try {
-            User user = userService.getUserById(id);
+            UserDto user = userService.getUser(email);
             return new ResponseEntity<>(user, HttpStatus.OK);
         } catch (Exception e){
             throw new Exception(e.getMessage());
@@ -35,37 +35,47 @@ public class UserController {
     }
 
 
-    @DeleteMapping(path = "/user/{id}")
-    public ResponseEntity<?> deleteUserById(@PathVariable String id) throws Exception {
+    @DeleteMapping(path = "/{email}")
+    public ResponseEntity<?> deleteUserByEmail(@PathVariable String email) throws Exception {
         try {
-            userService.deleteUser(id);
+            userService.deleteUser(email);
             return ResponseEntity.ok(HttpStatus.OK);
         } catch (Exception e){
             throw new Exception(e.getMessage());
         }
     }
 
-    @DeleteMapping(path = "/user/unsubscribe/{id}")
-    public ResponseEntity<?> unsubscribeEmailUser(@PathVariable String id) throws Exception {
+    @PutMapping(path = "/subscribe/{email}")
+    public ResponseEntity<?> subscribeEmailUser(@PathVariable String email) throws Exception {
         try {
-            userService.unsubscribeEmailUser(id);
+            userService.subscribeEmailUser(email);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e){
             throw new Exception(e.getMessage());
         }
     }
 
-    @PatchMapping(path = "/user/update")
+    @DeleteMapping(path = "/unsubscribe/{email}")
+    public ResponseEntity<?> unsubscribeEmailUser(@PathVariable String email) throws Exception {
+        try {
+            userService.unsubscribeEmailUser(email);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @PatchMapping(path = "/update")
     public ResponseEntity<?> updateUser(@RequestBody @Valid UserDto userDto) throws Exception {
         try {
-            ResponseUserDto userUpdated = userService.updateUser(userDto);
+            UserDto userUpdated = userService.updateUser(userDto);
             return new ResponseEntity<>(userUpdated, HttpStatus.OK);
         } catch (Exception e){
             throw new Exception(e.getMessage());
         }
     }
 
-    @PutMapping(path = "/user/updatePassword")
+    @PutMapping(path = "/updatePassword")
     public ResponseEntity<?> updatePassword(@RequestBody @Valid UpdatePasswordDto userDto) throws Exception {
         try {
             userService.updatePasswordUser(userDto);

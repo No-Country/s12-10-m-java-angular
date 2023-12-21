@@ -1,12 +1,13 @@
 package com.noCountry.library.service.impl;
 
-import com.noCountry.library.dto.RegisterRequest;
+import com.noCountry.library.dto.auth.RegisterRequest;
 import com.noCountry.library.dto.User.MappingUserDto;
-import com.noCountry.library.dto.User.ResponseUserDto;
 import com.noCountry.library.dto.User.UpdatePasswordDto;
 import com.noCountry.library.entities.User;
 import com.noCountry.library.entities.enums.Role;
+import com.noCountry.library.exception.BadRequestException;
 import com.noCountry.library.exception.InvalidPasswordException;
+import com.noCountry.library.exception.NotFoundException;
 import com.noCountry.library.repository.UserRepository;
 import com.noCountry.library.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,13 +69,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserById(String id) {
-        return userRepository.findById(id).get();
+    public UserDto getUser(String email) {
+        Optional<User> auxUser = findByEmail(email);
+        isEmptyUser(auxUser);
+
+        return mapperUser.userToUserDto(auxUser.get());
     }
 
     @Transactional
     @Override
-    public ResponseUserDto updateUser(UserDto userDTO) {
+    public UserDto updateUser(UserDto userDTO) {
+        Optional<User> auxUser = userRepository.findByEmail(userDTO.getEmail());
+        isEmptyUser(auxUser);
 
         User updateUser = mapperUser.userDtoToUser(userDTO);
 
@@ -110,11 +116,19 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Override
+    public void olvidoContraseña() {
+
+    }
+
 
     @Transactional
     @Override
-    public void deleteUser(String id) {
-        User user = userRepository.findById(id).get();
+    public void deleteUser(String email) {
+        Optional<User> auxUser = userRepository.findByEmail(email);
+        isEmptyUser(auxUser);
+
+        User user = auxUser.get();
         user.setModificationDate(LocalDate.now());
         user.setStatus(false);
 
@@ -123,25 +137,47 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public void unsubscribeEmailUser(String id) {
-        User user = userRepository.findById(id).get();
+    public void subscribeEmailUser(String email) {
+        Optional<User> auxUser = userRepository.findByEmail(email);
+        isEmptyUser(auxUser);
+
+        User user = auxUser.get();
+
+        if (!user.getStatus()) {
+            throw new BadRequestException("El usuario correspondiente al email ingresado, se encuentra eliminado.");
+        }
+
+        user.setIsSubscribed(Boolean.TRUE);
+        user.setModificationDate(LocalDate.now());
+
+        userRepository.save(user);
+        sendEmailSub(user.getEmail(), true);
+    }
+
+    @Transactional
+    @Override
+    public void unsubscribeEmailUser(String email) {
+        Optional<User> auxUser = userRepository.findByEmail(email);
+        isEmptyUser(auxUser);
+
+        User user = auxUser.get();
 
         if (user.getIsSubscribed()) {
-            user.setIsSubscribed(false);
+            user.setIsSubscribed(Boolean.FALSE);
             user.setModificationDate(LocalDate.now());
         }
 
         userRepository.save(user);
+        sendEmailSub(user.getEmail(), false);
     }
 
     private void validatePassword(RegisterRequest newUser) {
         if (!StringUtils.hasText(newUser.getPassword()) || !StringUtils.hasText(newUser.getPasswordRepeat())){ // Valida que contenga texto
-            throw new InvalidPasswordException("Las contraseñas no coinciden");
+            throw new InvalidPasswordException("Las contraseñas no tienen texto");
         }
         if (!newUser.getPassword().equals(newUser.getPasswordRepeat())){ //Que las contraseñas considan
             throw new InvalidPasswordException("Las contraseñas no coinciden");
         }
-
     }
 
     private void sendEmailWelcome(String name, String email) {
@@ -149,11 +185,29 @@ public class UserServiceImpl implements UserService {
         Map<String, Object> templateModel = new HashMap<>();
 
         templateModel.put("userName", name);
-        templateModel.put("libraryName", "Libreria YEY!");
+        templateModel.put("libraryName", "BookLeaks");
 
         emailService.sendWelcomeEmail(email,
-                "Bienvenido a la librería YEY!",
+                "Bienvenido a la librería BookLeaks!",
                 "welcome.html", templateModel);
+    }
+
+    private void sendEmailSub(String email, boolean subs) {
+        if (subs) {
+            emailService.sendSimpleEmail(email,
+                    "Suscripción existosa.",
+                    "Se ha suscripto exitosamente al newsletter de BooksLeaks! Bienvenido! ");
+        } else {
+            emailService.sendSimpleEmail(email,
+                    "Desuscripción exitosa.",
+                    "Se ha eliminado su suscripción del newsletter de BooksLeaks. Hasta pronto!");
+        }
+    }
+
+    private void isEmptyUser(Optional<User> user) throws NotFoundException {
+        if (user.isEmpty()){
+            throw new NotFoundException("Could not found user");
+        }
     }
 
 

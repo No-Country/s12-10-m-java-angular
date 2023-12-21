@@ -1,26 +1,48 @@
 package com.noCountry.library.dto.Book;
 
-import com.noCountry.library.entities.enums.Genre;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 
 @Data
 public class BookRequest {
 
+    @NotBlank(message = "Este campo es obligatorio")
     private String idBook;
 
-    private Long ISBN;
+    @NotBlank(message = "Este campo es obligatorio")
     private String title;
+
+    @NotBlank (message = "Este campo es obligatorio")
     private Double price;
+
+    @NotBlank (message = "Este campo es obligatorio")
     private Integer pages;
-    private Integer quantity;
+
+    @NotBlank (message = "Este campo es obligatorio")
+    private LocalDate publicationDate;
+
+    @NotBlank (message = "Este campo es obligatorio")
+    private Integer quantityAvailable;
+
+    @NotBlank (message = "Este campo es obligatorio")
     private String description;
+
+    private String collection;
+
+    @NotBlank (message = "Este campo es obligatorio")
     private String genre;
 
-    private String idAuthor;
-    private String idEditorial;
+    @NotBlank (message = "Este campo es obligatorio")
+    private String language;
 
-    private ArrayList<String> urlImages;
+    @NotBlank (message = "Este campo es obligatorio")
+    private String author;
+
+    @NotBlank (message = "Este campo es obligatorio")
+    private String nameEditorial;
+
+    private String initialImage;
 
 }

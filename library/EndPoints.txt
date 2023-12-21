@@ -1,0 +1,479 @@
+https://librarync1.fly.dev/api/v1
+
+		User
+
+POST	/authenticate/register
+RegisterRequest
+{
+    String    id
+	String    name
+	String    lastName
+	String    email
+	String    password
+	String    passwordRepeat
+}
+RegisterResponse
+{
+    String 	name;
+    String	lastName;
+    String 	email;
+    String 	role;
+    List<?> 	list;
+    String 	jwt;
+}
+201 CREATED
+
+
+
+POST	/authenticate/login
+LoginRequest
+{
+    String	email;
+    String 	password;
+}
+UserDetailsDTO
+{
+         String id;
+         String name;
+         String lastName;
+         String email;
+         String role;
+         List<?> list;
+         String jwt;
+}
+200 OK
+
+
+
+
+GET	/authenticate/profile
+
+
+
+
+GET	/authenticate/user          // enviar token en el header
+Response:
+UserDetailsDTO
+{
+         String id;
+         String name;
+         String lastName;
+         String email;
+         String role;
+         List<?> list;
+         String jwt;
+}
+
+
+
+
+GET	/user/{email}
+Response: 
+UserDto
+{
+    String 	name;
+    String  lastName;
+    String 	email;
+}
+200 OK
+
+
+
+PUT     /user/subscribe/{email}
+200 OK
+
+
+
+DELETE	/user/{email}
+200 OK
+
+
+
+DELETE	/user/unsubscribe/{email}
+200 OK
+
+
+		    Book
+
+GET	/book/{id} 
+Response:
+    BookResponse
+200 OK
+
+
+
+GET	/book/allBooks
+Response:
+	BookResponseWithImage
+	{
+	    String	idBook;
+        Double	price;
+        Integer 	pages;
+        LocalDate 	publicationDate;
+        Integer 	quantityAvailable;
+        Integer 	salesAmount;
+        Integer 	rating;
+        String 	description;
+        String 	collection;
+        String	genre;
+        String	language;
+        String 	completeNameAuthor;
+        String 	nameEditorial;
+        List<String> 	urlImages;
+
+	    List<UrlImage> imageWithId
+	    {
+	        String  id;
+            String  url;
+	    }
+	}
+200 OK
+
+
+
+GET	/book/toCard/{id}
+Response:
+    BookCardResponse
+{
+    String 	title;
+    Double 	price;
+    String 	author;
+    String	initialImage;
+}
+200 OK
+
+
+
+GET	/book/toCard/allBooks?page=0&size=5
+Response:
+    PaginatedBookResponseDTO<BookCardResponse>
+200 OK
+
+
+
+GET	/book/toCardDescription/{id}
+Response:
+    BookCardDescription
+{
+    String 	title;
+    Double 	price;
+    String 	author;
+    String	initialImage;
+    String	description;
+}
+200 OK
+
+
+
+GET	/book/toCardDescription/allBooks?page=0&size=5
+Response: 
+    PaginatedBookResponseDTO<BookCardDescription>
+200 OK
+
+
+
+
+GET	/book/searchByCriteria?page={page}&size={size}&minPrice={minPrice}&maxPrice={maxPrice}&minPages={minPages}&genre={List-genre}&language={List-language}&searchText={textoABuscar}&searchEvenNotAvailable={searchEvenNotAvailable}&orderBy={}&ascOrDesc={}
+donde: {searchEvenNotAvailable} va a ser 0 si el usuario quiere mostrar los libros sin stock
+        La lista de genres y languages se detallan en el endpoint separados por ,
+Ordenamiento: 
+	orderBy={Tipo de ordenamiento} 
+	ascOrDesc={Orden ascendente o descendente} -> asc / desc
+
+Tipos de ordenamiento: (price;
+			publicationDate;
+			salesAmount; (tendencia)
+			rating; <- todavia no hay votacion cargada asiq no anda
+			alphabetically;)
+Response:
+    PaginatedBookResponseDTO<BookToSearch>
+200 OK
+
+
+
+
+GET 	/book/searchGenre/{genre}?page=0&size=5&orderBy={}&ascOrDesc={}
+Response:
+	PaginatedBookResponseDTO<BookToSearch>
+200 OK
+
+
+
+
+GET 	/book/searchText/{text}?page=0&size=5
+Response:
+	PaginatedBookResponseDTO<BookToSearch>
+200 OK
+
+
+
+GET 	/book/searchTitle/{title}?page=0&size=5
+Response:
+	PaginatedBookResponseDTO<BookToSearch>
+200 OK
+
+
+
+
+GET 	/book/searchLatestAdded?page=0&size=5
+Response:
+	PaginatedBookResponseDTO<BookToSearch>
+200 OK
+
+
+
+
+GET 	/book/searchHighestRating?page=0&size=10
+Response:
+	PaginatedBookResponseDTO<BookToSearch>
+200 OK
+
+
+
+
+GET 	/book/searchByStars?page=0&size=10
+Response:
+	PaginatedBookResponseDTO<BookToSearch>
+200 OK
+
+
+
+
+
+GET     /book/getComments/{bookId}
+Response:
+    PaginatedBookResponseDTO<CommentsDto>
+200 OK
+
+
+
+POST	/book/createBook
+Request:
+    CreateBookRequest
+{
+    String	idBook;
+    String 	ISBN;
+    String 	title;
+}
+Response:
+201 CREATED
+
+
+
+
+POST	/book/addInfoBook
+Request:
+    BookRequest
+Response:
+	BookResponse
+201 CREATED
+
+
+
+
+POST	/book/addImage/{id}
+Request:
+{
+    String id;
+    String url;
+}
+
+201 CREATED
+
+
+
+
+PATCH   /book/updateBook
+Request:
+    BookRequest
+Response:
+	BookResponse
+201 CREATED
+
+
+
+PUT     /book/{id}/vote/{vote}
+Response:
+    BookResponse
+201 CREATED
+
+
+
+
+PUT     /book/addComment
+Request:
+    CommentDto
+Response:
+    ¿?
+201 CREATED
+
+
+
+DELETE	/book/{id}
+200 OK
+
+
+
+
+
+
+
+BookRequest
+{
+    String 	idBook;
+    String 	ISBN;
+    String 	title;
+    Double 	price;
+    Integer 	pages;
+    LocalDate 	publicationDate;
+    Integer 	quantityAvailable;
+    String 	description;
+    String 	collection;
+    String 	genre;
+    String	language;
+    String 	author;
+    String 	nameEditorial;
+    String 	initialImage;
+}
+
+
+
+
+BookResponse
+{
+    String	idBook;
+    Double	price;
+    Integer 	pages;
+    LocalDate 	publicationDate;
+    Integer 	quantityAvailable;
+    Integer 	salesAmount;
+    Integer 	rating;
+    String 	description;
+    String 	collection;
+    String	genre;
+    String	language;
+    String 	completeNameAuthor;
+    String 	nameEditorial;
+    List<String> 	urlImages;
+}
+
+PaginatedBookResponseDTO<T>
+{
+   "content": [
+	{ AnyBook },
+	{ AnyBook },
+	{ AnyBook }
+    ],
+    "totalPages": 4,
+    "totalElements": 12,
+    "isLast": false
+}
+
+BookToSearch
+{
+    String 	ID;
+    String 	author;
+    String 	name;
+    Double 	price;
+    String 	image;
+    String 	description;
+}
+
+
+
+		Editorial
+
+
+GET	/editorial/{id}
+Response:
+    EditorialDto
+200 OK
+
+
+
+POST	/editorial/createEditorial
+Request:
+    EditorialDto
+Response:
+    EditorialDto
+201 CREATED
+
+
+
+PATCH   /editorial/update
+Request:
+    EditorialDto
+Response:
+    EditorialDto
+201 CREATED
+
+
+
+DELETE	/editorial/{id}
+200 OK
+
+
+        Author
+
+
+
+
+        Bill
+
+POST        /bill/save
+Request:
+    BillRequestDto
+Response:
+    String (mensajito de todo ok)
+200 OK
+
+
+
+GET         /bill/list
+Response:
+    List<BillResponseDto>
+200 OK
+
+
+
+DELETE      /bill/delete/{id}
+Response:
+    200 OK
+
+
+
+
+BillRequestDto {
+    String          userId;
+    Boolean         delivery;            -> true si es envio a domicilio
+    String          paymentMethods;      -> CASH, DEBIT, CREDIT
+    String          address;             -> si no es envio a domicilio, se envia null
+    Map<String, Integer>    bookQuantities;
+    // <IdBook, Quantities>
+}
+Ejemplo:
+{
+  "userId": "usuario123",
+  "delivery": true,
+  "paymentMethods": "debit",
+  "address": "Av siempreviva 123",
+  "bookQuantities": {
+    "libroId1": 5,
+    "libroId2": 1,
+    "libroId3": 3
+  }
+}
+
+
+BillResponseDto {
+     Long id;
+     Double totalPrice;
+     LocalDate dateBill;
+     String paymentMethods;
+     String address;
+     Boolean delivery;
+     String userId;
+     Map<String, Integer> billItems;
+}
+
+

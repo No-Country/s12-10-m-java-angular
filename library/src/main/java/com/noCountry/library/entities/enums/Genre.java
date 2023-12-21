@@ -2,13 +2,15 @@ package com.noCountry.library.entities.enums;
 
 public enum Genre {
 
-	POETRY,
-	SCIENCE_FICTION,
 	DRAMA,
-	FANTASY,
-	ROMANCE,
+	COMEDY,
+	HISTORY,
+	SCIENCE_FICTION,
+	POLICY,
 	SELF_HELP,
-	STORY,
-	HORROR,
-	COMEDY
+	ROMANCE,
+	POETRY,
+	FANTASY,
+	HORROR
+
 }

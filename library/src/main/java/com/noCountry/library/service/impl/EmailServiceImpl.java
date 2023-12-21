@@ -98,6 +98,7 @@ public class EmailServiceImpl implements EmailService {
         return templateEngine.process(templateName, thymeleafContext);
     }
 
+    @Override
     public void sendSaleEmailWithPDFBill(String to, String subject, Map<String, Object> templateModel) {
 
         try {
@@ -107,17 +108,17 @@ public class EmailServiceImpl implements EmailService {
             messageHelper.setSubject(subject);
 
             // Procesar la plantilla Thymeleaf
-            String emailBody = processTemplate("billOfSale.html", templateModel);
+            String emailBody = processTemplate("invoice-template.html", templateModel);
             messageHelper.setText(emailBody, true);
 
             // Generar el PDF a partir de la plantilla HTML
             byte[] pdfBytes = generatePDF(emailBody);
 
             // Adjuntar el PDF al correo electrónico
-            messageHelper.addAttachment("factura.pdf", new ByteArrayResource(pdfBytes) {
+            messageHelper.addAttachment("bill_BooksLeaks.pdf", new ByteArrayResource(pdfBytes) {
                 @Override
                 public String getFilename() {
-                    return "factura.pdf";
+                    return "bill_BooksLeaks.pdf";
                 }
             });
 
