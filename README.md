@@ -51,6 +51,12 @@ GitHub [![My Skills](https://skillicons.dev/icons?i=github)](https://skillicons.
 
 ## Equipo S12-10-m-Java-Angular
 ### Integrantes
+**📌Project Manager**
+
+| <img src="https://avatars.githubusercontent.com/u/127913044?v=4" width=50>  |
+:-:|
+| <a href="https://github.com/Ceci-Alsina"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/cecilia-alsina-3670aa207/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a>|
+
 **📌Back End**
 | <img src="https://avatars.githubusercontent.com/u/87383576?v=4" width=50>| <img src="https://avatars.githubusercontent.com/u/127455847?v=4" width=50>| <img src="https://avatars.githubusercontent.com/u/115900906?v=4" width=50>  |   
 :-:|:-:|:-:|
@@ -63,11 +69,6 @@ GitHub [![My Skills](https://skillicons.dev/icons?i=github)](https://skillicons.
 | **Marcos López**  | **Agustín Ríos**  | **Lucas Fair**  | **Pablo Gutierrez**  | 
 | <a href="https://github.com/marcossic"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/marcos-lopez-dev"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a>| <a href="https://github.com/AgustinNRios"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/riosagustindev528/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a>| <a href="https://github.com/LucasEsca"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/lucasivanfair/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a>| <a href="https://github.com/Pablo2311"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/pablo-ra%C3%BAl-guti%C3%A9rrez/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> |
 
-**📌Project Manager**
-
-| <img src="https://avatars.githubusercontent.com/u/127913044?v=4" width=50>  |
-:-:|
-| <a href="https://github.com/Ceci-Alsina"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/cecilia-alsina-3670aa207/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a>|
 
 ### Herramientas 🛠️
 <img src=https://www.vectorlogo.zone/logos/asana/asana-ar21.svg><img src=https://www.vectorlogo.zone/logos/discord/discord-ar21.svg><img src=https://www.vectorlogo.zone/logos/slack/slack-ar21.svg><img src=https://www.vectorlogo.zone/logos/whatsapp/whatsapp-ar21.svg>
