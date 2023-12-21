@@ -13,7 +13,7 @@ La aplicación está diseñada para ofrecer una experiencia completa y amigable 
 - Proporcionar funcionalidades diferenciadas para clientes y administradores.
 - Implementar un sistema ágil y robusto que garantice una gestión efectiva del inventario y las ventas.
 ### Estado del proyecto
-(Cuando terminemos la proxima semana ponemos que se completó la primer etapa del proyecto.. o algo así) 
+Se completó la primer etapa del proyecto. Estamos trabajando en la segunda etapa, que consierne al perfil del adminsitrador. Ya se creó el dashboard y se está trabajando en las funcionalidades del mismo. 
 ### Caracteríticas principales ![image](https://github.com/No-Country/s12-10-m-java-angular/assets/127913044/f4f12a8f-852e-4d3f-9e2d-7c01f38ad8bc) 
  **Funcionalidades para el Cliente:**
 - Filtrado de Búsquedas: Opción de filtrar libros por editorial, título, autor o género para una búsqueda más precisa.
@@ -39,43 +39,12 @@ JavaScript [![My Skills](https://skillicons.dev/icons?i=js)](https://skillicons.
 GitHub [![My Skills](https://skillicons.dev/icons?i=github)](https://skillicons.dev)
 
 ### Demo
-(acá va el video o el link a la demo que tenemos que hacer) 
+🔗 Link https://youtu.be/TEtph4m8olk 
 
 ### Acceso al proyecto
 🔗 Link [books-leaks.netlify.app](https://books-leaks.netlify.app/)
 
 <img align="center" src="https://github.com/No-Country/s12-10-m-java-angular/assets/127913044/5aa07def-9fbe-4710-9b75-229ac04a04b4" width=500> 
-
-
-### Comenzando🚀
-
-_Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
-
-**Pre-requisitos 📋**
-
-_Que cosas necesitas para instalar el software y como instalarlas_
-
-```
-Da un ejemplo
-```
-
-### Instalación 🔧
-
-_Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose_
-
-_Dí cómo será ese paso_
-
-```
-Da un ejemplo
-```
-
-_Y repite_
-
-```
-hasta finalizar
-```
-
-_Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo_
 
 ### Despliegue 📦
 <img src=https://github.com/No-Country/s12-10-m-java-angular/assets/127913044/4ed308b4-2add-4402-8b4d-7d89f53a7e41 width=150> <img src=https://www.vectorlogo.zone/logos/flyio/flyio-ar21.svg width=100> <img src=https://railway.app/brand/logotype-light.png width=150>
