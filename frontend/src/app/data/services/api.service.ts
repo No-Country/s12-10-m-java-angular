@@ -19,7 +19,7 @@ export class ApiService {
       const token = localStorage.getItem('token');
       headers = new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       });
     } else {
       headers = new HttpHeaders({
@@ -39,10 +39,9 @@ export class ApiService {
     params?: any
   ): Observable<any> {
     let url = this.createPath(path);
-    console.log("params", params);
+    console.log('params', params);
     return this.http.get<any>(url, {
-      headers:
-        this.createHeaders(isNedAuth === undefined ? false : isNedAuth),
+      headers: this.createHeaders(isNedAuth === undefined ? false : isNedAuth),
       params: !params ? {} : params,
     });
   }
@@ -54,20 +53,20 @@ export class ApiService {
   ): Observable<any> {
     const url = this.createPath(path);
     return this.http.post<any>(url, body, {
-      headers: this.createHeaders((isNedAuth === undefined) ? false : isNedAuth),
+      headers: this.createHeaders(isNedAuth === undefined ? false : isNedAuth),
     });
   }
 
-  public httpPut(
-    path: string,
-    body: any,
-    isNedAuth: boolean = false
-  ): Observable<any> {
+  public httpPut(path: string, body: any, isNedAuth: boolean): Observable<any> {
     const url = this.createPath(path);
 
     return this.http.put<any>(url, body, {
       headers: this.createHeaders(isNedAuth),
     });
   }
-  
+
+  public httpPatch(path: string, body: any, isNedAuth: boolean) {
+    const url = this.createPath(path);
+    return this.http.patch<any>(url, body, { headers: this.createHeaders(isNedAuth) });
+  }
 }

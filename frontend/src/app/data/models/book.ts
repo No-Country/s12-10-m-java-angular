@@ -19,6 +19,25 @@ export interface Book {
     isbn:number;
 }
 
+export interface CompleteBook {
+  idBook: number | string;
+  title: string;
+  price: number;
+  pages: number;
+  publicationDate: string;
+  quantityAvailable: number;
+  salesAmount: number;
+  rating: number;
+  description: string;
+  collection: string;
+  genre: string;
+  language: string;
+  author: string;
+  nameEditorial: string;
+  urlImages: {id: string, url: string}[];
+  isbn: number;
+}
+
 export interface BookDetail {
     id: string | number;
     author: string;
@@ -83,7 +102,7 @@ export enum Language {
 };
 
 export interface BookCreation {
-  book: Book;
+  book: CompleteBook;
   stateCreate: AddModal;
   stateComplete: AddModal;
   stateAddImg: AddModal;

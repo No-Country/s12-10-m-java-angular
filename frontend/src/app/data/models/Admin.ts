@@ -458,10 +458,6 @@ export const BOOK_COLUMN: TableColumns[] = [
     id: 'admin-bookheader-5',
   },
   {
-    column: 'publish date',
-    id: 'admin-bookheader-6',
-  },
-  {
     column: 'pages',
     id: 'admin-bookheader-7',
   },

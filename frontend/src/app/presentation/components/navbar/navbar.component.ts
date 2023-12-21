@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     const token = localStorage.getItem("token");
-    const name = sessionStorage.getItem('name');
+    const name = localStorage.getItem('name');
     this.token = token !== null ? token : '';
     this.name = name !== null ? name : '';
 }

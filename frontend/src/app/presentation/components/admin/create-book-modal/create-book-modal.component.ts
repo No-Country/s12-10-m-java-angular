@@ -56,14 +56,17 @@ export class CreateBookModalComponent implements OnInit, OnDestroy {
 
   private destroy$: Subject<void> = new Subject<void>();
 
-  constructor(private builder: FormBuilder, protected bookService: BooksService) {
+  constructor(
+    private builder: FormBuilder,
+    protected bookService: BooksService
+  ) {
     this.createBookForm = this.createForm();
   }
 
   ngOnInit(): void {
-    if(this.bookService.createdBook.isUpdate){
-      this.isbn.setValue(  this.bookService.createdBook.book.isbn  );
-      this.title.setValue( this.bookService.createdBook.book.title );
+    if (this.bookService.createdBook.isUpdate) {
+      this.isbn.setValue(this.bookService.createdBook.book.isbn);
+      this.title.setValue(this.bookService.createdBook.book.title);
     }
 
     this.createBookForm.valueChanges
@@ -104,7 +107,7 @@ export class CreateBookModalComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     let sending = this.sending;
-    let isbnNotUK = this.isbnNotUK;
+
     const { title, isbn } = this.createBookForm.value;
     const ID = crypto.randomUUID();
     this.bookService.createdBook.book.idBook = ID;
@@ -112,23 +115,42 @@ export class CreateBookModalComponent implements OnInit, OnDestroy {
     sending = !sending;
     this.bookService.createdBook.stateCreate.state = AddState.SENDING;
 
-    this.bookService.save(ID, title, isbn).subscribe({
-      next: (res: any) => {
-        sending = !sending;
-        this.bookService.createdBook.stateCreate.state = AddState.COMPLETE;
-        this.bookService.createdBook.book.title = title;
-        this.bookService.createdBook.book.isbn = isbn;
-        this.closeModal.emit(true);
-      },
-      error: (err: any) => {
-        this.lastISBN = isbn;
-        this.lastTitle = title;
-        sending = !sending;
-        this.bookService.createdBook.stateCreate.state = AddState.WAITING;
-        isbnNotUK = true;
-        this.toast.error('Opss', 'Ha ocurrido un error en el servidor', 5);
-      },
-    });
+    if (!this.bookService.createdBook.isUpdate) {
+      this.bookService.save(ID, title, isbn).subscribe({
+        next: (res: any) => {
+          sending = !sending;
+          this.bookService.createdBook.stateCreate.state = AddState.COMPLETE;
+          this.bookService.createdBook.book.title = title;
+          this.bookService.createdBook.book.isbn = isbn;
+          this.closeModal.emit(true);
+        },
+        error: (err: any) => {
+          this.lastISBN = isbn;
+
+          sending = !sending;
+          this.bookService.createdBook.stateCreate.state = AddState.WAITING;
+
+          this.isbnNotUK = true;
+          this.toast.error('Opss', 'Ha ocurrido un error al guardar', 5);
+        },
+      });
+    } else {
+      this.bookService.updateTitle().subscribe({
+        next: () => {
+          this.bookService.createdBook.book.title = title;
+          this.bookService.createdBook.stateCreate.state = AddState.COMPLETE;
+          this.closeModal.emit(true);
+        },
+        error: () => {
+          this.lastTitle = title;
+
+          sending = !sending;
+          this.bookService.createdBook.stateCreate.state = AddState.WAITING;
+
+          this.toast.error('Opss', 'Ha ocurrido un error al actualizar', 5);
+        },
+      });
+    }
   }
 
   public get isbn() {

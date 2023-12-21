@@ -77,10 +77,10 @@ tbody .empty::after {
 
 .actions span:hover::before,
 .actions span.active:before {
-  background-color: #33333354;
+  background-color: #33333347;
   width: 25px;
   aspect-ratio: 1/1;
-  left: -31%;
+  left: -32%;
 }
 .menu-options.active {
   width: max-content;
@@ -88,11 +88,12 @@ tbody .empty::after {
   opacity: 1;
   visibility: visible;
   font-size: 0.75rem;
+  z-index: 10;
 }
 .menu-options {
   position: absolute;
   top: 85%;
-  left: -120%;
+  left: -7dvw;
   opacity: 0;
   visibility: hidden;
   background-color: #333;

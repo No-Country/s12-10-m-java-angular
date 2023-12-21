@@ -162,10 +162,9 @@ export class GalleryBookModalComponent implements OnInit {
 
     this.bookService.createdBook.stateAddImg.state = AddState.SENDING;
 
-    this.bookService.createdBook.book.urlImages[0] = this.frontPage()
-      ?.url as string;
+    this.bookService.createdBook.book.urlImages[0] = this.frontPage();
     this.images().forEach((img) => {
-      this.bookService.createdBook.book.urlImages.push(img.url);
+      this.bookService.createdBook.book.urlImages.push(img);
     });
     //Hay que conectar con el back la funcion updateImg
     this.bookService.updateImg().subscribe({

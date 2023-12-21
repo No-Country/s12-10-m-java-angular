@@ -26,7 +26,7 @@ import {
   BOOK_DATA_SOURCE,
   TableColumns,
 } from 'app/data/models/Admin';
-import { Book } from 'app/data/models/book';
+import { Book, CompleteBook } from 'app/data/models/book';
 import { BooksService } from 'app/data/services/books/books.service';
 import { ToastService } from 'app/data/services/toast/Toast.service';
 import { Observable } from 'rxjs';
@@ -54,19 +54,19 @@ import { Observable } from 'rxjs';
   ],
 })
 export class AdminBooksComponent implements OnInit {
-  protected bookDataSource: Book[] = [];
+  protected bookDataSource: CompleteBook[] = [];
   protected bookColumns: TableColumns[] = BOOK_COLUMN;
   public search: string = '';
 
   public viewAddBook: boolean = false;
-  public allBooks: WritableSignal<Book[]> = signal([]);
+  public allBooks: WritableSignal<CompleteBook[]> = signal([]);
   private readonly toast = inject(ToastService);
 
   constructor(public bookService: BooksService) {}
   ngOnInit(): void {
     this.bookService.resetState();
     this.bookService.getAll().subscribe((books) => {
-      this.allBooks.update((current) => books.content);
+      this.allBooks.update((current) => books);
     });
   }
 

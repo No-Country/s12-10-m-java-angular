@@ -45,7 +45,7 @@ import { ChangeDetectionStrategy, Component, type OnInit } from '@angular/core';
       color: #747474;
       font-weight: 500;
       border-bottom: 1px solid #e9edf7;
-      font-size: .9rem;
+      font-size: .85rem;
     }
     table ::ng-deep .t-body > tr td:last-child {
       letter-spacing: 2px;

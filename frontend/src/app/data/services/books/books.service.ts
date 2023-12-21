@@ -4,6 +4,7 @@ import {
   BookCreation,
   BookDetail,
   BookPagination,
+  CompleteBook,
 } from 'app/data/models/book';
 import {
   Observable,
@@ -30,7 +31,7 @@ export class BooksService {
     const books = sessionStorage.getItem('latestBooks');
 
     this.createdBook = {} as BookCreation;
-    console.log("Alo ?");
+    console.log('Alo ?');
     try {
       this.latestBooks =
         books !== null && books !== undefined
@@ -67,7 +68,7 @@ export class BooksService {
   }
 
   public resetState(): void {
-    this.createdBook.book = {} as Book;
+    this.createdBook.book = {} as CompleteBook;
     this.createdBook.stateCreate = {
       open: false,
       state: AddState.WAITING,
@@ -95,23 +96,49 @@ export class BooksService {
   }
 
   public completeBook(): Observable<any> {
-
     return this.api.httpPost('book/addInfoBook', this.createdBook.book, true);
   }
 
   public updateImg(): Observable<any> {
     //Enviar todo el array al back
     let images = this.createdBook.book.urlImages;
-
-    return of(true).pipe(delay(900));
+    return this.api.httpPost(
+      'book/addImage' + this.createdBook.book.idBook,
+      images,
+      true
+    );
   }
-/*
+  /*
   public update(id: number, book: BookDetail): Observable<any> {
     return this.api.httpPut(`book/addImage/${id}`, book);
   }*/
 
-  public getAll(){
+  public getAll(): Observable<any> {
     return this.api.httpGet('book/allBooks');
+  }
+
+  public updateTitle(): Observable<any> {
+    const updateTitle = {
+      idBook: this.createdBook.book.idBook,
+      title: this.createdBook.book.title,
+    };
+    return this.api.httpPatch('book/updateBook', updateTitle, true);
+  }
+
+  public updateCompleteBook(): Observable<any> {
+    const updateComplete = {
+      idBook: this.createdBook.book.idBook,
+      price: this.createdBook.book.price,
+      pages: this.createdBook.book.pages,
+
+      publicationDate: this.createdBook.book.publicationDate,
+      quantityAvailable: this.createdBook.book.quantityAvailable,
+
+      description: this.createdBook.book.description,
+      genre: this.createdBook.book.genre,
+      language: this.createdBook.book.language,
+    };
+    return this.api.httpPatch('book/updateBook', updateComplete, true);
   }
 
   /* ELIMINAR LIBRO

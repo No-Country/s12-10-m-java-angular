@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AddModal, AddState, TableColumns } from 'app/data/models/Admin';
-import { Book } from 'app/data/models/book';
+import { Book, CompleteBook } from 'app/data/models/book';
 import { FilterPipe } from 'app/data/pipes/filter.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AdminTableComponent } from '../admin-table/admin-table.component';
@@ -33,7 +33,8 @@ export class BookAdminTableComponent implements OnInit {
     {},
   ] as TableColumns[];
 
-  @Input({ required: true }) public bookDataSource: Book[] = [] as Book[];
+  @Input({ required: true }) public bookDataSource: CompleteBook[] =
+    [] as CompleteBook[];
   @Input() public searchTerm: string = '';
   public currentPage: number = 1;
 
@@ -46,7 +47,7 @@ export class BookAdminTableComponent implements OnInit {
     this.currentPage = updatePage;
   }
 
-  excuteAction(action: number, book: Book, index: number) {
+  excuteAction(action: number, book: CompleteBook, index: number) {
     this.actionActive[index] = !this.actionActive[index];
 
     this.bookService.createdBook.book = book;

@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, Output, type OnInit, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Output,
+  type OnInit,
+  inject,
+} from '@angular/core';
 import { ErrorMessageComponent } from '@presentation/components/error-message/error-message.component';
 import { AdminCardComponent } from '../admin-card/admin-card.component';
 import {
@@ -64,7 +71,20 @@ export class CompleBookModalComponent implements OnInit {
       description: ['', Validators.required, Validators.minLength(10)],
     });
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.bookService.createdBook.isUpdate) {
+      this.author.setValue(this.bookService.createdBook.book.author);
+      this.editorial.setValue(this.bookService.createdBook.book.nameEditorial);
+
+      this.price.setValue(this.bookService.createdBook.book.price);
+      this.quantity.setValue(
+        this.bookService.createdBook.book.quantityAvailable
+      );
+      this.pages.setValue(this.bookService.createdBook.book.pages);
+
+      this.description.setValue(this.bookService.createdBook.book.description);
+    }
+  }
 
   onSubmit() {
     let sending = this.sending;
@@ -86,18 +106,33 @@ export class CompleBookModalComponent implements OnInit {
     this.bookService.createdBook.book.genre = this.genreApplied;
     this.bookService.createdBook.book.language = this.languageApplied;
 
-    this.bookService.completeBook().subscribe({
-      next: (res: any) => {
-        sending = !sending;
-        this.bookService.createdBook.stateComplete.state = AddState.COMPLETE;
-        this.closeModal.emit(true);
-      },
-      error: (err: any) => {
-        sending = !sending;
-        this.bookService.createdBook.stateComplete.state = AddState.WAITING;
-        this.toast.error('Opss', 'Ha ocurrido un error en el servidor', 5);
-      },
-    });
+    if (!this.bookService.createdBook.isUpdate) {
+      this.bookService.completeBook().subscribe({
+        next: (res: any) => {
+          sending = !sending;
+          this.bookService.createdBook.stateComplete.state = AddState.COMPLETE;
+          this.closeModal.emit(true);
+        },
+        error: (err: any) => {
+          sending = !sending;
+          this.bookService.createdBook.stateComplete.state = AddState.WAITING;
+          this.toast.error('Opss', 'Ha ocurrido un error en el servidor', 5);
+        },
+      });
+    } else {
+      this.bookService.updateCompleteBook().subscribe({
+        next: (res: any) => {
+          sending = !sending;
+          this.bookService.createdBook.stateComplete.state = AddState.COMPLETE;
+          this.closeModal.emit(true);
+        },
+        error: (err: any) => {
+          sending = !sending;
+          this.bookService.createdBook.stateComplete.state = AddState.WAITING;
+          this.toast.error('Opss', 'Ha ocurrido un error en el servidor', 5);
+        },
+      });
+    }
   }
 
   public get author() {
