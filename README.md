@@ -1,8 +1,5 @@
 <h1 align = "center"><img align="center" src="https://github.com/No-Country/s12-10-m-java-angular/assets/127913044/a6e06399-b907-4d14-87e6-d8b2ad4a2e18"> Book Leaks </h1>
 
- <h4 align="center">
-🚧 Proyecto en construcción 🚧
-</h4>
 Este es un proyecto en desarrollo que se enfoca en la construcción de una plataforma de e-commerce que facilite la venta de libros por parte de una librería online. 
 La aplicación está diseñada para ofrecer una experiencia completa y amigable a los usuarios, permitiendo tanto la compra como la gestión efectiva de ventas y el inventario para los administradores.
 
@@ -28,15 +25,15 @@ Se completó la primer etapa del proyecto. Estamos trabajando en la segunda etap
 - Gestión de Ventas: Emitir recibos electrónicos y realizar ajustes en el stock después de cada venta.
 - Análisis de Ventas: Visualización de reportes detallados sobre las ventas por periodos.
 ### Construido con 🛠️
-Java [![My Skills](https://skillicons.dev/icons?i=java)](https://skillicons.dev)
-Maven [![My Skills](https://skillicons.dev/icons?i=maven)](https://skillicons.dev)
-Spring boot [![My Skills](https://skillicons.dev/icons?i=spring)](https://skillicons.dev)
-Angular [![My Skills](https://skillicons.dev/icons?i=angular)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=java)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=maven)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=spring)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=angular)](https://skillicons.dev)
 
-HTML [![My Skills](https://skillicons.dev/icons?i=html)](https://skillicons.dev)
-CSS [![My Skills](https://skillicons.dev/icons?i=css)](https://skillicons.dev)
-JavaScript [![My Skills](https://skillicons.dev/icons?i=js)](https://skillicons.dev)
-GitHub [![My Skills](https://skillicons.dev/icons?i=github)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=html)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=css)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=js)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=github)](https://skillicons.dev)
 
 ### Demo
 🔗 Link https://youtu.be/TEtph4m8olk 
