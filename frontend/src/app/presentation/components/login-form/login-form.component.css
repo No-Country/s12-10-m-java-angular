@@ -1,0 +1,43 @@
+.login-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: auto;
+    padding-block-start: 1.5rem;
+}
+
+.icon{
+  position: absolute;
+  width: 25px;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-45%);
+  opacity: .4;
+  cursor: pointer;
+  aspect-ratio: 1/1;
+}
+
+.icon:hover{
+  opacity: .6;
+}
+.icon.active{
+  opacity: 1;
+}
+
+/* SMALL */
+@media only screen and (min-width: 905px)  {
+  .login-form {
+    margin-inline: 1.5rem;
+    padding-block-start: 1.5rem;
+}
+  .input-group input.form-input {
+    height: auto !important;
+  }
+}
+/* LARGE */
+@media only screen and (min-width: 1440px) {
+  .form-label{
+      font-size: .75rem;
+  }
+}

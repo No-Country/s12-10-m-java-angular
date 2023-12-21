@@ -64,6 +64,7 @@ public class AuthenticationService {
 		return userDetailsDTO;
 	}
 
+
 	public User findLoggedInUser() {
 
 		Authentication auth = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext()

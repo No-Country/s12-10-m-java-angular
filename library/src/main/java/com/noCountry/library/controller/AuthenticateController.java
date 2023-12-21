@@ -1,5 +1,6 @@
 package com.noCountry.library.controller;
 
+
 import com.noCountry.library.dto.auth.LoginRequest;
 import com.noCountry.library.dto.auth.RegisterRequest;
 import com.noCountry.library.dto.auth.UserDetailsDTO;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "${ALLOWED_ORIGINS}")
 @RestController
 @RequestMapping("/authenticate")
+@CrossOrigin(origins = {"http://localhost:4200"})
 public class AuthenticateController {
 
 	@Autowired
@@ -24,6 +26,7 @@ public class AuthenticateController {
     @GetMapping("/hello")
     public ResponseEntity<?> hello(){
         return ResponseEntity.status(HttpStatus.OK).body("Hello");
+
     }
 
 	@PostMapping

@@ -1,0 +1,89 @@
+<admin-table class="admin-table">
+  <thead class="t-head">
+    <tr>
+      @for(item of columns; track item.id){
+      <th scope="col" rowspan="1">{{ item.column }}</th>
+      }
+    </tr>
+  </thead>
+  <tbody class="t-body">
+    @for(book of bookDataSource | filter: this.searchTerm | paginate: { id:
+    'admin-books-pagination', itemsPerPage: 7, currentPage: currentPage,
+    totalItems: bookDataSource.length }; track book.idBook){
+    <tr>
+      <td>
+        {{ bookDataSource.indexOf( book ) + 1 }}
+      </td>
+      <td
+        title="{{ book.title }}"
+        class="max-w-[135px] max-h-[58px] text-ellipsis overflow-y-hidden"
+        style="
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          padding-inline-start: 0.35rem;
+        "
+      >
+        {{ book.title }}
+      </td>
+      <td>
+        {{ book.isbn }}
+      </td>
+      <td class="max-w-[135px] max-h-[65px] text-ellipsis overflow-y-hidden" style="display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;">
+        {{ book.author }}
+      </td>
+      <td>
+        {{ book.nameEditorial }}
+      </td>
+
+      <td>
+        {{ book.pages }}
+      </td>
+      <td>
+        {{ book.price }}
+      </td>
+      <td class="max-w-[60px] flex justify-center mx-auto">
+        {{ book.quantityAvailable }}
+      </td>
+      <td class="actions">
+        <span
+          class="w-full"
+          [class.active]="actionActive[$index]"
+          (openCloseToggle)="actionActive[$index] = $event"
+          [openOrClose]="actionActive[$index]"
+          >...</span
+        >
+
+        <div class="menu-options slide-bottom" [class.active]="actionActive[$index]">
+          <ul>
+            <li (click)="excuteAction(1, book, $index)"><p>Update book title</p></li>
+            <li (click)="excuteAction(2, book, $index)"><p>Update book info</p></li>
+            <li (click)="excuteAction(3, book, $index)"><p>View book gallery</p></li>
+            <li (click)="excuteAction(4, book, $index)"><p>Disable Book</p></li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+    } @empty {
+    <tr class="empty"></tr>
+    }
+  </tbody>
+</admin-table>
+
+<div
+  class="w-full mt-3 flex justify-end items-center"
+  [ngClass]="{
+    hidden: (bookDataSource | filter : this.searchTerm).length <= 0
+  }"
+>
+  <pagination-controls
+    class="book-pagination"
+    id="admin-books-pagination"
+    (pageChange)="updatePage($event)"
+    [maxSize]="300"
+    [responsive]="true"
+    [autoHide]="true"
+    previousLabel="Previous"
+    nextLabel="Next"
+  ></pagination-controls>
+</div>

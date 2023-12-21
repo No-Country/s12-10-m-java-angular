@@ -1,0 +1,72 @@
+<article #cardBook class="card-book" [id]="'d' + book.id">
+  <section
+    class="img-wrapper"
+    [routerLink]="['/book/' + book.id]"
+  >
+    <a class="img-container" [ngClass]="{ 'blur-md': !isStringId(book.id) }">
+      <img [ngSrc]="book.image" fill priority alt="Book front page image" />
+    </a>
+  </section>
+
+  <section class="content-info">
+    <h2 [title]="book.name">
+      <a class="w-full" [routerLink]="['/book/' + book.id]">
+        {{ book.name }}
+      </a>
+    </h2>
+
+    <p>{{ book.author }}</p>
+
+    <div class="w-full flex justify-between items-center">
+      <p
+        class="mt-2 font-medium price text-[#242221] cursor-pointer hover:transform"
+      >
+        <a class="w-full" [routerLink]="['book/' + book.id]">
+          ${{ book.price }}
+        </a>
+      </p>
+
+      <div class="hidden min-[710px]:block">
+        <button
+          class="default-button up-button relative"
+          (click)="addOrRemove()"
+          [ngClass]="{
+            'take-out': onCart === true,
+            'activate': onCart === false
+          }"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="cart"
+            width="25px"
+            fill="#ffffff"
+            viewBox="0 0 512 512"
+          >
+            <path
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="32"
+              d="M80 176a16 16 0 00-16 16v216c0 30.24 25.76 56 56 56h272c30.24 0 56-24.51 56-54.75V192a16 16 0 00-16-16zM160 176v-32a96 96 0 0196-96h0a96 96 0 0196 96v32"
+            />
+          </svg>
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="100"
+            width="100"
+            class="svg-celebrate-icon"
+          >
+            <polygon points="10,10 20,20"></polygon>
+            <polygon points="10,50 20,50"></polygon>
+            <polygon points="20,80 30,70"></polygon>
+            <polygon points="90,10 80,20"></polygon>
+            <polygon points="90,50 80,50"></polygon>
+            <polygon points="80,80 70,70"></polygon>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+</article>

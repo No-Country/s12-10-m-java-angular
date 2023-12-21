@@ -1,0 +1,21 @@
+<div class="mt-8 lg:flex">
+  <div class="my-auto ms-[10vw] mx-[5dvw] lg:me-[0] min-w-[50%] max-w-[80%] lg:ms-[10vw] lg:min-w-[20vw] lg:max-w-[38vw] z-10 max-[600px]:text-center">
+    <h1 class="leading[3.5rem] text-[#242221] mb-6 text-5xl font-medium">A <span class="text-[#15AD67]">collection</span> of books your
+      most beloved</h1>
+    <p class="mb-1 text-sm leading[1.5rem] text-[#727272]" style="text-wrap: balance;">
+      Discover cherished tales in 'Your Beloved Books' collection. 
+      Immerse in beloved reading worlds!
+    </p>
+    <app-button class="flex mr-auto mb-6 cursor-default " title="Shop now button" className="min-w-[140px] max-w-[140px] min-[905px]:max-w-[12dvw] mt-[15px] max-[600px]:mx-auto">
+      <a routerLink="shop" [queryParams]="{ search: 'All' }" class=" w-full">
+        Shop now
+      </a>
+    </app-button>
+  </div>
+  <div class="mt-5 me-[10vw] ms-[5vw] lg:ms-[4vw] w-[80vw] lg:w-[38vw] relative h-[32vw] lg:h-[32vw] ">
+    <img class="absolute w-[33%] left-[45%] top-[-25%] lg:left-[0%] lg:top-[0%] lg:w-[60%] max-[600px]:left-[0%] max-[600px]:top-[-35%]"
+      src="../../.././../../assets/booksImages/book-cover.webp" alt="libro" />
+    <img class="absolute w-[28%] right-[0%] top-[0%] lg:top-[10%] lg:w-[50%]  max-[600px]:right-[-10%] max-[600px]:top-[-35%]"
+      src="../../.././../../assets/booksImages/book-mockup.webp" alt="libro" />
+  </div>
+</div>

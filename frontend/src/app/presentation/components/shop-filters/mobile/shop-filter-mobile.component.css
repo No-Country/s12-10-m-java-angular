@@ -1,0 +1,257 @@
+.modal-filter {
+  position: absolute;
+  top: 22%;
+  right: 1.275dvw;
+  background: #fff;
+  border-radius: 0.9375rem;
+  width: 75dvw;
+  z-index: 200;
+  max-width: 410px;
+  max-height: 70%;
+  padding-block-start: 10px;
+  overflow-y: auto;
+  pointer-events: auto;
+}
+
+.modal-filter > div {
+  border-block-end: 1px solid rgba(0, 0, 0, 0.35);
+  padding-inline: 15px;
+}
+
+.modal-filter > div h3 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #242221;
+}
+
+.modal-filter > div button {
+  color: #069150;
+  font-size: 0.9rem;
+  cursor: pointer;
+  outline: none;
+}
+
+.modal-filter .filter-list > li > div {
+  margin-block-start: 0.65rem;
+  border-block-end: 1.5px solid rgba(0, 0, 0, 0.25);
+  padding-inline: 15px;
+}
+
+.modal-filter .filter-list > li .order-by div {
+  display: flex;
+  justify-content: space-between;
+  height: 16px;
+}
+
+.modal-filter .filter-list > li h4 {
+  font-size: 1.25rem;
+  line-height: 1rem;
+  align-self: center;
+}
+
+.modal-filter .filter-list > li span {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.modal-filter .filter-list > li strong {
+  font-weight: 500;
+  color: #069150;
+  font-size: 0.85rem;
+  text-align: start;
+  margin-block-end: 0.5rem;
+  user-select: none;
+  margin-inline-start: 0.25rem;
+}
+
+.modal-filter .filter-list .filter-form {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  background-color: #f6f6f6;
+  row-gap: 0.5rem;
+  padding-block: 0.5rem;
+}
+
+.modal-filter .filter-list .filter-form .custom-radio {
+  display: inline-block;
+  position: relative;
+  padding-left: 20px; /* Ajusta según el tamaño del círculo deseado */
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.custom-radio::before {
+  content: "";
+  position: absolute;
+  right: 15px;
+  top: 4px;
+  width: 20px; /* Tamaño del círculo exterior */
+  height: 20px; /* Tamaño del círculo exterior */
+  border: 2px solid #33b672;
+  border-radius: 50%;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.custom-radio .checkmark::after {
+  content: "";
+  position: absolute;
+  right: 19px;
+  top: 8px;
+  width: 12px; /* Tamaño del círculo interior */
+  height: 12px; /* Tamaño del círculo interior */
+  border-radius: 50%;
+  background-color: #33b672;
+  display: none; /* Oculto por defecto */
+}
+
+.modal-filter .filter-list .filter-form .custom-checkbox {
+  display: inline-block;
+  position: relative;
+  padding-left: 20px; /* Ajusta según el tamaño del círculo deseado */
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.custom-checkbox::before {
+  content: "";
+  position: absolute;
+  right: 15px;
+  top: 4px;
+  width: 20px; /* Tamaño del círculo exterior */
+  height: 20px; /* Tamaño del círculo exterior */
+  border: 2px solid #33b672;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.custom-checkbox .checkmark::after {
+  content: "";
+  position: absolute;
+  right: 19px;
+  top: 8px;
+  width: 12px; /* Tamaño del círculo interior */
+  height: 12px; /* Tamaño del círculo interior */
+  background-color: #33b672;
+  display: none; /* Oculto por defecto */
+}
+
+.input-group {
+  display: flex;
+
+  flex-grow: 1;
+  flex-shrink: 1;
+  min-width: 0%;
+  position: relative;
+  aspect-ratio: 10/4;
+}
+
+.input-group label.form-label {
+  position: absolute;
+
+  top: 0.55rem;
+  margin-inline-start: 10px;
+  padding-inline: 3px;
+  pointer-events: none;
+
+  background: #fffbfe;
+  color: #49454f;
+
+  direction: ltr;
+  box-sizing: border-box;
+
+  width: auto;
+  z-index: 1;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 0.8rem;
+
+  margin-block-start: 0.75dvw;
+  background: #f6f6f6;
+  height: 21px;
+  left: 2.25rem;
+}
+
+.input-group input.form-input {
+  padding: 5px 10px;
+  font-size: 0.85rem;
+  line-height: 1.5rem;
+  outline: none;
+
+  direction: ltr;
+  text-align: left;
+  color: #202124;
+  margin: 1px 1px 0 1px;
+
+  border-radius: 1.25rem;
+  background: #f6f6f6;
+  flex-grow: 1;
+  flex-shrink: 1;
+
+  max-height: 45px;
+  caret-color: #c88d65;
+  max-width: 155px;
+  min-width: 20px;
+  align-self: center;
+  margin-inline: auto;
+}
+
+form input:not(:focus).form-input {
+  border: 2px solid #c8c8c8;
+}
+
+form input.form-input:focus {
+  border: 2px #c88d65 solid;
+}
+
+form input:focus ~ label.form-label {
+  color: #ba703c;
+}
+
+.custom-radio input[type="radio"]:checked + .checkmark::after,
+.custom-checkbox input[type="checkbox"]:checked + .checkmark::after {
+  display: block;
+}
+
+.custom-radio input[type="radio"],
+.custom-checkbox input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  outline: none;
+}
+
+@media only screen and (max-width: 525px) {
+  .input-group label.form-label {
+    top: 0.42rem;
+    left: 2rem;
+  }
+}
+
+@media only screen and (max-width: 490px) {
+  .input-group label.form-label {
+    top: 0.25rem;
+    left: 1.45rem;
+  }
+}
+
+@media only screen and (max-width: 440px) {
+  .input-group label.form-label {
+    top: 0.15rem;
+    left: 1rem;
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .input-group label.form-label {
+    top: 0rem;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .input-group label.form-label {
+    top: -.1rem;
+  }
+}

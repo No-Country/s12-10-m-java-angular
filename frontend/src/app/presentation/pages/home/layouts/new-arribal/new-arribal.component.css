@@ -1,0 +1,60 @@
+.arribal-container{
+
+    display: flex;
+    flex-direction: column;
+
+    padding-block: 1rem;
+    margin-block-end: 5%;
+    margin-block-start: 5%;
+}
+
+
+.arribal-container .book-list{
+margin-block-start: 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    place-content: center;
+    justify-items: center;
+    column-gap: 0.75rem;
+    row-gap: 1.5rem;
+    align-content: center;
+    align-items: center;
+}
+
+@media only screen and (min-width: 451px) {
+    .arribal-container .book-list{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    .arribal-container{
+        margin-inline: 3rem;
+    }
+}
+
+@media only screen and (min-width: 550px) {
+    .arribal-container .book-list{
+        margin-block-start: 3rem;
+        justify-items: center;
+        column-gap: 1rem;
+        row-gap: 2rem;
+    }
+}
+
+@media only screen and (min-width: 705px) {
+    .arribal-container .book-list{
+        grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
+        justify-items: start;
+        column-gap: 2.85rem;
+        row-gap: 2.5rem;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .arribal-container .book-list{
+        grid-template-columns: repeat(auto-fill, minmax(245px, 1fr));
+        justify-items: start;
+        column-gap: 2rem;
+        row-gap: 2.5rem;
+    }
+}

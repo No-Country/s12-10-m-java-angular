@@ -1,0 +1,90 @@
+<div class="modal">
+  <admin-card titleCard="Create Book">
+    @if(!sending){
+      <div class="close">
+        <svg
+          (click)="closeModal.emit(false)"
+          xmlns="http://www.w3.org/2000/svg"
+          width="23"
+          height="23"
+          viewBox="0 0 23 23"
+          fill="none"
+        >
+          <path
+            d="M23 2.31643L20.6836 0L11.5 9.18357L2.31643 0L0 2.31643L9.18357 11.5L0 20.6836L2.31643 23L11.5 13.8164L20.6836 23L23 20.6836L13.8164 11.5L23 2.31643Z"
+            fill="black"
+          />
+        </svg>
+      </div>
+
+      <form [formGroup]="createBookForm" (submit)="onSubmit()">
+        <div class="w-full  h-[74px]">
+          <div class="input-group w-full">
+            <input
+              type="text"
+              id="title-book"
+              formControlName="title"
+              for="title-book"
+              autocomplete="off"
+              name="title-book"
+              class="form-input"
+              aria-disabled="false"
+              aria-label="Title"
+              autocapitalize="none"
+              dir="ltr"
+              required
+            />
+            <label for="title-book" class="form-label translate-top-label" style="--label-bg:#fff;">Title <span class="text-red-600">*</span></label>
+          </div>
+
+          <error-message
+            [showError]="(createBookForm.get('title')?.dirty && createBookForm.get('title')?.touched) && createBookForm.get('title')?.invalid"
+            errorMessage="Title is required"
+            class="w-fit"
+            errorClass="text-red-500"
+          />
+        </div>
+
+        <div class="w-full flex flex-col justify-evenly   h-[80px]">
+          <div class="input-group w-full">
+            <input
+              type="text"
+              id="isbn-book"
+              formControlName="isbn"
+              for="isbn-book"
+              autocomplete="off"
+              name="isbn-book"
+              class="form-input"
+              aria-disabled="false"
+              aria-label="ISBN"
+              autocapitalize="none"
+              dir="ltr"
+              required
+              [disabled]="bookService.createdBook.isUpdate !== undefined && bookService.createdBook.isUpdate"
+            />
+            <label for="isbn-book" class="form-label translate-top-label" style="--label-bg:#fff;">ISBN <span class="text-red-600">*</span></label>
+          </div>
+
+          <error-message
+            [showError]="((isbn.dirty && isbn.touched) && isbn.invalid) || isbnNotUK"
+            errorMessage="Change ISBN, for a valid value"
+            errorClass="text-red-500"
+            class="w-fit"
+            tooltipMessage="- The ISBN is required.{{'\n'}}- The ISBN can only contain numbers.{{
+              '\n'
+            }}- The ISBN has a maximum of 13 chars.{{'\n'}}- The ISBN has a minimium of 10 chars.{{'\n'}}- The ISBN is a unique value for each book."
+          />
+        </div>
+
+        <app-button type="submit" title="Send new book" class="w-full flex justify-center items-center cursor-default mt-4" className="w-full min-w-[155px] max-w-[175px]" [isDisable]="createBookForm.invalid">
+          Create book
+        </app-button>
+      </form>
+    } @else {
+      <div class="w-full flex justify-center items-center p-20">
+        <dot-spinner class="m-auto"></dot-spinner>
+      </div>
+    }
+  </admin-card>
+</div>
+<app-toast></app-toast>

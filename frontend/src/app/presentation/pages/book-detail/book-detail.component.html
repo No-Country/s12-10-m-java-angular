@@ -1,0 +1,65 @@
+<header>
+    <app-navbar></app-navbar>
+    <app-navbar-2></app-navbar-2>
+</header>
+<section>
+    <div class="container">
+        <div class="nav">
+            <a class="nav-1" (click)="redirectToShop()">Go back to Store</a>
+            <a class="nav-2" (click)="shareBook()">Share book</a>
+            <div *ngIf="mostrarMensaje" class="mensaje">URL copiada</div>
+        </div>
+        <app-detail-card [book]="book"></app-detail-card>
+        <div class="tables">
+            <div class="table-container-1">
+                <h2>Detalles:</h2>
+            <div class="table-data-1">
+                <table>
+                    <tbody>
+                        <tr class="type-1">
+                            <td class="dataName">Title</td><td>{{book.title}}</td>
+                        </tr>
+                        <tr class="type-2">
+                            <td class="dataName">Author</td><td>{{book.author}}</td>
+                        </tr>
+                        <tr class="type-1">
+                            <td class="dataName">Editorial</td><td>{{book.nameEditorial}}</td>
+                        </tr>
+                        <tr class="type-2">
+                            <td class="dataName">ISBN</td><td>{{book.isbn}}</td>
+                        </tr>
+                        <tr class="type-1">
+                            <td class="dataName">Publication Date</td><td>{{book.publicationDate}}</td>
+                        </tr>
+                        <tr class="type-2">
+                            <td class="dataName">Page Number</td><td>{{book.pages}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+            <div class="table-container-2" id="payment">
+                <h2>Payment Methods:</h2>
+            <div class="table-data-2">
+                <table>
+                    <tbody>
+                        <tr class="type-1">
+                            <td>Pay cash on site</td><td></td>
+                        </tr>
+                        <tr class="type-2">
+                            <td>Pay cash at home</td><td></td>
+                        </tr>
+                        <tr class="type-1">
+                            <td>Debit</td><td></td>
+                        </tr>
+                        <tr class="type-2">
+                            <td>Credit card</td><td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+    </div>
+</section>
+<app-footer></app-footer>

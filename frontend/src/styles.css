@@ -1,3 +1,206 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  scroll-behavior: smooth;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  background-color: #ffffff;
+  font-family: Roboto, arial, sans-serif;
+
+  width: 100%;
+  height: auto;
+  min-height: 100dvh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  outline: none;
+  overscroll-behavior-x: none;
+  touch-action: manipulation;
+  direction: ltr;
+}
+
+h2.title {
+  font-size: 1.875rem;
+  line-height: 2rem;
+  color: #242221;
+  font-weight: 500;
+}
+
+/* SMALL */
+@media only screen and (min-width: 705px) {
+  h2.title {
+    font-size: 2rem;
+    line-height: 2.75rem;
+  }
+}
+
+/* MEDIUM */
+@media only screen and (min-width: 1240px) {
+  h2.title {
+    font-size: 3rem;
+    line-height: 3.5rem;
+  }
+}
+
+/* LARGE */
+@media only screen and (min-width: 1440px) {
+  h2.title {
+    font-size: 3.625rem;
+    line-height: 4rem;
+    letter-spacing: -0.01563rem;
+  }
+}
+.default-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-overflow: ellipsis;
+    border-radius: 0.9375rem;
+    font-size: .875rem;
+    font-weight: 500;
+    transition: background .19s linear, box-shadow .17s cubic-bezier(0.65, 0.05, 0.36, 1);
+    background-color: oklch(68.96% 0.15 155.76);
+    color: #FFFFFC;
+    height: 2.55rem;
+    outline: none;
+  }
+
+  .default-button:not(:disabled):hover,  .default-button:not(:disabled):focus {
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.30);
+      background-color: #15AD67;
+  }
+
+app-button button a {
+  border-radius: 0.9375rem;
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+}
+
+/* Estilo para quitar las flechas de incremento y decremento en input type="number" */
+input[type="number"],
+input[type="search"] {
+  -moz-appearance: textfield !important; /* Firefox */
+  appearance: textfield !important; /* Resto de navegadores */
+  -webkit-appearance: textfield !important;
+}
+
+/* Estilo adicional para navegadores que admiten la propiedad "appearance" */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0 !important;
+}
+
+/* Para navegadores WebKit (Chrome, Safari) */
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}
+
+.slide-right {
+  animation-name: slide-right;
+  animation-duration: 0.6s;
+  animation-timing-function: linear;
+}
+
+.slide-bottom {
+  animation-name: slide-bottom;
+  animation-duration: 0.6s;
+  animation-timing-function: linear;
+}
+
+.slide-left {
+  animation-name: slide-left;
+  animation-duration: 0.6s;
+  animation-timing-function: linear;
+}
+
+.blur-in-expand {
+    animation-name: blur-in-expand;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+}
+
+@keyframes blur-in-expand {
+  0% {
+    transform: scale(0.4);
+    filter: blur(10px);
+    opacity: 0;
+  }
+  50% { opacity: .5; }
+  100% {
+    transform: scale(1);
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-left {
+  0% {
+    translate: 125px 0;
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    translate: 0 0;
+    opacity: 1;
+  }
+}
+
+@keyframes slide-top {
+  0% {
+    translate: 0 -125px;
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    translate: 0 0;
+    opacity: 1;
+  }
+}
+
+@keyframes slide-bottom {
+  0% {
+    translate: 0 125px;
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    translate: 0 0;
+    opacity: 1;
+  }
+}
+
+@keyframes slide-right {
+  0% {
+    translate: -125px 0;
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    translate: 0 0;
+    opacity: 1;
+  }
+}

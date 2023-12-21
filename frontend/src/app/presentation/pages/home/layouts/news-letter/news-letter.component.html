@@ -1,0 +1,21 @@
+<section>
+    <div class="left-div">
+      <img src="\assets\imgs\cel-book.png"  class="img-fluid">
+    </div>
+    <div class="right-div">
+      <h2 class="title">Did you know us?</h2>
+      <p>At Name, we are passionate about books and our mission is to help you find your next great read. We feature the most extensive and up-to-date catalogue of literary releases in the market. Subscribe to our newsletter and be the first to know about new releases, exclusive discounts, and much more.</p>
+      <input autocomplete="off" required="" type="text" id="email" class="form-input"
+      formControlName="email" autocomplete="email" name="email" aria-disabled="false" aria-label="Email" 
+      tabindex="2" autocapitalize="none" dir="ltr" required placeholder="Email">
+    <br>
+    <app-button id="pc" class="flex cursor-default" className="w-full max-w-[28dvw] min-w-[28dvw] m-[3vh] aspect-[1/.11] rounded-[50px]" 
+      (click)="subscribe()">
+      Subscribe
+    </app-button>
+    <app-button id="movil" class="flex cursor-default" className="w-full max-w-[70dvw] min-w-[70dvw] m-[3vh] aspect-[1/.11] rounded-[50px]"
+      (click)="subscribe()">
+      Subscribe
+    </app-button>
+    </div>
+</section>
