@@ -2,6 +2,7 @@ package com.noCountry.library.service;
 
 import com.noCountry.library.dto.Book.*;
 import com.noCountry.library.dto.Comment.CommentDto;
+import com.noCountry.library.entities.UrlImage;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface BookService {
 
     BookResponse getBookById(String id);
 
-    PaginatedResponseDTO<BookResponse> getAllBooks(Integer pageNumber, Integer sizeElement);
+    List<BookResponseWithImage> getAllBooks();
 
     BookCardResponse getBookForCard(String id);
 
@@ -33,7 +34,7 @@ public interface BookService {
                                                           List<String> genres, List<String> languages, String searchText,
                                                           Integer searchEvenNotAvailable, String orderBy, String ascOrDesc);
 
-    void addImagesBook(String id, UrlImage image);
+    void addImagesBook(String id, List<UrlImage> image);
 
 
     BookResponse addQuantityAvailable(String id, Integer amount);

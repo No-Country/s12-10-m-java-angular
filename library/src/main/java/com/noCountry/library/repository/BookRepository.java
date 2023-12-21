@@ -12,10 +12,13 @@ import org.springframework.stereotype.Repository;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, String>, JpaSpecificationExecutor<Book> {
+
+    List<Book> findAllByStatusTrue();
 
     Page<Book> findAllByStatusTrue(Pageable pageable);
 
@@ -35,5 +38,8 @@ public interface BookRepository extends JpaRepository<Book, String>, JpaSpecific
     @Transactional
     @Query("UPDATE Book b SET b.rating = :nuevoRating WHERE b.id = :bookId")
     void asignarRatingABook(@Param("bookId") String bookId, @Param("nuevoRating") Double nuevoRating);
+
+
+
 
 }

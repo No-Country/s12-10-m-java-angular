@@ -2,6 +2,7 @@ package com.noCountry.library.controller;
 
 import com.noCountry.library.dto.Book.*;
 import com.noCountry.library.dto.Comment.CommentDto;
+import com.noCountry.library.entities.UrlImage;
 import com.noCountry.library.exception.BadRequestException;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,10 +37,9 @@ public class BookController {
     }
 
     @GetMapping(path = "/allBooks")
-    public ResponseEntity<?> getAllBooks(@RequestParam(defaultValue = "0") int page,
-                                         @RequestParam(defaultValue = "5") int size) {
+    public ResponseEntity<?> getAllBooks() {
         try {
-            PaginatedResponseDTO<BookResponse> books = bookService.getAllBooks(page, size);
+            List<BookResponseWithImage> books = bookService.getAllBooks();
             return new ResponseEntity<>(books, HttpStatus.OK);
         } catch (BadRequestException e){
             throw new BadRequestException(e.getMessage());
@@ -221,9 +221,10 @@ public class BookController {
 
 
     @PostMapping(path = "/addImage/{id}")
-    public ResponseEntity<?> addImageAtBook(@RequestBody @Valid UrlImage image, @PathVariable String id) {
+    public ResponseEntity<?> addImageAtBook(@RequestBody @Valid List<UrlImage> images, @PathVariable String id) {
         try {
-            bookService.addImagesBook(id, image);
+            bookService.addImagesBook(id, images);
+            System.out.println("En el repositorio despues del service");
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (BadRequestException e){
             throw new BadRequestException(e.getMessage());

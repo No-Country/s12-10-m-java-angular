@@ -12,7 +12,7 @@ public class EditorialDto {
     @NotBlank (message = "Este campo es obligatorio")
     private String name;
 
-    @NotBlank (message = "Este campo es obligatorio")
+
     private String url;
 
 }

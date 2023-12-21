@@ -1,10 +1,12 @@
 package com.noCountry.library.dto.Book;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.noCountry.library.entities.UrlImage;
 import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Data

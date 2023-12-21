@@ -102,9 +102,31 @@ Response:
 
 
 
-GET	/book/allBooks?page=0&size=5
+GET	/book/allBooks
 Response:
-	PaginatedBookResponseDTO<BookResponse>
+	BookResponseWithImage
+	{
+	    String	idBook;
+        Double	price;
+        Integer 	pages;
+        LocalDate 	publicationDate;
+        Integer 	quantityAvailable;
+        Integer 	salesAmount;
+        Integer 	rating;
+        String 	description;
+        String 	collection;
+        String	genre;
+        String	language;
+        String 	completeNameAuthor;
+        String 	nameEditorial;
+        List<String> 	urlImages;
+
+	    List<UrlImage> imageWithId
+	    {
+	        String  id;
+            String  url;
+	    }
+	}
 200 OK
 
 
@@ -113,10 +135,10 @@ GET	/book/toCard/{id}
 Response:
     BookCardResponse
 {
-String 	title;
-Double 	price;
-String 	author;
-String	initialImage;
+    String 	title;
+    Double 	price;
+    String 	author;
+    String	initialImage;
 }
 200 OK
 
@@ -251,8 +273,11 @@ Response:
 
 POST	/book/addImage/{id}
 Request:
-  String image;
-  Boolean isBookCover; // es true si es la imagen de la portada
+{
+    String id;
+    String url;
+}
+
 201 CREATED
 
 
