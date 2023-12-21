@@ -31,7 +31,7 @@ export class AddBookModalComponent implements OnInit, OnDestroy {
   constructor(public bookService: BooksService) {}
 
   ngOnInit(): void {
-    this.bookService.resetState();
+    this.bookService.createdBook.isUpdate = false;
   }
 
   ngOnDestroy(): void {

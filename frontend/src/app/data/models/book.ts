@@ -34,7 +34,8 @@ export interface CompleteBook {
   language: string;
   author: string;
   nameEditorial: string;
-  urlImages: {id: string, url: string}[];
+  urlImages: string[];
+  imageWithId: { id: string; url: string }[];
   isbn: number;
 }
 

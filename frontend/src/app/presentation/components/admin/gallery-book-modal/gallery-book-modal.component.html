@@ -23,7 +23,6 @@
         [class.active]="frontPage().id !== 'front-nothig'"
         (click)="deleteFiles(frontPage(), true)"
       >
-        ''
         <img
           src="{{ frontPage().url }}"
           [class.blur-sm]="frontPage().id === 'front-nothig'"
@@ -37,7 +36,7 @@
         for="front-book-file"
         [ngClass]="{
           '!border-red-500': frontPageError,
-          disabled: frontPage().id !== 'front-nothig'
+          'disabled': frontPage().id !== 'front-nothig'
         }"
       >
         <div class="icon">

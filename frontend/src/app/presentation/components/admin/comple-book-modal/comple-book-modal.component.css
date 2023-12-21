@@ -1,28 +1,18 @@
-.modal admin-card {
-  display: flex;
-  height: fit-content;
-  width: fit-content;
-  position: absolute;
-  inset: 0;
-  transform: translateY(5%) translateX(50%);
-  z-index: 200;
-  overflow-y: scroll;
+
+admin-card ::ng-deep .admin-card {
+  width: 725px !important;
+  position: relative !important;
+  margin: 0px !important;
 }
 
-.modal ::ng-deep .admin-card {
-  width: 725px;
-  position: relative;
-  margin: 0px;
-}
-
-.modal ::ng-deep .admin-card .title {
+admin-card ::ng-deep .admin-card .title {
   display: inline-flex;
   justify-content: flex-start;
   align-items: center;
   width: 50%;
 }
 
-.modal .close {
+.close {
   display: inline-flex;
   width: 50%;
   justify-content: flex-end;

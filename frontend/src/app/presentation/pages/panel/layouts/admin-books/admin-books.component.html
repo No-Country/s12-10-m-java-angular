@@ -8,7 +8,7 @@
       <input type="search" placeholder="Search Books..." [(ngModel)]="search" />
       <app-button
         className="w-full px-2 max-w-[140px] min-w-[120px]"
-        (click)="viewAddBook = !viewAddBook"
+        (click)="creteBook()"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -54,38 +54,31 @@
     </admin-card>
   </section>
 </div>
-
 @if( bookService.createdBook.stateAddImg.open ||
-     bookService.createdBook.stateComplete.open ||
-     bookService.createdBook.stateCreate.open ||
-     viewAddBook
-){
+bookService.createdBook.stateComplete.open ||
+bookService.createdBook.stateCreate.open || viewAddBook ){
 <div class="modal fixed inset-0">
   @if(viewAddBook){
-    <add-book-modal (openOrCloseModal)="togle($event)"></add-book-modal>
-  }
-
-  @if( bookService.createdBook.stateCreate.open ){
-    <create-book-modal
-      class="relative z-[200]"
-      (closeModal)="closeBooksModal($event, 1)"
-    ></create-book-modal>
-  }
-
-  @if( bookService.createdBook.stateComplete.open ){
-    <comple-book-modal
-      class="relative z-[200]"
-      (closeModal)="closeBooksModal($event, 2)"
-    ></comple-book-modal>
-  }
-
-  @if( bookService.createdBook.stateAddImg.open ){
-    <gallery-book-modal
-      class="relative z-[200]"
-      (closeModal)="closeBooksModal($event, 3)"
-    ></gallery-book-modal>
+  <add-book-modal (openOrCloseModal)="togle($event)"></add-book-modal>
+  } @if( bookService.createdBook.stateCreate.open ){
+  <create-book-modal
+    class="relative z-[200] overflow-y-auto flex flex-1 w-full h-full "
+    (closeModal)="closeBooksModal($event, 1)"
+  ></create-book-modal>
+  } @if( bookService.createdBook.stateComplete.open ){
+  <comple-book-modal
+    class="relative z-[200] overflow-y-auto flex flex-1 w-full h-full "
+    (closeModal)="closeBooksModal($event, 2)"
+  ></comple-book-modal>
+  } @if( bookService.createdBook.stateAddImg.open ){
+  <gallery-book-modal
+    class="relative z-[200] overflow-y-auto flex flex-1 w-full h-full "
+    (closeModal)="closeBooksModal($event, 3)"
+  ></gallery-book-modal>
   }
   <app-toast></app-toast>
   <overlay (click)="closeAll()"></overlay>
 </div>
 }
+
+

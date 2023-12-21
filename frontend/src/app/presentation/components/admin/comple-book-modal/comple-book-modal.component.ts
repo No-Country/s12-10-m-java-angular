@@ -6,6 +6,9 @@ import {
   Output,
   type OnInit,
   inject,
+  WritableSignal,
+  signal,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { ErrorMessageComponent } from '@presentation/components/error-message/error-message.component';
 import { AdminCardComponent } from '../admin-card/admin-card.component';
@@ -52,11 +55,17 @@ export class CompleBookModalComponent implements OnInit {
   protected GENRES: Genre[] = GENRES;
   protected LANGUAGES: Language[] = LANGUAGES;
 
-  protected genreApplied: string = '';
-  protected languageApplied: string = '';
+  protected genreApplied: WritableSignal<string> = signal('');
+  protected languageApplied: WritableSignal<string> = signal('');
 
-  constructor(private builder: FormBuilder, private bookService: BooksService) {
+  constructor(
+    private builder: FormBuilder,
+    private bookService: BooksService,
+    private cdr: ChangeDetectorRef
+  ) {
     this.completeForm = this.createForm();
+    this.updateGenre('');
+    this.updateLanguage('');
   }
 
   private createForm(): FormGroup {
@@ -73,17 +82,36 @@ export class CompleBookModalComponent implements OnInit {
   }
   ngOnInit(): void {
     if (this.bookService.createdBook.isUpdate) {
-      this.author.setValue(this.bookService.createdBook.book.author);
-      this.editorial.setValue(this.bookService.createdBook.book.nameEditorial);
+      try {
+        this.author.setValue(this.bookService.createdBook.book.author);
+        this.editorial.setValue(
+          this.bookService.createdBook.book.nameEditorial
+        );
 
-      this.price.setValue(this.bookService.createdBook.book.price);
-      this.quantity.setValue(
-        this.bookService.createdBook.book.quantityAvailable
-      );
-      this.pages.setValue(this.bookService.createdBook.book.pages);
+        this.price.setValue(this.bookService.createdBook.book.price);
+        this.quantity.setValue(
+          this.bookService.createdBook.book.quantityAvailable
+        );
+        this.pages.setValue(this.bookService.createdBook.book.pages);
 
-      this.description.setValue(this.bookService.createdBook.book.description);
+        this.description.setValue(
+          this.bookService.createdBook.book.description
+        );
+      } catch (err: any) {}
+
+      this.updateGenre(this.bookService.createdBook.book.genre);
+      this.updateLanguage(this.bookService.createdBook.book.language);
+      this.cdr.detectChanges();
+
     }
+  }
+
+  updateGenre(genre: string | Genre) {
+    this.genreApplied.update((current: any) => genre);
+  }
+
+  updateLanguage(language: string | Language) {
+    this.languageApplied.update((current: any) => language);
   }
 
   onSubmit() {
@@ -103,8 +131,8 @@ export class CompleBookModalComponent implements OnInit {
     this.bookService.createdBook.book.pages = pages;
     this.bookService.createdBook.book.quantityAvailable = quantity;
     this.bookService.createdBook.book.description = description;
-    this.bookService.createdBook.book.genre = this.genreApplied;
-    this.bookService.createdBook.book.language = this.languageApplied;
+    this.bookService.createdBook.book.genre = this.genreApplied();
+    this.bookService.createdBook.book.language = this.languageApplied();
 
     if (!this.bookService.createdBook.isUpdate) {
       this.bookService.completeBook().subscribe({

@@ -30,22 +30,22 @@ export class NewsLetterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const id = sessionStorage.getItem("id");
+    const id = localStorage.getItem('id');
     this.id = id !== null ? id : '';
-    const name = sessionStorage.getItem("name");
+    const name = localStorage.getItem('name');
     this.name = name !== null ? name : '';
-    const lastName = sessionStorage.getItem("lastName");
+    const lastName = localStorage.getItem('lastName');
     this.lastName = lastName !== null ? lastName : '';
-    const role = sessionStorage.getItem("role");
+    const role = localStorage.getItem('role');
     this.role = role !== null ? role : '';
-    const jwt = sessionStorage.getItem("jwt");
+    const jwt = localStorage.getItem('jwt');
     this.jwt = jwt !== null ? jwt : '';
   }
 
   subscribe() {
     if (this.newsletterForm.valid) {
       const email = this.newsletterForm.get('email')!.value;
-      const auth: AuthResponse = { 
+      const auth: AuthResponse = {
         id : this.id,
         name: this.name,
         lastName: this.lastName,

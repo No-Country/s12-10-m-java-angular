@@ -42,7 +42,7 @@ export class ModalBuyComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    const id = sessionStorage.getItem("id");
+    const id = localStorage.getItem('id');
     this.id = id !== null ? id : '';
     this.billRequest.userId = this.id;
   }
@@ -91,7 +91,7 @@ export class ModalBuyComponent implements OnInit{
         this.seeSuccessMessage = true;
         this.cdr.detectChanges();
         setTimeout(() => {
-          this.router.navigate(['']); 
+          this.router.navigate(['']);
         }, 1800);
       },
       (error) => {

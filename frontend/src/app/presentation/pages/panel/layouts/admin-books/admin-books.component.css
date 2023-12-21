@@ -10,7 +10,7 @@ section{
   overflow: visible;
 }
 
-.modal admin-card {
+.modal ::ng-deep admin-card {
   display: flex;
   height: fit-content;
   width: fit-content;
@@ -18,7 +18,6 @@ section{
   inset: 0;
   transform: translateY(5%) translateX(50%);
   z-index: 200;
-  overflow-y: scroll;
 }
 .modal ::ng-deep .admin-card {
   position: relative;

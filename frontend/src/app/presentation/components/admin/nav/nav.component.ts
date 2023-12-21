@@ -17,10 +17,8 @@ export class NavComponent implements OnInit{
   constructor() {}
 
   ngOnInit(): void {
-    const token = localStorage.getItem('token');
-    const name = sessionStorage.getItem('name');
-    this.token = token !== null ? token : '';
-    this.name = name !== null ? name : '';
+    const name = localStorage.getItem('name');
+    this.name = name && name != undefined ? name : '';
 }
 
 

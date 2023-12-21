@@ -1,9 +1,8 @@
-<div class="modal">
   <admin-card
     titleCard="Complete Book Info"
   >
     @if( !sending ){
-    <div class="close">
+    <div class="close ">
       <svg
         (click)="closeModal.emit(false)"
         xmlns="http://www.w3.org/2000/svg"
@@ -211,8 +210,8 @@
           @for(genre of GENRES; track '4-'+genre){
           <li
             role="checkbox"
-            (click)="genreApplied = genre"
-            [ngClass]="{ active: genreApplied === genre }"
+            (click)="updateGenre(genre)"
+            [ngClass]="{ 'active': genreApplied() === genre }"
           >
             <span>+</span> {{ genre.valueOf() }}
           </li>
@@ -234,8 +233,8 @@
           @for(language of LANGUAGES; track '4-'+language){
           <li
             role="checkbox"
-            (click)="languageApplied = language"
-            [ngClass]="{ active: languageApplied === language }"
+            (click)="updateLanguage(language)"
+            [ngClass]="{ 'active': languageApplied() === language }"
           >
             <span>+</span> {{ language.valueOf() }}
           </li>
@@ -248,7 +247,7 @@
         class="w-full flex cursor-default justify-center items-center"
         className="w-full min-w-[155px] max-w-[175px]"
         title="Send complete infor for book"
-        [isDisable]=" completeForm.invalid  ||  genreApplied === ''  ||  languageApplied === '' "
+        [isDisable]=" completeForm.invalid  ||  genreApplied() === ''  ||  languageApplied() === '' "
       >
         Complete book
       </app-button>
@@ -259,6 +258,5 @@
     </div>
     }
   </admin-card>
-</div>
 
 <app-toast></app-toast>

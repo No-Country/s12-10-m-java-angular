@@ -60,10 +60,25 @@ export class GalleryBookModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    setInterval(() => {
-      console.log('front page', this.frontPage());
-      console.log('front page err', this.frontPageError);
-    }, 9000);
+    if (this.bookService.createdBook.isUpdate) {
+      const images = this.bookService.createdBook.book.imageWithId;
+      console.log('url', images);
+      this.frontPage.update((current) => ({
+        ...current,
+        url: images[0].url,
+        id: images[0].id,
+      }));
+
+      if (images.length > 1) {
+        let actual = this.images();
+
+        images.forEach((img, index) => {
+          if (index != 0) actual.push({ url: img.url, id: img.id });
+        });
+
+        this.images.update((current) => actual);
+      }
+    }
   }
 
   protected onFileSelected(image: any, isFrontPage: boolean) {
@@ -88,7 +103,6 @@ export class GalleryBookModalComponent implements OnInit {
       }
       if (!isFrontPage) this.loadImgs.push(true);
       this.uploadFile(selectedFile, isFrontPage);
-
     }
   }
 
@@ -113,18 +127,18 @@ export class GalleryBookModalComponent implements OnInit {
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           console.log('File available at', downloadURL);
-          if(isFrontPage){
+          if (isFrontPage) {
             this.frontPage.update((current) => ({
-            ...current,
-            url: downloadURL,
-            id: ramdomRef
-          }));
+              ...current,
+              url: downloadURL,
+              id: ramdomRef,
+            }));
           } else {
             loadImgs.pop();
 
             let actual = this.images();
             actual.push({ url: downloadURL, id: ramdomRef });
-            this.images.update((current)=> (actual));
+            this.images.update((current) => actual);
           }
         });
       }
@@ -162,9 +176,13 @@ export class GalleryBookModalComponent implements OnInit {
 
     this.bookService.createdBook.stateAddImg.state = AddState.SENDING;
 
-    this.bookService.createdBook.book.urlImages[0] = this.frontPage();
-    this.images().forEach((img) => {
-      this.bookService.createdBook.book.urlImages.push(img);
+    this.bookService.createdBook.book.imageWithId[0] = this.frontPage();
+    this.bookService.createdBook.book.urlImages[0] = this.frontPage().url;
+    this.images().forEach((img, index) => {
+      if (index !== 0) {
+        this.bookService.createdBook.book.urlImages.push(img.url);
+        this.bookService.createdBook.book.imageWithId.push(img);
+      }
     });
     //Hay que conectar con el back la funcion updateImg
     this.bookService.updateImg().subscribe({

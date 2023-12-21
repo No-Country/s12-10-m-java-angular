@@ -36,7 +36,7 @@ export class LoggedInService {
   }
 
   public updateId(updatedId: string) {
-    sessionStorage.setItem('id', updatedId);
+    localStorage.setItem('id', updatedId);
   }
 
   public logOut() {

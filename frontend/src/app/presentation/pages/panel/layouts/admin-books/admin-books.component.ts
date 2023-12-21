@@ -108,6 +108,14 @@ export class AdminBooksComponent implements OnInit {
   }
 
   protected closeBooksModal(event: boolean, modal: number): void {
+   if(!this.bookService.createdBook.isUpdate){
+     this.togle(modal);
+   } else {
+    if(modal === 1) this.bookService.createdBook.stateCreate.open = false;
+    if(modal === 2) this.bookService.createdBook.stateComplete.open = false;
+    if(modal === 3) this.bookService.createdBook.stateAddImg.open = false;
+   }
+
     if (event) {
       if (modal === 1) {
         this.toast.success(
@@ -116,7 +124,7 @@ export class AdminBooksComponent implements OnInit {
           5
         );
       }
-      if (event && modal === 2) {
+      if (modal === 2) {
         this.toast.success(
           'Info has been saved',
           'Now add image to your book!',
@@ -124,7 +132,7 @@ export class AdminBooksComponent implements OnInit {
         );
       }
 
-      if (event && modal === 3) {
+      if (modal === 3) {
         {
           this.toast.success(
             'Saved successfully',
@@ -137,9 +145,10 @@ export class AdminBooksComponent implements OnInit {
           }, 800);
         }
       }
-    } else {
-      this.togle(modal);
     }
+
+
+
   }
 
   public viewOverlay() {
@@ -149,5 +158,10 @@ export class AdminBooksComponent implements OnInit {
       this.bookService.createdBook.stateCreate.open ||
       this.bookService.createdBook.stateComplete.open
     );
+  }
+
+  public creteBook(){
+    this.bookService.resetState();
+    this.viewAddBook = !this.viewAddBook;
   }
 }

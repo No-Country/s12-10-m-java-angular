@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { LoggedInService } from 'app/data/services/login/loggedIn.service';
@@ -13,16 +18,16 @@ import { LoggedInService } from 'app/data/services/login/loggedIn.service';
 })
 export class NavbarComponent implements OnInit {
   protected readonly loggedInState: LoggedInService = inject(LoggedInService);
-  protected token: string = '';
-  protected name: string = '';
+  public token: string = '';
+  public name: string = '';
 
   constructor() {}
 
   ngOnInit(): void {
-    const token = localStorage.getItem("token");
-    const name = localStorage.getItem('name');
-    this.token = token !== null ? token : '';
-    this.name = name !== null ? name : '';
-}
+    const token = localStorage.getItem('token');
+    this.token = token && token != undefined ? token : '';
 
+    const name = localStorage.getItem('name');
+    this.name = name && name != undefined ? name : '';
+  }
 }
