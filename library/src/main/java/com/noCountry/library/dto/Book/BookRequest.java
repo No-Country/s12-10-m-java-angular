@@ -38,10 +38,10 @@ public class BookRequest {
     private String language;
 
     @NotBlank (message = "Este campo es obligatorio")
-    private String idAuthor;
+    private String author;
 
     @NotBlank (message = "Este campo es obligatorio")
-    private String idEditorial;
+    private String nameEditorial;
 
     private String initialImage;
 

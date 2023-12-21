@@ -5,6 +5,7 @@ import com.noCountry.library.dto.Comment.CommentDto;
 import com.noCountry.library.entities.Author;
 import com.noCountry.library.entities.Book;
 import com.noCountry.library.entities.Editorial;
+import com.noCountry.library.entities.UrlImage;
 import com.noCountry.library.entities.enums.Genre;
 import com.noCountry.library.entities.enums.Language;
 import com.noCountry.library.exception.BadRequestException;
@@ -12,6 +13,7 @@ import com.noCountry.library.exception.NotFoundException;
 import com.noCountry.library.repository.AuthorRepository;
 import com.noCountry.library.repository.BookRepository;
 import com.noCountry.library.repository.EditorialRepository;
+import com.noCountry.library.repository.UrlImageRepository;
 import com.noCountry.library.repository.specification.BookSpecification;
 import com.noCountry.library.service.BookService;
 import jakarta.transaction.Transactional;
@@ -29,6 +31,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
+import static com.noCountry.library.LibraryApplication.generateRandomUUID;
+
 @Service
 public class BookServiceImpl implements BookService {
 
@@ -38,15 +42,19 @@ public class BookServiceImpl implements BookService {
 
     private final EditorialRepository editorialRepository;
 
+    private final UrlImageRepository urlImageRepository;
+
     private final MapperBooks mapperBooks;
 
     @Autowired
     public BookServiceImpl(BookRepository bookRepository, MapperBooks mapperBooks,
-                           AuthorRepository authorRepository, EditorialRepository editorialRepository) {
+                           AuthorRepository authorRepository, EditorialRepository editorialRepository,
+                           UrlImageRepository urlImageRepository) {
         this.bookRepository = bookRepository;
         this.mapperBooks = mapperBooks;
         this.authorRepository = authorRepository;
         this.editorialRepository = editorialRepository;
+        this.urlImageRepository = urlImageRepository;
     }
 
     @Transactional
@@ -55,11 +63,8 @@ public class BookServiceImpl implements BookService {
         Optional<Book> bookAux = bookRepository.findById(bookRequest.getIdBook());
         isEmptyObject(bookAux);
 
-        Optional<Author> author = authorRepository.findById(bookRequest.getIdAuthor());
-        isEmptyObject(author);
-
-        Optional<Editorial> editorial = editorialRepository.findById(bookRequest.getIdEditorial());
-        isEmptyObject(editorial);
+        Author author = createAuthor(bookRequest.getAuthor());
+        Editorial editorial = createEditorial(bookRequest.getNameEditorial());
 
         Genre genre = searchGenre(bookRequest.getGenre());
         Language language = searchLanguage(bookRequest.getLanguage());
@@ -77,9 +82,8 @@ public class BookServiceImpl implements BookService {
 
         book.setGenre(genre);
         book.setLanguage(language);
-        book.setAuthor(author.get());
-        book.setEditorial(editorial.get());
-
+        book.setAuthor(author);
+        book.setEditorial(editorial);
         book.setModificationDate(LocalDate.now());
         book.setStatus(Boolean.TRUE);
 
@@ -87,15 +91,10 @@ public class BookServiceImpl implements BookService {
             book.setCollection(bookRequest.getCollection());
         }
 
-        if (!bookRequest.getInitialImage().isEmpty()) {
-            book.setInitialImage(bookRequest.getInitialImage());
-            book.getUrlImages().add(bookRequest.getInitialImage());
-        }
-
         bookRepository.save(book);
-
         return mapperBooks.bookToBookResponse(book);
     }
+
 
     @Transactional
     @Override
@@ -196,15 +195,15 @@ public class BookServiceImpl implements BookService {
             }
         }
 
-        if (book.getIdAuthor() != null) {
-            Optional<Author> author = authorRepository.findById(book.getIdAuthor());
+        if (book.getAuthor() != null) {
+            Optional<Author> author = authorRepository.findById(book.getAuthor());
             isEmptyObject(author);
 
             updatedBook.setAuthor(author.get());
         }
 
-        if (book.getIdEditorial() != null) {
-            Optional<Editorial> editorial = editorialRepository.findById(book.getIdEditorial());
+        if (book.getNameEditorial() != null) {
+            Optional<Editorial> editorial = editorialRepository.findById(book.getNameEditorial());
             isEmptyObject(editorial);
 
             updatedBook.setEditorial(editorial.get());
@@ -228,11 +227,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public PaginatedResponseDTO<BookResponse> getAllBooks(Integer pageNumber, Integer sizeElement) {
-        Pageable page = PageRequest.of(pageNumber, sizeElement);
-        Page<Book> pagesBook = bookRepository.findAllByStatusTrue(page);
+    public List<BookResponseWithImage> getAllBooks() {
 
-        return pagesBookToPagination(pagesBook, mapperBooks::listBooksToListResponseBooks);
+        List<Book> books = bookRepository.findAllByStatusTrue();
+
+        return mapperBooks.listBooksToListResponseBooksWithImage(books);
     }
 
     @Override
@@ -309,28 +308,30 @@ public class BookServiceImpl implements BookService {
 
     @Transactional
     @Override
-    public void addImagesBook(String id, UrlImage image) {
+    public void addImagesBook(String id, List<UrlImage> image) {
         Optional<Book> auxBook = bookRepository.findById(id);
         isEmptyObject(auxBook);
 
         Book book = auxBook.get();
 
-        if (book.getUrlImages() == null) {
-            book.setUrlImages(new ArrayList<>());
+        if (book.getUrlImage().isEmpty()) {
+            book.setUrlImage(new ArrayList<>());
+        } else {
+            book.getUrlImage().clear();
         }
 
-        if (image.getImage() == null || image.getImage().isEmpty()) {
-            throw new BadRequestException("La imagen a almacenar esta vacia");
+        book.setInitialImage(image.get(0).getUrl());
+
+        for (UrlImage element: image) {
+            UrlImage newImage = new UrlImage(element.getId(), element.getUrl());
+            book.getUrlImage().add(newImage);
+            urlImageRepository.save(newImage);
         }
 
-        if (image.getIsBookCover()) {
-            book.setInitialImage(image.getImage());
-        }
-
-        book.getUrlImages().add(image.getImage());
         book.setModificationDate(LocalDate.now());
 
         bookRepository.save(book);
+        System.out.println("Bokk url" + book.getUrlImage());
     }
 
     @Transactional
@@ -413,9 +414,6 @@ public class BookServiceImpl implements BookService {
         book.setModificationDate(LocalDate.now());
 
         bookRepository.save(book);
-
-        System.out.println("El voto fue: " + vote);
-        System.out.println("El promedio es: " + book.getRating());
 
         return mapperBooks.bookToBookResponse(book);
     }
@@ -598,6 +596,62 @@ public class BookServiceImpl implements BookService {
         }
 
         return (addition / voteList.size());
+    }
+
+
+    private Author createAuthor(String fullName) {
+        Optional<Author> authorAux = authorRepository.findByFullNameIgnoreCaseAndStatusTrue(fullName);
+
+        if (authorAux.isPresent()) {
+            System.out.println("El author ya existe");
+            return authorAux.get();
+        } else {
+            System.out.println("El author no existe");
+            Author newAuthor = new Author();
+            String uuidString = generateRandomUUID();
+            String[] partOfName = fullName.split(" ");
+
+            if (partOfName.length == 2) {
+                newAuthor.setName(partOfName[0]);
+                newAuthor.setLastName(partOfName[1]);
+            } else if (partOfName.length > 2) {
+                newAuthor.setName(partOfName[0] + partOfName[1]);
+                newAuthor.setLastName(partOfName[2]);
+            } else {
+                newAuthor.setName(fullName);
+                newAuthor.setLastName(" ");
+            }
+
+            newAuthor.setId(uuidString);
+            newAuthor.setFullName(fullName);
+            newAuthor.setBirthday(null);
+            newAuthor.setNationality(null);
+            newAuthor.setBiography(null);
+
+            newAuthor.setCreationDate(LocalDate.now());
+            newAuthor.setModificationDate(LocalDate.now());
+
+            return newAuthor;
+        }
+    }
+
+    private Editorial createEditorial(String name) {
+        Optional<Editorial> editorialAux = editorialRepository.findByNameIgnoreCaseAndStatusTrue(name);
+
+        if (editorialAux.isPresent()) {
+            return editorialAux.get();
+        } else {
+            Editorial editorial = new Editorial();
+            String uuidString = generateRandomUUID();
+            editorial.setId(uuidString);
+            editorial.setName(name);
+            editorial.setUrl("example@books.com");
+
+            editorial.setCreationDate(LocalDate.now());
+            editorial.setModificationDate(LocalDate.now());
+
+            return editorial;
+        }
     }
 
 

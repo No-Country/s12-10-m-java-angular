@@ -76,7 +76,6 @@ public class UserServiceImpl implements UserService {
         return mapperUser.userToUserDto(auxUser.get());
     }
 
-
     @Transactional
     @Override
     public UserDto updateUser(UserDto userDTO) {
@@ -204,7 +203,6 @@ public class UserServiceImpl implements UserService {
                     "Se ha eliminado su suscripción del newsletter de BooksLeaks. Hasta pronto!");
         }
     }
-
 
     private void isEmptyUser(Optional<User> user) throws NotFoundException {
         if (user.isEmpty()){

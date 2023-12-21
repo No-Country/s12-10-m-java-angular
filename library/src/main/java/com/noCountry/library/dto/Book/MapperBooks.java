@@ -1,7 +1,7 @@
 package com.noCountry.library.dto.Book;
 
 import com.noCountry.library.entities.Book;
-import com.noCountry.library.entities.enums.Genre;
+import com.noCountry.library.entities.UrlImage;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -54,9 +54,17 @@ public class MapperBooks {
         bookResponse.setCompleteNameAuthor(author);
         bookResponse.setNameEditorial(book.getEditorial().getName());
 
-        bookResponse.setUrlImages(book.getUrlImages());
+        bookResponse.setUrlImages(getUrl(book.getUrlImage()));
 
         return bookResponse;
+    }
+
+    public List<String> getUrl(List<UrlImage> images) {
+        List<String> result = new ArrayList<>();
+        for (UrlImage element : images) {
+            result.add(element.getUrl());
+        }
+        return result;
     }
 
     public List<BookResponse> listBooksToListResponseBooks(List<Book> listBooks) {
@@ -68,6 +76,53 @@ public class MapperBooks {
 
         return listResponse;
     }
+
+    public BookResponseWithImage bookToBookResponseWithImage(Book book) {
+        String author = book.getAuthor().getFullName();
+
+        BookResponseWithImage bookResponse = new BookResponseWithImage();
+
+        bookResponse.setIdBook(book.getId());
+        bookResponse.setISBN(book.getISBN());
+        bookResponse.setTitle(book.getTitle());
+        bookResponse.setPrice(book.getPrice());
+        bookResponse.setPages(book.getPages());
+
+        bookResponse.setPublicationDate(book.getPublicationDate());
+        bookResponse.setQuantityAvailable(book.getQuantityAvailable());
+        bookResponse.setSalesAmount(book.getSalesAmount());
+        bookResponse.setRating(book.getRating());
+
+        bookResponse.setDescription(book.getDescription());
+        bookResponse.setCollection(book.getCollection());
+
+        bookResponse.setGenre(book.getGenre().name());
+
+        if (book.getLanguage() != null) {
+            bookResponse.setLanguage(book.getLanguage().name());
+        }
+
+        bookResponse.setCompleteNameAuthor(author);
+        bookResponse.setNameEditorial(book.getEditorial().getName());
+
+        bookResponse.setUrlImages(getUrl(book.getUrlImage()));
+        bookResponse.setImageWithId(book.getUrlImage());
+
+        return bookResponse;
+    }
+
+    public List<BookResponseWithImage> listBooksToListResponseBooksWithImage(List<Book> listBooks) {
+        List<BookResponseWithImage> listResponse = new ArrayList<>();
+
+        for (Book book: listBooks) {
+            listResponse.add(bookToBookResponseWithImage(book));
+        }
+
+        return listResponse;
+    }
+
+
+
 
 
     public BookCardResponse bookToBookCardResponse(Book book) {
@@ -140,5 +195,7 @@ public class MapperBooks {
 
         return listResponse;
     }
+
+
 
 }

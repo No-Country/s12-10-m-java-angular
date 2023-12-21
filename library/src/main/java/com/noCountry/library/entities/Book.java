@@ -30,8 +30,12 @@ public class Book extends PersistenceObject {
     private String description;
 	private String collection;
 
-	private String initialImage;
-	private List<String> urlImages = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "book_id")
+	@Column(name = "url_image")
+	private List<UrlImage> urlImage = new ArrayList<>();
+
+    private String initialImage;
 
 	private List<Integer> voteList = new ArrayList<>();
 
