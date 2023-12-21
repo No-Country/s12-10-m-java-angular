@@ -331,8 +331,8 @@ BookRequest
     String 	collection;
     String 	genre;
     String	language;
-    String 	idAuthor;
-    String 	idEditorial;
+    String 	author;
+    String 	nameEditorial;
     String 	initialImage;
 }
 
