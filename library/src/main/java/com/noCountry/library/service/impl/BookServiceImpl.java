@@ -148,11 +148,7 @@ public class BookServiceImpl implements BookService {
 
         Book updatedBook = auxBook.get();
         updatedBook.setModificationDate(LocalDate.now());
-
-        if (book.getIdBook() != null) {
-            updatedBook.setISBN(book.getIdBook());
-        }
-
+        
         if (book.getTitle() != null) {
             updatedBook.setTitle(book.getTitle());
         }
