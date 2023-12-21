@@ -32,7 +32,7 @@ Se completó la primer etapa del proyecto. Estamos trabajando en la segunda etap
 
 [![My Skills](https://skillicons.dev/icons?i=html)](https://skillicons.dev)
 [![My Skills](https://skillicons.dev/icons?i=css)](https://skillicons.dev)
-[![My Skills](https://skillicons.dev/icons?i=js)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=ts)](https://skillicons.dev)
 [![My Skills](https://skillicons.dev/icons?i=github)](https://skillicons.dev)
 
 ### Demo
