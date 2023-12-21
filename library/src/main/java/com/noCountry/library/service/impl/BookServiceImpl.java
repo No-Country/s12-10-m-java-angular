@@ -196,17 +196,25 @@ public class BookServiceImpl implements BookService {
         }
 
         if (book.getAuthor() != null) {
-            Optional<Author> author = authorRepository.findById(book.getAuthor());
-            isEmptyObject(author);
+            Optional<Author> author = authorRepository.findByFullNameAndStatusTrue(book.getAuthor());
 
-            updatedBook.setAuthor(author.get());
+            if (author.isPresent()) {
+                updatedBook.setAuthor(author.get());
+            } else {
+                Author authors = createAuthor(book.getAuthor());
+                updatedBook.setAuthor(authors);
+            }
         }
 
         if (book.getNameEditorial() != null) {
-            Optional<Editorial> editorial = editorialRepository.findById(book.getNameEditorial());
-            isEmptyObject(editorial);
+            Optional<Editorial> editorial = editorialRepository.findByNameIgnoreCaseAndStatusTrue(book.getNameEditorial());
 
-            updatedBook.setEditorial(editorial.get());
+            if (editorial.isPresent()) {
+                updatedBook.setEditorial(editorial.get());
+            } else {
+                Editorial editorials = createEditorial(book.getNameEditorial());
+                updatedBook.setEditorial(editorials);
+            }
         }
 
         bookRepository.save(updatedBook);
